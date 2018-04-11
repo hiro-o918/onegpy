@@ -14,7 +14,7 @@ class Function(object):
     """Function object.
 
         # Attribute
-            n_childen: int, the number of children of this function.
+            n_children: int, the number of children of this function.
             eval: function, function of node to evaluate.
     """
     def __init__(self, n_children, eval=None):
@@ -67,7 +67,7 @@ def get_parent_node(parent_node, target_node):
             return get_parent_node(c, target_node)
 
 
-def get_all_node(root, list = []):
+def get_all_node(root, nodes=[]):
     """
     function for getting all node in the solution
 
@@ -77,10 +77,10 @@ def get_all_node(root, list = []):
 
     children = root.children
     for n in enumerate(children):
-        list.append(n)
-        get_all_node(n, list)
+        nodes.append(n)
+        get_all_node(n, nodes)
 
-    return list
+    return nodes
 
 
 def _func_id_checker(func_id):
