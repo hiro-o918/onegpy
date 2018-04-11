@@ -29,13 +29,14 @@ def set_id(node, func_id):
                 node: Node object, target node.
                 id: int, id of node.
     """
-    # TODO implement a method to check if id is correct type and range
+
+    _func_id_checker(func_id)
     node.func_id = func_id
 
 
 def get_n_children(func_id, function_dict):
 
-    # TODO implement a method to check if id is correct type
+    _func_id_checker(func_id)
     func = function_dict[func_id]
     return func.n_children
 
@@ -80,4 +81,17 @@ def get_all_node(root, list = []):
         get_all_node(n, list)
 
     return list
+
+
+def _func_id_checker(func_id):
+    if not isinstance(func_id, int):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(int, type(func_id))
+    elif func_id < 0:
+        typ = ValueError
+        msg = 'Expected condition: func_id >= 0.'
+    else:
+        return
+
+    raise typ(msg)
 
