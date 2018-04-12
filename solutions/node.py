@@ -81,7 +81,7 @@ def get_parent_node(root, target_node):
     return pos, parent
 
 
-def get_all_node(root, list = []):
+def get_all_node(root):
     """
     function for getting all node in the solution
 
@@ -89,10 +89,17 @@ def get_all_node(root, list = []):
     :return: list of Node object. All node in the solution
     """
 
-    children = root.children
-    for n in enumerate(children):
-        list.append(n)
-        get_all_node(n, list)
+    def add_children(current_node, nodes=[]):
+        children = current_node.children
 
-    return list
+        if children is None:
+            return
+        for c in children:
+            nodes.append(c)
+            add_children(c, nodes)
+
+    nodes = []
+    add_children(root, nodes)
+
+    return nodes
 
