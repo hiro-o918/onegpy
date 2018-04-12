@@ -9,6 +9,24 @@ import unittest
 from solutions import node as nd
 
 
+class TestNode(unittest.TestCase):
+    def test_Node(self):
+        n1 = nd.Node()
+        self.assertEqual(n1.func_id, -1)
+        self.assertEqual(n1.children, None)
+
+        n2 = nd.Node(1)
+        self.assertEqual(n2.func_id, 1)
+
+
+class TestFunction(unittest.TestCase):
+    def test_Function(self):
+        f1 = nd.Function(1)
+        self.assertEqual(f1.n_children, 1)
+        self.assertEqual(f1.eval, None)
+        # TODO create test for argument ``eval'' after defined what is eval
+
+
 class TestNodeFunction(unittest.TestCase):
 
     def setUp(self):
