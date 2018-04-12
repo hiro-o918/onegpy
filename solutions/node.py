@@ -49,25 +49,40 @@ def set_children(node, children):
     node.children = children
 
 
-def get_parent_node(parent_node, target_node):
+def get_parent_node(root, target_node):
     """function for searching parent node of target node.
 
         # Arguments
-            parent_node: Node object, current node.
+            root: Node object, root node.
             target_node: Node object, target node.
 
         # Returns
-            Node object of parent node.
+            Position of target_node in parent node and node object of parent node.
     """
-    children = parent_node.children
-    for i, c in enumerate(children):
-        if c is target_node:
-            return i, parent_node
-        else:
-            return get_parent_node(c, target_node)
+
+    def find_parent_node(current_node, target_node):
+        children = current_node.children
+        if children is None:
+            raise ValueError('current_node is a terminal node')
+
+        for i, c in enumerate(children):
+            if c is target_node:
+                return i, current_node
+            else:
+                return find_parent_node(c, target_node)
+
+    if target_node is root:
+        raise ValueError('There is no parent of root.')
+
+    try:
+        pos, parent = find_parent_node(root, target_node)
+    except ValueError:
+        raise ValueError('root and target_node are not in the same tree.')
+
+    return pos, parent
 
 
-def get_all_node(root, nodes=[]):
+def get_all_node(root):
     """
     function for getting all node in the solution
 
@@ -75,13 +90,19 @@ def get_all_node(root, nodes=[]):
     :return: list of Node object. All node in the solution
     """
 
-    children = root.children
-    for n in enumerate(children):
-        nodes.append(n)
-        get_all_node(n, nodes)
+    def add_children(current_node, nodes=[]):
+        children = current_node.children
+
+        if children is None:
+            return
+        for c in children:
+            nodes.append(c)
+            add_children(c, nodes)
+
+    nodes = []
+    add_children(root, nodes)
 
     return nodes
-
 
 def _func_id_checker(func_id):
     if not isinstance(func_id, int):
