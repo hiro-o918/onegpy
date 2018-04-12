@@ -29,23 +29,25 @@ def set_id(node, func_id):
                 node: Node object, target node.
                 id: int, id of node.
     """
-
+    _node_checker(node)
     _func_id_checker(func_id)
     node.func_id = func_id
 
 
 def get_n_children(func_id, function_dict):
-
     _func_id_checker(func_id)
     func = function_dict[func_id]
+
     return func.n_children
 
 
 def set_children(node, children):
     """ TODO: implement a method to check follows:
               the number of children of node = len(children)
-              children is list
     """
+    _nodes_checker(node)
+    _children_checker(children)
+
     node.children = children
 
 
@@ -71,6 +73,7 @@ def get_parent_node(root, target_node):
             else:
                 return find_parent_node(c, target_node)
 
+    _nodes_checker(root, target_node)
     if target_node is root:
         raise ValueError('There is no parent of root.')
 
@@ -99,10 +102,12 @@ def get_all_node(root):
             nodes.append(c)
             add_children(c, nodes)
 
+    _node_checker(root)
     nodes = []
     add_children(root, nodes)
 
     return nodes
+
 
 def _func_id_checker(func_id):
     if not isinstance(func_id, int):
@@ -116,3 +121,24 @@ def _func_id_checker(func_id):
 
     raise typ(msg)
 
+
+def _node_checker(node):
+    if not isinstance(node, Node):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(Node, type(node))
+    else:
+        return
+
+    raise typ(msg)
+
+
+def _nodes_checker(*nodes):
+    for node in nodes:
+        _node_checker(node)
+
+
+def _children_checker(children):
+    if isinstance(children, list):
+        raise TypeError('Expected type: {}'.format(list))
+
+    _nodes_checker(*children)
