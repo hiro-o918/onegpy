@@ -36,7 +36,7 @@ def set_id(node, func_id):
 
 def get_n_children(func_id, function_dict):
     _func_id_checker(func_id)
-    func = function_dict[func_id]
+    func = function_dict[str(func_id)]
 
     return func.n_children
 
@@ -103,7 +103,7 @@ def get_all_node(root):
             add_children(c, nodes)
 
     _node_checker(root)
-    nodes = []
+    nodes = [root]
     add_children(root, nodes)
 
     return nodes
@@ -138,7 +138,7 @@ def _nodes_checker(*nodes):
 
 
 def _children_checker(children):
-    if isinstance(children, list):
+    if not isinstance(children, list):
         raise TypeError('Expected type: {}'.format(list))
 
     _nodes_checker(*children)
