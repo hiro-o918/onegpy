@@ -36,7 +36,7 @@ def set_id(node, func_id):
 
 def get_n_children(func_id, function_dict):
     _func_id_checker(func_id)
-    func = function_dict[str(func_id)]
+    func = function_dict[func_id]
 
     return func.n_children
 
@@ -62,7 +62,7 @@ def get_parent_node(root, target_node):
             Position of target_node in parent node and node object of parent node.
     """
 
-    def find_parent_node(current_node, target_node):
+    def find_parent_node(current_node):
         children = current_node.children
         if children is None:
             raise ValueError('current_node is a terminal node')
@@ -71,14 +71,14 @@ def get_parent_node(root, target_node):
             if c is target_node:
                 return i, current_node
             else:
-                return find_parent_node(c, target_node)
+                return find_parent_node(c)
 
     _nodes_checker(root, target_node)
     if target_node is root:
         raise ValueError('There is no parent of root.')
 
     try:
-        pos, parent = find_parent_node(root, target_node)
+        pos, parent = find_parent_node(root)
     except ValueError:
         raise ValueError('root and target_node are not in the same tree.')
 
@@ -93,18 +93,19 @@ def get_all_node(root):
     :return: list of Node object. All node in the solution
     """
 
-    def add_children(current_node, nodes=[]):
-        children = current_node.children
+    _node_checker(root)
+    nodes = [root]
 
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal nodes
         if children is None:
             return
         for c in children:
             nodes.append(c)
-            add_children(c, nodes)
+            add_children_to_nodes(c)
 
-    _node_checker(root)
-    nodes = [root]
-    add_children(root, nodes)
+    add_children_to_nodes(root)
 
     return nodes
 
