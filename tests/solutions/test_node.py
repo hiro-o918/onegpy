@@ -39,7 +39,7 @@ class TestNodeFunction(unittest.TestCase):
 
         self.f1 = nd.Function(2)
         self.f2 = nd.Function(3)
-        self.function_dict = {'0': self.f1, '1': self.f2}
+        self.function_dict = {0: self.f1, 1: self.f2}
 
     def test_set_id(self):
         func_id = 0
@@ -49,7 +49,7 @@ class TestNodeFunction(unittest.TestCase):
 
     def test_get_n_children(self):
         func_id = 0
-        func = self.function_dict[str(func_id)]
+        func = self.function_dict[func_id]
 
         self.assertEqual(nd.get_n_children(func_id, self.function_dict), func.n_children)
 
