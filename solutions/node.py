@@ -14,7 +14,7 @@ class Function(object):
     """Function object.
 
         # Attribute
-            n_childen: int, the number of children of this function.
+            n_children: int, the number of children of this function.
             eval: function, function of node to evaluate.
     """
     def __init__(self, n_children, eval=None):
@@ -29,44 +29,63 @@ def set_id(node, func_id):
                 node: Node object, target node.
                 id: int, id of node.
     """
-    # TODO implement a method to check if id is correct type and range
+    _node_checker(node)
+    _func_id_checker(func_id)
     node.func_id = func_id
 
 
 def get_n_children(func_id, function_dict):
-
-    # TODO implement a method to check if id is correct type
+    _func_id_checker(func_id)
     func = function_dict[func_id]
+
     return func.n_children
 
 
 def set_children(node, children):
     """ TODO: implement a method to check follows:
               the number of children of node = len(children)
-              children is list
     """
+    _nodes_checker(node)
+    _children_checker(children)
+
     node.children = children
 
 
-def get_parent_node(parent_node, target_node):
+def get_parent_node(root, target_node):
     """function for searching parent node of target node.
 
         # Arguments
-            parent_node: Node object, current node.
+            root: Node object, root node.
             target_node: Node object, target node.
 
         # Returns
-            Node object of parent node.
+            Position of target_node in parent node and node object of parent node.
     """
-    children = parent_node.children
-    for i, c in enumerate(children):
-        if c is target_node:
-            return i, parent_node
-        else:
-            return get_parent_node(c, target_node)
+
+    def find_parent_node(current_node):
+        children = current_node.children
+        if children is None:
+            raise ValueError('current_node is a terminal node')
+
+        for i, c in enumerate(children):
+            if c is target_node:
+                return i, current_node
+            else:
+                return find_parent_node(c)
+
+    _nodes_checker(root, target_node)
+    if target_node is root:
+        raise ValueError('There is no parent of root.')
+
+    try:
+        pos, parent = find_parent_node(root)
+    except ValueError:
+        raise ValueError('root and target_node are not in the same tree.')
+
+    return pos, parent
 
 
-def get_all_node(root, list = []):
+def get_all_node(root):
     """
     function for getting all node in the solution
 
@@ -74,10 +93,53 @@ def get_all_node(root, list = []):
     :return: list of Node object. All node in the solution
     """
 
-    children = root.children
-    for n in enumerate(children):
-        list.append(n)
-        get_all_node(n, list)
+    _node_checker(root)
+    nodes = [root]
 
-    return list
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal nodes
+        if children is None:
+            return
+        for c in children:
+            nodes.append(c)
+            add_children_to_nodes(c)
 
+    add_children_to_nodes(root)
+
+    return nodes
+
+
+def _func_id_checker(func_id):
+    if not isinstance(func_id, int):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(int, type(func_id))
+    elif func_id < 0:
+        typ = ValueError
+        msg = 'Expected condition: func_id >= 0.'
+    else:
+        return
+
+    raise typ(msg)
+
+
+def _node_checker(node):
+    if not isinstance(node, Node):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(Node, type(node))
+    else:
+        return
+
+    raise typ(msg)
+
+
+def _nodes_checker(*nodes):
+    for node in nodes:
+        _node_checker(node)
+
+
+def _children_checker(children):
+    if not isinstance(children, list):
+        raise TypeError('Expected type: {}'.format(list))
+
+    _nodes_checker(*children)
