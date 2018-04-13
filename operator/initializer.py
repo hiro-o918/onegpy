@@ -22,11 +22,11 @@ def initialize(t_prob, max_depth, n_terminal, n_nonterminal, function_dict):
             for _ in n_child:
                 child = node.Node()
                 if t_prob > random.random():
-                    id = random.randint(n_terminal)
+                    func_id = random.randint(n_terminal)
                 else:
-                    id = random.randint(n_nonterminal)
+                    func_id = random.randint(n_nonterminal)
                     new_node(child, depth + 1)
-                node.set_id(child, id)
+                node.set_id(child, func_id)
                 children.append(child)
 
             # adding the child to parent, if it has parent
@@ -37,4 +37,4 @@ def initialize(t_prob, max_depth, n_terminal, n_nonterminal, function_dict):
 
     root = new_node(None, 0)
 
-    return solution.solution(root)
+    return solution.Solution(root)

@@ -33,7 +33,7 @@ class RandomSelection(AbstractSelection):
             # Returns
                 list of solutions.
         """
-        return self.f(population=population, k=self.k)
+        return self.rand_f(population=population, k=self.k)
 
 class TournamentSelection(AbstractSelection):
 
@@ -64,7 +64,7 @@ class TournamentSelection(AbstractSelection):
 
         #TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
         while(len(chosen) < k):
-            candidates = self.f(population=population, k=self.tournament_size)
+            candidates = self.rand_f(population=population, k=self.tournament_size)
             best = max(candidates, key=lambda x: x.previous_fitness)
             self.append(best, chosen)
 

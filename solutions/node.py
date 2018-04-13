@@ -22,6 +22,20 @@ class Function(object):
         self.eval = eval
 
 
+def get_func(eval, n_children):
+
+    def eval_func(x):
+        if n_children != len(x):
+            raise IndentationError('the size of x is expected to {}. '
+                                   'but this function got size:{}'.format(n_children, len(x)))
+        else:
+            return eval(x)
+
+    func = Function(n_children, eval=eval_func)
+
+    return func
+
+
 def set_id(node, func_id):
     """function for setting id to node object.
 

@@ -12,35 +12,13 @@ __version__ = '0.0.1-alpha'
 __license__ = 'MIT'
 
 
-class AbstractGP(object):
+class GP(object):
 
-    def __init__(self):
-        self.operators = []
-        self.population = []
-        self.problem = None
+    def __init__(self, operators, problem, func_dict):
+        self.operators = operators
+        self.problem = problem
+        self.func_dict = func_dict
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, population):
         for op in self.operators:
-            op(self.population)
-
-    def add_operator(self):
-        raise NotImplementedError
-
-
-class SGP(AbstractGP):
-
-    def __init__(self, init='random', operators = None):
-        super().__init__()
-        if type(init, str):
-            if init == 'random':
-                pass
-
-    def search(self):
-        for op in self.operators:
-            op(self.population)
-
-    def build(self):
-        self.population = []
-
-    def set_operators(self):
-        pass
+            op(population)
