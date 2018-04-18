@@ -17,9 +17,22 @@ class Function(object):
             n_children: int, the number of children of this function.
             eval: function, function of node to evaluate.
     """
-    def __init__(self, n_children, eval=None):
+    def __init__(self, n_children, f_eval=None):
         self.n_children = n_children
-        self.eval = eval
+        self.f_eval = f_eval
+
+    def __call__(self, x):
+        return self.f_eval(x)
+
+
+def build_func(f_eval, n_children):
+
+    def eval_func(x):
+        return f_eval(x)
+
+    func = Function(n_children, f_eval=eval_func)
+
+    return func
 
 
 def set_id(node, func_id):
@@ -64,25 +77,24 @@ def get_parent_node(root, target_node):
 
     def find_parent_node(current_node):
         children = current_node.children
-        if children is None:
-            raise ValueError('current_node is a terminal node')
-
-        for i, c in enumerate(children):
-            if c is target_node:
-                return i, current_node
-            else:
-                return find_parent_node(c)
+        if children is not None:
+            for i, c in enumerate(children):
+                if c is target_node:
+                    return i, current_node
+                else:
+                    p = find_parent_node(c)
+                    if p is not None:
+                        return p
 
     _nodes_checker(root, target_node)
     if target_node is root:
         raise ValueError('There is no parent of root.')
 
-    try:
-        pos, parent = find_parent_node(root)
-    except ValueError:
+    parent = find_parent_node(root)
+    if parent is None:
         raise ValueError('root and target_node are not in the same tree.')
 
-    return pos, parent
+    return parent
 
 
 def get_all_node(root):
