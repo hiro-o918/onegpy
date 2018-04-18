@@ -74,8 +74,7 @@ class TournamentSelection(AbstractSelection):
             best = max(candidates, key=lambda x: x.previous_fitness)
             self.append(best, chosen)
 
-        population = chosen
-        chosen = None
+        del population
 
-        return population
+        return chosen
 

@@ -76,10 +76,9 @@ def get_default_crossover():
         while len(population) > len(new_population):
             children = crossover_operator(selection_operator(population))
             new_population.extend(children)
-        population = new_population
-        new_population = None
+        del population
 
-        return population
+        return new_population
 
     return do_crossover
 
