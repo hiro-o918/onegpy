@@ -9,16 +9,7 @@ from unittest import TestCase
 from gplib.solutions import node, solution
 
 
-class TestSolution(TestCase):
-    def test_Solution(self):
-        n = node.Node()
-        s = solution.Solution(n)
-
-        self.assertEqual(s.root, n)
-        self.assertEqual(s.previous_fitness, None)
-
-
-class TestSolutionFunction(TestCase):
+class TestSolutionFunctions(TestCase):
     def setUp(self):
         self.n1 = node.Node()
         self.n2 = node.Node()

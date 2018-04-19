@@ -5,27 +5,7 @@ import unittest
 from gplib.solutions import node
 
 
-class TestNode(unittest.TestCase):
-    def test_Node(self):
-        n1 = node.Node()
-        self.assertEqual(n1.func_id, -1)
-        self.assertEqual(n1.children, None)
-
-        n2 = node.Node(1)
-        self.assertEqual(n2.func_id, 1)
-
-
-class TestFunction(unittest.TestCase):
-    def test_Function(self):
-        def do_nothing(*args):
-            pass
-
-        f1 = node.Function(1)
-        self.assertEqual(f1.n_children, 1)
-        self.assertEqual(f1.f_eval, do_nothing)
-
-
-class TestNodeFunction(unittest.TestCase):
+class TestNodeFunctions(unittest.TestCase):
 
     def setUp(self):
         self.n1 = node.Node()
