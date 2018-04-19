@@ -17,10 +17,12 @@ class TestNode(unittest.TestCase):
 
 class TestFunction(unittest.TestCase):
     def test_Function(self):
+        def do_nothing(*args):
+            pass
+
         f1 = node.Function(1)
         self.assertEqual(f1.n_children, 1)
-        self.assertEqual(f1.eval, None)
-        # TODO create test for argument ``eval'' after defined what is eval
+        self.assertEqual(f1.f_eval, do_nothing)
 
 
 class TestNodeFunction(unittest.TestCase):
@@ -35,7 +37,18 @@ class TestNodeFunction(unittest.TestCase):
 
         self.f1 = node.Function(2)
         self.f2 = node.Function(3)
+        # ``function_dict'' is not separated based on kinds of nodes
+        # such as non-terminal nodes or terminal nodes here.
         self.function_dict = {0: self.f1, 1: self.f2}
+
+    def test_build_func(self):
+        def do_nothing(*args):
+            return 'do_nothing'
+        n_children = 1
+        f_eval = do_nothing
+        f = node.build_func(f_eval, n_children)
+        self.assertEqual(f.n_children, n_children)
+        self.assertEqual(f(self.n1), 'do_nothing')
 
     def test_set_id(self):
         func_id = 0
