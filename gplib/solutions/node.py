@@ -5,6 +5,7 @@ class Node(object):
             id: int, symbolic id for Function. This id is not assigned for each node object.
             children: list of Node object, children of this node.
     """
+
     def __init__(self, func_id=-1):
         self.func_id = func_id
         self.children = None
@@ -17,6 +18,7 @@ class Function(object):
             n_children: int, the number of children of this function.
             eval: function, function of node to evaluate.
     """
+
     def __init__(self, n_children, f_eval=None):
         self.n_children = n_children
         self.f_eval = f_eval
@@ -26,7 +28,6 @@ class Function(object):
 
 
 def build_func(f_eval, n_children):
-
     def eval_func(x):
         return f_eval(x)
 
@@ -76,25 +77,31 @@ def get_parent_node(root, target_node):
     """
 
     def find_parent_node(current_node):
+        if current_node.children is None:
+            return
+
         children = current_node.children
-        if children is not None:
-            for i, c in enumerate(children):
-                if c is target_node:
-                    return i, current_node
-                else:
-                    p = find_parent_node(c)
-                    if p is not None:
-                        return p
+        p = None
+        for i, c in enumerate(children):
+            if c is target_node:
+                return i, current_node
+            else:
+                p = p or find_parent_node(c)
+
+        return p
 
     _nodes_checker(root, target_node)
     if target_node is root:
-        raise ValueError('There is no parent of root.')
+        msg = 'There is no parent of root.'
+        raise ValueError(msg)
 
-    parent = find_parent_node(root)
-    if parent is None:
-        raise ValueError('root and target_node are not in the same tree.')
+    pos, parent = find_parent_node(root) or (None, None)
 
-    return parent
+    if pos is None or parent is None:
+        msg = 'Invalid arguments: cannot find parent.'
+        raise ValueError(msg)
+
+    return pos, parent
 
 
 def get_all_node(root):
