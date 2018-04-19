@@ -80,7 +80,7 @@ def get_parent_node(root, target_node):
     try:
         pos, parent = find_parent_node(root)
     except ValueError:
-        raise ValueError('root and target_node are not in the same tree.')
+        raise ValueError('Invalid arguments.')
 
     return pos, parent
 

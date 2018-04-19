@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on 11 4 2018/04/11 18:36 2018
 
-@author: Hironori Yamamoto
-"""
 import unittest
 
 from solutions import node as nd
@@ -66,6 +62,9 @@ class TestNodeFunction(unittest.TestCase):
         nd.set_children(self.n2, [self.n4, self.n5, self.n6])
 
         self.assertEqual(nd.get_parent_node(self.n1, self.n4), (0, self.n2))
+        msg = 'Invalid arguments.'
+        with self.assertRaises(ValueError, msg=msg):
+            nd.get_parent_node(nd.Node(), nd.Node())
 
     def test_get_all_node(self):
         nd.set_id(self.n1, 0)
