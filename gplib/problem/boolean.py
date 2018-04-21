@@ -7,14 +7,14 @@ class EvenParity(object):
     def __init__(self, dim):
         self.func_dicts = None
         self.dim = dim
-        self.x, self.y = self._make_data(dim)
+        self.x, self.y = self._make_data()
 
-    def _make_data(self, dim):
+    def _make_data(self):
         x = []
         y = []
-        for i in range(2 ** dim):
+        for i in range(2 ** self.dim):
             xi = []
-            for j in range(dim):
+            for j in range(self.dim):
                 xi.append((i >> j) % 2 == 1)
             y.append(sum(xi) % 2 == 1)
             x.append(xi)

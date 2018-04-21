@@ -1,11 +1,12 @@
 class Solution(object):
     def __init__(self, root):
+        # TODO type check if ``root'' is node.Node
         self.root = root
         self.previous_fitness = None
 
 
 def get_depth(solution):
-
+    # TODO type check if ``solution'' is Solution
     d_list = []
 
     def cal_depth(c_node, depth):
