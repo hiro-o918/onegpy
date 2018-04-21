@@ -4,12 +4,12 @@ Created on 20 4 2018/04/20 0:14 2018
 
 @author: Hironori Yamamoto
 """
-from unittest import TestCase
+import unittest
 
 from gplib.solutions import node, solution
 
 
-class TestSolutionFunctions(TestCase):
+class TestSolutionFunctions(unittest.TestCase):
     def setUp(self):
         self.n1 = node.Node()
         self.n2 = node.Node()
@@ -33,3 +33,7 @@ class TestSolutionFunctions(TestCase):
 
     def test_get_depth(self):
         self.assertEqual(solution.get_depth(self.n), 2)
+
+
+if __name__ == '__main__':
+    unittest.main()
