@@ -1,3 +1,6 @@
+from gplib.solutions.node import node_equal, set_children
+
+
 class Solution(object):
     def __init__(self, root):
         # TODO type check if ``root'' is node.Node
@@ -19,4 +22,10 @@ def get_depth(solution):
     cal_depth(solution.root, 0)
 
     return max(d_list)
+
+
+def solution_equal(solution_a, solution_b):
+    # TODO type check if ``solution'' is Solution
+    return node_equal(solution_a.root, solution_b.root, by_tree=True)
+
 

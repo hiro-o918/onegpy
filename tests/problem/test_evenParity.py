@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on 20 4 2018/04/20 0:31 2018
-
-@author: Hironori Yamamoto
-"""
 import unittest
 import numpy as np
 from gplib.problem import boolean

@@ -77,6 +77,28 @@ class TestNodeFunctions(unittest.TestCase):
 
         self.assertEqual(node.get_all_node(self.n1), all_nodes)
 
+    def test_node_equal(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 0)
+        node.set_id(self.n3, 0)
+        node.set_id(self.n4, 0)
+        node.set_id(self.n5, 0)
+        node.set_id(self.n6, 0)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n4, [self.n5, self.n6])
+
+        self.assertTrue(node.node_equal(self.n1, self.n4))
+        self.assertTrue(node.node_equal(self.n1, self.n4, by_tree=True))
+        node.set_id(self.n2, 1)
+        self.assertFalse(node.node_equal(self.n1, self.n3))
+        self.assertFalse(node.node_equal(self.n2, self.n3))
+        self.assertFalse(node.node_equal(self.n1, self.n4, by_tree=True))
+
+    def test_node_array_equal(self):
+        self.assertTrue(node.node_array_equal([self.n1, self.n2], [self.n3, self.n4]))
+        node.set_id(self.n4, 0)
+        self.assertFalse(node.node_array_equal([self.n1, self.n2], [self.n3, self.n4]))
+
     def test__func_id_checker(self):
         with self.assertRaises(ValueError):
             node._func_id_checker(-1)

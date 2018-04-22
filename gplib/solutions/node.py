@@ -129,6 +129,41 @@ def get_all_node(root):
     return nodes
 
 
+def node_equal(node_a, node_b, by_tree=False):
+    """
+    Function for comparing two nodes.
+    :param node_a: Node object
+    :param node_b: Node object
+    :param by_tree: If False, compare the nodes based the node's type and the function id,
+                    otherwise based on their tree structures as well as the node's type and the function id.
+    :return:  bool
+    """
+    def func_id_equal(x, y):
+        node_type_equal = not(bool(x.children) ^ bool(y.children))
+        if x.func_id == y.func_id and node_type_equal:
+            return True
+        else:
+            return False
+
+    _nodes_checker(node_a, node_b)
+    if not by_tree:
+        return func_id_equal(node_a, node_b)
+
+    else:
+        for x, y in zip(get_all_node(node_a), get_all_node(node_b)):
+            if not func_id_equal(x, y):
+                return False
+        return True
+
+
+def node_array_equal(nodes_a, nodes_b):
+    for node_a, node_b in zip(nodes_a, nodes_b):
+        if not node_equal(node_a, node_b, by_tree=False):
+            return False
+
+    return True
+
+
 def _func_id_checker(func_id):
     if not isinstance(func_id, int):
         typ = TypeError
