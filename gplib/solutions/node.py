@@ -129,12 +129,12 @@ def get_all_node(root):
     return nodes
 
 
-def node_equal(node_a, node_b, by_tree=False):
+def node_equal(node_a, node_b, as_tree=False):
     """
     Function for comparing two nodes.
     :param node_a: Node object
     :param node_b: Node object
-    :param by_tree: If False, compare the nodes based the node's type and the function id,
+    :param as_tree: If False, compare the nodes based the node's type and the function id,
                     otherwise based on their tree structures as well as the node's type and the function id.
     :return:  bool
     """
@@ -146,7 +146,7 @@ def node_equal(node_a, node_b, by_tree=False):
             return False
 
     _nodes_checker(node_a, node_b)
-    if not by_tree:
+    if not as_tree:
         return func_id_equal(node_a, node_b)
 
     else:
@@ -158,7 +158,7 @@ def node_equal(node_a, node_b, by_tree=False):
 
 def node_array_equal(nodes_a, nodes_b):
     for node_a, node_b in zip(nodes_a, nodes_b):
-        if not node_equal(node_a, node_b, by_tree=False):
+        if not node_equal(node_a, node_b, as_tree=False):
             return False
 
     return True

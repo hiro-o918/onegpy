@@ -26,6 +26,6 @@ def get_depth(solution):
 
 def solution_equal(solution_a, solution_b):
     # TODO type check if ``solution'' is Solution
-    return node_equal(solution_a.root, solution_b.root, by_tree=True)
+    return node_equal(solution_a.root, solution_b.root, as_tree=True)
 
 

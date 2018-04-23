@@ -88,11 +88,11 @@ class TestNodeFunctions(unittest.TestCase):
         node.set_children(self.n4, [self.n5, self.n6])
 
         self.assertTrue(node.node_equal(self.n1, self.n4))
-        self.assertTrue(node.node_equal(self.n1, self.n4, by_tree=True))
+        self.assertTrue(node.node_equal(self.n1, self.n4, as_tree=True))
         node.set_id(self.n2, 1)
         self.assertFalse(node.node_equal(self.n1, self.n3))
         self.assertFalse(node.node_equal(self.n2, self.n3))
-        self.assertFalse(node.node_equal(self.n1, self.n4, by_tree=True))
+        self.assertFalse(node.node_equal(self.n1, self.n4, as_tree=True))
 
     def test_node_array_equal(self):
         self.assertTrue(node.node_array_equal([self.n1, self.n2], [self.n3, self.n4]))
