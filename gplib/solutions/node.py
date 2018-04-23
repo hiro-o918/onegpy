@@ -1,3 +1,6 @@
+import copy
+
+
 class Node(object):
     """Node object.
 
@@ -65,7 +68,18 @@ def set_children(node, children):
     node.children = children
 
 
-def get_parent_node(root, target_node):
+def copy_node(node, deep=False):
+    if not deep:
+        new_node = node.__class__(node.func_id)
+        if node.children is not None:
+            new_node.children = [copy.copy(c) for c in node.children]
+
+        return new_node
+    else:
+        return copy.deepcopy(node)
+
+
+def get_parent_node(root, target_node, copied=False):
     """function for searching parent node of target node.
 
         # Arguments
@@ -75,20 +89,37 @@ def get_parent_node(root, target_node):
         # Returns
             Position of target_node in parent node and node object of parent node.
     """
+    graph = []
 
     def find_parent_node(current_node):
+        nonlocal graph
         if current_node.children is None:
             return
 
         children = current_node.children
         p = None
         for i, c in enumerate(children):
+            graph.append([i, c])
             if c is target_node:
                 return i, current_node
+
+            p = p or find_parent_node(c)
+            if p is None:
+                graph.pop()
             else:
-                p = p or find_parent_node(c)
+                break
 
         return p
+
+    def copied_by_graph():
+        root_ = copy_node(root)
+        current_node = root_
+        for i, node in graph:
+            current_node.children[i] = copy_node(node)
+            if node is not graph[-1][1]:
+                current_node = current_node.children[i]
+
+        return i, current_node, root_
 
     _nodes_checker(root, target_node)
     if target_node is root:
@@ -96,10 +127,13 @@ def get_parent_node(root, target_node):
         raise ValueError(msg)
 
     pos, parent = find_parent_node(root) or (None, None)
-
     if pos is None or parent is None:
         msg = 'Invalid arguments: cannot find parent.'
         raise ValueError(msg)
+
+    if copied:
+        pos, parent, root_ = copied_by_graph()
+        return pos, parent, root_
 
     return pos, parent
 

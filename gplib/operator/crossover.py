@@ -6,6 +6,8 @@ import copy
 
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
+from gplib.solutions.solution import Solution
+
 
 class AbstractCrossover(object):
     def __init__(self, c_rate, destructive=True):
@@ -33,28 +35,20 @@ class AbstractCrossover(object):
     def _crossover_core(parents, points):
 
         if parents[0].root is points[0]:
-            joint_point1 = 'parents[0].root'
+            root1 = parents[0].root
+            parents[0].root = points[1]
         else:
-            try:
-                index1, subtree1 = node.get_parent_node(parents[0].root, points[0])
-            except ValueError:
-                # When n points crossover used, the target node may move from the original tree.
-                index1, subtree1 = node.get_parent_node(parents[1].root, parents[0])
-            joint_point1 = 'subtree1.children[index1]'
+            index1, subtree1, root1 = node.get_parent_node(parents[0].root, points[0], copied=True)
+            subtree1.children[index1] = points[1]
 
         if parents[1].root is points[1]:
-            joint_point2 = 'parents[1].root'
+            root2 = parents[1].root
+            parents[1].root = points[0]
         else:
-            try:
-                index2, subtree2 = node.get_parent_node(parents[1].root, points[1])
-            except ValueError:
-                # When n points crossover used, the target node may move from the original tree.
-                index2, subtree2 = node.get_parent_node(parents[1].root, points[0])
-            joint_point2 = 'subtree2.children[index2]'
+            index2, subtree2, root2 = node.get_parent_node(parents[1].root, points[1], copied=True)
+            subtree2.children[index2] = points[0]
 
-        exec('{}, {} = points[1], points[0]'.format(joint_point1, joint_point2))
-
-        return parents
+        return [Solution(root1), Solution(root2)]
 
     @staticmethod
     def _crossover_loop(parents, points_set):
