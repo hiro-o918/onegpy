@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on 22 4 2018/04/22 23:31 2018
-
-@author: Hironori Yamamoto
-"""
 import unittest
 
 from gplib.operator import initializer
@@ -30,9 +25,11 @@ class TestInitializerFunctions(unittest.TestCase):
         self.function_dicts = ({0: f_non_terminal()}, {0: f_terminal()})
 
     def test_initialize(self):
-        s = initializer.initialize(0, self.max_depth, self.function_dicts)
+        t_prob = 0
+        s = initializer.initialize(t_prob, self.max_depth, self.function_dicts)
         self.assertEqual(solution.get_depth(s), self.max_depth)
         self.assertEqual(node._nodes_checker(*node.get_all_node(s.root)), None)
 
-        s = initializer.initialize(1, self.max_depth, self.function_dicts)
+        t_prob = 1
+        s = initializer.initialize(t_prob, self.max_depth, self.function_dicts)
         self.assertEqual(solution.get_depth(s), 0)

@@ -79,7 +79,31 @@ def copy_node(node, deep=False):
         return copy.deepcopy(node)
 
 
-def get_parent_node(root, target_node, copied=False):
+def copy_nodes_along_graph(graph):
+    """
+    Copy node object from ``root`` to the target node based on ``graph''
+    This method differs from deepcopy(root) in that it copies only the nodes along ``graph''.
+    :param root: Node object, the beginning or graph
+    :param graph: list of ``(i, Node object)'' where ``i'' is the index of the next node of graph
+    and ``Node object'' is the parent node
+    :return: the index of target node node in the parent, copied the target node object and copied root object
+    """
+    previous_pos = None
+    current_node = None
+    root = None
+    for pos, node in graph:
+        copied_node = copy_node(node)
+        if previous_pos is None:
+            root = copied_node
+        else:
+            current_node.children[previous_pos] = copied_node
+        current_node = copied_node
+        previous_pos = pos
+
+    return previous_pos, current_node, root
+
+
+def get_parent_node(root, target_node):
     """function for searching parent node of target node.
 
         # Arguments
@@ -87,7 +111,8 @@ def get_parent_node(root, target_node, copied=False):
             target_node: Node object, target node.
 
         # Returns
-            Position of target_node in parent node and node object of parent node.
+            Position of target_node in parent node, node object of parent node
+            and graph from ``root'' to ``target_node''
     """
     graph = []
 
@@ -99,10 +124,9 @@ def get_parent_node(root, target_node, copied=False):
         children = current_node.children
         p = None
         for i, c in enumerate(children):
-            graph.append([i, c])
+            graph.append((i, current_node))
             if c is target_node:
                 return i, current_node
-
             p = p or find_parent_node(c)
             if p is None:
                 graph.pop()
@@ -110,16 +134,6 @@ def get_parent_node(root, target_node, copied=False):
                 break
 
         return p
-
-    def copied_by_graph():
-        root_ = copy_node(root)
-        current_node = root_
-        for i, node in graph:
-            current_node.children[i] = copy_node(node)
-            if node is not graph[-1][1]:
-                current_node = current_node.children[i]
-
-        return i, current_node, root_
 
     _nodes_checker(root, target_node)
     if target_node is root:
@@ -131,11 +145,7 @@ def get_parent_node(root, target_node, copied=False):
         msg = 'Invalid arguments: cannot find parent.'
         raise ValueError(msg)
 
-    if copied:
-        pos, parent, root_ = copied_by_graph()
-        return pos, parent, root_
-
-    return pos, parent
+    return pos, parent, graph
 
 
 def get_all_node(root):

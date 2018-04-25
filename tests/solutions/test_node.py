@@ -48,16 +48,28 @@ class TestNodeFunctions(unittest.TestCase):
 
         self.assertEqual(self.n1.children, children)
 
+    def test__copy_nodes_along_graph(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 1)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n2, [self.n4, self.n5])
+        node.set_children(self.n3, [self.n6])
+
+        graph = [(0, self.n1), (1, self.n2)]
+        pos, parent, root = node.copy_nodes_along_graph(graph)
+        self.assertEqual(pos, 1)
+        self.assertTrue(node.node_equal(parent, self.n2))
+        self.assertTrue(node.node_equal(root, self.n1, as_tree=True))
+        self.assertFalse(parent is self.n2)
+        self.assertFalse(root is self.n1)
+
     def test_get_parent_node(self):
         node.set_id(self.n1, 0)
         node.set_id(self.n2, 1)
         node.set_children(self.n1, [self.n2, self.n3])
         node.set_children(self.n2, [self.n4, self.n5, self.n6])
-        self.assertEqual(node.get_parent_node(self.n1, self.n2), (0, self.n1))
-        self.assertEqual(node.get_parent_node(self.n1, self.n3), (1, self.n1))
-        self.assertEqual(node.get_parent_node(self.n1, self.n4), (0, self.n2))
-        self.assertEqual(node.get_parent_node(self.n1, self.n5), (1, self.n2))
-        self.assertEqual(node.get_parent_node(self.n1, self.n6), (2, self.n2))
+        graph = [(0, self.n1), (0, self.n2)]
+        self.assertEqual(node.get_parent_node(self.n1, self.n4), (0, self.n2, graph))
 
         msg = 'There is no parent of root.'
         with self.assertRaises(ValueError, msg=msg):
@@ -72,7 +84,6 @@ class TestNodeFunctions(unittest.TestCase):
         node.set_id(self.n2, 1)
         node.set_children(self.n1, [self.n2, self.n3])
         node.set_children(self.n2, [self.n4, self.n5, self.n6])
-
         all_nodes = [self.n1, self.n2, self.n4, self.n5, self.n6, self.n3]
 
         self.assertEqual(node.get_all_node(self.n1), all_nodes)

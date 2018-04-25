@@ -1,7 +1,6 @@
 from gplib.solutions import node
 from gplib.operator import selection
 import random
-import copy
 
 
 # TODO: we must consider the number of parents and crossover points.
@@ -10,7 +9,7 @@ from gplib.solutions.solution import Solution
 
 
 class AbstractCrossover(object):
-    def __init__(self, c_rate, destructive=True):
+    def __init__(self, c_rate, destructive=False):
         """
         Abstract class of crossover.
 
@@ -33,31 +32,50 @@ class AbstractCrossover(object):
 
     @staticmethod
     def _crossover_core(parents, points):
-
         if parents[0].root is points[0]:
-            root1 = parents[0].root
-            parents[0].root = points[1]
+            root1 = points[1]
         else:
-            index1, subtree1, root1 = node.get_parent_node(parents[0].root, points[0], copied=True)
+            _, _, graph1 = node.get_parent_node(parents[0].root, points[0])
+            index1, subtree1, root1 = node.copy_nodes_along_graph(graph1)
             subtree1.children[index1] = points[1]
 
         if parents[1].root is points[1]:
-            root2 = parents[1].root
-            parents[1].root = points[0]
+            root2 = points[0]
         else:
-            index2, subtree2, root2 = node.get_parent_node(parents[1].root, points[1], copied=True)
+            _, _, graph2 = node.get_parent_node(parents[1].root, points[1])
+            index2, subtree2, root2 = node.copy_nodes_along_graph(graph2)
             subtree2.children[index2] = points[0]
 
-        return [Solution(root1), Solution(root2)]
+        parents = [Solution(root1), Solution(root2)]
+
+        return parents
 
     @staticmethod
-    def _crossover_loop(parents, points_set):
+    def _destructive_crossover_core(parents, points):
+        if parents[0].root is points[0]:
+            parents[0].root = points[1]
+        else:
+            index1, subtree1, _ = node.get_parent_node(parents[0].root, points[0])
+            subtree1.children[index1] = points[1]
+
+        if parents[1].root is points[1]:
+            parents[1].root = points[0]
+        else:
+            index2, subtree2, _ = node.get_parent_node(parents[1].root, points[1])
+            subtree2.children[index2] = points[0]
+
+        return parents
+
+    def _crossover_loop(self, parents, points_set):
         if len(points_set[0]) > 1:
-            msg = 'n point crossover is not developed'
+            msg = 'n point crossover has not been developed'
             raise ValueError(msg)
 
         for points in zip(points_set[0], points_set[1]):
-            parents = AbstractCrossover._crossover_core(parents, points)
+            if self.destructive:
+                parents = self._destructive_crossover_core(parents, points)
+            else:
+                parents = self._crossover_core(parents, points)
 
         return parents
 
@@ -72,9 +90,6 @@ class AbstractCrossover(object):
         if random.random() > self.c_rate:
             return parents
         else:
-            if not self.destructive:
-                parents = copy.deepcopy(parents)
-
             points_set = [self._get_crossover_point(parents[0]), self._get_crossover_point(parents[1])]
             parents = self._crossover_loop(parents, points_set)
 
@@ -83,7 +98,7 @@ class AbstractCrossover(object):
 
 class OnePointCrossover(AbstractCrossover):
 
-    def __init__(self, c_rate=1.0,destructive=True):
+    def __init__(self, c_rate=1.0, destructive=False):
         super().__init__(c_rate, destructive)
 
     def __call__(self, parents):
