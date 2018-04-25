@@ -15,7 +15,7 @@ class AbstractSelection(object):
         if replacement:
             self.rand_f = random.choices
         else:
-            self.rand_f = rand_sample
+            self.rand_f = random.sample
 
         self.problem = problem
 
@@ -67,7 +67,6 @@ class TournamentSelection(AbstractSelection):
 
         chosen = []
         self._cal_fitness(population)
-
         if self.replacement:
             k = len(population)
         else:
@@ -93,9 +92,3 @@ def reduce_population(population):
 
     return solutions
 
-
-def rand_sample(population, k):
-    population = reduce_population(population)
-    if len(population) < k:
-        k = len(population)
-    return random.sample(population, k)

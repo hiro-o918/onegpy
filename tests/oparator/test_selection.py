@@ -76,10 +76,7 @@ class TestRandomSelection(unittest.TestCase, ExampleSolutions):
     def test__call__without_replacement(self):
         selection = RandomSelection(self.k, replacement=False)
         chosen = selection.__call__(self.population)
-        self.assertEqual(min(self.k, len(reduce_population(chosen))), len(chosen))
-
-        for i in range(len(chosen)):
-            self.assertFalse(is_solution_in_population(chosen[i], (chosen[:i] + chosen[i + 1:])))
+        self.assertEqual(self.k, len(chosen))
 
 
 class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
