@@ -28,3 +28,15 @@ def solution_equal(solution_a, solution_b):
     # TODO type check if ``solution'' is Solution
     return node_equal(solution_a.root, solution_b.root, as_tree=True)
 
+
+def is_solution_in_population(solution, population):
+    """
+    check the tree of ``solution'' is in ``population'' or not
+    :param solution: Solution object
+    :param population: list of Solution object
+    :return: bool
+    """
+    for s in population:
+        if solution_equal(solution, s):
+            return True
+    return False
