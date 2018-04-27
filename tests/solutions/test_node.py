@@ -131,7 +131,6 @@ class TestNodeFunctions(unittest.TestCase):
         le_msg = 'Expected type: {} not {}.'.format(node.Node, list)
         with self.assertRaises(TypeError, msg=le_msg):
             node._children_checker(self.n1)
-        # self.assertEqual(le.msg, 'Expected type: {}'.format(list))
 
         ne_msg = 'Expected type: {} not {}.'.format(node.Node, int)
         with self.assertRaises(TypeError, msg=ne_msg):

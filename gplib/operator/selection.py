@@ -42,7 +42,11 @@ class RandomSelection(AbstractSelection):
 
 
 class TournamentSelection(AbstractSelection):
-    def __init__(self, tournament_size, problem, replacement=True):
+    def __init__(self, tournament_size, problem, replacement=True, selection_size=None):
+        if not replacement and selection_size is None:
+            msg = 'If replacement is False, selection_size must be set.'
+            raise TypeError(msg)
+        self.selection_size = selection_size
         self.tournament_size = tournament_size
         if replacement:
             def append(solution, chosen):
@@ -67,14 +71,9 @@ class TournamentSelection(AbstractSelection):
 
         chosen = []
         self._cal_fitness(population)
-        if self.replacement:
-            k = len(population)
-        else:
-            n_reduced_pop = len(reduce_population(population))
-            k = min(len(population), n_reduced_pop)
         #TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
-
-        while len(chosen) < k:
+        selection_size = self.selection_size or len(population)
+        while len(chosen) < selection_size:
             candidates = self.rand_f(population=population, k=self.tournament_size)
             best = max(candidates, key=lambda x: x.previous_fitness)
             self.append(best, chosen)

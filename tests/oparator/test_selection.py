@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from gplib.solutions import node
-from gplib.solutions.solution import is_solution_in_population, Solution
+from gplib.solutions.solution import Solution
 from gplib.operator import RandomSelection, TournamentSelection, reduce_population
 
 
@@ -24,7 +24,7 @@ class ExampleSolutions(object):
             self.population.append(s1)
             self.population.append(s2)
             self.population.append(s3)
-
+        self.population = self.population * 2
     @staticmethod
     def create_tree_type1():
         n1 = node.Node(0)
@@ -83,22 +83,28 @@ class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
     def setUp(self):
         ExampleSolutions.__init__(self)
         self.tournament_size = 2
+        self.selection_size = 3
         self.problem = EmptyProblem()
 
     def test__call__with_replacement(self):
         selection = TournamentSelection(self.tournament_size, self.problem, replacement=True)
-        n_population = len(self.population)
         chosen = selection.__call__(self.population)
-        self.assertEqual(len(chosen), n_population)
+        self.assertEqual(len(self.population), len(chosen))
 
-    # def test__call__without_replacement(self):
-    #     selection = TournamentSelection(self.tournament_size, self.problem, replacement=False)
-    #     n_population = len(self.population)
-    #     chosen = selection.__call__(self.population)
-    #     self.assertEqual(min(n_population, len(reduce_population(chosen))), len(chosen))
-    #
-    #     for i in range(len(chosen)):
-    #         self.assertFalse(is_solution_in_population(chosen[i], (chosen[:i] + chosen[i + 1:])))
+        selection = TournamentSelection(self.tournament_size, self.problem,
+                                        replacement=True, selection_size=self.selection_size)
+        chosen = selection.__call__(self.population)
+        self.assertEqual(self.selection_size, len(chosen))
+
+    def test__call__without_replacement(self):
+        selection = TournamentSelection(self.tournament_size, self.problem, replacement=False,
+                                        selection_size=self.selection_size)
+        chosen = selection.__call__(self.population)
+        self.assertEqual(self.selection_size, len(chosen))
+
+        msg = 'If replacement is False, selection_size must be set.'
+        with self.assertRaises(TypeError, msg=msg):
+            TournamentSelection(self.tournament_size, self.problem, replacement=False)
 
 
 class TestSelectionFunctions(unittest.TestCase, ExampleSolutions):
