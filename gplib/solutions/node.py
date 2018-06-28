@@ -83,10 +83,9 @@ def copy_nodes_along_graph(graph):
     """
     Copy node object from ``root`` to the target node based on ``graph''
     This method differs from deepcopy(root) in that it copies only the nodes along ``graph''.
-    :param root: Node object, the beginning or graph
     :param graph: list of ``(i, Node object)'' where ``i'' is the index of the next node of graph
-    and ``Node object'' is the parent node
-    :return: the index of target node node in the parent, copied the target node object and copied root object
+    and ``Node object'' is the parent node. This graph is obtained by using ``get_parent_node''.
+    :return: the index of target node node in the parent, copied the target node object and copied root object.
     """
     previous_pos = None
     current_node = None

@@ -65,7 +65,6 @@ class TournamentSelection(AbstractSelection):
         Tournament Selection
 
         :param population: list of solutions.
-        :param k: int. the number of solutions which are selected
         :return: list of solutions.
         """
 
