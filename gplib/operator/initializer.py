@@ -1,6 +1,7 @@
 from gplib.solutions import solution, node
 import random
 
+
 def initialize(t_prob, max_depth, function_dicts):
     """Generating a new solution.
 
@@ -12,6 +13,7 @@ def initialize(t_prob, max_depth, function_dicts):
         # Return
             solution
     """
+    # TODO check t_prob range and all the arguments are correct.
     n_nonterminal = len(function_dicts[0])
     n_terminal = len(function_dicts[1])
 
