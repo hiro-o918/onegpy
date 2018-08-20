@@ -2,7 +2,7 @@
 import unittest
 from gplib.solutions import node
 from gplib.solutions.solution import Solution
-from gplib.operator import RandomSelection, TournamentSelection, reduce_population
+from gplib.operators import RandomSelection, TournamentSelection, reduce_population
 
 
 class EmptyProblem(object):

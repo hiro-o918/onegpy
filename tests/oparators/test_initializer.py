@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gplib.operator import initializer
+from gplib.operators import initializer
 from gplib.solutions import node, solution
 
 
