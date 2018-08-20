@@ -47,6 +47,13 @@ class TestSolutionFunctions(unittest.TestCase):
         node.set_children(na2, [na4, na5, na6])
         self.assertFalse(solution.solution_equal(self.s, sa))
 
+    def test_select_random_points(self):
+        k = 2
+        points = solution.select_random_points(self.s, k)
+        for point in points:
+            self.assertTrue(isinstance(point, node.Node))
+        self.assertEqual(len(points), k)
+
 
 if __name__ == '__main__':
     unittest.main()
