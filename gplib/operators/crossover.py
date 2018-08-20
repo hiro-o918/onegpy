@@ -62,19 +62,19 @@ class OnePointCrossover(AbstractOperator):
         """
         self.c_rate = c_rate
         self.destructive = destructive
-        self.crossover_core = get_crossover_core(destructive)
 
     def __call__(self, parents):
         if len(parents) != 2:
             msg = 'parents must be a list consisting of two solutions'
             raise ValueError(msg)
 
-        points = [select_random_points(p, 1) for p in parents]
+        points = [select_random_points(p, 1)[0] for p in parents]
 
         if random.random() > self.c_rate:
             return parents
         else:
-            return self.crossover_core(parents, points)
+            crossover_core = get_crossover_core(self.destructive)
+            return crossover_core(parents, points)
 
 
 def get_default_crossover():

@@ -47,7 +47,7 @@ class TestCrossover(unittest.TestCase, ExampleParents):
         self.assertFalse(self.parents[0] is new_s1)
         self.assertFalse(self.parents[1] is new_s2)
 
-    def test__destructive_crossover_core(self):
+    def test_destructive_crossover_core(self):
         s1_nodes = node.get_all_node(self.parents[0].root)
         s2_nodes = node.get_all_node(self.parents[1].root)
         points = [s1_nodes[0], s2_nodes[2]]
@@ -66,6 +66,20 @@ class TestCrossover(unittest.TestCase, ExampleParents):
         self.assertTrue(node.node_equal(expected_nodes2[0], new_s2.root, as_tree=True))
         self.assertTrue(self.parents[0] is new_s1)
         self.assertTrue(self.parents[1] is new_s2)
+
+
+class TestOnePointCrossover(unittest.TestCase, ExampleParents):
+    def setUp(self):
+        ExampleParents.__init__(self)
+        self.crossover = co.OnePointCrossover(c_rate=1)
+
+    def test_crossover(self):
+        self.crossover.destructive = False
+        self.crossover(self.parents)
+
+    def test_destructive_crossover(self):
+        self.crossover.destructive = True
+        self.crossover(self.parents)
 
 
 if __name__ == '__main__':
