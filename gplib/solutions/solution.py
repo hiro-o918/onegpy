@@ -1,4 +1,6 @@
-from gplib.solutions.node import node_equal
+import random
+
+from gplib.solutions.node import node_equal, get_all_node
 
 
 class Solution(object):
@@ -40,3 +42,10 @@ def is_solution_in_population(solution, population):
         if solution_equal(solution, s):
             return True
     return False
+
+
+def point_selection(solution, k):
+    node_list = get_all_node(solution.root)
+    points = random.sample(node_list, k=k)
+
+    return points
