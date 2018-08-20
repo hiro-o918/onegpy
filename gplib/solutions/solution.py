@@ -51,6 +51,7 @@ def select_random_points(solution, k):
     :param k: the number of points to obtain
     :return: a list of class `Node`
     """
+    # TODO check k <= len(nodelist) or get min(k, len(nodelist))
     # TODO type check if ``solution'' is Solution
     node_list = get_all_node(solution.root)
     points = random.sample(node_list, k=k)

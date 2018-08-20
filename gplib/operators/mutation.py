@@ -1,21 +1,23 @@
 from gplib.solutions import node
 import random
 
+
 class AbstractMutation(object):
     def __init__(self, m_rate):
         """
         Abstract class of mutation.
 
-        :param m_rate: float([0, 1.0]). mutaion rate for each iteration
+        :param m_rate: float([0, 1.0]). mutation rate for each iteration
         """
         self.m_rate = m_rate
 
-    def __call__(self, solution):
+    def __call__(self, *args, **kwargs):
         raise NotImplementedError
+
 
 class BitStringMutation(AbstractMutation):
     def __init__(self, m_rate):
-        super.__init__(m_rate)
+        super(BitStringMutation, self).__init__(m_rate)
 
     def __call__(self, solution, function_dict):
         """

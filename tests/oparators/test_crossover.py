@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from gplib.operator import crossover
+from gplib.operators import crossover as co
 from gplib.solutions import node, solution
 
 
@@ -23,20 +23,11 @@ class ExampleParents(object):
         return solution.Solution(n1)
 
 
-class TestAbstractCrossover(unittest.TestCase, ExampleParents):
+class TestCrossover(unittest.TestCase, ExampleParents):
     def setUp(self):
         ExampleParents.__init__(self)
-        self.c_rate = 1
-        self.crossover = crossover.AbstractCrossover(self.c_rate, destructive=False)
 
-    def test__get_crossover_point(self):
-        k = 1
-        points = self.crossover._get_crossover_point(self.s1, k)
-        for point in points:
-            self.assertTrue(isinstance(point, node.Node))
-        # self.assertEqual(len(points), k)
-
-    def test__crossover_core(self):
+    def test_crossover(self):
         s1_nodes = node.get_all_node(self.parents[0].root)
         s2_nodes = node.get_all_node(self.parents[1].root)
         points = [s1_nodes[0], s2_nodes[2]]
@@ -50,13 +41,13 @@ class TestAbstractCrossover(unittest.TestCase, ExampleParents):
         node.set_children(expected_nodes2[2], [expected_nodes2[3], expected_nodes2[6]])
         node.set_children(expected_nodes2[3], [expected_nodes2[4], expected_nodes2[5]])
 
-        new_s1, new_s2 = self.crossover._crossover_core(self.parents, points)
+        new_s1, new_s2 = co.crossover(self.parents, points)
         self.assertTrue(node.node_equal(expected_nodes1[0], new_s1.root, as_tree=True))
         self.assertTrue(node.node_equal(expected_nodes2[0], new_s2.root, as_tree=True))
         self.assertFalse(self.parents[0] is new_s1)
         self.assertFalse(self.parents[1] is new_s2)
 
-    def test__destructive_crossover_core(self):
+    def test_destructive_crossover_core(self):
         s1_nodes = node.get_all_node(self.parents[0].root)
         s2_nodes = node.get_all_node(self.parents[1].root)
         points = [s1_nodes[0], s2_nodes[2]]
@@ -70,11 +61,25 @@ class TestAbstractCrossover(unittest.TestCase, ExampleParents):
         node.set_children(expected_nodes2[2], [expected_nodes2[3], expected_nodes2[6]])
         node.set_children(expected_nodes2[3], [expected_nodes2[4], expected_nodes2[5]])
 
-        new_s1, new_s2 = self.crossover._destructive_crossover_core(self.parents, points)
+        new_s1, new_s2 = co.destructive_crossover(self.parents, points)
         self.assertTrue(node.node_equal(expected_nodes1[0], new_s1.root, as_tree=True))
         self.assertTrue(node.node_equal(expected_nodes2[0], new_s2.root, as_tree=True))
         self.assertTrue(self.parents[0] is new_s1)
         self.assertTrue(self.parents[1] is new_s2)
+
+
+class TestOnePointCrossover(unittest.TestCase, ExampleParents):
+    def setUp(self):
+        ExampleParents.__init__(self)
+        self.crossover = co.OnePointCrossover(c_rate=1)
+
+    def test_crossover(self):
+        self.crossover.destructive = False
+        self.crossover(self.parents)
+
+    def test_destructive_crossover(self):
+        self.crossover.destructive = True
+        self.crossover(self.parents)
 
 
 if __name__ == '__main__':
