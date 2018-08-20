@@ -26,20 +26,25 @@ def get_depth(solution):
     return max(d_list)
 
 
-def solution_equal(solution_a, solution_b):
+def solution_equal(solution_a, solution_b, as_tree=True):
     # TODO type check if ``solution'' is Solution
-    return node_equal(solution_a.root, solution_b.root, as_tree=True)
+    if not as_tree:
+        node_equal(solution_a.root, solution_b.root, as_tree=as_tree)
+    else:
+        return solution_a is solution_b
 
 
-def is_solution_in_population(solution, population):
+def is_solution_in_pop(solution, population, as_tree=False):
     """
     check the tree of ``solution'' is in ``population'' or not
     :param solution: Solution object
     :param population: list of Solution object
+    :param as_tree: If as_tree is true, solution is compared by all the nodes' structure
+                    Otherwise, compared by object id.
     :return: bool
     """
     for s in population:
-        if solution_equal(solution, s):
+        if solution_equal(solution, s, as_tree):
             return True
     return False
 

@@ -1,5 +1,5 @@
 import random
-from gplib.solutions.solution import is_solution_in_population
+from gplib.solutions.solution import is_solution_in_pop
 
 
 class AbstractSelection(object):
@@ -53,7 +53,7 @@ class TournamentSelection(AbstractSelection):
                 return chosen.append(solution)
         else:
             def append(solution, chosen):
-                if not is_solution_in_population(solution, chosen):
+                if not is_solution_in_pop(solution, chosen):
                     chosen.append(solution)
 
         self.append = append
@@ -85,7 +85,7 @@ class TournamentSelection(AbstractSelection):
 def reduce_population(population):
     solutions = [population[0]]
     for s in population[1:]:
-        if not is_solution_in_population(s, solutions):
+        if not is_solution_in_pop(s, solutions):
             solutions.append(s)
 
     return solutions
