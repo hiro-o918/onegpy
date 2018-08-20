@@ -13,7 +13,7 @@ class AbstractMutation(object):
     def __call__(self, solution):
         raise NotImplementedError
 
-class bit_string_mutation(AbstractMutation):
+class BitStringMutation(AbstractMutation):
     def __init__(self, m_rate):
         super.__init__(m_rate)
 
@@ -22,9 +22,11 @@ class bit_string_mutation(AbstractMutation):
             Mutation points in the solution at random.
             :param solution: class `Solution`
             :param function_dict: dictionary of functions
+            :return: solution.
         """
         points = node.get_all_node(solution.root)
         for point in points:
             if random.random() <= self.m_rate:
                 func_id = random.choice(list(function_dict.keys()))
                 node.set_id(point, func_id)
+        return solution
