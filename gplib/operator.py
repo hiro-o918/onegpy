@@ -40,7 +40,7 @@ def build_population_operator(operator, selection_builder=None, n_out=None):
 
     selection = selection_builder(k=operator.n_input)
 
-    return PopulationOperator(operator, selection, n_out)
+    return PopulationOperator(selection, operator, n_out)
 
 
 def check_operator(operator):
