@@ -44,7 +44,14 @@ def is_solution_in_population(solution, population):
     return False
 
 
-def point_selection(solution, k):
+def select_random_points(solution, k):
+    """
+    Obtain `k` points in the solution at random.
+    :param solution: class `Solution`
+    :param k: the number of points to obtain
+    :return: a list of class `Node`
+    """
+    # TODO type check if ``solution'' is Solution
     node_list = get_all_node(solution.root)
     points = random.sample(node_list, k=k)
 
