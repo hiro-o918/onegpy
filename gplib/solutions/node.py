@@ -105,13 +105,43 @@ def copy_nodes_along_graph(graph):
 def get_parent_node(root, target_node):
     """function for searching parent node of target node.
 
-        # Arguments
-            root: Node object, root node.
-            target_node: Node object, target node.
+        :param root: Node object, root node.
+        :param target_node: Node object, target node.
 
-        # Returns
-            Position of target_node in parent node, node object of parent node
-            and graph from ``root'' to ``target_node''
+        :return Position of target_node in parent node, node object of parent node
+    """
+
+    def find_parent_node(current_node):
+        if current_node.children is None:
+            return
+
+        children = current_node.children
+        for i, c in enumerate(children):
+            if c is target_node:
+                return i, current_node
+            else:
+                return find_parent_node(c)
+
+    _nodes_checker(root, target_node)
+    if target_node is root:
+        msg = 'There is no parent of root.'
+        raise ValueError(msg)
+
+    pos, parent = find_parent_node(root) or (None, None)
+    if pos is None or parent is None:
+        msg = 'Invalid arguments: cannot find parent.'
+        raise ValueError(msg)
+
+    return pos, parent
+
+
+def get_graph_to_target(root, target_node):
+    """function for searching a graph from root node to a target node.
+
+        :param root: Node object, root node.
+        :param target_node: Node object, target node.
+
+        :return Graph from ``root'' to ``target_node''
     """
     graph = []
 
@@ -144,7 +174,7 @@ def get_parent_node(root, target_node):
         msg = 'Invalid arguments: cannot find parent.'
         raise ValueError(msg)
 
-    return pos, parent, graph
+    return graph
 
 
 def get_all_node(root):
