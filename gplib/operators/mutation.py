@@ -19,16 +19,19 @@ class BitStringMutation(AbstractMutation):
     def __init__(self, m_rate):
         super(BitStringMutation, self).__init__(m_rate)
 
-    def __call__(self, solution, function_dict):
+    def __call__(self, solution, function_dicts):
         """
             Mutation points in the solution at random.
             :param solution: class `Solution`
-            :param function_dict: dictionary of functions
+            :param function_dicts: list of dictionary of functions
+                                    dicts[0] nonterminal. dicts[1] terminal.
             :return: solution.
         """
         points = node.get_all_node(solution.root)
         for point in points:
             if random.random() <= self.m_rate:
-                func_id = random.choice(list(function_dict.keys()))
-                node.set_id(point, func_id)
+                if point.children is None:
+                    node.set_id(point, random.choice(list(function_dicts[1].keys())))
+                else:
+                    node.set_id(point, random.choice(list(function_dicts[0].keys())))
         return solution
