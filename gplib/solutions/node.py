@@ -116,11 +116,16 @@ def get_parent_node(root, target_node):
             return
 
         children = current_node.children
+        p = None
         for i, c in enumerate(children):
             if c is target_node:
                 return i, current_node
             else:
-                return find_parent_node(c)
+                p = p or find_parent_node(c)
+
+                if p is not None:
+                    break
+        return p
 
     _nodes_checker(root, target_node)
     if target_node is root:
