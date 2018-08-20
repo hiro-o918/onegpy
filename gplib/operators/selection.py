@@ -1,5 +1,5 @@
 import random
-from gplib.solutions.solution import is_solution_in_pop
+from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
 class AbstractSelection(object):
@@ -18,6 +18,10 @@ class AbstractSelection(object):
             self.rand_f = random.sample
 
         self.problem = problem
+        self.replacement = replacement
+
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError
 
     def _cal_fitness(self, population):
         for solution in population:
@@ -38,7 +42,13 @@ class RandomSelection(AbstractSelection):
             # Returns
                 list of solutions.
         """
-        return self.rand_f(population=population, k=self.k)
+        if self.replacement:
+            chosen = []
+            for i in range(self.k):
+                copy_append(random.choice(population), chosen)
+            return chosen
+        else:
+            return self.rand_f(population=population, k=self.k)
 
 
 class TournamentSelection(AbstractSelection):
@@ -50,10 +60,10 @@ class TournamentSelection(AbstractSelection):
         self.tournament_size = tournament_size
         if replacement:
             def append(solution, chosen):
-                return chosen.append(solution)
+                return copy_append(solution, chosen)
         else:
             def append(solution, chosen):
-                if not is_solution_in_pop(solution, chosen):
+                if not is_solution_in_pop(solution, chosen, as_tree=True):
                     chosen.append(solution)
 
         self.append = append
@@ -90,3 +100,9 @@ def reduce_population(population):
 
     return solutions
 
+
+def copy_append(solution, chosen):
+    if is_solution_in_pop(solution, chosen, as_tree=False):
+        chosen.append(copy_solution(solution, deep=True))
+    else:
+        chosen.append(solution)

@@ -1,4 +1,5 @@
 import random
+import copy
 
 from gplib.solutions.node import node_equal, get_all_node
 
@@ -62,3 +63,13 @@ def select_random_points(solution, k):
     points = random.sample(node_list, k=k)
 
     return points
+
+
+def copy_solution(solution, deep=False):
+    if not deep:
+        new_solution = solution.__class__(solution.root)
+        if solution.previous_fitness is not None:
+            new_solution.previous_fitness = copy.copy(solution.previous_fitness)
+        return new_solution
+    else:
+        return copy.deepcopy(solution)
