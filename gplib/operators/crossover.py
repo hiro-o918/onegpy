@@ -104,7 +104,7 @@ class OnePointCrossover(AbstractOperator):
 
 class PopulationOnePointCrossover(PopulationOperatorAdapter):
 
-    def __init__(self, c_rate, destructive=True, generator_builder=None):
+    def __init__(self, c_rate, destructive=False, generator_builder=None):
 
         operator = OnePointCrossover(c_rate, destructive)
         if generator_builder is None:
