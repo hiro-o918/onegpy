@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from functools import partial
+import warnings
 
 
 class AbstractOperator(object):
@@ -12,6 +13,15 @@ class AbstractOperator(object):
 
     def __call__(self, *args, **kwargs):
         raise NotImplementedError
+
+    @staticmethod
+    def not_changeable_warning():
+        with warnings.catch_warnings():
+            warnings.simplefilter('default')
+            msg = 'This variable is not changeable.' \
+                  ' Thus, the operation has no effect.'\
+
+            warnings.warn(msg)
 
 
 class PopulationOperator(AbstractOperator):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
+import warnings
 from gplib.operators import crossover as co
 from gplib.solutions import node, solution
 
@@ -71,15 +72,22 @@ class TestCrossover(unittest.TestCase, ExampleParents):
 class TestOnePointCrossover(unittest.TestCase, ExampleParents):
     def setUp(self):
         ExampleParents.__init__(self)
-        self.crossover = co.OnePointCrossover(c_rate=1)
+        self.destructive_co = co.OnePointCrossover(c_rate=1, destructive=True)
+        self.non_destructive_co = co.OnePointCrossover(c_rate=1, destructive=False)
 
     def test_crossover(self):
-        self.crossover.destructive = False
-        self.crossover(self.parents)
+        with warnings.catch_warnings(record=True) as w:
+            self.destructive_co.destructive = False
+            self.assertTrue(len(w) == 1)
+            msg = 'This variable is not changeable.' \
+                  ' Thus, the operation has no effect.'
+            self.assertSequenceEqual(msg, str(w[-1].message))
+
+        self.destructive_co(self.parents)
 
     def test_destructive_crossover(self):
-        self.crossover.destructive = True
-        self.crossover(self.parents)
+        self.destructive_co.destructive = True
+        self.destructive_co(self.parents)
 
 
 if __name__ == '__main__':

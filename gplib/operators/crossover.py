@@ -61,8 +61,9 @@ class OnePointCrossover(AbstractOperator):
                             Otherwise, parents are copied and keep their structures.
         """
         super(OnePointCrossover, self).__init__()
-        self.c_rate = c_rate
-        self.destructive = destructive
+        self._c_rate = c_rate
+        self._destructive = destructive
+        self.crossover_core = get_crossover_core(self._destructive)
 
     def __call__(self, parents):
         if len(parents) != 2:
@@ -71,11 +72,34 @@ class OnePointCrossover(AbstractOperator):
 
         points = [select_random_points(p, 1)[0] for p in parents]
 
-        if random.random() > self.c_rate:
+        if random.random() > self._c_rate:
             return parents
         else:
-            crossover_core = get_crossover_core(self.destructive)
-            return crossover_core(parents, points)
+            return self.crossover_core(parents, points)
+
+    @property
+    def c_rate(self):
+        return self._c_rate
+
+    @c_rate.setter
+    def c_rate(self, _):
+        self.not_changeable_warning()
+
+    @c_rate.deleter
+    def c_rate(self):
+        self.not_changeable_warning()
+
+    @property
+    def destructive(self):
+        return self._destructive
+
+    @destructive.setter
+    def destructive(self, _):
+        self.not_changeable_warning()
+
+    @destructive.deleter
+    def destructive(self):
+        self.not_changeable_warning()
 
 
 def get_default_crossover():
