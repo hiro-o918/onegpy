@@ -1,12 +1,12 @@
 from gplib.solutions import node
-from gplib.operators import selection
-from gplib.operator import AbstractOperator
+from gplib.operator import AbstractOperator, PopulationOperatorAdapter
 import random
 
 
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
 from gplib.solutions.solution import Solution, select_random_points
+from gplib.operators import RandomSelection
 
 
 def crossover(parents, points):
@@ -60,7 +60,7 @@ class OnePointCrossover(AbstractOperator):
         :param destructive: If destructive is true, parents also are changed.
                             Otherwise, parents are copied and keep their structures.
         """
-        super(OnePointCrossover, self).__init__()
+        super(OnePointCrossover, self).__init__(n_in=2, n_out=2)
         self._c_rate = c_rate
         self._destructive = destructive
         self.crossover_core = get_crossover_core(self._destructive)
@@ -102,8 +102,19 @@ class OnePointCrossover(AbstractOperator):
         self.not_changeable_warning()
 
 
+class PopulationOnePointCrossover(PopulationOperatorAdapter):
+
+    def __init__(self, c_rate, destructive=True, generator_builder=None):
+
+        operator = OnePointCrossover(c_rate, destructive)
+        if generator_builder is None:
+            generator_builder = RandomSelection(k=operator._n_in, replacement=False).generator_builder
+
+        super(PopulationOnePointCrossover, self).__init__(operator, generator_builder)
+
+
 def get_default_crossover():
-    selection_operator = selection.RandomSelection(k=2, replacement=False)
+    selection_operator = RandomSelection(k=2, replacement=False)
     crossover_operator = OnePointCrossover(c_rate=0.5)
 
     def do_crossover(population):
