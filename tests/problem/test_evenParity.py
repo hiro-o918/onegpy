@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 import numpy as np
-from gplib.problem import boolean
+from gplib.problems import boolean
 from gplib.solutions import node, solution
 
 

@@ -1,5 +1,5 @@
 from gplib.operator import crossover, selection, initializer
-from gplib.problem import boolean
+from gplib.problems import boolean
 from gplib.base import gpbase
 
 def build_SGP():
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     popsize = 500
 
     t_prob = 0.1
-    max_depth= 10
+    max_depth = 10
     function_dict = None
 
     gp = build_SGP()
