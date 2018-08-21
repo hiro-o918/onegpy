@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
+
 import numpy as np
+
 from gplib.problems import boolean
 from gplib.solutions import node, solution
 
