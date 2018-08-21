@@ -100,34 +100,6 @@ class TestSelectionBase(unittest.TestCase, ExampleSolutions):
         self.assertEqual(self.elite_size, len(chosen))
 
 
-# class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
-#     def setUp(self):
-#         ExampleSolutions.__init__(self)
-#         self.tournament_size = 2
-#         self.selection_size = 3
-#         self.problem = EmptyProblem()
-#
-#     def test__call__with_replacement(self):
-#         selection = TournamentSelection(self.tournament_size, self.problem, replacement=True)
-#         chosen = selection.__call__(self.population)
-#         self.assertEqual(len(self.population), len(chosen))
-#
-#         selection = TournamentSelection(self.tournament_size, self.problem,
-#                                         replacement=True, selection_size=self.selection_size)
-#         chosen = selection.__call__(self.population)
-#         self.assertEqual(self.selection_size, len(chosen))
-#
-#     def test__call__without_replacement(self):
-#         selection = TournamentSelection(self.tournament_size, self.problem, replacement=False,
-#                                         selection_size=self.selection_size)
-#         chosen = selection.__call__(self.population)
-#         self.assertEqual(self.selection_size, len(chosen))
-#
-#         msg = 'If replacement is False, selection_size must be set.'
-#         with self.assertRaises(TypeError, msg=msg):
-#             TournamentSelection(self.tournament_size, self.problem, replacement=False)
-
-
 class TestSelectionFunctions(unittest.TestCase, ExampleSolutions):
     def setUp(self):
         ExampleSolutions.__init__(self)
