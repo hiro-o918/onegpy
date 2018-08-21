@@ -1,9 +1,10 @@
 import random
-from gplib.operator import AbstractPopulationOperator
+
+from gplib.operator import PopulationOperator
 from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
-class AbstractSelection(AbstractPopulationOperator):
+class AbstractSelection(PopulationOperator):
 
     def __init__(self, k, replacement, problem):
         """
