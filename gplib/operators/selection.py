@@ -76,6 +76,7 @@ class SelectionBase(object):
                 solution = selection_core(candidates)
                 chosen.append(solution)
                 candidates.remove(solution)
+            del candidates
         return chosen
 
     def get_selection(self):
