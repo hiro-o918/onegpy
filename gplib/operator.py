@@ -51,14 +51,14 @@ class AbstractOperator(object):
         self.not_changeable_warning()
 
 
-class AbstractPopulationOperator(AbstractOperator):
+class PopulationOperator(AbstractOperator):
     def __call__(self, *args, **kwargs):
         raise NotImplementedError
 
 
-class PopulationOperator(AbstractPopulationOperator):
+class PopulationOperatorAdapter(PopulationOperator):
     def __init__(self, operator, generator_builder=None, n_out=None):
-        super(PopulationOperator, self).__init__()
+        super(PopulationOperatorAdapter, self).__init__()
         check_operator(operator)
         self.operator = operator
         self.generator_builder = generator_builder or self._build_default_generator
