@@ -1,7 +1,7 @@
 import numpy as np
 
+from gplib.problem import AbstractProblem
 from gplib.solutions import node
-from problem import AbstractProblem
 
 
 class EvenParity(AbstractProblem):
