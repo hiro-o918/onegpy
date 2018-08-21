@@ -60,8 +60,8 @@ class PopulationOperator(AbstractOperator):
 
 class PopulationOperatorAdapter(PopulationOperator):
     def __init__(self, operator, generator_builder=None, n_out=None):
-        super(PopulationOperatorAdapter, self).__init__()
-        check_operator(operator)
+        super(PopulationOperatorAdapter, self).__init__(n_out=n_out)
+        operator_checker(operator)
         if operator.n_in is None:
             msg = 'n_in of {} must be set'.format(operator.__name__)
             raise ValueError(msg)
@@ -71,8 +71,7 @@ class PopulationOperatorAdapter(PopulationOperator):
             warnings.warn(msg)
 
         self.operator = operator
-        self.generator_builder = generator_builder or self._get_default_generator_builder
-        self.n_out = n_out
+        self.generator_builder = generator_builder or self._get_default_generator_builder()
 
     def __call__(self, population, *args, **kwargs):
         new_pop = []
@@ -90,19 +89,20 @@ class PopulationOperatorAdapter(PopulationOperator):
 
         return new_pop
 
-    def _get_default_generator_builder(self, population):
-        random.shuffle(population)
+    def _get_default_generator_builder(self):
+
         n_solutions = self.operator.n_in
 
-        def generator():
+        def generator_builder(population):
+            random.shuffle(population)
             for i in range(0, len(population), n_solutions):
                 yield population[i:i + n_solutions]
 
-        return generator()
+        return generator_builder
 
 
 def build_population_operator(operator, selection_class=None, n_out=None, **kwargs):
-    check_operator(operator)
+    operator_checker(operator)
 
     if selection_class is not None:
         generator_builder = get_generator_builder(selection_class(k=operator.n_input, **kwargs))
@@ -112,7 +112,7 @@ def build_population_operator(operator, selection_class=None, n_out=None, **kwar
     return PopulationOperatorAdapter(operator, generator_builder, n_out)
 
 
-def check_operator(operator):
+def operator_checker(operator):
     if not isinstance(operator, AbstractOperator):
         typ = TypeError
         msg = 'Expected type: {} not {}.'.format(AbstractOperator, type(operator))
