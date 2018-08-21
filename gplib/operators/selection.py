@@ -2,94 +2,61 @@ import random
 from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
-class AbstractSelection(object):
-
-    def __init__(self, problem):
-        """
-        :return: function of selection
-        """
-        self.problem = problem
-
-    def __call__(self, *args, **kwargs):
-        raise NotImplementedError
-
-    def _cal_fitness(self, population):
-        for solution in population:
-            self.problem.fitness(solution)
+def random_selection(population, problem):
+    return random.choice(population=population)
 
 
-class RandomSelection(AbstractSelection):
-
-    def __init__(self):
-        super().__init__(None)
-
-    def __call__(self, population):
-        """Random Selection
-
-            # Arguments
-                population: list of individual. a candidate set of solutions.
-
-            # Returns
-                solution.
-        """
-        return random.choice(population=population)
-
-
-class EliteSelection(AbstractSelection):
-    def __init__(self, problem):
-        super().__init__(problem=problem)
-
-    def __call__(self, population):
-        """
-        Tournament Selection
-
-        :param population: list of solutions.
-        :return: solution.
-        """
-        self._cal_fitness(population)
-        return max(population, key=lambda x: x.previous_fitness)
+def elite_selection(population, problem):
+    _cal_fitness(population, problem)
+    return max(population, key=lambda x: x.previous_fitness)
 
 
 class SelectionBase(object):
-    def __init__(self, selection_size, replacement, selection_type=None):
+    def __init__(self, selection_size, replacement, selection_name, problem=None):
         """
             Selection Base
 
             :param selection_size: number of selection solutions.
-            :param selection_type: string. type of selection.
+            :param selection_name: string. type of selection.
             :param replacement: bool. sample with replacement
             :return: list of solutions.
         """
         self.selection_size = selection_size
-        self.selection_type = selection_type
+        self.selection_name = selection_name
+        self.problem = problem
         self.replacement = replacement
 
     def __call__(self, population):
-        selection_core = self.get_selection()
+        selection_core = get_selection_core(self.selection_name)
         chosen = []
         if self.replacement:
             for i in range(self.selection_size):
-                copy_append(selection_core(population), chosen)
+                copy_append(selection_core(population, self.problem), chosen)
         else:
             candidates = population[:]
             for i in range(self.selection_size):
-                solution = selection_core(candidates)
-                chosen.append(solution)
-                candidates.remove(solution)
+                solution = selection_core(candidates, self.problem)
+                chosen.append(candidates.pop(solution))
             del candidates
         return chosen
 
-    def get_selection(self):
-        if self.selection_type == 'elite':
-            return EliteSelection
-        else:
-            return RandomSelection
+
+def get_selection_core(selection_name):
+    if selection_name == 'elite':
+        return elite_selection
+    else:
+        return random_selection
+
+
+def _cal_fitness(population, problem):
+    for solution in population:
+        problem.fitness(solution)
 
 
 def reduce_population(population):
     solutions = [population[0]]
     for s in population[1:]:
-        if not is_solution_in_pop(s, solutions):
+        if not is_solution_in_pop(s, solutions, as_tree=True):
             solutions.append(s)
 
     return solutions

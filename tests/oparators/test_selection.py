@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 from gplib.solutions import node
-from gplib.solutions.solution import Solution
-from gplib.operators import RandomSelection, TournamentSelection, reduce_population
+from gplib.solutions.solution import Solution, solution_equal
+from gplib.operators import selection as se
 
 
 class EmptyProblem(object):
@@ -62,49 +62,48 @@ class ExampleSolutions(object):
         return Solution(n1)
 
 
-class TestRandomSelection(unittest.TestCase, ExampleSolutions):
+class TestEliteSelection(unittest.TestCase, ExampleSolutions):
     def setUp(self):
         ExampleSolutions.__init__(self)
-        self.k = 3
         self.problem = EmptyProblem()
 
-    def test__call__with_replacement(self):
-        selection = RandomSelection(self.k,  replacement=True)
-        chosen = selection.__call__(self.population)
-        self.assertEqual(len(chosen), self.k)
-
-    def test__call__without_replacement(self):
-        selection = RandomSelection(self.k, replacement=False)
-        chosen = selection.__call__(self.population)
-        self.assertEqual(self.k, len(chosen))
+    def test_random_selection(self):
+        solution = se.elite_selection(self.population, self.problem)
+        self.assertEqual(solution.previous_fitness, 3)
 
 
-class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
+class TestSelectionBase(unittest.TestCase, ExampleSolutions):
     def setUp(self):
         ExampleSolutions.__init__(self)
         self.tournament_size = 2
         self.selection_size = 3
         self.problem = EmptyProblem()
-
-    def test__call__with_replacement(self):
-        selection = TournamentSelection(self.tournament_size, self.problem, replacement=True)
-        chosen = selection.__call__(self.population)
-        self.assertEqual(len(self.population), len(chosen))
-
-        selection = TournamentSelection(self.tournament_size, self.problem,
-                                        replacement=True, selection_size=self.selection_size)
-        chosen = selection.__call__(self.population)
-        self.assertEqual(self.selection_size, len(chosen))
-
-    def test__call__without_replacement(self):
-        selection = TournamentSelection(self.tournament_size, self.problem, replacement=False,
-                                        selection_size=self.selection_size)
-        chosen = selection.__call__(self.population)
-        self.assertEqual(self.selection_size, len(chosen))
-
-        msg = 'If replacement is False, selection_size must be set.'
-        with self.assertRaises(TypeError, msg=msg):
-            TournamentSelection(self.tournament_size, self.problem, replacement=False)
+# class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
+#     def setUp(self):
+#         ExampleSolutions.__init__(self)
+#         self.tournament_size = 2
+#         self.selection_size = 3
+#         self.problem = EmptyProblem()
+#
+#     def test__call__with_replacement(self):
+#         selection = TournamentSelection(self.tournament_size, self.problem, replacement=True)
+#         chosen = selection.__call__(self.population)
+#         self.assertEqual(len(self.population), len(chosen))
+#
+#         selection = TournamentSelection(self.tournament_size, self.problem,
+#                                         replacement=True, selection_size=self.selection_size)
+#         chosen = selection.__call__(self.population)
+#         self.assertEqual(self.selection_size, len(chosen))
+#
+#     def test__call__without_replacement(self):
+#         selection = TournamentSelection(self.tournament_size, self.problem, replacement=False,
+#                                         selection_size=self.selection_size)
+#         chosen = selection.__call__(self.population)
+#         self.assertEqual(self.selection_size, len(chosen))
+#
+#         msg = 'If replacement is False, selection_size must be set.'
+#         with self.assertRaises(TypeError, msg=msg):
+#             TournamentSelection(self.tournament_size, self.problem, replacement=False)
 
 
 class TestSelectionFunctions(unittest.TestCase, ExampleSolutions):
@@ -112,7 +111,14 @@ class TestSelectionFunctions(unittest.TestCase, ExampleSolutions):
         ExampleSolutions.__init__(self)
 
     def test_reduce_population(self):
-        self.assertEqual(len(reduce_population(self.population)), 3)
+        self.assertEqual(len(se.reduce_population(self.population)), 3)
+
+    def test_copy_append(self):
+        s1 = self.create_tree_type1()
+        s2 = s1
+        chosen = [s1]
+        se.copy_append(s2, chosen)
+        self.assertFalse(solution_equal(chosen[0], chosen[1], False))
 
 
 if __name__ == '__main__':
