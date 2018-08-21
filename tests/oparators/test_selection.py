@@ -75,9 +75,31 @@ class TestEliteSelection(unittest.TestCase, ExampleSolutions):
 class TestSelectionBase(unittest.TestCase, ExampleSolutions):
     def setUp(self):
         ExampleSolutions.__init__(self)
-        self.tournament_size = 2
+        self.elite_size = 1
         self.selection_size = 3
         self.problem = EmptyProblem()
+
+    def test_random_selection_base_with_replacement(self):
+        selection = se.SelectionBase(self.selection_size, True, 'random')
+        chosen = selection(self.population)
+        self.assertEqual(self.selection_size, len(chosen))
+
+    def test_random_selection_base_without_replacement(self):
+        selection = se.SelectionBase(self.selection_size, False, 'random')
+        chosen = selection(self.population)
+        self.assertEqual(self.selection_size, len(chosen))
+
+    def test_elite_selection_base_with_replacement(self):
+        selection = se.SelectionBase(self.elite_size, True, 'elite', self.problem)
+        chosen = selection(self.population)
+        self.assertEqual(self.elite_size, len(chosen))
+
+    def test_elite_selection_base_without_replacement(self):
+        selection = se.SelectionBase(self.elite_size, False, 'elite', self.problem)
+        chosen = selection(self.population)
+        self.assertEqual(self.elite_size, len(chosen))
+
+
 # class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
 #     def setUp(self):
 #         ExampleSolutions.__init__(self)

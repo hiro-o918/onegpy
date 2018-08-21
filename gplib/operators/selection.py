@@ -3,7 +3,7 @@ from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
 def random_selection(population, problem):
-    return random.choice(population=population)
+    return random.choice(population)
 
 
 def elite_selection(population, problem):
@@ -36,7 +36,8 @@ class SelectionBase(object):
             candidates = population[:]
             for i in range(self.selection_size):
                 solution = selection_core(candidates, self.problem)
-                chosen.append(candidates.pop(solution))
+                chosen.append(solution)
+                candidates.remove(solution)
             del candidates
         return chosen
 
