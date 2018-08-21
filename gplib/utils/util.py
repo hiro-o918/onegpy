@@ -1,14 +1,15 @@
-def build_generator(selection, population):
+def get_generator_builder(selection):
     """
-    Build a generator selecting from fixed population by means of `selection`.
+    Get a generator builder.
+    The generator generates list of solutions by means of `selection`.
     :param selection: inheritance of class AbstractSelection.
     :param population: list of solutions.
     :return:
     """
-    def generator():
+    def generator_builder(population):
         while True:
             yield selection(population)
 
-    return generator()
+    return generator_builder
 
 
