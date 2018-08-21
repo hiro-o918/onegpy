@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import unittest
 import warnings
+
 from gplib.operators import crossover as co
-from gplib.solutions import node, solution
 from gplib.operators.crossover import PopulationOnePointCrossover
+from gplib.solutions import node, solution
 
 
 class ExampleParents(object):
@@ -87,19 +88,28 @@ class TestOnePointCrossover(unittest.TestCase, ExampleParents):
         self.destructive_co(self.parents)
 
     def test_destructive_crossover(self):
-        self.destructive_co.destructive = True
         self.destructive_co(self.parents)
 
 
-class TestPopulationOnePointCrossover(unittest.TestCase, ExampleParents):
+class TestPopulationOnePointCrossover(unittest.TestCase):
     def setUp(self):
-        ExampleParents.__init__(self)
-        self.pop = [self.s1, self.s2] * 10
-        self.pop_crossover = PopulationOnePointCrossover(c_rate=1, destructive=False)
+        self.pop = [solution.Solution(node.Node()) for _ in range(100)]
 
-    def test_crossover(self):
-        new_pop = self.pop_crossover(self.pop)
+    def test_non_destructive_crossover(self):
+        pop_crossover = PopulationOnePointCrossover(c_rate=1, destructive=False)
+        new_pop = pop_crossover(self.pop)
         self.assertEqual(len(self.pop), len(new_pop))
+
+        for s in new_pop:
+            self.assertFalse(solution.is_solution_in_pop(s, self.pop, as_tree=False))
+
+    def test_destructive_crossover(self):
+        pop_crossover = PopulationOnePointCrossover(c_rate=1, destructive=True)
+        new_pop = pop_crossover(self.pop)
+        self.assertEqual(len(self.pop), len(new_pop))
+
+        for s in new_pop:
+            self.assertTrue(solution.is_solution_in_pop(s, self.pop, as_tree=False))
 
 
 if __name__ == '__main__':
