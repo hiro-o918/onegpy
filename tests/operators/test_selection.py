@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import unittest
+
+from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection, copy_append, \
+    reduce_population
 from gplib.solutions import node
 from gplib.solutions.solution import Solution, solution_equal
-from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection, copy_append, reduce_population
 
 
 class EmptyProblem(object):
