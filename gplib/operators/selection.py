@@ -1,57 +1,105 @@
 import random
+from gplib.operator import PopulationOperator
 from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
-def random_selection(population, problem):
-    return random.choice(population)
+class AbstractSelection(PopulationOperator):
 
-
-def elite_selection(population, problem):
-    _cal_fitness(population, problem)
-    return max(population, key=lambda x: x.previous_fitness)
-
-
-class SelectionBase(object):
-    def __init__(self, selection_size, replacement, selection_name, problem=None):
+    def __init__(self, k, replacement, problem):
         """
-            Selection Base
-
-            :param selection_size: number of selection solutions.
-            :param selection_name: string. type of selection.
-            :param replacement: bool. sample with replacement
-            :return: list of solutions.
+        :param k: int. The number of solutions which are selected.
+        :param replacement: bool. sample with replacement
+        :return: function of selection
         """
-        self.selection_size = selection_size
-        self.selection_name = selection_name
-        self.problem = problem
+        self.k = k
         self.replacement = replacement
+        self.problem = problem
+
+    def _cal_fitness(self, population):
+        for solution in population:
+            self.problem.fitness(solution)
+
+
+class RandomSelection(AbstractSelection):
+
+    def __init__(self, k, replacement):
+        super().__init__(k, replacement, None)
 
     def __call__(self, population):
-        selection_core = get_selection_core(self.selection_name)
-        chosen = []
+        """Random Selection
+
+            # Arguments
+                population: list of individual. a candidate set of solutions.
+
+            # Returns
+                list of solutions.
+        """
         if self.replacement:
-            for i in range(self.selection_size):
-                copy_append(selection_core(population, self.problem), chosen)
+            chosen = []
+            for i in range(self.k):
+                copy_append(chosen, random.choice(population))
+            return chosen
         else:
-            candidates = population[:]
-            for i in range(self.selection_size):
-                solution = selection_core(candidates, self.problem)
-                chosen.append(solution)
-                candidates.remove(solution)
-            del candidates
+            return random.sample(population, self.k)
+
+
+class EliteSelection(AbstractSelection):
+    def __init__(self, k, problem, replacement=False):
+        super().__init__(k, replacement, problem)
+
+    def __call__(self, population):
+        self._cal_fitness(population)
+        k = self.k or len(population)
+        chosen = []
+        candidates = population[:]
+        for i in range(k):
+            best = max(candidates, key=lambda x: x.previous_fitness)
+            chosen.append(chosen)
+            candidates.remove(best)
+        del candidates
+
         return chosen
 
 
-def get_selection_core(selection_name):
-    if selection_name == 'elite':
-        return elite_selection
-    else:
-        return random_selection
+class TournamentSelection(AbstractSelection):
+    def __init__(self, tournament_size, problem, replacement=True, selection_size=None):
+        if not replacement and selection_size is None:
+            msg = 'If replacement is False, selection_size must be set.'
+            raise TypeError(msg)
+        self.selection_size = selection_size
+        self.tournament_size = tournament_size
+        if replacement:
+            def append(solution, chosen):
+                copy_append(solution, chosen)
+        else:
+            def append(solution, chosen):
+                if not is_solution_in_pop(solution, chosen, False):
+                    chosen.append(solution)
 
+        self.append = append
+        self.replacement = replacement
+        super().__init__(k=tournament_size, replacement=replacement, problem=problem)
 
-def _cal_fitness(population, problem):
-    for solution in population:
-        problem.fitness(solution)
+    def __call__(self, population):
+        """
+        Tournament Selection
+
+        :param population: list of solutions.
+        :return: list of solutions.
+        """
+
+        chosen = []
+        self._cal_fitness(population)
+        #TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
+        selection_size = self.selection_size or len(population)
+        while len(chosen) < selection_size:
+            candidates = random.sample(population, self.tournament_size)
+            best = max(candidates, key=lambda x: x.previous_fitness)
+            self.append(best, chosen)
+
+        del population
+
+        return chosen
 
 
 def reduce_population(population):
