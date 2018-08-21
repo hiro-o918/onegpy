@@ -16,12 +16,9 @@ class AbstractOperator(object):
 
     @staticmethod
     def not_changeable_warning():
-        with warnings.catch_warnings():
-            warnings.simplefilter('default')
-            msg = 'This variable is not changeable.' \
-                  ' Thus, the operation has no effect.'\
-
-            warnings.warn(msg)
+        msg = 'This variable is not changeable.' \
+              ' Thus, the operation has no effect.'
+        warnings.warn(msg)
 
 
 class PopulationOperator(AbstractOperator):
