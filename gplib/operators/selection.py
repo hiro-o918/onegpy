@@ -1,9 +1,9 @@
 import random
-from gplib.operator import PopulationOperator
+from gplib.operator import AbstractPopulationOperator
 from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
-class AbstractSelection(PopulationOperator):
+class AbstractSelection(AbstractPopulationOperator):
 
     def __init__(self, k, replacement, problem):
         """
@@ -11,6 +11,7 @@ class AbstractSelection(PopulationOperator):
         :param replacement: bool. sample with replacement
         :return: function of selection
         """
+        super(AbstractSelection, self).__init__()
         self.k = k
         self.replacement = replacement
         self.problem = problem
@@ -19,11 +20,25 @@ class AbstractSelection(PopulationOperator):
         for solution in population:
             self.problem.fitness(solution)
 
+    def build_generator(self, population):
+        def generator():
+            while True:
+                yield self.__call__(population)
+
+        return generator()
+
+    @property
+    def generator_builder(self):
+        return self.build_generator
+
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError
+
 
 class RandomSelection(AbstractSelection):
 
     def __init__(self, k, replacement):
-        super().__init__(k, replacement, None)
+        super(RandomSelection, self).__init__(k, replacement, None)
 
     def __call__(self, population):
         """Random Selection
@@ -50,7 +65,7 @@ class EliteSelection(AbstractSelection):
            list of solutions.
     """
     def __init__(self, k, problem, replacement=False):
-        super().__init__(k, replacement, problem)
+        super(EliteSelection, self).__init__(k, replacement, problem)
 
     def __call__(self, population):
         self._cal_fitness(population)
@@ -59,7 +74,7 @@ class EliteSelection(AbstractSelection):
         candidates = population[:]
         for i in range(k):
             best = max(candidates, key=lambda x: x.previous_fitness)
-            chosen.append(chosen)
+            chosen.append(best)
             candidates.remove(best)
         del candidates
 
@@ -83,7 +98,7 @@ class TournamentSelection(AbstractSelection):
 
         self.append = append
         self.replacement = replacement
-        super().__init__(k=tournament_size, replacement=replacement, problem=problem)
+        super(TournamentSelection, self).__init__(k=tournament_size, replacement=replacement, problem=problem)
 
     def __call__(self, population):
         """
