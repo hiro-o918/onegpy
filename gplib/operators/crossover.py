@@ -60,6 +60,7 @@ class OnePointCrossover(AbstractOperator):
         :param destructive: If destructive is true, parents also are changed.
                             Otherwise, parents are copied and keep their structures.
         """
+        super(OnePointCrossover, self).__init__()
         self.c_rate = c_rate
         self.destructive = destructive
 
