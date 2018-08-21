@@ -37,13 +37,18 @@ class RandomSelection(AbstractSelection):
         if self.replacement:
             chosen = []
             for i in range(self.k):
-                copy_append(chosen, random.choice(population))
+                copy_append(random.choice(population), chosen)
             return chosen
         else:
             return random.sample(population, self.k)
 
 
 class EliteSelection(AbstractSelection):
+    """Elite Selection
+
+        # Returns
+           list of solutions.
+    """
     def __init__(self, k, problem, replacement=False):
         super().__init__(k, replacement, problem)
 
