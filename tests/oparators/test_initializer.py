@@ -33,3 +33,7 @@ class TestInitializerFunctions(unittest.TestCase):
         t_prob = 1
         s = initializer.initialize(t_prob, self.max_depth, self.function_dicts)
         self.assertEqual(solution.get_depth(s), 0)
+
+
+if __name__ == '__main__':
+    unittest.main()

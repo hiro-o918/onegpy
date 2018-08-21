@@ -33,3 +33,7 @@ class TestOperatorFunctions(unittest.TestCase):
         msg = 'Expected type: {} not {}.'.format(self.operator, bool)
         with self.assertRaises(TypeError, msg=msg):
             operator_checker(False)
+
+
+if __name__ == '__main__':
+    unittest.main()
