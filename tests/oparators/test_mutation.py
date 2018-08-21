@@ -21,21 +21,12 @@ class ExampleParents(object):
         return solution.Solution(n1)
 
 
-class TestOnePointMutation(unittest.TestCase, ExampleParents):
+class TestPointMutation(unittest.TestCase, ExampleParents):
     def setUp(self):
         ExampleParents.__init__(self)
-        self.mutation = mu.OnePointMutation(1.0, function_dicts=[({0: 'a', 1: 'b'}), ({0: 'c', 1: 'd'})], function_name='onepoint')
+        self.mutation = mu.PointMutation(1.0, function_dicts=[({0: 'a', 1: 'b'}), ({0: 'c', 1: 'd'})], mutation_type='onepoint')
 
     def test_onepoint_mutation(self):
-        self.mutation(self.s1)
-
-
-class TestRateSelectionMutation(unittest.TestCase, ExampleParents):
-    def setUp(self):
-        ExampleParents.__init__(self)
-        self.mutation = mu.RateSelectionMutation(0.5, function_dicts=[({0: 'a', 1: 'b'}), ({0: 'c', 1: 'd'})], function_name='rate')
-
-    def test_rate_selection_mutation(self):
         self.mutation(self.s1)
 
 
