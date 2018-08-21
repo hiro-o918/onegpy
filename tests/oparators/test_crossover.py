@@ -3,6 +3,7 @@ import unittest
 import warnings
 from gplib.operators import crossover as co
 from gplib.solutions import node, solution
+from gplib.operators.crossover import PopulationOnePointCrossover
 
 
 class ExampleParents(object):
@@ -88,6 +89,17 @@ class TestOnePointCrossover(unittest.TestCase, ExampleParents):
     def test_destructive_crossover(self):
         self.destructive_co.destructive = True
         self.destructive_co(self.parents)
+
+
+class TestPopulationOnePointCrossover(unittest.TestCase, ExampleParents):
+    def setUp(self):
+        ExampleParents.__init__(self)
+        self.pop = [self.s1, self.s2] * 10
+        self.pop_crossover = PopulationOnePointCrossover(c_rate=1, destructive=False)
+
+    def test_crossover(self):
+        new_pop = self.pop_crossover(self.pop)
+        self.assertEqual(len(self.pop), len(new_pop))
 
 
 if __name__ == '__main__':
