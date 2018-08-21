@@ -21,17 +21,6 @@ class AbstractSelection(PopulationOperator):
         for solution in population:
             self.problem.fitness(solution)
 
-    def build_generator(self, population):
-        def generator():
-            while True:
-                yield self.__call__(population)
-
-        return generator()
-
-    @property
-    def generator_builder(self):
-        return self.build_generator
-
     def __call__(self, *args, **kwargs):
         raise NotImplementedError
 

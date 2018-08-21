@@ -2,6 +2,8 @@
 import random
 import warnings
 
+from gplib.utils.util import get_generator_builder
+
 
 class AbstractOperator(object):
     """
@@ -60,8 +62,16 @@ class PopulationOperatorAdapter(PopulationOperator):
     def __init__(self, operator, generator_builder=None, n_out=None):
         super(PopulationOperatorAdapter, self).__init__()
         check_operator(operator)
+        if operator.n_in is None:
+            msg = 'n_in of {} must be set'.format(operator.__name__)
+            raise ValueError(msg)
+
+        if operator.n_in != operator.n_out and n_out is None:
+            msg = 'The number of population will change by this operator'
+            warnings.warn(msg)
+
         self.operator = operator
-        self.generator_builder = generator_builder or self._build_default_generator
+        self.generator_builder = generator_builder or self._get_default_generator_builder
         self.n_out = n_out
 
     def __call__(self, population, *args, **kwargs):
@@ -80,7 +90,7 @@ class PopulationOperatorAdapter(PopulationOperator):
 
         return new_pop
 
-    def _build_default_generator(self, population):
+    def _get_default_generator_builder(self, population):
         random.shuffle(population)
         n_solutions = self.operator.n_in
 
@@ -95,11 +105,11 @@ def build_population_operator(operator, selection_class=None, n_out=None, **kwar
     check_operator(operator)
 
     if selection_class is not None:
-        build_generator = selection_class(k=operator.n_input, **kwargs).build_generator
+        generator_builder = get_generator_builder(selection_class(k=operator.n_input, **kwargs))
     else:
-        build_generator = None
+        generator_builder = None
 
-    return PopulationOperator(operator, build_generator, n_out)
+    return PopulationOperatorAdapter(operator, generator_builder, n_out)
 
 
 def check_operator(operator):

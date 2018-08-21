@@ -1,12 +1,12 @@
-from gplib.solutions import node
-from gplib.operator import AbstractOperator, PopulationOperatorAdapter
 import random
 
-
+from gplib.operator import AbstractOperator, PopulationOperatorAdapter
+from gplib.operators import RandomSelection
+from gplib.solutions import node
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
 from gplib.solutions.solution import Solution, select_random_points
-from gplib.operators import RandomSelection
+from gplib.utils.util import get_generator_builder
 
 
 def crossover(parents, points):
@@ -108,22 +108,7 @@ class PopulationOnePointCrossover(PopulationOperatorAdapter):
 
         operator = OnePointCrossover(c_rate, destructive)
         if generator_builder is None:
-            generator_builder = RandomSelection(k=operator._n_in, replacement=False).generator_builder
+            generator_builder = get_generator_builder(RandomSelection(k=operator.n_in, replacement=False))
 
         super(PopulationOnePointCrossover, self).__init__(operator, generator_builder)
 
-
-def get_default_crossover():
-    selection_operator = RandomSelection(k=2, replacement=False)
-    crossover_operator = OnePointCrossover(c_rate=0.5)
-
-    def do_crossover(population):
-        new_population = []
-        while len(population) > len(new_population):
-            children = crossover_operator(selection_operator(population))
-            new_population.extend(children)
-        del population
-
-        return new_population
-
-    return do_crossover
