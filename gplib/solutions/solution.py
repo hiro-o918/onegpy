@@ -1,5 +1,5 @@
-import random
 import copy
+import random
 
 from gplib.solutions.node import node_equal, get_all_node
 
@@ -30,8 +30,7 @@ def get_depth(solution):
 def solution_equal(solution_a, solution_b, as_tree=True):
     # TODO type check if ``solution'' is Solution
     if as_tree:
-        return node_equal(solution_a.root, solution_b.root, as_tree=as_tree) \
-               and solution_a.previous_fitness is solution_b.previous_fitness
+        return node_equal(solution_a.root, solution_b.root, as_tree=as_tree)
     else:
         return solution_a is solution_b
 
