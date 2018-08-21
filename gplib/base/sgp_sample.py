@@ -1,6 +1,7 @@
-from gplib.operator import crossover, selection, initializer
-from gplib.problems import boolean
 from gplib.base import gpbase
+from gplib.operators import crossover, selection, initializer
+from gplib.problems import boolean
+
 
 def build_SGP():
     dim = 3
