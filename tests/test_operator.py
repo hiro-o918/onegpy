@@ -22,15 +22,22 @@ class TestPopulationOperatorAdapter(unittest.TestCase):
 class TestOperatorFunctions(unittest.TestCase):
     def setUp(self):
         self.operator = OnePointCrossover(c_rate=1)
+        self.pop_operator = build_population_operator(self.operator)
 
     def test_build_population_operator(self):
-        pop_operator = build_population_operator(self.operator)
-        self.assertIsInstance(pop_operator, PopulationOperator)
+        self.assertIsInstance(self.pop_operator, PopulationOperator)
 
     def test_operator_checker(self):
         self.assertIsNone(operator_checker(self.operator))
 
         msg = 'Expected type: {} not {}.'.format(self.operator, bool)
+        with self.assertRaises(TypeError, msg=msg):
+            operator_checker(False)
+
+    def test_pop_operator_checker(self):
+        self.assertIsNone(operator_checker(self.pop_operator))
+
+        msg = 'Expected type: {} not {}.'.format(self.pop_operator, bool)
         with self.assertRaises(TypeError, msg=msg):
             operator_checker(False)
 
