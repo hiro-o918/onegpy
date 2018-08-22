@@ -49,7 +49,6 @@ class DefaultViewer(AbstractViewer):
         self.get_out("------------end------------")
         self.get_out(datetime.datetime.today())
         self.get_out("eliteFitness:{}".format(util.get_fitness_info(population).get('max_fit')))
-        self.out.close()
 
     def update(self, gene, population):
         fit_info = util.get_fitness_info(population)
