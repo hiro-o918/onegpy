@@ -38,3 +38,10 @@ def initialize(t_prob, max_depth, function_dicts):
     root = new_node(None, 0)
 
     return solution.Solution(root)
+
+
+def population_initialize(t_prob, max_depth, pop_size, function_dicts):
+    pop = []
+    for i in range(pop_size):
+        pop.append(initialize(t_prob, max_depth, function_dicts))
+    return pop
