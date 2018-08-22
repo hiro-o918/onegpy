@@ -1,13 +1,14 @@
 # Import crossovers
-import gplib.operators.crossover
+from gplib.operators.crossover import OnePointCrossover
+from gplib.operators.crossover import PopulationOnePointCrossover
 # Import initializing functions
-import gplib.operators.initializer
+from gplib.operators.initializer import initialize
+from gplib.operators.initializer import population_initialize
 # Import mutations
-import gplib.operators.mutation
+from gplib.operators.mutation import PointMutation
+from gplib.operators.mutation import PopulationPointMutation
 # import selections
-import gplib.operators.selection
-from gplib.operators.crossover import OnePointCrossover, PopulationOnePointCrossover
-from gplib.operators.initializer import initialize, population_initialize
-from gplib.operators.mutation import PointMutation, PopulationPointMutation
-from gplib.operators.selection import AbstractSelection, RandomSelection, TournamentSelection, EliteSelection, \
-    reduce_population
+from gplib.operators.selection import RandomSelection
+from gplib.operators.selection import TournamentSelection
+from gplib.operators.selection import EliteSelection
+from gplib.operators.selection import reduce_population
