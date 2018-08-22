@@ -15,7 +15,7 @@ __license__ = 'MIT'
 from gplib.operators import initializer
 
 
-class GP(object):
+class PopulationGP(object):
 
     def __init__(self, sequential, n_generations, viewer):
         self.sequential = sequential
