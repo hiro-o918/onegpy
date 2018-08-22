@@ -102,7 +102,6 @@ class TournamentSelection(AbstractSelection):
 
         self.append = append
         self.replacement = replacement
-        super(TournamentSelection, self).__init__(k=tournament_size, replacement=replacement, problem=problem)
 
     def __call__(self, population):
         """
