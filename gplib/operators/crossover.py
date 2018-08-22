@@ -1,12 +1,12 @@
-from gplib.solutions import node
-from gplib.operators import selection
-from gplib.operator import AbstractOperator
 import random
 
-
+from gplib.operator import AbstractOperator, PopulationOperatorAdapter
+from gplib.operators import RandomSelection
+from gplib.solutions import node
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
 from gplib.solutions.solution import Solution, select_random_points
+from gplib.utils.util import get_generator_builder
 
 
 def crossover(parents, points):
@@ -60,9 +60,10 @@ class OnePointCrossover(AbstractOperator):
         :param destructive: If destructive is true, parents also are changed.
                             Otherwise, parents are copied and keep their structures.
         """
-        super(OnePointCrossover, self).__init__()
-        self.c_rate = c_rate
-        self.destructive = destructive
+        super(OnePointCrossover, self).__init__(n_in=2, n_out=2)
+        self._c_rate = c_rate
+        self._destructive = destructive
+        self.crossover_core = get_crossover_core(self._destructive)
 
     def __call__(self, parents):
         if len(parents) != 2:
@@ -71,24 +72,43 @@ class OnePointCrossover(AbstractOperator):
 
         points = [select_random_points(p, 1)[0] for p in parents]
 
-        if random.random() > self.c_rate:
+        if random.random() > self._c_rate:
             return parents
         else:
-            crossover_core = get_crossover_core(self.destructive)
-            return crossover_core(parents, points)
+            return self.crossover_core(parents, points)
+
+    @property
+    def c_rate(self):
+        return self._c_rate
+
+    @c_rate.setter
+    def c_rate(self, _):
+        self.not_changeable_warning()
+
+    @c_rate.deleter
+    def c_rate(self):
+        self.not_changeable_warning()
+
+    @property
+    def destructive(self):
+        return self._destructive
+
+    @destructive.setter
+    def destructive(self, _):
+        self.not_changeable_warning()
+
+    @destructive.deleter
+    def destructive(self):
+        self.not_changeable_warning()
 
 
-def get_default_crossover():
-    selection_operator = selection.RandomSelection(k=2, replacement=False)
-    crossover_operator = OnePointCrossover(c_rate=0.5)
+class PopulationOnePointCrossover(PopulationOperatorAdapter):
 
-    def do_crossover(population):
-        new_population = []
-        while len(population) > len(new_population):
-            children = crossover_operator(selection_operator(population))
-            new_population.extend(children)
-        del population
+    def __init__(self, c_rate, destructive=False, generator_builder=None):
 
-        return new_population
+        operator = OnePointCrossover(c_rate, destructive)
+        if generator_builder is None:
+            generator_builder = get_generator_builder(RandomSelection(k=operator.n_in, replacement=False))
 
-    return do_crossover
+        super(PopulationOnePointCrossover, self).__init__(operator, generator_builder)
+

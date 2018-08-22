@@ -42,10 +42,11 @@ class TestSolutionFunctions(unittest.TestCase):
         node.set_children(na1, [na2, na3])
         node.set_children(na2, [na4, na5, na6])
         sa = solution.Solution(na1)
-        self.assertTrue(solution.solution_equal(self.s, sa))
+        self.assertTrue(solution.solution_equal(self.s, sa, True))
+        self.assertFalse(solution.solution_equal(self.s, sa, False))
         na4 = node.Node(0)
         node.set_children(na2, [na4, na5, na6])
-        self.assertFalse(solution.solution_equal(self.s, sa))
+        self.assertFalse(solution.solution_equal(self.s, sa, True))
 
     def test_select_random_points(self):
         k = 2
