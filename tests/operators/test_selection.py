@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import unittest
+
+from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection, copy_append, \
+    reduce_population
 from gplib.solutions import node
-from gplib.solutions.solution import Solution
-from gplib.operators import RandomSelection, TournamentSelection, reduce_population
+from gplib.solutions.solution import Solution, solution_equal
 
 
 class EmptyProblem(object):
@@ -79,6 +81,18 @@ class TestRandomSelection(unittest.TestCase, ExampleSolutions):
         self.assertEqual(self.k, len(chosen))
 
 
+class TestEliteSelection(unittest.TestCase, ExampleSolutions):
+    def setUp(self):
+        ExampleSolutions.__init__(self)
+        self.k = 3
+        self.problem = EmptyProblem()
+
+    def test__call__(self):
+        selection = EliteSelection(self.k, self.problem)
+        chosen = selection.__call__(self.population)
+        self.assertEqual(len(chosen), self.k)
+
+
 class TestTournamentSelection(unittest.TestCase, ExampleSolutions):
     def setUp(self):
         ExampleSolutions.__init__(self)
@@ -113,6 +127,13 @@ class TestSelectionFunctions(unittest.TestCase, ExampleSolutions):
 
     def test_reduce_population(self):
         self.assertEqual(len(reduce_population(self.population)), 3)
+
+    def test_copy_append(self):
+        s1 = self.create_tree_type1()
+        s2 = s1
+        chosen = [s1]
+        copy_append(s2, chosen)
+        self.assertFalse(solution_equal(chosen[0], chosen[1], False))
 
 
 if __name__ == '__main__':

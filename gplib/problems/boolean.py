@@ -1,11 +1,13 @@
-from gplib.solutions import node
 import numpy as np
 
+from gplib.problem import AbstractProblem
+from gplib.solutions import node
 
-class EvenParity(object):
+
+class EvenParity(AbstractProblem):
 
     def __init__(self, dim):
-        self.func_dicts = None
+        super().__init__()
         self.dim = dim
         self.x, self.y = self._make_data()
 
@@ -22,11 +24,11 @@ class EvenParity(object):
         y = np.array(y, dtype=bool)
         return x, y
 
-    def fitness(self, solution):
-        value = self._eval(solution.root, self.x)
+    def _cal_fitness(self, target_solution):
+        value = self._eval(target_solution.root, self.x)
         cnt = np.sum(np.logical_xor(self.y, value))
         fitness = float(cnt) / float(2**self.dim)
-        solution.previous_fitness = fitness
+        target_solution.previous_fitness = fitness
         return fitness
 
     def _eval(self, current_node, x):
