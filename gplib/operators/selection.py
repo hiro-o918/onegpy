@@ -12,8 +12,8 @@ class AbstractSelection(PopulationOperator):
         :param replacement: bool. sample with replacement
         :return: function of selection
         """
-        super(AbstractSelection, self).__init__()
-        self.k = k
+        super(AbstractSelection, self).__init__(n_out=k)
+        self._k = k
         self.replacement = replacement
         self.problem = problem
 
@@ -23,6 +23,18 @@ class AbstractSelection(PopulationOperator):
 
     def __call__(self, *args, **kwargs):
         raise NotImplementedError
+
+    @property
+    def k(self):
+        return self._k
+
+    @k.setter
+    def k(self, _):
+        self.not_changeable_warning()
+
+    @k.deleter
+    def k(self):
+        self.not_changeable_warning()
 
 
 class RandomSelection(AbstractSelection):
