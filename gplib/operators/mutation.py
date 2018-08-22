@@ -3,8 +3,6 @@ import random
 
 from gplib.solutions import node
 from gplib.operator import AbstractOperator, PopulationOperatorAdapter
-from gplib.operators import RandomSelection
-from gplib.utils.util import get_generator_builder
 
 
 class AbstractMutation(AbstractOperator):

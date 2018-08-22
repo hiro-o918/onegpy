@@ -120,3 +120,13 @@ def operator_checker(operator):
         return
 
     raise typ(msg)
+
+
+def pop_operator_checker(operator):
+    if not isinstance(operator, PopulationOperator):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(PopulationOperator, type(operator))
+    else:
+        return
+
+    raise typ(msg)
