@@ -18,7 +18,7 @@ class TestConfig(unittest.TestCase):
                     })
 
     def test_sequential_from_json(self):
-        path = Path('tests/utils/config.json')
+        path = Path('tests/utils/sequential_config.json')
         sequential = sequential_from_json(path)
 
     def test_build_sequential(self):

@@ -1,8 +1,7 @@
 import unittest
 
 from gplib.operator import AbstractOperator
-from gplib.operators import RandomSelection
-from gplib.operators.crossover import PopulationOnePointCrossover, OnePointCrossover
+from gplib.operators.crossover import RandomSelection, PopulationOnePointCrossover, OnePointCrossover
 from gplib.sequential import Sequential
 from gplib.solutions.node import Node
 from gplib.solutions.solution import Solution
