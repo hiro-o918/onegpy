@@ -35,7 +35,7 @@ class AbstractViewer(object):
 
 
 class DefaultViewer(AbstractViewer):
-    def __init__(self, filename):
+    def __init__(self, filename='STDOUT'):
         """
             Class of viewer.
         """
