@@ -1,8 +1,10 @@
-from gplib.operator import operator_checker, pop_operator_checker
+from gplib.operator import operator_checker
 
 
 class Sequential(object):
-    def __init__(self, operators):
+    def __init__(self, operators=None):
+        if operators is None:
+            operators = []
         self._operators = []
 
         for operator in operators:
@@ -11,6 +13,10 @@ class Sequential(object):
     def add(self, operator):
         self._added_operator_checker(operator)
         self._operators.append(operator)
+
+    @property
+    def operators(self):
+        return self._operators
 
     def _added_operator_checker(self, operator):
         operator_checker(operator)
@@ -33,10 +39,3 @@ class Sequential(object):
 
         return out
 
-
-class PopulationSequential(Sequential):
-    def __init__(self, operators):
-        super(PopulationSequential, self).__init__(operators)
-
-    def _added_operator_checker(self, operator):
-        pop_operator_checker(operator)
