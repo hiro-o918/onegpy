@@ -12,29 +12,21 @@ __version__ = '0.0.1-alpha'
 __license__ = 'MIT'
 
 
-from gplib.solutions import solution
-import numpy as np
+from gplib.operators import initializer
+
 
 class GP(object):
 
-    def __init__(self, operators, problem, func_dicts, n_generations):
-        self.operators = operators
-        self.problem = problem
-        self.func_dicts = func_dicts
+    def __init__(self, sequential, n_generations, viewer):
+        self.sequential = sequential
         self.n_generations = n_generations
+        self.viewer = viewer
 
-    def __call__(self, population):
-        print('{}, {}, {}'.format('generation', 'best', 'average'))
+    def __call__(self, t_prob, max_depth, pop_size, function_dicts):
+        population = initializer.population_initialize(t_prob, max_depth, pop_size, function_dicts)
+        self.viewer.begin()
         for gene in range(self.n_generations):
-            for op in self.operators:
-                population = op(population)
+            population = self.sequential(population)
+            self.viewer.update(gene, population)
 
-            fitness_list = []
-            depth_list = []
-            for s in population:
-                fitness_list.append(s.previous_fitness)
-                depth_list.append(solution.get_depth(s))
-
-            print('{}, {}, {}, {}, {}, {}'.format(gene, max(fitness_list), np.average(fitness_list), max(depth_list),
-                                              np.average(depth_list), len(population)))
-
+        self.viewer.end(population)
