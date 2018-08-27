@@ -95,6 +95,11 @@ class EliteSelection(AbstractProblemBasedSelection):
 
 
 class TournamentSelection(AbstractProblemBasedSelection):
+    """
+    TODO: **Warning**
+    Tournament Selection takes a lot of time, because it copies solutions deeply.
+    """
+
     def __init__(self, k, tournament_size, problem, replacement=True):
         if not replacement and k is None:
             msg = 'If replacement is False, selection_size must be set.'
