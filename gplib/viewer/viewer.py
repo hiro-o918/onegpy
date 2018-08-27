@@ -1,9 +1,11 @@
 import sys
 import datetime
+from abc import ABC, abstractmethod
+
 from gplib.utils import util
 
 
-class AbstractViewer(object):
+class AbstractViewer(ABC):
     def __init__(self, filename='STDOUT'):
         """
                     Class of viewer.
@@ -24,12 +26,15 @@ class AbstractViewer(object):
     def get_out(self, str_out):
         print(str_out, file=self.out)
 
+    @abstractmethod
     def begin(self):
         raise NotImplementedError
 
+    @abstractmethod
     def end(self, population):
         raise NotImplementedError
 
+    @abstractmethod
     def update(self, gene, population):
         raise NotImplementedError
 
