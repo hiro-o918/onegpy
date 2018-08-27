@@ -7,9 +7,9 @@ from gplib.solutions import node
 class EvenParity(AbstractProblem):
 
     def __init__(self, dim):
-        super().__init__()
         self.dim = dim
         self.x, self.y = self._make_data()
+        super(EvenParity, self).__init__()
 
     def _make_data(self):
         x = []
@@ -42,20 +42,19 @@ class EvenParity(AbstractProblem):
                 results.append(self._eval(c, x))
             return eval_func(results)
 
+    def _function_dicts_builder(self):
+        nonterminal_node_dict = {}
+        terminal_node_dict = {}
 
-def get_default_node_set(dim):
-    nonterminal_node_dict = {}
-    terminal_node_dict = {}
+        nonterminal_node_dict[0] = get_and(2)
+        nonterminal_node_dict[1] = get_or(2)
+        nonterminal_node_dict[2] = get_nand(2)
+        nonterminal_node_dict[3] = get_nor(2)
 
-    nonterminal_node_dict[0] = get_and(2)
-    nonterminal_node_dict[1] = get_or(2)
-    nonterminal_node_dict[2] = get_nand(2)
-    nonterminal_node_dict[3] = get_nor(2)
+        for d in range(self.dim):
+            terminal_node_dict[d] = get_x(d)
 
-    for d in range(dim):
-        terminal_node_dict[d] = get_x(d)
-
-    return nonterminal_node_dict, terminal_node_dict
+        return nonterminal_node_dict, terminal_node_dict
 
 
 def get_and(n_children=2):
