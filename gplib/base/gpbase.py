@@ -12,18 +12,16 @@ __version__ = '0.0.1-alpha'
 __license__ = 'MIT'
 
 
-from gplib.operators import initializer
-
-
 class PopulationGP(object):
 
-    def __init__(self, sequential, n_generations, viewer):
-        self.sequential = sequential
+    def __init__(self, n_generations, initializer, sequential,  viewer):
         self.n_generations = n_generations
+        self.initializer = initializer
+        self.sequential = sequential
         self.viewer = viewer
 
-    def __call__(self, t_prob, max_depth, pop_size, function_dicts):
-        population = initializer.population_initialize(t_prob, max_depth, pop_size, function_dicts)
+    def __call__(self):
+        population = self.initializer()
         self.viewer.begin()
         for gene in range(self.n_generations):
             population = self.sequential(population)
