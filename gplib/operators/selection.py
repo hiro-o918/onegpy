@@ -1,12 +1,12 @@
 import random
+from abc import ABC
 
-from gplib.operator import PopulationOperator
+from gplib.operator import PopulationOperator, ProblemBasedOperator
 from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
-class AbstractSelection(PopulationOperator):
-
-    def __init__(self, k, replacement, problem):
+class AbstractSelection(PopulationOperator, ABC):
+    def __init__(self, k, replacement):
         """
         :param k: int. The number of solutions which are selected.
         :param replacement: bool. sample with replacement
@@ -15,14 +15,6 @@ class AbstractSelection(PopulationOperator):
         super(AbstractSelection, self).__init__(n_out=k)
         self._k = k
         self.replacement = replacement
-        self.problem = problem
-
-    def _cal_fitness(self, population):
-        for solution in population:
-            self.problem.fitness(solution)
-
-    def __call__(self, *args, **kwargs):
-        raise NotImplementedError
 
     @property
     def k(self):
@@ -37,10 +29,29 @@ class AbstractSelection(PopulationOperator):
         self.not_changeable_warning()
 
 
+class AbstractProblemBasedSelection(AbstractSelection, ProblemBasedOperator, ABC):
+
+    def __init__(self, k, replacement, problem):
+        """
+        :param k: int. The number of solutions which are selected.
+        :param replacement: bool. sample with replacement
+        :return: function of selection
+        """
+        AbstractSelection.__init__(self, k=k, replacement=replacement)
+        ProblemBasedOperator.__init__(self, problem)
+        self._k = k
+        self.replacement = replacement
+        self.problem = problem
+
+    def _cal_fitness(self, population):
+        for solution in population:
+            self.problem.fitness(solution)
+
+
 class RandomSelection(AbstractSelection):
 
     def __init__(self, k, replacement):
-        super(RandomSelection, self).__init__(k, replacement, None)
+        super(RandomSelection, self).__init__(k, replacement)
 
     def __call__(self, population):
         """Random Selection
@@ -60,7 +71,7 @@ class RandomSelection(AbstractSelection):
             return random.sample(population, self.k)
 
 
-class EliteSelection(AbstractSelection):
+class EliteSelection(AbstractProblemBasedSelection):
     """Elite Selection
 
         # Returns
@@ -83,7 +94,7 @@ class EliteSelection(AbstractSelection):
         return chosen
 
 
-class TournamentSelection(AbstractSelection):
+class TournamentSelection(AbstractProblemBasedSelection):
     def __init__(self, k, tournament_size, problem, replacement=True):
         if not replacement and k is None:
             msg = 'If replacement is False, selection_size must be set.'
@@ -94,6 +105,7 @@ class TournamentSelection(AbstractSelection):
 
         if replacement:
             def append(solution, chosen):
+                chosen.append(solution)
                 copy_append(solution, chosen)
         else:
             def append(solution, chosen):

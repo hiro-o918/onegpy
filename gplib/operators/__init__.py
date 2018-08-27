@@ -2,8 +2,8 @@
 from gplib.operators.crossover import OnePointCrossover
 from gplib.operators.crossover import PopulationOnePointCrossover
 # Import initializing functions
-from gplib.operators.initializer import initialize
-from gplib.operators.initializer import population_initialize
+from gplib.operators.initializer import RandomInitializer
+from gplib.operators.initializer import PopulationRandomInitializer
 # Import mutations
 from gplib.operators.mutation import PointMutation
 from gplib.operators.mutation import PopulationPointMutation

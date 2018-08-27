@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 import random
+import types
 import warnings
+from abc import ABC, abstractmethod
 
 from gplib.utils.util import get_generator_builder
 
 
-class AbstractOperator(object):
+class AbstractOperator(ABC):
     """
         This is the base class for operators.
     """
+
     def __init__(self, n_in=None, n_out=None):
         """
         The number of input solution to the operator and outputs one of the operator
@@ -19,6 +22,7 @@ class AbstractOperator(object):
         self._n_in = n_in
         self._n_out = n_out
 
+    @abstractmethod
     def __call__(self, *args, **kwargs):
         raise NotImplementedError
 
@@ -53,9 +57,8 @@ class AbstractOperator(object):
         self.not_changeable_warning()
 
 
-class PopulationOperator(AbstractOperator):
-    def __call__(self, *args, **kwargs):
-        raise NotImplementedError
+class PopulationOperator(AbstractOperator, ABC):
+    pass
 
 
 class PopulationOperatorAdapter(PopulationOperator):
@@ -71,6 +74,7 @@ class PopulationOperatorAdapter(PopulationOperator):
             warnings.warn(msg)
 
         self.operator = operator
+        self._register_metaclass()
         self.generator_builder = generator_builder or self._get_default_generator_builder()
 
     def __call__(self, population, *args, **kwargs):
@@ -100,8 +104,16 @@ class PopulationOperatorAdapter(PopulationOperator):
 
         return generator_builder
 
+    def _register_metaclass(self):
+            self.operator.__class__.register(self.__class__)
 
-def build_population_operator(operator, selection_class=None, n_out=None, **kwargs):
+
+class ProblemBasedOperator(ABC):
+    def __init__(self, problem):
+        self.problem = problem
+
+
+def build_population_operator(operator, selection_class=None, n_out=None, cls_name=None, **kwargs):
     operator_checker(operator)
 
     if selection_class is not None:
@@ -109,7 +121,10 @@ def build_population_operator(operator, selection_class=None, n_out=None, **kwar
     else:
         generator_builder = None
 
-    return PopulationOperatorAdapter(operator, generator_builder, n_out)
+    po_cls = types.new_class(cls_name or 'Population{}'.format(operator.__class__.__name__),
+                             bases=(PopulationOperatorAdapter,))
+
+    return po_cls(operator, generator_builder, n_out)
 
 
 def operator_checker(operator):

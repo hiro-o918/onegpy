@@ -3,13 +3,10 @@ import unittest
 
 from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection, copy_append, \
     reduce_population
+from gplib.problem import AbstractProblem
 from gplib.solutions import node
 from gplib.solutions.solution import Solution, solution_equal
-
-
-class EmptyProblem(object):
-    def fitness(self, solution):
-        pass
+from tests.test_problem import EmptyProblem
 
 
 class ExampleSolutions(object):
@@ -27,6 +24,7 @@ class ExampleSolutions(object):
             self.population.append(s2)
             self.population.append(s3)
         self.population = self.population * 2
+
     @staticmethod
     def create_tree_type1():
         n1 = node.Node(0)
