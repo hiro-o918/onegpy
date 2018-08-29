@@ -43,18 +43,22 @@ class EvenParity(AbstractProblem):
             return eval_func(results)
 
     def _function_dicts_builder(self):
-        nonterminal_node_dict = {}
-        terminal_node_dict = {}
+        return get_default_function_dicts(self.dim)
 
-        nonterminal_node_dict[0] = get_and(2)
-        nonterminal_node_dict[1] = get_or(2)
-        nonterminal_node_dict[2] = get_nand(2)
-        nonterminal_node_dict[3] = get_nor(2)
 
-        for d in range(self.dim):
-            terminal_node_dict[d] = get_x(d)
+def get_default_function_dicts(dim):
+    nonterminal_node_dict = {}
+    terminal_node_dict = {}
 
-        return nonterminal_node_dict, terminal_node_dict
+    nonterminal_node_dict[0] = get_and(2)
+    nonterminal_node_dict[1] = get_or(2)
+    nonterminal_node_dict[2] = get_nand(2)
+    nonterminal_node_dict[3] = get_nor(2)
+
+    for d in range(dim):
+        terminal_node_dict[d] = get_x(d)
+
+    return nonterminal_node_dict, terminal_node_dict
 
 
 def get_and(n_children=2):
