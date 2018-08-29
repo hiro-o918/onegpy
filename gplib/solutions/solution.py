@@ -1,7 +1,7 @@
 import copy
 import random
 
-from gplib.solutions.node import node_equal, get_all_node, get_graph_to_target, calc_node_depth
+from gplib.solutions.node import node_equal, get_all_node, get_graph_to_target, calc_node_depth, copy_nodes_along_graph
 
 
 class Solution(object):
@@ -125,15 +125,31 @@ def copy_solution(solution, deep=False):
         return copy.deepcopy(solution)
 
 
-def replace_node(solution, replaced_node, new_node):
+def replace_node(solution, replaced_node, new_node, destructive=True):
     """
     Replace a node in a solution by another node.
     :param solution: class Solution.
     :param replaced_node: class Node. A node to be replaced in the solution.
     :param new_node: class Node. A node set to replaced point in the solution.
+    :param destructive: bool. If true, solution is replaced, keeping its object.
+    Otherwise, new solution instance is created, protecting original solution.
     :return solution: class Solution.
     """
+
     # TODO: Type check if ``solution'' is Solution and ``nodes'' are Node
+    # If replaced_node is root node
+    if solution.root is replaced_node:
+        if destructive:
+            solution.root = new_node
+        else:
+            solution = Solution(new_node)
+
+        set_solution_n_nodes(solution)
+        set_solution_depth(solution)
+
+        return solution
+
+    # Otherwise
     try:
         graph = get_graph_to_target(solution.root, replaced_node)
     except ValueError:
@@ -150,11 +166,19 @@ def replace_node(solution, replaced_node, new_node):
     # Core calculation and setting of depth and the number of nodes.
     depth = max(point_depth + new_node_depth - rpl_node_depth, solution.depth)
     n_nodes = solution.n_nodes + n_new_nodes - n_rpl_nodes
-    set_solution_depth(solution, depth)
-    set_solution_n_nodes(solution, n_nodes)
+
+    # Obtain the replaced point
+    if destructive:
+        idx, parent = graph[-1]
+    else:
+        idx, parent, root = copy_nodes_along_graph(graph)
+        solution = Solution(root)
 
     # Replace the replaced_node by new_node
-    idx, parent = graph[-1]
     parent.children[idx] = new_node
+
+    # Set the depth and n_nodes based on the results.
+    set_solution_depth(solution, depth)
+    set_solution_n_nodes(solution, n_nodes)
 
     return solution

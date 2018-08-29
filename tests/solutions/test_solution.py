@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 import unittest
 
 from gplib.solutions import node, solution
@@ -70,23 +71,47 @@ class TestSolutionFunctions(unittest.TestCase):
             self.assertTrue(isinstance(point, node.Node))
         self.assertEqual(len(points), k)
 
-    def test_replace_node(self):
+    def test_non_destructive_replace_node(self):
         na1 = node.Node(1)
         na2 = node.Node(0)
 
         node.set_id(na1, 0)
         node.set_id(na2, 1)
         node.set_children(na1, [na2])
-
-        solution.replace_node(self.s1, self.n2, na1)
+        original_s1 = copy.deepcopy(self.s1)
+        new_s1 = solution.replace_node(self.s1, self.n2, na1, destructive=False)
 
         expected_nodes = [node.Node(0), node.Node(0), node.Node(1), node.Node(0)]
         node.set_children(expected_nodes[0], [expected_nodes[1], expected_nodes[3]])
         node.set_children(expected_nodes[1], [expected_nodes[2]])
 
-        self.assertTrue(node.node_equal(self.s1.root, expected_nodes[0], as_tree=True))
-        self.assertEqual(self.s1.n_nodes, len(expected_nodes))
-        self.assertEqual(self.s1.depth, 2)
+        self.assertTrue(node.node_equal(new_s1.root, expected_nodes[0], as_tree=True))
+        self.assertEqual(new_s1.n_nodes, len(expected_nodes))
+        self.assertEqual(new_s1.depth, 2)
+        # Check whether the original solution is protected.
+        self.assertTrue(solution.solution_equal(original_s1, self.s1))
+        self.assertFalse(self.s1 is new_s1)
+
+    def test_destructive_replace_node(self):
+        na1 = node.Node(1)
+        na2 = node.Node(0)
+
+        node.set_id(na1, 0)
+        node.set_id(na2, 1)
+        node.set_children(na1, [na2])
+        original_s1 = copy.deepcopy(self.s1)
+        new_s1 = solution.replace_node(self.s1, self.n2, na1, destructive=True)
+
+        expected_nodes = [node.Node(0), node.Node(0), node.Node(1), node.Node(0)]
+        node.set_children(expected_nodes[0], [expected_nodes[1], expected_nodes[3]])
+        node.set_children(expected_nodes[1], [expected_nodes[2]])
+
+        self.assertTrue(node.node_equal(new_s1.root, expected_nodes[0], as_tree=True))
+        self.assertEqual(new_s1.n_nodes, len(expected_nodes))
+        self.assertEqual(new_s1.depth, 2)
+        # Check whether the original solution is NOT protected.
+        self.assertFalse(solution.solution_equal(original_s1, new_s1))
+        self.assertTrue(self.s1 is new_s1)
 
 
 if __name__ == '__main__':
