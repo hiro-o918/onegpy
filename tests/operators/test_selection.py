@@ -3,7 +3,6 @@ import unittest
 
 from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection, copy_append, \
     reduce_population
-from gplib.problem import AbstractProblem
 from gplib.solutions import node
 from gplib.solutions.solution import Solution, solution_equal
 from tests.test_problem import EmptyProblem

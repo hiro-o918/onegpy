@@ -42,13 +42,13 @@ class TestInitializer(unittest.TestCase):
         t_prob = 0
         initializer = RandomInitializer(t_prob, self.max_depth, self.problem)
         s = initializer()
-        self.assertEqual(solution.get_depth(s), self.max_depth)
+        self.assertEqual(solution.calc_solution_depth(s), self.max_depth)
         self.assertEqual(node._nodes_checker(*node.get_all_node(s.root)), None)
 
         t_prob = 1
         initializer = RandomInitializer(t_prob, self.max_depth, self.problem)
         s = initializer()
-        self.assertEqual(solution.get_depth(s), 0)
+        self.assertEqual(solution.calc_solution_depth(s), 0)
 
 
 if __name__ == '__main__':
