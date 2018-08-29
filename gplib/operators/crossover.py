@@ -2,47 +2,22 @@ import random
 
 from gplib.operator import AbstractOperator, PopulationOperatorAdapter
 from gplib.operators.selection import RandomSelection
-from gplib.solutions import node
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
-from gplib.solutions.solution import Solution, select_random_points
+from gplib.solutions.solution import select_random_points, replace_node
 from gplib.utils.util import get_generator_builder
 
 
-def crossover(parents, points):
-    if parents[0].root is points[0]:
-        root1 = points[1]
-    else:
-        graph1 = node.get_graph_to_target(parents[0].root, points[0])
-        index1, subtree1, root1 = node.copy_nodes_along_graph(graph1)
-        subtree1.children[index1] = points[1]
+def crossover(parents, points, destructive=False):
+    new_p1 = replace_node(parents[0], points[0], points[1], destructive)
+    new_p2 = replace_node(parents[1], points[1], points[0], destructive)
+    new_parents = (new_p1, new_p2)
 
-    if parents[1].root is points[1]:
-        root2 = points[0]
-    else:
-        graph2 = node.get_graph_to_target(parents[1].root, points[1])
-        index2, subtree2, root2 = node.copy_nodes_along_graph(graph2)
-        subtree2.children[index2] = points[0]
-
-    parents = [Solution(root1), Solution(root2)]
-
-    return parents
+    return new_parents
 
 
 def destructive_crossover(parents, points):
-    if parents[0].root is points[0]:
-        parents[0].root = points[1]
-    else:
-        index1, subtree1 = node.get_parent_node(parents[0].root, points[0])
-        subtree1.children[index1] = points[1]
-
-    if parents[1].root is points[1]:
-        parents[1].root = points[0]
-    else:
-        index2, subtree2 = node.get_parent_node(parents[1].root, points[1])
-        subtree2.children[index2] = points[0]
-
-    return parents
+    return crossover(parents, points, destructive=True)
 
 
 def get_crossover_core(destructive=True):
