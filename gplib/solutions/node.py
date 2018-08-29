@@ -207,6 +207,21 @@ def get_all_node(root):
     return nodes
 
 
+def get_node_depth(node):
+    d_list = []
+
+    def cal_depth(c_node, depth):
+        if c_node.children is not None:
+            for c in c_node.children:
+                cal_depth(c, depth+1)
+        else:
+            d_list.append(depth)
+
+    cal_depth(node, 0)
+
+    return max(d_list)
+
+
 def node_equal(node_a, node_b, as_tree=False):
     """
     Function for comparing two nodes.

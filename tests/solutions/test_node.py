@@ -103,6 +103,14 @@ class TestNodeFunctions(unittest.TestCase):
 
         self.assertEqual(node.get_all_node(self.n1), all_nodes)
 
+    def test_get_node_depth(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 1)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n2, [self.n4, self.n5, self.n6])
+
+        self.assertEqual(node.get_node_depth(self.n1), 2)
+
     def test_node_equal(self):
         node.set_id(self.n1, 0)
         node.set_id(self.n2, 0)
