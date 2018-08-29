@@ -37,7 +37,7 @@ class MLPS_GP(object):
         self.population_list = []
         self.t_prob = t_prob
         self.max_depth = max_depth
-        self.func_dicts = problem.func_dicts
+        self.func_dicts = problem.func_bank
 
     def __call__(self):
         cnt = 0
