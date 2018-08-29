@@ -1,29 +1,24 @@
+from abc import ABC
 from functools import partial
 import random
 
 from gplib.solutions import node
-from gplib.operator import AbstractOperator, PopulationOperatorAdapter
-from gplib.operators import RandomSelection
-from gplib.utils.util import get_generator_builder
+from gplib.operator import AbstractOperator, PopulationOperatorAdapter, ProblemBasedOperator
 
 
-class AbstractMutation(AbstractOperator):
-    def __init__(self, m_rate, function_dicts, mutation_type):
+class AbstractMutation(AbstractOperator, ProblemBasedOperator, ABC):
+    def __init__(self, m_rate, mutation_type, problem):
         """
         Abstract class of mutation.
 
         :param m_rate: float([0, 1.0]). mutation rate for each iteration
-        :param function_dicts: list of dictionary of functions
-                                dicts[0] nonterminal. dicts[1] terminal.
         :param mutation_type: function name
+        :param problem: problem
         """
-        super(AbstractMutation, self).__init__(n_in=1, n_out=1)
+        AbstractOperator.__init__(self, n_in=1, n_out=1)
+        ProblemBasedOperator.__init__(self, problem)
         self._m_rate = m_rate
-        self._function_dicts = function_dicts
         self._mutation_type = mutation_type
-
-    def __call__(self, *args, **kwargs):
-        raise NotImplementedError
 
     @property
     def m_rate(self):
@@ -38,15 +33,15 @@ class AbstractMutation(AbstractOperator):
         self.not_changeable_warning()
 
     @property
-    def function_dicts(self):
-        return self._function_dicts
+    def func_dicts(self):
+        return self.problem.func_dicts
 
-    @function_dicts.setter
-    def function_dicts(self, _):
+    @func_dicts.setter
+    def func_dicts(self, _):
         self.not_changeable_warning()
 
-    @function_dicts.deleter
-    def function_dicts(self):
+    @func_dicts.deleter
+    def func_dicts(self):
         self.not_changeable_warning()
 
     @property
@@ -62,17 +57,18 @@ class AbstractMutation(AbstractOperator):
         self.not_changeable_warning()
 
 
-def one_point(solution, function_dicts):
+def one_point(solution, func_dicts):
     point = random.choice(node.get_all_node(solution.root))
     if point.children is None:
-        node.set_id(point, random.choice(list(function_dicts[1].keys())))
+        node.set_id(point, random.choice(list(func_dicts[1].keys())))
     else:
-        node.set_id(point, random.choice(list(function_dicts[0].keys())))
+        node.set_id(point, random.choice(list(func_dicts[0].keys())))
     return solution
 
 
 def get_mutation_core(mutation_type, **kwargs):
     if mutation_type == 'onepoint':
+        # Obtain `one_point` function fixed `func_dicts`
         mutation_core = partial(one_point, **kwargs)
     else:
         msg = '{} is not found'.format(mutation_type)
@@ -82,9 +78,9 @@ def get_mutation_core(mutation_type, **kwargs):
 
 
 class PointMutation(AbstractMutation):
-    def __init__(self, m_rate, function_dicts, mutation_type='onepoint', **kwargs):
-        super(PointMutation, self).__init__(m_rate, function_dicts, mutation_type)
-        self.mutation_core = get_mutation_core(self._mutation_type, **kwargs)
+    def __init__(self, m_rate, problem, mutation_type='onepoint'):
+        super(PointMutation, self).__init__(m_rate, mutation_type, problem)
+        self.mutation_core = get_mutation_core(self._mutation_type, func_dicts=problem.func_dicts)
 
     def __call__(self, solution):
         """
@@ -102,11 +98,11 @@ class PointMutation(AbstractMutation):
         if random.random() > self._m_rate:
             return solution
         else:
-            return self.mutation_core(solution, self._function_dicts)
+            return self.mutation_core(solution)
 
 
-class PopulationPointMutation(PopulationOperatorAdapter):
-    def __init__(self, m_rate, function_dicts, mutation_type='onepoint', generator_builder=None):
-        operator = PointMutation(m_rate, function_dicts, mutation_type)
+class PopulationPointMutation(PopulationOperatorAdapter, ProblemBasedOperator):
+    def __init__(self, m_rate, problem, mutation_type='onepoint', generator_builder=None):
+        operator = PointMutation(m_rate, problem, mutation_type)
 
         super(PopulationPointMutation, self).__init__(operator, generator_builder)

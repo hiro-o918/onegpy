@@ -1,34 +1,58 @@
 import random
+from abc import ABC
 
-from gplib.operator import PopulationOperator
+from gplib.operator import PopulationOperator, ProblemBasedOperator
 from gplib.solutions.solution import is_solution_in_pop, copy_solution
 
 
-class AbstractSelection(PopulationOperator):
+class AbstractSelection(PopulationOperator, ABC):
+    def __init__(self, k, replacement):
+        """
+        :param k: int. The number of solutions which are selected.
+        :param replacement: bool. If replacement is True, duplicated solutions are selected.
+        Otherwise, all the solutions are unique in an output population.
+        :return: function of selection
+        """
+        super(AbstractSelection, self).__init__(n_out=k)
+        self._k = k
+        self.replacement = replacement
+
+    @property
+    def k(self):
+        return self._k
+
+    @k.setter
+    def k(self, _):
+        self.not_changeable_warning()
+
+    @k.deleter
+    def k(self):
+        self.not_changeable_warning()
+
+
+class AbstractProblemBasedSelection(AbstractSelection, ProblemBasedOperator, ABC):
 
     def __init__(self, k, replacement, problem):
         """
         :param k: int. The number of solutions which are selected.
-        :param replacement: bool. sample with replacement
+        :param replacement: bool. If replacement is True, duplicated solutions are selected.
+        Otherwise, all the solutions are unique in an output population.
         :return: function of selection
         """
-        super(AbstractSelection, self).__init__()
-        self.k = k
+        AbstractSelection.__init__(self, k=k, replacement=replacement)
+        ProblemBasedOperator.__init__(self, problem)
+        self._k = k
         self.replacement = replacement
-        self.problem = problem
 
     def _cal_fitness(self, population):
         for solution in population:
             self.problem.fitness(solution)
 
-    def __call__(self, *args, **kwargs):
-        raise NotImplementedError
-
 
 class RandomSelection(AbstractSelection):
 
     def __init__(self, k, replacement):
-        super(RandomSelection, self).__init__(k, replacement, None)
+        super(RandomSelection, self).__init__(k, replacement)
 
     def __call__(self, population):
         """Random Selection
@@ -48,7 +72,7 @@ class RandomSelection(AbstractSelection):
             return random.sample(population, self.k)
 
 
-class EliteSelection(AbstractSelection):
+class EliteSelection(AbstractProblemBasedSelection):
     """Elite Selection
 
         # Returns
@@ -71,13 +95,20 @@ class EliteSelection(AbstractSelection):
         return chosen
 
 
-class TournamentSelection(AbstractSelection):
-    def __init__(self, tournament_size, problem, replacement=True, selection_size=None):
-        if not replacement and selection_size is None:
+class TournamentSelection(AbstractProblemBasedSelection):
+    """
+    TODO: **Warning**
+    Tournament Selection takes a lot of time, because it copies solutions deeply.
+    """
+
+    def __init__(self, k, tournament_size, problem, replacement=True):
+        if not replacement and k is None:
             msg = 'If replacement is False, selection_size must be set.'
             raise TypeError(msg)
-        self.selection_size = selection_size
+
         self.tournament_size = tournament_size
+        super(TournamentSelection, self).__init__(k=k, replacement=replacement, problem=problem)
+
         if replacement:
             def append(solution, chosen):
                 copy_append(solution, chosen)
@@ -88,7 +119,6 @@ class TournamentSelection(AbstractSelection):
 
         self.append = append
         self.replacement = replacement
-        super(TournamentSelection, self).__init__(k=tournament_size, replacement=replacement, problem=problem)
 
     def __call__(self, population):
         """
@@ -101,8 +131,8 @@ class TournamentSelection(AbstractSelection):
         chosen = []
         self._cal_fitness(population)
         #TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
-        selection_size = self.selection_size or len(population)
-        while len(chosen) < selection_size:
+        k = self.k or len(population)
+        while len(chosen) < k:
             candidates = random.sample(population, self.tournament_size)
             best = max(candidates, key=lambda x: x.previous_fitness)
             self.append(best, chosen)

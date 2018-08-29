@@ -16,8 +16,6 @@ class TestEvenParity(unittest.TestCase):
                            [False, True],
                            [True, True]], dtype=bool)
         self.y = np.array([False, True, True, False], dtype=bool)
-        function_dicts = boolean.get_default_node_set(self.dim)
-        self.even_parity.func_dicts = function_dicts
 
         self.n1 = node.Node(0)
         self.n2 = node.Node(1)

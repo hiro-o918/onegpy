@@ -1,7 +1,7 @@
 import random
 
 from gplib.operator import AbstractOperator, PopulationOperatorAdapter
-from gplib.operators import RandomSelection
+from gplib.operators.selection import RandomSelection
 from gplib.solutions import node
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
