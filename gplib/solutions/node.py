@@ -30,6 +30,7 @@ class Function(object):
         return self.f_eval(x)
 
 
+#TODO: Remove this function.
 def build_func(f_eval, n_children):
     def eval_func(x):
         return f_eval(x)
@@ -207,7 +208,7 @@ def get_all_node(root):
     return nodes
 
 
-def get_node_depth(node):
+def calc_node_depth(node):
     d_list = []
 
     def cal_depth(c_node, depth):
