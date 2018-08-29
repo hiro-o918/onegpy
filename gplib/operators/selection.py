@@ -9,7 +9,8 @@ class AbstractSelection(PopulationOperator, ABC):
     def __init__(self, k, replacement):
         """
         :param k: int. The number of solutions which are selected.
-        :param replacement: bool. sample with replacement
+        :param replacement: bool. If replacement is True, duplicated solutions are selected.
+        Otherwise, all the solutions are unique in an output population.
         :return: function of selection
         """
         super(AbstractSelection, self).__init__(n_out=k)
@@ -34,7 +35,8 @@ class AbstractProblemBasedSelection(AbstractSelection, ProblemBasedOperator, ABC
     def __init__(self, k, replacement, problem):
         """
         :param k: int. The number of solutions which are selected.
-        :param replacement: bool. sample with replacement
+        :param replacement: bool. If replacement is True, duplicated solutions are selected.
+        Otherwise, all the solutions are unique in an output population.
         :return: function of selection
         """
         AbstractSelection.__init__(self, k=k, replacement=replacement)
