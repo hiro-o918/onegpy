@@ -1,4 +1,4 @@
-from gplib.problem import AbstractProblem
+from gplib.problem import AbstractProblem, FunctionBank
 from gplib.solutions import node
 
 
@@ -9,7 +9,7 @@ def f_non_terminal(n_children=2):
     return node.build_func(print_non_terminal, n_children)
 
 
-def f_terminal(n_children=2):
+def f_terminal(n_children=0):
     def print_terminal(x):
         print('terminal')
 
@@ -17,9 +17,12 @@ def f_terminal(n_children=2):
 
 
 class EmptyProblem(AbstractProblem):
-    def _function_dicts_builder(self):
-        return [({0: f_non_terminal(), 1: f_non_terminal()}),
-                ({2: f_terminal(), 3: f_terminal()})]
+    def _function_bank_builder(self):
+        func_bank = FunctionBank()
+        for i in range(3):
+            func_bank.add_function(f_non_terminal())
+            func_bank.add_function(f_terminal())
+        return func_bank
 
     def _cal_fitness(self, target_solution):
         target_solution.previous_fitness = target_solution.root.func_id

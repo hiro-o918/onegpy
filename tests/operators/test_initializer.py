@@ -2,7 +2,7 @@
 import unittest
 
 from gplib.operators import initializer, RandomInitializer
-from gplib.problem import AbstractProblem
+from gplib.problem import AbstractProblem, FunctionBank
 from gplib.solutions import node, solution
 
 
@@ -28,9 +28,12 @@ class DummyProblem(AbstractProblem):
     def _cal_fitness(self, target_solution):
         pass
 
-    def _function_dicts_builder(self):
-        func_dicts = ({0: f_non_terminal()}, {0: f_terminal()})
-        return func_dicts
+    def _function_bank_builder(self):
+        func_bank = FunctionBank()
+        for i in range(3):
+            func_bank.add_function(f_non_terminal())
+            func_bank.add_function(f_terminal())
+        return func_bank
 
 
 class TestInitializer(unittest.TestCase):

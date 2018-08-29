@@ -38,7 +38,7 @@ class AbstractProblem(ABC):
 
     @abstractmethod
     def _function_bank_builder(self):
-        raise NotImplementedError('default_function_dicts_builder should be implemented in {}'.format(self.__class__))
+        raise NotImplementedError('default_function_bank_builder should be implemented in {}'.format(self.__class__))
 
 
 class FunctionBank(object):
