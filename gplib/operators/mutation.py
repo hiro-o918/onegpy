@@ -68,6 +68,7 @@ def one_point(solution, func_dicts):
 
 def get_mutation_core(mutation_type, **kwargs):
     if mutation_type == 'onepoint':
+        # Obtain `one_point` function fixed `func_dicts`
         mutation_core = partial(one_point, **kwargs)
     else:
         msg = '{} is not found'.format(mutation_type)
@@ -77,9 +78,9 @@ def get_mutation_core(mutation_type, **kwargs):
 
 
 class PointMutation(AbstractMutation):
-    def __init__(self, m_rate, problem, mutation_type='onepoint', **kwargs):
+    def __init__(self, m_rate, problem, mutation_type='onepoint'):
         super(PointMutation, self).__init__(m_rate, mutation_type, problem)
-        self.mutation_core = get_mutation_core(self._mutation_type, **kwargs)
+        self.mutation_core = get_mutation_core(self._mutation_type, func_dicts=problem.func_dicts)
 
     def __call__(self, solution):
         """
@@ -97,7 +98,7 @@ class PointMutation(AbstractMutation):
         if random.random() > self._m_rate:
             return solution
         else:
-            return self.mutation_core(solution, self.func_dicts)
+            return self.mutation_core(solution)
 
 
 class PopulationPointMutation(PopulationOperatorAdapter, ProblemBasedOperator):
