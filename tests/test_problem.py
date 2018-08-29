@@ -22,4 +22,4 @@ class EmptyProblem(AbstractProblem):
                 ({2: f_terminal(), 3: f_terminal()})]
 
     def _cal_fitness(self, target_solution):
-        target_solution.previous_fitness = target_solution.root.func_id
+        return target_solution.root.func_id
