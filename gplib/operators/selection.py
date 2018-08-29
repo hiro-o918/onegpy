@@ -41,7 +41,6 @@ class AbstractProblemBasedSelection(AbstractSelection, ProblemBasedOperator, ABC
         ProblemBasedOperator.__init__(self, problem)
         self._k = k
         self.replacement = replacement
-        self.problem = problem
 
     def _cal_fitness(self, population):
         for solution in population:
