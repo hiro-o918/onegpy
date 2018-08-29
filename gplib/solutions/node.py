@@ -222,6 +222,58 @@ def get_node_depth(node):
     return max(d_list)
 
 
+def get_all_terminal_node(root):
+    """
+    function for getting all terminal node in the solution
+
+    :param root: Node object. root node of target solution.
+    :return: list of Node object. All terminal node in the solution
+    """
+
+    _node_checker(root)
+    terminal_nodes = []
+
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal terminal_nodes
+        if children is None:
+            terminal_nodes.append(current_node)
+            return
+        for c in children:
+            add_children_to_nodes(c)
+
+    add_children_to_nodes(root)
+
+    return terminal_nodes
+
+
+def get_all_terminal_points(root):
+    """
+    function for getting all terminal points in the solution
+    this function is for crossover in MLPS-GP
+
+    :param root: Node object. root node of target solution.
+    :return: list of tuple(Node, int). (parent, index of terminal node)
+    """
+
+    _node_checker(root)
+    points = []
+
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal points
+        if children is None:
+            return
+        for index, c in enumerate(children):
+            if c.children is None:
+                points.append((current_node, index))
+            add_children_to_nodes(c)
+
+    add_children_to_nodes(root)
+
+    return points
+
+
 def node_equal(node_a, node_b, as_tree=False):
     """
     Function for comparing two nodes.
