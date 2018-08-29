@@ -5,11 +5,25 @@ import numpy as np
 from gplib.problems import boolean
 from gplib.operators import initializer
 
+
 class MLPS_GP(object):
 
+    def __init__(self, initializer, localsearch, problem, max_evals, t_prob, max_depth, simplify=None,
+                 is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000):
+        """
 
-    def __init__(self, initializer, localsearch, problem, max_evals, t_prob, max_depth, simplify = None, is_add_terminal=True, only_add_best = False, only_add_improvements=False,
-                 depth_limit=1000000):
+        :param initializer: function. Initialize operator of MLPS-GP.
+        :param localsearch: local search object. Local search operator of MLPS_GP.
+        :param problem: Problem object. problem to solve.
+        :param max_evals: int. the number of maximum evaluations for the terminal condition.
+        :param t_prob: float. terminal probability for initialization.
+        :param max_depth: int. a limit depth of a tree for initialization.
+        :param simplify: simplify object. Simplify operator of MLPS-GP. Default is None.
+        :param is_add_terminal: bool. a control parameter of MLPS-GP. Default is True.
+        :param only_add_best: bool. a control parameter of MLPS-GP. Default is False.
+        :param only_add_improvements: bool. a control parameter of MLPS-GP. Default is False.
+        :param depth_limit: int. a limit depth of a tree during search. Default is 1000000.
+        """
         self.initializer = initializer
         self.localsearch = localsearch
         self.crossover = MLPS_Crossover(problem)
@@ -23,7 +37,7 @@ class MLPS_GP(object):
         self.population_list = []
         self.t_prob = t_prob
         self.max_depth = max_depth
-        self.function_dicts = problem.func_dicts
+        self.func_dicts = problem.func_dicts
 
     def __call__(self):
         cnt = 0
@@ -64,7 +78,7 @@ class MLPS_GP(object):
         return self.population_list[level]
 
     def initialize_solution(self):
-        candidate_solution = self.initializer(self.t_prob, self.max_depth, self.function_dicts)
+        candidate_solution = self.initializer(self.t_prob, self.max_depth, self.func_dicts)
         problem.fitness(candidate_solution)
 
         if self.localsearch is not None:
@@ -131,7 +145,7 @@ class MLPS_GP(object):
 
             ##TODO: if you want to use only_add_original_fit or remove_equals, implement it here
 
-            ##TODO: if you use subtree node, create a new root using subtree node here(also, update update elite).
+            ##TODO: if you use subtree node, create a new root using subtree node here(also, update elite).
             sub_population.append(candidate_copy)
 
             sub_population.sort(key=lambda x: x.previous_fitness, reverse=True)

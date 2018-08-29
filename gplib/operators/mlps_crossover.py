@@ -1,9 +1,11 @@
 import random
 from gplib.solutions import solution
+from gplib.operator import AbstractOperator
 
-class MLPS_Crossover(object):
+class MLPS_Crossover(AbstractOperator):
 
     def __init__(self, problem, stop_after_one=False, donor_order='random'):
+        super(MLPS_Crossover, self).__init__()
         self.stop_after_one = stop_after_one
         self.donor_order = donor_order
         self.problem = problem
