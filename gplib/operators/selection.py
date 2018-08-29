@@ -111,7 +111,6 @@ class TournamentSelection(AbstractProblemBasedSelection):
 
         if replacement:
             def append(solution, chosen):
-                chosen.append(solution)
                 copy_append(solution, chosen)
         else:
             def append(solution, chosen):
