@@ -88,6 +88,7 @@ class EliteSelection(AbstractProblemBasedSelection):
         # Returns
            list of solutions.
     """
+
     def __init__(self, k, problem, replacement=False):
         super(EliteSelection, self).__init__(k, replacement, problem)
 
@@ -130,7 +131,7 @@ class TournamentSelection(AbstractProblemBasedSelection):
 
         chosen = []
         self._cal_fitness(population)
-        #TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
+        # TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
         k = self.k or len(population)
         # Contains the bool values indicates whether the id's solution is added to chosen.
         is_picked_idxs = [False] * len(population)
@@ -139,10 +140,11 @@ class TournamentSelection(AbstractProblemBasedSelection):
             candidates_idxs = random.sample(solution_idxs, self.tournament_size)
             best_idx = max(candidates_idxs, key=lambda x: population[x].previous_fitness)
 
+            # If replacement is not true, all the solutions in chosen must have unique trees.
             if not self.replacement \
-                    and not is_picked_idxs[best_idx] \
-                    and is_solution_in_pop(population[best_idx], chosen, as_tree=True):
-                # If replacement is True, all the solutions in chosen must have unique trees.
+                    and (is_picked_idxs[best_idx]   # if already picked, continue.
+                         # if chosen contains solution which has same structure as candidates, continue.
+                         or is_solution_in_pop(population[best_idx], chosen, as_tree=True)):
                 continue
 
             if is_picked_idxs[best_idx]:
@@ -165,4 +167,3 @@ def reduce_population(population):
             solutions.append(s)
 
     return solutions
-
