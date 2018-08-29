@@ -28,7 +28,6 @@ class EvenParity(AbstractProblem):
         value = self._eval(target_solution.root, self.x)
         cnt = np.sum(np.logical_xor(self.y, value))
         fitness = float(cnt) / float(2**self.dim)
-        target_solution.previous_fitness = fitness
         return fitness
 
     def _eval(self, current_node, x):
