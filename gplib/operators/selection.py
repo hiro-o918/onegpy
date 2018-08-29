@@ -71,6 +71,7 @@ class RandomSelection(AbstractSelection):
             for i in range(self.k):
                 picked_idx = random.randrange(0, len(population))
                 candidates = population[picked_idx]
+                # If candidate is appended to chosen, copy it.
                 if is_picked_idxs[picked_idx]:
                     chosen.append(copy_solution(candidates, deep=True))
                 else:
@@ -146,14 +147,14 @@ class TournamentSelection(AbstractProblemBasedSelection):
                          # if chosen contains solution which has same structure as candidates, continue.
                          or is_solution_in_pop(population[best_idx], chosen, as_tree=True)):
                 continue
-
+            # If candidate is appended to chosen, copy it.
             if is_picked_idxs[best_idx]:
-                candidates = copy_solution(population[best_idx], deep=True)
+                candidate = copy_solution(population[best_idx], deep=True)
             else:
-                candidates = population[best_idx]
+                candidate = population[best_idx]
                 is_picked_idxs[best_idx] = True
 
-            chosen.append(candidates)
+            chosen.append(candidate)
 
         del population
 
