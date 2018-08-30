@@ -19,9 +19,9 @@ class TestEvenParity(unittest.TestCase):
 
         self.n1 = node.Node(0)
         self.n2 = node.Node(1)
-        self.n3 = node.Node(0)
-        self.n4 = node.Node(1)
-        self.n5 = node.Node(0)
+        self.n3 = node.Node(4)
+        self.n4 = node.Node(4)
+        self.n5 = node.Node(4)
         node.set_children(self.n1, [self.n2, self.n3])
         node.set_children(self.n2, [self.n4, self.n5])
 

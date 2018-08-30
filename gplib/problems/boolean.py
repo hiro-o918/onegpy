@@ -5,10 +5,10 @@ from gplib.solutions import node
 
 class EvenParity(AbstractProblem):
 
-    def __init__(self, dim):
+    def __init__(self, dim, function_bank_builder=None):
         self.dim = dim
         self.x, self.y = self._make_data()
-        super(EvenParity, self).__init__()
+        super(EvenParity, self).__init__(function_bank_builder)
 
     def _make_data(self):
         x = []
@@ -31,7 +31,7 @@ class EvenParity(AbstractProblem):
 
     def _eval(self, current_node, x):
         eval_func = self.func_bank.function_list[current_node.func_id]
-        if current_node.children is None:
+        if not current_node.children:
             if eval_func.n_children != 0:
                 raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
             return eval_func(x)
