@@ -25,4 +25,4 @@ class EmptyProblem(AbstractProblem):
         return func_bank
 
     def _cal_fitness(self, target_solution):
-        target_solution.previous_fitness = target_solution.root.func_id
+        return target_solution.root.func_id
