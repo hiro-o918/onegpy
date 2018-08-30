@@ -52,14 +52,14 @@ class FunctionBank(object):
         func_id = len(self.function_list)
         self.function_list.append(func)
 
-        if not n_children in self.children_dict:
+        if n_children not in self.children_dict:
             self.children_dict[n_children] = []
         self.children_dict[n_children].append(func_id)
 
     def get_function_list(self, n_children=None):
         if n_children is None:
             return self.function_list
-        if not n_children in self.children_dict:
+        if n_children not in self.children_dict:
             return None
         else:
             return self.children_dict[n_children]
