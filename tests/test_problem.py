@@ -17,6 +17,9 @@ def f_terminal(n_children=0):
 
 
 class EmptyProblem(AbstractProblem):
+    def __init__(self):
+        super().__init__(function_bank_builder=None)
+
     def _function_bank_builder(self):
         func_bank = FunctionBank()
         for i in range(3):

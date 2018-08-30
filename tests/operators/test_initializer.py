@@ -23,7 +23,7 @@ def f_terminal():
 class DummyProblem(AbstractProblem):
 
     def __init__(self):
-        super(DummyProblem, self).__init__()
+        super(DummyProblem, self).__init__(function_bank_builder=None)
 
     def _cal_fitness(self, target_solution):
         return target_solution.root.func_id
