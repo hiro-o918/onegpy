@@ -5,7 +5,7 @@ from gplib.solutions.solution import Solution
 
 class AbstractProblem(ABC):
 
-    def __init__(self, function_bank_builder=None):
+    def __init__(self, function_bank_builder):
         if function_bank_builder is not None:
             self._function_bank_builder = function_bank_builder
 
