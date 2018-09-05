@@ -11,7 +11,7 @@ class Node(object):
 
     def __init__(self, func_id=-1):
         self.func_id = func_id
-        self.children = None
+        self.children = []
 
 
 class Function(object):
@@ -72,7 +72,7 @@ def set_children(node, children):
 def copy_node(node, deep=False):
     if not deep:
         new_node = node.__class__(node.func_id)
-        if node.children is not None:
+        if node.children:
             new_node.children = [copy.copy(c) for c in node.children]
 
         return new_node
@@ -113,7 +113,7 @@ def get_parent_node(root, target_node):
     """
 
     def find_parent_node(current_node):
-        if current_node.children is None:
+        if not current_node.children:
             return
 
         children = current_node.children
@@ -153,7 +153,7 @@ def get_graph_to_target(root, target_node):
 
     def find_parent_node(current_node):
         nonlocal graph
-        if current_node.children is None:
+        if not current_node.children:
             return
 
         children = current_node.children
@@ -197,7 +197,7 @@ def get_all_node(root):
     def add_children_to_nodes(current_node):
         children = current_node.children
         nonlocal nodes
-        if children is None:
+        if not children:
             return
         for c in children:
             nodes.append(c)
