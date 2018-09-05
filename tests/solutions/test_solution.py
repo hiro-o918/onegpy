@@ -28,10 +28,10 @@ class TestSolutionFunctions(unittest.TestCase):
         self.n_nodes = 6
 
     def test_calc_solution_depth(self):
-        self.assertEqual(solution.calc_solution_depth(self.s1), self.depth)
+        self.assertEqual(solution._calc_solution_depth(self.s1), self.depth)
 
     def test_calc_solution_n_nodes(self):
-        self.assertEqual(solution.calc_solution_n_nodes(self.s1), self.n_nodes)
+        self.assertEqual(solution._calc_solution_n_nodes(self.s1), self.n_nodes)
 
     def test_set_solution_depth(self):
         solution.set_solution_depth(self.s1, 0)

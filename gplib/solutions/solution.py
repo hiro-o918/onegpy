@@ -39,19 +39,17 @@ class Solution(object):
         raise Exception(msg)
 
 
-def calc_solution_depth(solution):
+def _calc_solution_depth(solution):
     # TODO type check if ``solution'' is Solution
     depth = calc_node_depth(solution.root)
-    set_solution_depth(solution, depth)
 
     return depth
 
 
-def calc_solution_n_nodes(solution):
+def _calc_solution_n_nodes(solution):
     # TODO type check if ``solution'' is Solution
     nodes = get_all_node(solution.root)
     n_nodes = len(nodes)
-    set_solution_n_nodes(solution, n_nodes)
 
     return n_nodes
 
@@ -59,7 +57,7 @@ def calc_solution_n_nodes(solution):
 def set_solution_depth(solution, depth=None):
     # TODO type check if ``solution'' is Solution
     if depth is None:
-        solution._depth = calc_solution_depth(solution)
+        solution._depth = _calc_solution_depth(solution)
     else:
         solution._depth = depth
 
@@ -67,7 +65,7 @@ def set_solution_depth(solution, depth=None):
 def set_solution_n_nodes(solution, n_nodes=None):
     # TODO type check if ``solution'' is Solution
     if n_nodes is None:
-        solution._n_nodes = len(get_all_node(solution.root))
+        solution._n_nodes = _calc_solution_n_nodes(solution)
     else:
         solution._n_nodes = n_nodes
 
