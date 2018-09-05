@@ -1,15 +1,15 @@
 from abc import ABC, abstractmethod
-
 from gplib.solutions.solution import Solution
+from gplib.solutions.node import Function
 
 
 class AbstractProblem(ABC):
 
-    def __init__(self, function_dics_builder=None):
-        if function_dics_builder is not None:
-            self._function_dicts_builder = function_dics_builder
+    def __init__(self, function_bank_builder):
+        if function_bank_builder is not None:
+            self._function_bank_builder = function_bank_builder
 
-        self.func_dicts = self._function_dicts_builder()
+        self.func_bank = self._function_bank_builder()
         self._eval_cnt = 0
 
     def fitness(self, target_solution_or_solutions):
@@ -37,5 +37,31 @@ class AbstractProblem(ABC):
         return self._eval_cnt
 
     @abstractmethod
-    def _function_dicts_builder(self):
-        raise NotImplementedError('default_function_dicts_builder should be implemented in {}'.format(self.__class__))
+    def _function_bank_builder(self):
+        raise NotImplementedError('default_function_bank_builder should be implemented in {}'.format(self.__class__))
+
+
+class FunctionBank(object):
+
+    def __init__(self):
+        self.function_list = []
+        self.children_dict = {}
+
+    def add_function(self, func):
+        if not isinstance(func, Function):
+            raise ValueError('func must be Function class, but this func is {}.'.format(type(func)))
+        n_children = func.n_children
+        func_id = len(self.function_list)
+        self.function_list.append(func)
+
+        if n_children not in self.children_dict:
+            self.children_dict[n_children] = []
+        self.children_dict[n_children].append(func_id)
+
+    def get_function_list(self, n_children=None):
+        if n_children is None:
+            return self.function_list
+        if n_children not in self.children_dict:
+            raise KeyError('Key {} is not in children_dict'.format(n_children))
+        else:
+            return self.children_dict[n_children]

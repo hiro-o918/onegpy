@@ -11,16 +11,35 @@ class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):
         ProblemBasedOperator.__init__(self, problem)
 
     @property
-    def func_dicts(self):
-        return self.problem.func_dicts
+    def func_bank(self):
+        return self.problem.func_bank
 
-    @func_dicts.setter
-    def func_dicts(self, _):
+    @func_bank.setter
+    def func_bank(self, _):
         self.not_changeable_warning()
 
-    @func_dicts.deleter
-    def func_dicts(self):
+    @func_bank.deleter
+    def func_bank(self):
         self.not_changeable_warning()
+
+    def _get_nonterminal_list(self):
+        nonterminal_list = []
+        child_dict = self.func_bank.children_dict
+        for key, id_list in child_dict.items():
+            if key != 0:
+                nonterminal_list.extend(id_list)
+        if len(nonterminal_list) == 0:
+            raise ValueError("the number of non-terminal must be more than 0. but it has no non-terminal node")
+        return nonterminal_list
+
+    def _get_terminal_list(self):
+        terminal_list = self.func_bank.get_function_list(0)
+
+        if terminal_list is None:
+            raise ValueError("function bank must have terminal list, but it has no terminal list.")
+        elif len(terminal_list) == 0:
+            raise ValueError("the number of terminal must be more than 0, but it has no terminal node.")
+        return terminal_list
 
 
 class RandomInitializer(AbstractInitializer):
@@ -28,6 +47,8 @@ class RandomInitializer(AbstractInitializer):
         super(RandomInitializer, self).__init__(n_in=0, n_out=1, problem=problem)
         self.t_prob = t_prob
         self.max_depth = max_depth
+        self.nonterminal_list = self._get_nonterminal_list()
+        self.terminal_list = self._get_terminal_list()
 
     def __call__(self):
         """Generating a new solution.
@@ -35,7 +56,7 @@ class RandomInitializer(AbstractInitializer):
                 # Arguments
                     t_prob: float((0, 1]). probability of terminal node.
                     max_depth: int. The limit of depth of the solution.
-                    func_dicts: tuple of dictionary
+                    func_bank: tuple of dictionary
 
                 # Return
                     solution
@@ -43,17 +64,15 @@ class RandomInitializer(AbstractInitializer):
             """
         # TODO check t_prob range and all the arguments are correct.
         # TODO check problem is class Problem
-        n_nonterminal = len(self.func_dicts[0])
-        n_terminal = len(self.func_dicts[1])
 
         def new_node(parent, depth):
             current_node = node.Node()
             if self.t_prob > random.random() or depth == self.max_depth:
-                func_id = random.randrange(0, n_terminal)
+                func_id = random.choice(self.terminal_list)
             else:
                 current_node.children = []
-                func_id = random.randrange(0, n_nonterminal)
-                n_child = node.get_n_children(func_id, self.func_dicts[0])
+                func_id = random.choice(self.nonterminal_list)
+                n_child = node.get_n_children(func_id, self.func_bank.get_function_list())
                 for _ in range(n_child):
                     new_node(current_node, depth + 1)
 

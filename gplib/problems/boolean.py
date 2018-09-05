@@ -1,15 +1,14 @@
 import numpy as np
-
-from gplib.problem import AbstractProblem
+from gplib.problem import AbstractProblem, FunctionBank
 from gplib.solutions import node
 
 
 class EvenParity(AbstractProblem):
 
-    def __init__(self, dim):
+    def __init__(self, dim, function_bank_builder=None):
         self.dim = dim
         self.x, self.y = self._make_data()
-        super(EvenParity, self).__init__()
+        super(EvenParity, self).__init__(function_bank_builder)
 
     def _make_data(self):
         x = []
@@ -31,33 +30,34 @@ class EvenParity(AbstractProblem):
         return fitness
 
     def _eval(self, current_node, x):
-        if current_node.children is None:
-            eval_func = self.func_dicts[1][current_node.func_id]
+        eval_func = self.func_bank.function_list[current_node.func_id]
+        if not current_node.children:
+            if eval_func.n_children != 0:
+                raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
             return eval_func(x)
         else:
-            eval_func = self.func_dicts[0][current_node.func_id]
             results = []
             for c in current_node.children:
                 results.append(self._eval(c, x))
             return eval_func(results)
 
-    def _function_dicts_builder(self):
-        return get_default_function_dicts(self.dim)
+    def _function_bank_builder(self):
+        return get_default_function_bank(self.dim)
 
 
-def get_default_function_dicts(dim):
-    nonterminal_node_dict = {}
-    terminal_node_dict = {}
+def get_default_function_bank(dim):
 
-    nonterminal_node_dict[0] = get_and(2)
-    nonterminal_node_dict[1] = get_or(2)
-    nonterminal_node_dict[2] = get_nand(2)
-    nonterminal_node_dict[3] = get_nor(2)
+    func_bank = FunctionBank()
+
+    func_bank.add_function(get_and(2))
+    func_bank.add_function(get_or(2))
+    func_bank.add_function(get_nand(2))
+    func_bank.add_function(get_nor(2))
 
     for d in range(dim):
-        terminal_node_dict[d] = get_x(d)
+        func_bank.add_function(get_x(d))
 
-    return nonterminal_node_dict, terminal_node_dict
+    return func_bank
 
 
 def get_and(n_children=2):

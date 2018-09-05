@@ -12,11 +12,12 @@ class ExampleSolution(object):
 
     @staticmethod
     def create_tree():
+        # odd numbers are ids of terminal nodes, the others are non-terminal nodes.
         n1 = node.Node(0)
-        n2 = node.Node(1)
-        n3 = node.Node(2)
+        n2 = node.Node(2)
+        n3 = node.Node(1)
         n4 = node.Node(3)
-        n5 = node.Node(2)
+        n5 = node.Node(5)
         node.set_children(n1, [n2, n3])
         node.set_children(n2, [n4, n5])
 
@@ -32,11 +33,8 @@ class TestPointMutation(unittest.TestCase, ExampleSolution):
     def test_onepoint_mutation(self):
         s2 = self.mutation(self.s1)
         for n in node.get_all_node(s2.root):
-            if n.children is None:
-                self.assertTrue(n.func_id in [2, 3])
-
-            else:
-                self.assertTrue(n.func_id in [0, 1])
+            func_list = self.problem.func_bank.get_function_list(n_children=len(n.children))
+            self.assertTrue(n.func_id in func_list)
 
 
 class TestPopulationPointMutation(unittest.TestCase, ExampleSolution):

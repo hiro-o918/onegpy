@@ -33,15 +33,15 @@ class AbstractMutation(AbstractOperator, ProblemBasedOperator, ABC):
         self.not_changeable_warning()
 
     @property
-    def func_dicts(self):
-        return self.problem.func_dicts
+    def func_bank(self):
+        return self.problem.func_bank
 
-    @func_dicts.setter
-    def func_dicts(self, _):
+    @func_bank.setter
+    def func_bank(self, _):
         self.not_changeable_warning()
 
-    @func_dicts.deleter
-    def func_dicts(self):
+    @func_bank.deleter
+    def func_bank(self):
         self.not_changeable_warning()
 
     @property
@@ -57,18 +57,25 @@ class AbstractMutation(AbstractOperator, ProblemBasedOperator, ABC):
         self.not_changeable_warning()
 
 
-def one_point(solution, func_dicts):
+def one_point(solution, func_bank):
     point = random.choice(node.get_all_node(solution.root))
-    if point.children is None:
-        node.set_id(point, random.choice(list(func_dicts[1].keys())))
+    n_children = len(point.children)
+    function_list = func_bank.get_function_list(n_children)
+    if function_list is None:
+        raise ValueError("function bank must have {}'s function list, but it has no list.".format(n_children))
+
+    candidate_id = random.sample(function_list, 2)
+    if point.func_id != candidate_id[0]:
+        node.set_id(point, candidate_id[0])
     else:
-        node.set_id(point, random.choice(list(func_dicts[0].keys())))
+        node.set_id(point, candidate_id[1])
+
     return solution
 
 
 def get_mutation_core(mutation_type, **kwargs):
     if mutation_type == 'onepoint':
-        # Obtain `one_point` function fixed `func_dicts`
+        # Obtain `one_point` function fixed `func_bank`
         mutation_core = partial(one_point, **kwargs)
     else:
         msg = '{} is not found'.format(mutation_type)
@@ -80,7 +87,7 @@ def get_mutation_core(mutation_type, **kwargs):
 class PointMutation(AbstractMutation):
     def __init__(self, m_rate, problem, mutation_type='onepoint'):
         super(PointMutation, self).__init__(m_rate, mutation_type, problem)
-        self.mutation_core = get_mutation_core(self._mutation_type, func_dicts=problem.func_dicts)
+        self.mutation_core = get_mutation_core(self._mutation_type, func_bank=problem.func_bank)
 
     def __call__(self, solution):
         """
