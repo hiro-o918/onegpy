@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-
 from gplib.solutions.solution import Solution
+from gplib.solutions.node import Function
 
 
 class AbstractProblem(ABC):
@@ -48,6 +48,8 @@ class FunctionBank(object):
         self.children_dict = {}
 
     def add_function(self, func):
+        if not isinstance(func, Function):
+            raise ValueError('func must be Function class, but this func is {}.'.format(type(func)))
         n_children = func.n_children
         func_id = len(self.function_list)
         self.function_list.append(func)
@@ -59,7 +61,7 @@ class FunctionBank(object):
     def get_function_list(self, n_children=None):
         if n_children is None:
             return self.function_list
-        if not n_children in self.children_dict:
-            return None
+        if n_children not in self.children_dict:
+            raise KeyError('Key {} is not in children_dict'.format(n_children))
         else:
             return self.children_dict[n_children]
