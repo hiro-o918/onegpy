@@ -212,7 +212,7 @@ def calc_node_depth(node):
     d_list = []
 
     def cal_depth(c_node, depth):
-        if c_node.children is not None:
+        if c_node.children:
             for c in c_node.children:
                 cal_depth(c, depth+1)
         else:
