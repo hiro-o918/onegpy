@@ -69,12 +69,13 @@ def one_point(solution, func_bank):
         node.set_id(point, candidate_id[0])
     else:
         node.set_id(point, candidate_id[1])
+
     return solution
 
 
 def get_mutation_core(mutation_type, **kwargs):
     if mutation_type == 'onepoint':
-        # Obtain `one_point` function fixed `func_dicts`
+        # Obtain `one_point` function fixed `func_bank`
         mutation_core = partial(one_point, **kwargs)
     else:
         msg = '{} is not found'.format(mutation_type)
@@ -86,7 +87,7 @@ def get_mutation_core(mutation_type, **kwargs):
 class PointMutation(AbstractMutation):
     def __init__(self, m_rate, problem, mutation_type='onepoint'):
         super(PointMutation, self).__init__(m_rate, mutation_type, problem)
-        self.mutation_core = get_mutation_core(self._mutation_type, func_dicts=problem.func_bank)
+        self.mutation_core = get_mutation_core(self._mutation_type, func_bank=problem.func_bank)
 
     def __call__(self, solution):
         """

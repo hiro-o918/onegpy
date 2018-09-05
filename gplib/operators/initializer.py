@@ -41,6 +41,7 @@ class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):
             raise ValueError("the number of terminal must be more than 0, but it has no terminal node.")
         return terminal_list
 
+
 class RandomInitializer(AbstractInitializer):
     def __init__(self, t_prob, max_depth, problem):
         super(RandomInitializer, self).__init__(n_in=0, n_out=1, problem=problem)
@@ -55,7 +56,7 @@ class RandomInitializer(AbstractInitializer):
                 # Arguments
                     t_prob: float((0, 1]). probability of terminal node.
                     max_depth: int. The limit of depth of the solution.
-                    func_dicts: tuple of dictionary
+                    func_bank: tuple of dictionary
 
                 # Return
                     solution

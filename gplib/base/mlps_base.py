@@ -37,7 +37,7 @@ class MLPS_GP(object):
         self.population_list = []
         self.t_prob = t_prob
         self.max_depth = max_depth
-        self.func_dicts = problem.func_bank
+        self.func_bank = problem.func_bank
 
     def __call__(self):
         cnt = 0
@@ -78,7 +78,7 @@ class MLPS_GP(object):
         return self.population_list[level]
 
     def initialize_solution(self):
-        candidate_solution = self.initializer(self.t_prob, self.max_depth, self.func_dicts)
+        candidate_solution = self.initializer(self.t_prob, self.max_depth, self.func_bank)
         problem.fitness(candidate_solution)
 
         if self.localsearch is not None:
@@ -165,8 +165,6 @@ if __name__ == '__main__':
     ls_op = None
 
     problem = boolean.EvenParity(dim=dim)
-    func_dicts = boolean.get_default_node_set(dim=dim)
-    problem.func_dicts = func_dicts
 
     population = []
     mlps = MLPS_GP(initializer= init_op, localsearch=ls_op, problem=problem, max_evals=max_evals, t_prob=t_prob,

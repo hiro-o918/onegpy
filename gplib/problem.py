@@ -5,7 +5,7 @@ from gplib.solutions.node import Function
 
 class AbstractProblem(ABC):
 
-    def __init__(self, function_bank_builder=None):
+    def __init__(self, function_bank_builder):
         if function_bank_builder is not None:
             self._function_bank_builder = function_bank_builder
 
@@ -54,7 +54,7 @@ class FunctionBank(object):
         func_id = len(self.function_list)
         self.function_list.append(func)
 
-        if not n_children in self.children_dict:
+        if n_children not in self.children_dict:
             self.children_dict[n_children] = []
         self.children_dict[n_children].append(func_id)
 

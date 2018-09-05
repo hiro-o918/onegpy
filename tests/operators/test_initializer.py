@@ -13,20 +13,20 @@ def f_non_terminal(n_children=2):
     return node.build_func(print_non_terminal, n_children)
 
 
-def f_terminal(n_children=2):
+def f_terminal():
     def print_terminal(x):
         print('terminal')
 
-    return node.build_func(print_terminal, n_children)
+    return node.build_func(print_terminal, 0)
 
 
 class DummyProblem(AbstractProblem):
 
     def __init__(self):
-        super(DummyProblem, self).__init__()
+        super(DummyProblem, self).__init__(function_bank_builder=None)
 
     def _cal_fitness(self, target_solution):
-        pass
+        return target_solution.root.func_id
 
     def _function_bank_builder(self):
         func_bank = FunctionBank()
