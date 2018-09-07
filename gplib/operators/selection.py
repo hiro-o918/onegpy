@@ -65,8 +65,19 @@ class RandomSelection(AbstractSelection):
         """
         if self.replacement:
             chosen = []
+            # Contains the bool values indicates whether the id's solution is added to chosen.
+            is_picked_idxs = [False] * len(population)
+
             for i in range(self.k):
-                copy_append(random.choice(population), chosen)
+                picked_idx = random.randrange(0, len(population))
+                candidates = population[picked_idx]
+                # If candidate is appended to chosen, copy it.
+                if is_picked_idxs[picked_idx]:
+                    chosen.append(copy_solution(candidates, deep=True))
+                else:
+                    chosen.append(candidates)
+                    is_picked_idxs[picked_idx] = True
+
             return chosen
         else:
             return random.sample(population, self.k)
@@ -78,6 +89,7 @@ class EliteSelection(AbstractProblemBasedSelection):
         # Returns
            list of solutions.
     """
+
     def __init__(self, k, problem, replacement=False):
         super(EliteSelection, self).__init__(k, replacement, problem)
 
@@ -108,16 +120,6 @@ class TournamentSelection(AbstractProblemBasedSelection):
 
         self.tournament_size = tournament_size
         super(TournamentSelection, self).__init__(k=k, replacement=replacement, problem=problem)
-
-        if replacement:
-            def append(solution, chosen):
-                copy_append(solution, chosen)
-        else:
-            def append(solution, chosen):
-                if not is_solution_in_pop(solution, chosen, False):
-                    chosen.append(solution)
-
-        self.append = append
         self.replacement = replacement
 
     def __call__(self, population):
@@ -130,12 +132,29 @@ class TournamentSelection(AbstractProblemBasedSelection):
 
         chosen = []
         self._cal_fitness(population)
-        #TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
+        # TODO: we must check the original population size > k (it is also super redundant if k is almost equal to population size), if replacement=False.
         k = self.k or len(population)
+        # Contains the bool values indicates whether the id's solution is added to chosen.
+        is_picked_idxs = [False] * len(population)
+        solution_idxs = list(range(len(population)))
         while len(chosen) < k:
-            candidates = random.sample(population, self.tournament_size)
-            best = max(candidates, key=lambda x: x.previous_fitness)
-            self.append(best, chosen)
+            candidates_idxs = random.sample(solution_idxs, self.tournament_size)
+            best_idx = max(candidates_idxs, key=lambda x: population[x].previous_fitness)
+
+            # If replacement is not true, all the solutions in chosen must have unique trees.
+            if not self.replacement \
+                    and (is_picked_idxs[best_idx]   # if already picked, continue.
+                         # if chosen contains solution which has same structure as candidates, continue.
+                         or is_solution_in_pop(population[best_idx], chosen, as_tree=True)):
+                continue
+            # If candidate is appended to chosen, copy it.
+            if is_picked_idxs[best_idx]:
+                candidate = copy_solution(population[best_idx], deep=True)
+            else:
+                candidate = population[best_idx]
+                is_picked_idxs[best_idx] = True
+
+            chosen.append(candidate)
 
         del population
 
@@ -149,10 +168,3 @@ def reduce_population(population):
             solutions.append(s)
 
     return solutions
-
-
-def copy_append(solution, chosen):
-    if is_solution_in_pop(solution, chosen, as_tree=False):
-        chosen.append(copy_solution(solution, deep=True))
-    else:
-        chosen.append(solution)

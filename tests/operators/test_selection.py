@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection, copy_append, \
+from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection,\
     reduce_population
 from gplib.solutions import node
-from gplib.solutions.solution import Solution, solution_equal
+from gplib.solutions.solution import Solution
 from tests.test_problem import EmptyProblem
 
 
@@ -122,13 +122,6 @@ class TestSelectionFunctions(unittest.TestCase, ExampleSolutions):
 
     def test_reduce_population(self):
         self.assertEqual(len(reduce_population(self.population)), 3)
-
-    def test_copy_append(self):
-        s1 = self.create_tree_type1()
-        s2 = s1
-        chosen = [s1]
-        copy_append(s2, chosen)
-        self.assertFalse(solution_equal(chosen[0], chosen[1], False))
 
 
 if __name__ == '__main__':

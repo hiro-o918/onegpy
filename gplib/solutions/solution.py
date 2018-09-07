@@ -73,6 +73,9 @@ def set_solution_n_nodes(solution, n_nodes=None):
 def solution_equal(solution_a, solution_b, as_tree=True):
     # TODO type check if ``solution'' is Solution
     if as_tree:
+        if solution_a is solution_b:
+            return True
+
         if solution_a.n_nodes != solution_b.n_nodes:
             return False
         if solution_a.depth != solution_b.depth:
