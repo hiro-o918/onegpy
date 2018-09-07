@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gplib.operators.crossover module &mdash; GPLib 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GPLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">gplib.operators.crossover module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GPLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>gplib.operators.crossover module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generated/gplib.operators.crossover.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-gplib.operators.crossover">
+<span id="gplib-operators-crossover-module"></span><h1>gplib.operators.crossover module<a class="headerlink" href="#module-gplib.operators.crossover" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gplib.operators.crossover.OnePointCrossover">
+<em class="property">class </em><code class="descclassname">gplib.operators.crossover.</code><code class="descname">OnePointCrossover</code><span class="sig-paren">(</span><em>c_rate</em>, <em>destructive=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/crossover.html#OnePointCrossover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.crossover.OnePointCrossover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operator.html#gplib.operator.AbstractOperator" title="gplib.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.AbstractOperator</span></code></a></p>
+<dl class="attribute">
+<dt id="gplib.operators.crossover.OnePointCrossover.c_rate">
+<code class="descname">c_rate</code><a class="headerlink" href="#gplib.operators.crossover.OnePointCrossover.c_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gplib.operators.crossover.OnePointCrossover.destructive">
+<code class="descname">destructive</code><a class="headerlink" href="#gplib.operators.crossover.OnePointCrossover.destructive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.crossover.PopulationOnePointCrossover">
+<em class="property">class </em><code class="descclassname">gplib.operators.crossover.</code><code class="descname">PopulationOnePointCrossover</code><span class="sig-paren">(</span><em>c_rate</em>, <em>destructive=False</em>, <em>generator_builder=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/crossover.html#PopulationOnePointCrossover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.crossover.PopulationOnePointCrossover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operator.html#gplib.operator.PopulationOperatorAdapter" title="gplib.operator.PopulationOperatorAdapter"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.PopulationOperatorAdapter</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.operators.crossover.crossover">
+<code class="descclassname">gplib.operators.crossover.</code><code class="descname">crossover</code><span class="sig-paren">(</span><em>parents</em>, <em>points</em>, <em>destructive=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/crossover.html#crossover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.crossover.crossover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.operators.crossover.destructive_crossover">
+<code class="descclassname">gplib.operators.crossover.</code><code class="descname">destructive_crossover</code><span class="sig-paren">(</span><em>parents</em>, <em>points</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/crossover.html#destructive_crossover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.crossover.destructive_crossover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.operators.crossover.get_crossover_core">
+<code class="descclassname">gplib.operators.crossover.</code><code class="descname">get_crossover_core</code><span class="sig-paren">(</span><em>destructive=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/crossover.html#get_crossover_core"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.crossover.get_crossover_core" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
