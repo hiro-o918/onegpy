@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest
+
 import numpy as np
-from gplib.problem import boolean
+
+from gplib.problems import boolean
 from gplib.solutions import node, solution
 
 
@@ -14,14 +16,12 @@ class TestEvenParity(unittest.TestCase):
                            [False, True],
                            [True, True]], dtype=bool)
         self.y = np.array([False, True, True, False], dtype=bool)
-        function_dicts = boolean.get_default_node_set(self.dim)
-        self.even_parity.func_dicts = function_dicts
 
         self.n1 = node.Node(0)
         self.n2 = node.Node(1)
-        self.n3 = node.Node(0)
-        self.n4 = node.Node(1)
-        self.n5 = node.Node(0)
+        self.n3 = node.Node(4)
+        self.n4 = node.Node(4)
+        self.n5 = node.Node(4)
         node.set_children(self.n1, [self.n2, self.n3])
         node.set_children(self.n2, [self.n4, self.n5])
 

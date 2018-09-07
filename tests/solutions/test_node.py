@@ -68,8 +68,7 @@ class TestNodeFunctions(unittest.TestCase):
         node.set_id(self.n2, 1)
         node.set_children(self.n1, [self.n2, self.n3])
         node.set_children(self.n2, [self.n4, self.n5, self.n6])
-        graph = [(0, self.n1), (0, self.n2)]
-        self.assertEqual(node.get_parent_node(self.n1, self.n4), (0, self.n2, graph))
+        self.assertEqual(node.get_parent_node(self.n1, self.n4), (0, self.n2))
 
         msg = 'There is no parent of root.'
         with self.assertRaises(ValueError, msg=msg):
@@ -79,6 +78,22 @@ class TestNodeFunctions(unittest.TestCase):
         with self.assertRaises(ValueError, msg=msg):
             node.get_parent_node(node.Node(), node.Node())
 
+    def test_get_graph_to_target(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 1)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n2, [self.n4, self.n5, self.n6])
+        graph = [(0, self.n1), (0, self.n2)]
+        self.assertEqual(node.get_graph_to_target(self.n1, self.n4), graph)
+
+        msg = 'There is no parent of root.'
+        with self.assertRaises(ValueError, msg=msg):
+            node.get_graph_to_target(self.n1, self.n1)
+
+        msg = 'Invalid arguments: cannot find parent.'
+        with self.assertRaises(ValueError, msg=msg):
+            node.get_graph_to_target(node.Node(), node.Node())
+
     def test_get_all_node(self):
         node.set_id(self.n1, 0)
         node.set_id(self.n2, 1)
@@ -87,6 +102,14 @@ class TestNodeFunctions(unittest.TestCase):
         all_nodes = [self.n1, self.n2, self.n4, self.n5, self.n6, self.n3]
 
         self.assertEqual(node.get_all_node(self.n1), all_nodes)
+
+    def test_calc_node_depth(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 1)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n2, [self.n4, self.n5, self.n6])
+
+        self.assertEqual(node.calc_node_depth(self.n1), 2)
 
     def test_node_equal(self):
         node.set_id(self.n1, 0)

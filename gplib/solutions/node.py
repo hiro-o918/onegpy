@@ -11,7 +11,7 @@ class Node(object):
 
     def __init__(self, func_id=-1):
         self.func_id = func_id
-        self.children = None
+        self.children = []
 
 
 class Function(object):
@@ -30,6 +30,7 @@ class Function(object):
         return self.f_eval(x)
 
 
+#TODO: Remove this function.
 def build_func(f_eval, n_children):
     def eval_func(x):
         return f_eval(x)
@@ -71,7 +72,7 @@ def set_children(node, children):
 def copy_node(node, deep=False):
     if not deep:
         new_node = node.__class__(node.func_id)
-        if node.children is not None:
+        if node.children:
             new_node.children = [copy.copy(c) for c in node.children]
 
         return new_node
@@ -105,19 +106,54 @@ def copy_nodes_along_graph(graph):
 def get_parent_node(root, target_node):
     """function for searching parent node of target node.
 
-        # Arguments
-            root: Node object, root node.
-            target_node: Node object, target node.
+        :param root: Node object, root node.
+        :param target_node: Node object, target node.
 
-        # Returns
-            Position of target_node in parent node, node object of parent node
-            and graph from ``root'' to ``target_node''
+        :return Position of target_node in parent node, node object of parent node
+    """
+
+    def find_parent_node(current_node):
+        if not current_node.children:
+            return
+
+        children = current_node.children
+        p = None
+        for i, c in enumerate(children):
+            if c is target_node:
+                return i, current_node
+            else:
+                p = p or find_parent_node(c)
+
+                if p is not None:
+                    break
+        return p
+
+    _nodes_checker(root, target_node)
+    if target_node is root:
+        msg = 'There is no parent of root.'
+        raise ValueError(msg)
+
+    pos, parent = find_parent_node(root) or (None, None)
+    if pos is None or parent is None:
+        msg = 'Invalid arguments: cannot find parent.'
+        raise ValueError(msg)
+
+    return pos, parent
+
+
+def get_graph_to_target(root, target_node):
+    """function for searching a graph from root node to a target node.
+
+        :param root: Node object, root node.
+        :param target_node: Node object, target node.
+
+        :return Graph from ``root'' to ``target_node''
     """
     graph = []
 
     def find_parent_node(current_node):
         nonlocal graph
-        if current_node.children is None:
+        if not current_node.children:
             return
 
         children = current_node.children
@@ -144,7 +180,7 @@ def get_parent_node(root, target_node):
         msg = 'Invalid arguments: cannot find parent.'
         raise ValueError(msg)
 
-    return pos, parent, graph
+    return graph
 
 
 def get_all_node(root):
@@ -161,7 +197,7 @@ def get_all_node(root):
     def add_children_to_nodes(current_node):
         children = current_node.children
         nonlocal nodes
-        if children is None:
+        if not children:
             return
         for c in children:
             nodes.append(c)
@@ -170,6 +206,73 @@ def get_all_node(root):
     add_children_to_nodes(root)
 
     return nodes
+
+
+def calc_node_depth(node):
+    d_list = []
+
+    def cal_depth(c_node, depth):
+        if c_node.children:
+            for c in c_node.children:
+                cal_depth(c, depth+1)
+        else:
+            d_list.append(depth)
+
+    cal_depth(node, 0)
+
+    return max(d_list)
+
+
+def get_all_terminal_node(root):
+    """
+    function for getting all terminal node in the solution
+
+    :param root: Node object. root node of target solution.
+    :return: list of Node object. All terminal node in the solution
+    """
+
+    _node_checker(root)
+    terminal_nodes = []
+
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal terminal_nodes
+        if children is None:
+            terminal_nodes.append(current_node)
+            return
+        for c in children:
+            add_children_to_nodes(c)
+
+    add_children_to_nodes(root)
+
+    return terminal_nodes
+
+
+def get_all_terminal_points(root):
+    """
+    function for getting all terminal points in the solution
+    this function is for crossover in MLPS-GP
+
+    :param root: Node object. root node of target solution.
+    :return: list of tuple(Node, int). (parent, index of terminal node)
+    """
+
+    _node_checker(root)
+    points = []
+
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal points
+        if children is None:
+            return
+        for index, c in enumerate(children):
+            if c.children is None:
+                points.append((current_node, index))
+            add_children_to_nodes(c)
+
+    add_children_to_nodes(root)
+
+    return points
 
 
 def node_equal(node_a, node_b, as_tree=False):

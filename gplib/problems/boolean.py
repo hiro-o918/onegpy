@@ -1,13 +1,14 @@
-from gplib.solutions import node
 import numpy as np
+from gplib.problem import AbstractProblem, FunctionBank
+from gplib.solutions import node
 
 
-class EvenParity(object):
+class EvenParity(AbstractProblem):
 
-    def __init__(self, dim):
-        self.func_dicts = None
+    def __init__(self, dim, function_bank_builder=None):
         self.dim = dim
         self.x, self.y = self._make_data()
+        super(EvenParity, self).__init__(function_bank_builder)
 
     def _make_data(self):
         x = []
@@ -22,38 +23,41 @@ class EvenParity(object):
         y = np.array(y, dtype=bool)
         return x, y
 
-    def fitness(self, solution):
-        value = self._eval(solution.root, self.x)
+    def _cal_fitness(self, target_solution):
+        value = self._eval(target_solution.root, self.x)
         cnt = np.sum(np.logical_xor(self.y, value))
         fitness = float(cnt) / float(2**self.dim)
-        solution.previous_fitness = fitness
         return fitness
 
     def _eval(self, current_node, x):
-        if current_node.children is None:
-            eval_func = self.func_dicts[1][current_node.func_id]
+        eval_func = self.func_bank.function_list[current_node.func_id]
+        if not current_node.children:
+            if eval_func.n_children != 0:
+                raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
             return eval_func(x)
         else:
-            eval_func = self.func_dicts[0][current_node.func_id]
             results = []
             for c in current_node.children:
                 results.append(self._eval(c, x))
             return eval_func(results)
 
+    def _function_bank_builder(self):
+        return get_default_function_bank(self.dim)
 
-def get_default_node_set(dim):
-    nonterminal_node_dict = {}
-    terminal_node_dict = {}
 
-    nonterminal_node_dict[0] = get_and(2)
-    nonterminal_node_dict[1] = get_or(2)
-    nonterminal_node_dict[2] = get_nand(2)
-    nonterminal_node_dict[3] = get_nor(2)
+def get_default_function_bank(dim):
+
+    func_bank = FunctionBank()
+
+    func_bank.add_function(get_and(2))
+    func_bank.add_function(get_or(2))
+    func_bank.add_function(get_nand(2))
+    func_bank.add_function(get_nor(2))
 
     for d in range(dim):
-        terminal_node_dict[d] = get_x(d)
+        func_bank.add_function(get_x(d))
 
-    return nonterminal_node_dict, terminal_node_dict
+    return func_bank
 
 
 def get_and(n_children=2):

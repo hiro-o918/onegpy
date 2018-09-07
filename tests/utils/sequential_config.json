@@ -1,0 +1,13 @@
+{
+  "PopulationOnePointCrossover": {
+    "c_rate": 1,
+    "destructive": false
+  },
+  "RandomSelection": [
+    2,
+    true
+  ],
+  "OnePointCrossover": [
+    1
+  ]
+}
