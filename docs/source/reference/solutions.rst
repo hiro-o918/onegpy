@@ -1,21 +1,13 @@
-Solutions
-=======================
-.. module:: gplib.solutions
+solutions package
+=================
 
+.. automodule:: gplib.solutions
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Node Class and Functions
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. toctree::
 
-   node
-
-Solution Class and Functions
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   solution
+   solutions.node
+   solutions.solution
 

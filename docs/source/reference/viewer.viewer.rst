@@ -1,0 +1,10 @@
+viewer.viewer
+=============
+
+.. module:: gplib.viewer.viewer
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   AbstractViewer
+   DefaultViewer

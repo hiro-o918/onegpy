@@ -1,21 +1,13 @@
-Utils
-=======================
-.. module:: gplib.utils
+utils package
+=============
 
+.. automodule:: gplib.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Config
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. toctree::
 
-   config
-
-Common Utils
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   util
+   utils.config
+   utils.util
 

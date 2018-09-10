@@ -1,17 +1,14 @@
-Base
-=======================
-.. module:: gplib.base
+base package
+============
 
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. automodule:: gplib.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Standard Bases
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. toctree::
 
-   gpbase
-   mlps_base
-   sgp_sample
+   base.gpbase
+   base.mlps_base
+   base.sgp_sample
+

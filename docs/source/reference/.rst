@@ -1,5 +1,5 @@
-Reference
-=========
+ package
+========
 
 .. automodule:: gplib
    :members:
@@ -7,7 +7,6 @@ Reference
    :show-inheritance:
 
 .. toctree::
-   :maxdepth: 1
 
    base
    operators
@@ -17,7 +16,6 @@ Reference
    viewer
 
 .. toctree::
-   :maxdepth: 1
 
    operator
    problem

@@ -1,0 +1,14 @@
+operators.selection
+===================
+
+.. module:: gplib.operators.selection
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   AbstractProblemBasedSelection
+   AbstractSelection
+   EliteSelection
+   RandomSelection
+   TournamentSelection
+   reduce_population

@@ -1,31 +1,16 @@
-Operators
-=======================
-.. module:: gplib.operators
+operators package
+=================
 
+.. automodule:: gplib.operators
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Abstract Class
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. toctree::
 
-   gplib.operator
+   operators.crossover
+   operators.initializer
+   operators.mlps_crossover
+   operators.mutation
+   operators.selection
 
-Standard Operators
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   crossover
-   initializer
-   mutation
-   selection
-
-MLPS-GP Operators
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   mlps_crossover
