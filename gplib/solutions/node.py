@@ -248,6 +248,29 @@ def get_all_terminal_node(root):
     return terminal_nodes
 
 
+def get_all_nonterminal_node(root):
+    """
+    function for getting all terminal node in the solution
+
+    :param root: Node object. root node of target solution.
+    :return: list of Node object. All terminal node in the solution
+    """
+
+    _node_checker(root)
+    nonterminal_nodes = []
+
+    def add_children_to_nodes(current_node):
+        children = current_node.children
+        nonlocal nonterminal_nodes
+        if children is not None:
+            nonterminal_nodes.append(current_node)
+            for c in children:
+                add_children_to_nodes(c)
+
+    add_children_to_nodes(root)
+
+    return nonterminal_nodes
+
 def get_all_terminal_points(root):
     """
     function for getting all terminal points in the solution

@@ -30,7 +30,7 @@ class EvenParity(AbstractProblem):
         return fitness
 
     def _eval(self, current_node, x):
-        eval_func = self.func_bank.function_list[current_node.func_id]
+        eval_func = self.func_bank.get_func(current_node.func_id)
         if not current_node.children:
             if eval_func.n_children != 0:
                 raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
