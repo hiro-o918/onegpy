@@ -19,10 +19,13 @@ from __future__ import print_function
 
 import argparse
 import glob
+import importlib
+import inspect
 import os
 import sys
 from fnmatch import fnmatch
 from os import path
+from pathlib import Path
 
 from six import binary_type
 
@@ -31,9 +34,7 @@ from sphinx.cmd.quickstart import EXTENSIONS
 from sphinx.util import rst
 from sphinx.util.osutil import FileAvoidWrite, ensuredir, walk
 
-if False:
-    # For type annotation
-    from typing import Any, List, Tuple  # NOQA
+from typing import Any, List, Tuple
 
 # automodule options
 if 'SPHINX_APIDOC_OPTIONS' in os.environ:
@@ -47,7 +48,7 @@ else:
     ]
 
 INITPY = '__init__.py'
-PY_SUFFIXES = set(['.py', '.pyx'])
+PY_SUFFIXES = {'.py', '.pyx'}
 
 
 def makename(package, module):
@@ -84,6 +85,8 @@ def format_heading(level, text, escape=True):
     if escape:
         text = rst.escape(text)
     underlining = ['=', '-', '~', ][level - 1] * len(text)
+    # if text.find('.') != -1:
+    #     text = '.'.join(text.split('.')[-1:])
     return '%s\n%s\n\n' % (text, underlining)
 
 
@@ -92,18 +95,46 @@ def format_directive(module, package=None):
     """Create the automodule directive and add the options."""
     directive = '.. automodule:: %s\n' % makename(package, module)
     for option in OPTIONS:
-        directive += '    :%s:\n' % option
+        directive += '   :%s:\n' % option
     return directive
+
+
+def format_summary(module, package=None):
+    # type: (unicode, unicode) -> unicode
+    """Create the automodule directive and add the options."""
+    summary = '.. module:: %s\n' % makename(package, module)
+    summary += '.. autosummary::\n' \
+               + '   :toctree: generated/\n' \
+               + '   :nosignatures:\n\n'
+
+    items = get_defined_items(module, package)
+    for item in items:
+        summary += '   %s\n' % item
+    return summary
+
+
+def get_defined_items(module, package=None):
+    abs_module = importlib.import_module(makename(package, module))
+    items = []
+    module_name = makename(package, module)
+    members = inspect.getmembers(abs_module, inspect.isclass) + inspect.getmembers(abs_module, inspect.isfunction)
+
+    for name, item in members:
+        file_path = Path(inspect.getfile(item))
+        depth = len(module_name.split('.'))
+        if module_name == '.'.join(list(file_path.parts[-depth:-1]) + [file_path.stem]):
+            items.append(name)
+
+    return items
 
 
 def create_module_file(package, module, opts):
     # type: (unicode, unicode, Any) -> None
     """Build the text of the file and write the file."""
     if not opts.noheadings:
-        text = format_heading(1, '%s module' % module)
+        text = format_heading(1, '%s' % module)
     else:
         text = ''
-    # text += format_heading(2, ':mod:`%s` Module' % module)
     text += format_directive(module, package)
     write_file(makename(package, module), text, opts)
 
@@ -111,8 +142,13 @@ def create_module_file(package, module, opts):
 def create_package_file(root, master_package, subroot, py_files, opts, subs, is_namespace, excludes=[]):  # NOQA
     # type: (unicode, unicode, unicode, List[unicode], Any, List[unicode], bool, List[unicode]) -> None  # NOQA
     """Build the text of the file and write the file."""
+    if opts.nomast:
+        sub_package = subroot
+    else:
+        sub_package = makename(master_package, subroot)
+
     text = format_heading(1, ('%s package' if not is_namespace else "%s namespace")
-                          % makename(master_package, subroot))
+                          % sub_package)
 
     if opts.modulefirst and not is_namespace:
         text += format_directive(subroot, master_package)
@@ -126,46 +162,38 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs, is_
             shall_skip(path.join(root, sub, INITPY), opts, excludes)]
     # if there are some package directories, add a TOC for theses subpackages
     if subs:
-        text += format_heading(2, 'Subpackages')
         text += '.. toctree::\n\n'
         for sub in subs:
-            text += '    %s.%s\n' % (makename(master_package, subroot), sub)
+            text += '   %s\n' % makename(sub_package, sub)
         text += '\n'
 
     submods = [path.splitext(sub)[0] for sub in py_files
                if not shall_skip(path.join(root, sub), opts, excludes) and
                sub != INITPY]
     if submods:
-        text += format_heading(2, 'Submodules')
         if opts.separatemodules:
             text += '.. toctree::\n\n'
             for submod in submods:
-                modfile = makename(master_package, makename(subroot, submod))
+                modfile = makename(sub_package, submod)
                 text += '   %s\n' % modfile
 
                 # generate separate file for this module
                 if not opts.noheadings:
-                    filetext = format_heading(1, '%s module' % modfile)
+                    filetext = format_heading(1, '%s' % modfile)
                 else:
                     filetext = ''
-                filetext += format_directive(makename(subroot, submod),
-                                             master_package)
+                filetext += format_summary(makename(subroot, submod), master_package)
                 write_file(modfile, filetext, opts)
         else:
             for submod in submods:
-                modfile = makename(master_package, makename(subroot, submod))
+                modfile = makename(sub_package, submod)
                 if not opts.noheadings:
-                    text += format_heading(2, '%s module' % modfile)
-                text += format_directive(makename(subroot, submod),
-                                         master_package)
+                    text += format_heading(2, '%s' % modfile)
+                text += format_summary(makename(subroot, submod), master_package)
                 text += '\n'
         text += '\n'
 
-    if not opts.modulefirst and not is_namespace:
-        text += format_heading(2, 'Module contents')
-        text += format_directive(subroot, master_package)
-
-    write_file(makename(master_package, subroot), text, opts)
+    write_file(sub_package, text, opts)
 
 
 def create_modules_toc_file(modules, opts, name='modules'):
@@ -348,6 +376,7 @@ Note: By default this script will not overwrite already created files.""")
                         dest='modulefirst',
                         help='put module documentation before submodule '
                              'documentation')
+    parser.add_argument('-m', '--no-master-package', action='store_true', dest='nomast')
     parser.add_argument('--implicit-namespaces', action='store_true',
                         dest='implicit_namespaces',
                         help='interpret module paths according to PEP-0420 '
