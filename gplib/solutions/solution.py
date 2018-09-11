@@ -8,9 +8,20 @@ class Solution(object):
     def __init__(self, root):
         # TODO type check if ``root'' is node.Node
         self.root = root
-        self.previous_fitness = None
+
         self._depth = None
         self._n_nodes = None
+        self._previous_fitness = None
+
+    @property
+    def previous_fitness(self):
+        return self._previous_fitness
+
+    @previous_fitness.setter
+    def previous_fitness(self, _):
+        msg = 'To set previous fitness to solution, use the function {}'\
+            .format(set_previous_fitness.__name__)
+        raise Exception(msg)
 
     @property
     def depth(self):
@@ -37,6 +48,11 @@ class Solution(object):
         msg = 'To set depth to solution, use the function {}'\
             .format(set_solution_depth.__name__)
         raise Exception(msg)
+
+
+def set_previous_fitness(solution, fitness):
+    # super danger!!!!!!!!!!
+    solution._previous_fitness = fitness
 
 
 def _calc_solution_depth(solution):

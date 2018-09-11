@@ -11,9 +11,10 @@ class TestDefaultViewer(unittest.TestCase):
         s1 = solution.Solution(node.Node())
         s2 = solution.Solution(node.Node())
         s3 = solution.Solution(node.Node())
-        s1.previous_fitness = 1
-        s2.previous_fitness = 2
-        s3.previous_fitness = 3
+        solution.set_previous_fitness(s1, 1)
+        solution.set_previous_fitness(s2, 2)
+        solution.set_previous_fitness(s3, 3)
+
         self.pop = []
         for _ in range(2):
             self.pop.extend([s1, s2, s3])

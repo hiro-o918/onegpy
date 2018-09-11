@@ -3,7 +3,7 @@ import unittest
 
 from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection,\
     reduce_population
-from gplib.solutions import node
+from gplib.solutions import node, solution
 from gplib.solutions.solution import Solution
 from tests.test_problem import EmptyProblem
 
@@ -16,9 +16,10 @@ class ExampleSolutions(object):
             s1 = self.create_tree_type1()
             s2 = self.create_tree_type2()
             s3 = self.create_tree_type3()
-            s1.previous_fitness = 1
-            s2.previous_fitness = 2
-            s3.previous_fitness = 3
+            solution.set_previous_fitness(s1, 1)
+            solution.set_previous_fitness(s2, 2)
+            solution.set_previous_fitness(s3, 3)
+
             self.population.append(s1)
             self.population.append(s2)
             self.population.append(s3)
