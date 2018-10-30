@@ -152,7 +152,7 @@
 <span class="kn">from</span> <span class="nn">gplib.utils.util</span> <span class="k">import</span> <span class="n">get_generator_builder</span>
 
 
-<div class="viewcode-block" id="crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.html#gplib.operators.crossover.crossover">[docs]</a><span class="k">def</span> <span class="nf">crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.crossover.html#gplib.operators.crossover.crossover">[docs]</a><span class="k">def</span> <span class="nf">crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">new_p1</span> <span class="o">=</span> <span class="n">replace_node</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">destructive</span><span class="p">)</span>
     <span class="n">new_p2</span> <span class="o">=</span> <span class="n">replace_node</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">destructive</span><span class="p">)</span>
     <span class="n">new_parents</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_p1</span><span class="p">,</span> <span class="n">new_p2</span><span class="p">)</span>
@@ -160,19 +160,19 @@
     <span class="k">return</span> <span class="n">new_parents</span></div>
 
 
-<div class="viewcode-block" id="destructive_crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.html#gplib.operators.crossover.destructive_crossover">[docs]</a><span class="k">def</span> <span class="nf">destructive_crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+<div class="viewcode-block" id="destructive_crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.destructive_crossover.html#gplib.operators.crossover.destructive_crossover">[docs]</a><span class="k">def</span> <span class="nf">destructive_crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_crossover_core"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.html#gplib.operators.crossover.get_crossover_core">[docs]</a><span class="k">def</span> <span class="nf">get_crossover_core</span><span class="p">(</span><span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="get_crossover_core"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.get_crossover_core.html#gplib.operators.crossover.get_crossover_core">[docs]</a><span class="k">def</span> <span class="nf">get_crossover_core</span><span class="p">(</span><span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">destructive</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">crossover</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">destructive_crossover</span></div>
 
 
-<div class="viewcode-block" id="OnePointCrossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.html#gplib.operators.crossover.OnePointCrossover">[docs]</a><span class="k">class</span> <span class="nc">OnePointCrossover</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="OnePointCrossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.OnePointCrossover.html#gplib.operators.crossover.OnePointCrossover">[docs]</a><span class="k">class</span> <span class="nc">OnePointCrossover</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
+<div class="viewcode-block" id="OnePointCrossover.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.OnePointCrossover.html#gplib.operators.crossover.OnePointCrossover.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        One point crossover.</span>
 <span class="sd">        :param c_rate: Crossover rate.</span>
@@ -182,7 +182,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">OnePointCrossover</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_c_rate</span> <span class="o">=</span> <span class="n">c_rate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_destructive</span> <span class="o">=</span> <span class="n">destructive</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">crossover_core</span> <span class="o">=</span> <span class="n">get_crossover_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_destructive</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crossover_core</span> <span class="o">=</span> <span class="n">get_crossover_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_destructive</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parents</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
@@ -221,15 +221,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="PopulationOnePointCrossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.html#gplib.operators.crossover.PopulationOnePointCrossover">[docs]</a><span class="k">class</span> <span class="nc">PopulationOnePointCrossover</span><span class="p">(</span><span class="n">PopulationOperatorAdapter</span><span class="p">):</span>
+<div class="viewcode-block" id="PopulationOnePointCrossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.PopulationOnePointCrossover.html#gplib.operators.crossover.PopulationOnePointCrossover">[docs]</a><span class="k">class</span> <span class="nc">PopulationOnePointCrossover</span><span class="p">(</span><span class="n">PopulationOperatorAdapter</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generator_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PopulationOnePointCrossover.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.PopulationOnePointCrossover.html#gplib.operators.crossover.PopulationOnePointCrossover.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generator_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="n">operator</span> <span class="o">=</span> <span class="n">OnePointCrossover</span><span class="p">(</span><span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">generator_builder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">generator_builder</span> <span class="o">=</span> <span class="n">get_generator_builder</span><span class="p">(</span><span class="n">RandomSelection</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">n_in</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">PopulationOnePointCrossover</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">generator_builder</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PopulationOnePointCrossover</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">generator_builder</span><span class="p">)</span></div></div>
 
 </pre></div>
 

@@ -1,7 +1,23 @@
-gplib\.viewer\.viewer module
-============================
+gplib.viewer.viewer
+===================
 
 .. automodule:: gplib.viewer.viewer
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AbstractViewer
+      DefaultViewer
+   
+   
+
+   
+   
+   

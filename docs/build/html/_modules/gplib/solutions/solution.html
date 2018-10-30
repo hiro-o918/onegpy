@@ -148,13 +148,13 @@
 <span class="kn">from</span> <span class="nn">gplib.solutions.node</span> <span class="k">import</span> <span class="n">node_equal</span><span class="p">,</span> <span class="n">get_all_node</span><span class="p">,</span> <span class="n">get_graph_to_target</span><span class="p">,</span> <span class="n">calc_node_depth</span><span class="p">,</span> <span class="n">copy_nodes_along_graph</span>
 
 
-<div class="viewcode-block" id="Solution"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.Solution">[docs]</a><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<div class="viewcode-block" id="Solution"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.Solution.html#gplib.solutions.solution.Solution">[docs]</a><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Solution.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.Solution.html#gplib.solutions.solution.Solution.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="c1"># TODO type check if ``root&#39;&#39; is node.Node</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">previous_fitness</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_depth</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_n_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_nodes</span> <span class="o">=</span> <span class="kc">None</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -183,22 +183,22 @@
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">_calc_solution_depth</span><span class="p">(</span><span class="n">solution</span><span class="p">):</span>
+<div class="viewcode-block" id="_calc_solution_depth"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution._calc_solution_depth.html#gplib.solutions.solution._calc_solution_depth">[docs]</a><span class="k">def</span> <span class="nf">_calc_solution_depth</span><span class="p">(</span><span class="n">solution</span><span class="p">):</span>
     <span class="c1"># TODO type check if ``solution&#39;&#39; is Solution</span>
     <span class="n">depth</span> <span class="o">=</span> <span class="n">calc_node_depth</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">depth</span>
+    <span class="k">return</span> <span class="n">depth</span></div>
 
 
-<span class="k">def</span> <span class="nf">_calc_solution_n_nodes</span><span class="p">(</span><span class="n">solution</span><span class="p">):</span>
+<div class="viewcode-block" id="_calc_solution_n_nodes"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution._calc_solution_n_nodes.html#gplib.solutions.solution._calc_solution_n_nodes">[docs]</a><span class="k">def</span> <span class="nf">_calc_solution_n_nodes</span><span class="p">(</span><span class="n">solution</span><span class="p">):</span>
     <span class="c1"># TODO type check if ``solution&#39;&#39; is Solution</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="n">get_all_node</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
     <span class="n">n_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">n_nodes</span>
+    <span class="k">return</span> <span class="n">n_nodes</span></div>
 
 
-<div class="viewcode-block" id="set_solution_depth"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.set_solution_depth">[docs]</a><span class="k">def</span> <span class="nf">set_solution_depth</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="set_solution_depth"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.set_solution_depth.html#gplib.solutions.solution.set_solution_depth">[docs]</a><span class="k">def</span> <span class="nf">set_solution_depth</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># TODO type check if ``solution&#39;&#39; is Solution</span>
     <span class="k">if</span> <span class="n">depth</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">solution</span><span class="o">.</span><span class="n">_depth</span> <span class="o">=</span> <span class="n">_calc_solution_depth</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
@@ -206,7 +206,7 @@
         <span class="n">solution</span><span class="o">.</span><span class="n">_depth</span> <span class="o">=</span> <span class="n">depth</span></div>
 
 
-<div class="viewcode-block" id="set_solution_n_nodes"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.set_solution_n_nodes">[docs]</a><span class="k">def</span> <span class="nf">set_solution_n_nodes</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">n_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="set_solution_n_nodes"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.set_solution_n_nodes.html#gplib.solutions.solution.set_solution_n_nodes">[docs]</a><span class="k">def</span> <span class="nf">set_solution_n_nodes</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">n_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># TODO type check if ``solution&#39;&#39; is Solution</span>
     <span class="k">if</span> <span class="n">n_nodes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">solution</span><span class="o">.</span><span class="n">_n_nodes</span> <span class="o">=</span> <span class="n">_calc_solution_n_nodes</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
@@ -214,7 +214,7 @@
         <span class="n">solution</span><span class="o">.</span><span class="n">_n_nodes</span> <span class="o">=</span> <span class="n">n_nodes</span></div>
 
 
-<div class="viewcode-block" id="solution_equal"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.solution_equal">[docs]</a><span class="k">def</span> <span class="nf">solution_equal</span><span class="p">(</span><span class="n">solution_a</span><span class="p">,</span> <span class="n">solution_b</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="solution_equal"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.solution_equal.html#gplib.solutions.solution.solution_equal">[docs]</a><span class="k">def</span> <span class="nf">solution_equal</span><span class="p">(</span><span class="n">solution_a</span><span class="p">,</span> <span class="n">solution_b</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="c1"># TODO type check if ``solution&#39;&#39; is Solution</span>
     <span class="k">if</span> <span class="n">as_tree</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">solution_a</span> <span class="ow">is</span> <span class="n">solution_b</span><span class="p">:</span>
@@ -230,7 +230,7 @@
         <span class="k">return</span> <span class="n">solution_a</span> <span class="ow">is</span> <span class="n">solution_b</span></div>
 
 
-<div class="viewcode-block" id="is_solution_in_pop"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.is_solution_in_pop">[docs]</a><span class="k">def</span> <span class="nf">is_solution_in_pop</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="is_solution_in_pop"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.is_solution_in_pop.html#gplib.solutions.solution.is_solution_in_pop">[docs]</a><span class="k">def</span> <span class="nf">is_solution_in_pop</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    check the tree of ``solution&#39;&#39; is in ``population&#39;&#39; or not</span>
 <span class="sd">    :param solution: Solution object</span>
@@ -245,7 +245,7 @@
     <span class="k">return</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="select_random_points"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.select_random_points">[docs]</a><span class="k">def</span> <span class="nf">select_random_points</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="viewcode-block" id="select_random_points"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.select_random_points.html#gplib.solutions.solution.select_random_points">[docs]</a><span class="k">def</span> <span class="nf">select_random_points</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obtain `k` points in the solution at random.</span>
 <span class="sd">    :param solution: class `Solution`</span>
@@ -260,7 +260,7 @@
     <span class="k">return</span> <span class="n">points</span></div>
 
 
-<div class="viewcode-block" id="copy_solution"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.copy_solution">[docs]</a><span class="k">def</span> <span class="nf">copy_solution</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="copy_solution"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.copy_solution.html#gplib.solutions.solution.copy_solution">[docs]</a><span class="k">def</span> <span class="nf">copy_solution</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">deep</span><span class="p">:</span>
         <span class="n">new_solution</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">solution</span><span class="o">.</span><span class="n">previous_fitness</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -270,7 +270,7 @@
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="replace_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.html#gplib.solutions.solution.replace_node">[docs]</a><span class="k">def</span> <span class="nf">replace_node</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">replaced_node</span><span class="p">,</span> <span class="n">new_node</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="replace_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.replace_node.html#gplib.solutions.solution.replace_node">[docs]</a><span class="k">def</span> <span class="nf">replace_node</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">replaced_node</span><span class="p">,</span> <span class="n">new_node</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replace a node in a solution by another node.</span>
 <span class="sd">    :param solution: class Solution.</span>

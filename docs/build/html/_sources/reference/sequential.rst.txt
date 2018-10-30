@@ -1,12 +1,9 @@
-Sequential
-=======================
-.. module:: gplib
+sequential
+==========
 
-
+.. module:: gplib.sequential
 .. autosummary::
    :toctree: generated/
    :nosignatures:
 
-Sequential
------------------------
-   sequential
+   Sequential

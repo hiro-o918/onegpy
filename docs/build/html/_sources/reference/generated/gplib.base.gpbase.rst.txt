@@ -1,7 +1,22 @@
-gplib\.base\.gpbase module
-==========================
+gplib.base.gpbase
+=================
 
 .. automodule:: gplib.base.gpbase
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree: ./
+      PopulationGP
+   
+   
+
+   
+   
+   

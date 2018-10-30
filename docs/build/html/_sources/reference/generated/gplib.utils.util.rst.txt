@@ -1,7 +1,23 @@
-gplib\.utils\.util module
-=========================
+gplib.utils.util
+================
 
 .. automodule:: gplib.utils.util
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_fitness_info
+      get_generator_builder
+   
+   
+
+   
+   
+   
+
+   
+   
+   

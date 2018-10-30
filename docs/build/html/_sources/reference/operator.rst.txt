@@ -1,31 +1,15 @@
-Operator
-=======================
-.. module:: gplib.operators
+operator
+========
 
-
-Abstract Class
------------------------
+.. module:: gplib.operator
 .. autosummary::
    :toctree: generated/
    :nosignatures:
 
-   gplib.operator
-
-Standard Operators
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   crossover
-   initializer
-   mutation
-   selection
-
-MLPS-GP Operators
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   mlps_crossover
+   AbstractOperator
+   PopulationOperator
+   PopulationOperatorAdapter
+   ProblemBasedOperator
+   build_population_operator
+   operator_checker
+   pop_operator_checker

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gplib.operator module &mdash; GPLib 0.0 documentation</title>
+  <title>gplib.operator &mdash; GPLib 0.0 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="gplib.operators.crossover" href="gplib.operators.crossover.html" />
+    <link rel="prev" title="Operators" href="../operators.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -76,11 +78,28 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">gplib.operator module</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../operators.html">Operators</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../operators.html#module-gplib">Abstract Class</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">gplib.operator</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../operators.html#standard-operators">Standard Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operators.html#mlps-gp-operators">MLPS-GP Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../sequential.html">Sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solutions.html">Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../viewer.html">Viewer</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -124,7 +143,11 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>gplib.operator module</li>
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../operators.html">Operators</a> &raquo;</li>
+        
+      <li>gplib.operator</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -144,62 +167,46 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-gplib.operator">
-<span id="gplib-operator-module"></span><h1>gplib.operator module<a class="headerlink" href="#module-gplib.operator" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="gplib.operator.AbstractOperator">
-<em class="property">class </em><code class="descclassname">gplib.operator.</code><code class="descname">AbstractOperator</code><span class="sig-paren">(</span><em>n_in=None</em>, <em>n_out=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#AbstractOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.AbstractOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>This is the base class for operators.</p>
-<dl class="attribute">
-<dt id="gplib.operator.AbstractOperator.n_in">
-<code class="descname">n_in</code><a class="headerlink" href="#gplib.operator.AbstractOperator.n_in" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gplib.operator.AbstractOperator.n_out">
-<code class="descname">n_out</code><a class="headerlink" href="#gplib.operator.AbstractOperator.n_out" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="staticmethod">
-<dt id="gplib.operator.AbstractOperator.not_changeable_warning">
-<em class="property">static </em><code class="descname">not_changeable_warning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#AbstractOperator.not_changeable_warning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.AbstractOperator.not_changeable_warning" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="gplib.operator.PopulationOperator">
-<em class="property">class </em><code class="descclassname">gplib.operator.</code><code class="descname">PopulationOperator</code><span class="sig-paren">(</span><em>n_in=None</em>, <em>n_out=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#PopulationOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.PopulationOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gplib.operator.AbstractOperator" title="gplib.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.AbstractOperator</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-</dd></dl>
-
-<dl class="class">
-<dt id="gplib.operator.PopulationOperatorAdapter">
-<em class="property">class </em><code class="descclassname">gplib.operator.</code><code class="descname">PopulationOperatorAdapter</code><span class="sig-paren">(</span><em>operator</em>, <em>generator_builder=None</em>, <em>n_out=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#PopulationOperatorAdapter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.PopulationOperatorAdapter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gplib.operator.PopulationOperator" title="gplib.operator.PopulationOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.PopulationOperator</span></code></a></p>
-</dd></dl>
-
-<dl class="class">
-<dt id="gplib.operator.ProblemBasedOperator">
-<em class="property">class </em><code class="descclassname">gplib.operator.</code><code class="descname">ProblemBasedOperator</code><span class="sig-paren">(</span><em>problem</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#ProblemBasedOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.ProblemBasedOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="gplib.operator.build_population_operator">
-<code class="descclassname">gplib.operator.</code><code class="descname">build_population_operator</code><span class="sig-paren">(</span><em>operator</em>, <em>selection_class=None</em>, <em>n_out=None</em>, <em>cls_name=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#build_population_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.build_population_operator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="gplib.operator.operator_checker">
-<code class="descclassname">gplib.operator.</code><code class="descname">operator_checker</code><span class="sig-paren">(</span><em>operator</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#operator_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.operator_checker" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="gplib.operator.pop_operator_checker">
-<code class="descclassname">gplib.operator.</code><code class="descname">pop_operator_checker</code><span class="sig-paren">(</span><em>operator</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#pop_operator_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.pop_operator_checker" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<span id="gplib-operator"></span><h1>gplib.operator<a class="headerlink" href="#module-gplib.operator" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_population_operator</span></code>(operator[,&nbsp;…])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">operator_checker</span></code>(operator)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop_operator_checker</span></code>(operator)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbstractOperator</span></code>([n_in,&nbsp;n_out])</td>
+<td>This is the base class for operators.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationOperator</span></code>([n_in,&nbsp;n_out])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationOperatorAdapter</span></code>(operator[,&nbsp;…])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">ProblemBasedOperator</span></code>(problem)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -207,6 +214,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gplib.operators.crossover.html" class="btn btn-neutral float-right" title="gplib.operators.crossover" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../operators.html" class="btn btn-neutral" title="Operators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

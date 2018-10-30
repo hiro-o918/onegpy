@@ -1,14 +1,25 @@
 Reference
-=================================
+=========
 
-.. module:: gplib
+.. automodule:: gplib
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    base
    operators
-   sequential
    problems
    solutions
    utils
    viewer
+
+.. toctree::
+   :maxdepth: 1
+
+   operator
+   problem
+   sequential
+

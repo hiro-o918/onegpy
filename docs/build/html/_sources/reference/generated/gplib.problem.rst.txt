@@ -1,7 +1,23 @@
-gplib\.problem module
-=====================
+gplib.problem
+=============
 
 .. automodule:: gplib.problem
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AbstractProblem
+      FunctionBank
+   
+   
+
+   
+   
+   

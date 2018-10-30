@@ -1,21 +1,12 @@
-Problems
-=======================
-.. module:: gplib.problems
+problems package
+================
 
+.. automodule:: gplib.problems
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Abstract Class
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. toctree::
 
-   gplib.problem
-
-Example Problems
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   boolean
+   problems.boolean
 

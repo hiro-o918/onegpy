@@ -147,16 +147,16 @@
 <span class="kn">from</span> <span class="nn">gplib.solutions.node</span> <span class="k">import</span> <span class="n">Function</span>
 
 
-<div class="viewcode-block" id="AbstractProblem"><a class="viewcode-back" href="../../reference/generated/gplib.problem.html#gplib.problem.AbstractProblem">[docs]</a><span class="k">class</span> <span class="nc">AbstractProblem</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractProblem"><a class="viewcode-back" href="../../reference/generated/gplib.problem.AbstractProblem.html#gplib.problem.AbstractProblem">[docs]</a><span class="k">class</span> <span class="nc">AbstractProblem</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_bank_builder</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractProblem.__init__"><a class="viewcode-back" href="../../reference/generated/gplib.problem.AbstractProblem.html#gplib.problem.AbstractProblem.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_bank_builder</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">function_bank_builder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_function_bank_builder</span> <span class="o">=</span> <span class="n">function_bank_builder</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">func_bank</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_function_bank_builder</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eval_cnt</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="AbstractProblem.fitness"><a class="viewcode-back" href="../../reference/generated/gplib.problem.html#gplib.problem.AbstractProblem.fitness">[docs]</a>    <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_solution_or_solutions</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_solution_or_solutions</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_solution_or_solutions</span><span class="p">,</span> <span class="n">Solution</span><span class="p">):</span>
             <span class="n">fitness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cal_fitness</span><span class="p">(</span><span class="n">target_solution</span><span class="o">=</span><span class="n">target_solution_or_solutions</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_eval_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -171,27 +171,27 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_eval_cnt</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_solution_or_solutions</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">fitness_list</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;target_solution_or_solutions should be Solution object or list of Solution objects.&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;target_solution_or_solutions should be Solution object or list of Solution objects.&quot;</span><span class="p">)</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">_cal_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_solution</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;_cal_fitness should be implemented in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span>
 
-<div class="viewcode-block" id="AbstractProblem.get_eval_count"><a class="viewcode-back" href="../../reference/generated/gplib.problem.html#gplib.problem.AbstractProblem.get_eval_count">[docs]</a>    <span class="k">def</span> <span class="nf">get_eval_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_cnt</span></div>
+    <span class="k">def</span> <span class="nf">get_eval_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_cnt</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">_function_bank_builder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;default_function_bank_builder should be implemented in </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="FunctionBank"><a class="viewcode-back" href="../../reference/generated/gplib.problem.html#gplib.problem.FunctionBank">[docs]</a><span class="k">class</span> <span class="nc">FunctionBank</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="FunctionBank"><a class="viewcode-back" href="../../reference/generated/gplib.problem.FunctionBank.html#gplib.problem.FunctionBank">[docs]</a><span class="k">class</span> <span class="nc">FunctionBank</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FunctionBank.__init__"><a class="viewcode-back" href="../../reference/generated/gplib.problem.FunctionBank.html#gplib.problem.FunctionBank.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">function_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span> <span class="o">=</span> <span class="p">{}</span></div>
 
-<div class="viewcode-block" id="FunctionBank.add_function"><a class="viewcode-back" href="../../reference/generated/gplib.problem.html#gplib.problem.FunctionBank.add_function">[docs]</a>    <span class="k">def</span> <span class="nf">add_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Function</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;func must be Function class, but this func is </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">func</span><span class="p">)))</span>
         <span class="n">n_children</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">n_children</span>
@@ -200,15 +200,15 @@
 
         <span class="k">if</span> <span class="n">n_children</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">[</span><span class="n">n_children</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">[</span><span class="n">n_children</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">[</span><span class="n">n_children</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
 
-<div class="viewcode-block" id="FunctionBank.get_function_list"><a class="viewcode-back" href="../../reference/generated/gplib.problem.html#gplib.problem.FunctionBank.get_function_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_function_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_function_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n_children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_list</span>
         <span class="k">if</span> <span class="n">n_children</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Key </span><span class="si">{}</span><span class="s1"> is not in children_dict&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_children</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">[</span><span class="n">n_children</span><span class="p">]</span></div></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">children_dict</span><span class="p">[</span><span class="n">n_children</span><span class="p">]</span></div>
 </pre></div>
 
            </div>

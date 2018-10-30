@@ -1,7 +1,33 @@
-gplib\.problems\.boolean module
-===============================
+gplib.problems.boolean
+======================
 
 .. automodule:: gplib.problems.boolean
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_and
+      get_default_function_bank
+      get_nand
+      get_nor
+      get_or
+      get_x
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      EvenParity
+   
+   
+
+   
+   
+   

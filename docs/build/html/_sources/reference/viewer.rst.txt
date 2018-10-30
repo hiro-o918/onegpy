@@ -1,12 +1,12 @@
-Viewer
-=======================
-.. module:: gplib.viewer
+viewer package
+==============
 
+.. automodule:: gplib.viewer
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Default Viewer
------------------------
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
+.. toctree::
 
-   viewer
+   viewer.viewer
+

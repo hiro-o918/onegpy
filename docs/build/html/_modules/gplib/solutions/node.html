@@ -145,7 +145,7 @@
 <span></span><span class="kn">import</span> <span class="nn">copy</span>
 
 
-<div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.Node">[docs]</a><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.Node.html#gplib.solutions.node.Node">[docs]</a><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Node object.</span>
 
 <span class="sd">        # Attribute</span>
@@ -153,12 +153,12 @@
 <span class="sd">            children: list of Node object, children of this node.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="Node.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.Node.html#gplib.solutions.node.Node.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func_id</span> <span class="o">=</span> <span class="n">func_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span></div></div>
 
 
-<div class="viewcode-block" id="Function"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.Function">[docs]</a><span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Function"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.Function.html#gplib.solutions.node.Function">[docs]</a><span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Function object.</span>
 
 <span class="sd">        # Attribute</span>
@@ -166,16 +166,16 @@
 <span class="sd">            eval: function, function of node to evaluate.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_children</span><span class="p">,</span> <span class="n">f_eval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Function.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.Function.html#gplib.solutions.node.Function.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_children</span><span class="p">,</span> <span class="n">f_eval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_children</span> <span class="o">=</span> <span class="n">n_children</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">f_eval</span> <span class="o">=</span> <span class="n">f_eval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f_eval</span> <span class="o">=</span> <span class="n">f_eval</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
 <span class="c1">#TODO: Remove this function.</span>
-<div class="viewcode-block" id="build_func"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.build_func">[docs]</a><span class="k">def</span> <span class="nf">build_func</span><span class="p">(</span><span class="n">f_eval</span><span class="p">,</span> <span class="n">n_children</span><span class="p">):</span>
+<div class="viewcode-block" id="build_func"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.build_func.html#gplib.solutions.node.build_func">[docs]</a><span class="k">def</span> <span class="nf">build_func</span><span class="p">(</span><span class="n">f_eval</span><span class="p">,</span> <span class="n">n_children</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">eval_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">f_eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
@@ -184,7 +184,7 @@
     <span class="k">return</span> <span class="n">func</span></div>
 
 
-<div class="viewcode-block" id="set_id"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.set_id">[docs]</a><span class="k">def</span> <span class="nf">set_id</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">func_id</span><span class="p">):</span>
+<div class="viewcode-block" id="set_id"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.set_id.html#gplib.solutions.node.set_id">[docs]</a><span class="k">def</span> <span class="nf">set_id</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">func_id</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;function for setting id to node object.</span>
 
 <span class="sd">            # Arguments</span>
@@ -196,14 +196,14 @@
     <span class="n">node</span><span class="o">.</span><span class="n">func_id</span> <span class="o">=</span> <span class="n">func_id</span></div>
 
 
-<div class="viewcode-block" id="get_n_children"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.get_n_children">[docs]</a><span class="k">def</span> <span class="nf">get_n_children</span><span class="p">(</span><span class="n">func_id</span><span class="p">,</span> <span class="n">function_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="get_n_children"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_n_children.html#gplib.solutions.node.get_n_children">[docs]</a><span class="k">def</span> <span class="nf">get_n_children</span><span class="p">(</span><span class="n">func_id</span><span class="p">,</span> <span class="n">function_dict</span><span class="p">):</span>
     <span class="n">_func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">function_dict</span><span class="p">[</span><span class="n">func_id</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">func</span><span class="o">.</span><span class="n">n_children</span></div>
 
 
-<div class="viewcode-block" id="set_children"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.set_children">[docs]</a><span class="k">def</span> <span class="nf">set_children</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">children</span><span class="p">):</span>
+<div class="viewcode-block" id="set_children"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.set_children.html#gplib.solutions.node.set_children">[docs]</a><span class="k">def</span> <span class="nf">set_children</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">children</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; TODO: implement a method to check follows:</span>
 <span class="sd">              the number of children of node = len(children)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -213,7 +213,7 @@
     <span class="n">node</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="n">children</span></div>
 
 
-<div class="viewcode-block" id="copy_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.copy_node">[docs]</a><span class="k">def</span> <span class="nf">copy_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="copy_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.copy_node.html#gplib.solutions.node.copy_node">[docs]</a><span class="k">def</span> <span class="nf">copy_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">deep</span><span class="p">:</span>
         <span class="n">new_node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">func_id</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
@@ -224,7 +224,7 @@
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="copy_nodes_along_graph"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.copy_nodes_along_graph">[docs]</a><span class="k">def</span> <span class="nf">copy_nodes_along_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+<div class="viewcode-block" id="copy_nodes_along_graph"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.copy_nodes_along_graph.html#gplib.solutions.node.copy_nodes_along_graph">[docs]</a><span class="k">def</span> <span class="nf">copy_nodes_along_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Copy node object from ``root`` to the target node based on ``graph&#39;&#39;</span>
 <span class="sd">    This method differs from deepcopy(root) in that it copies only the nodes along ``graph&#39;&#39;.</span>
@@ -247,7 +247,7 @@
     <span class="k">return</span> <span class="n">previous_pos</span><span class="p">,</span> <span class="n">current_node</span><span class="p">,</span> <span class="n">root</span></div>
 
 
-<div class="viewcode-block" id="get_parent_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.get_parent_node">[docs]</a><span class="k">def</span> <span class="nf">get_parent_node</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">):</span>
+<div class="viewcode-block" id="get_parent_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_parent_node.html#gplib.solutions.node.get_parent_node">[docs]</a><span class="k">def</span> <span class="nf">get_parent_node</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;function for searching parent node of target node.</span>
 
 <span class="sd">        :param root: Node object, root node.</span>
@@ -285,7 +285,7 @@
     <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">parent</span></div>
 
 
-<div class="viewcode-block" id="get_graph_to_target"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.get_graph_to_target">[docs]</a><span class="k">def</span> <span class="nf">get_graph_to_target</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">):</span>
+<div class="viewcode-block" id="get_graph_to_target"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_graph_to_target.html#gplib.solutions.node.get_graph_to_target">[docs]</a><span class="k">def</span> <span class="nf">get_graph_to_target</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;function for searching a graph from root node to a target node.</span>
 
 <span class="sd">        :param root: Node object, root node.</span>
@@ -327,7 +327,7 @@
     <span class="k">return</span> <span class="n">graph</span></div>
 
 
-<div class="viewcode-block" id="get_all_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.get_all_node">[docs]</a><span class="k">def</span> <span class="nf">get_all_node</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<div class="viewcode-block" id="get_all_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_node.html#gplib.solutions.node.get_all_node">[docs]</a><span class="k">def</span> <span class="nf">get_all_node</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    function for getting all node in the solution</span>
 
@@ -352,7 +352,7 @@
     <span class="k">return</span> <span class="n">nodes</span></div>
 
 
-<div class="viewcode-block" id="calc_node_depth"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.calc_node_depth">[docs]</a><span class="k">def</span> <span class="nf">calc_node_depth</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_node_depth"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.calc_node_depth.html#gplib.solutions.node.calc_node_depth">[docs]</a><span class="k">def</span> <span class="nf">calc_node_depth</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
     <span class="n">d_list</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">cal_depth</span><span class="p">(</span><span class="n">c_node</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
@@ -367,7 +367,7 @@
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">d_list</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_all_terminal_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.get_all_terminal_node">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_node</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<div class="viewcode-block" id="get_all_terminal_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_terminal_node.html#gplib.solutions.node.get_all_terminal_node">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_node</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    function for getting all terminal node in the solution</span>
 
@@ -392,7 +392,7 @@
     <span class="k">return</span> <span class="n">terminal_nodes</span></div>
 
 
-<div class="viewcode-block" id="get_all_terminal_points"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.get_all_terminal_points">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_points</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<div class="viewcode-block" id="get_all_terminal_points"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_terminal_points.html#gplib.solutions.node.get_all_terminal_points">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_points</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    function for getting all terminal points in the solution</span>
 <span class="sd">    this function is for crossover in MLPS-GP</span>
@@ -419,7 +419,7 @@
     <span class="k">return</span> <span class="n">points</span></div>
 
 
-<div class="viewcode-block" id="node_equal"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.node_equal">[docs]</a><span class="k">def</span> <span class="nf">node_equal</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="node_equal"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.node_equal.html#gplib.solutions.node.node_equal">[docs]</a><span class="k">def</span> <span class="nf">node_equal</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function for comparing two nodes.</span>
 <span class="sd">    :param node_a: Node object</span>
@@ -446,7 +446,7 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="node_array_equal"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.html#gplib.solutions.node.node_array_equal">[docs]</a><span class="k">def</span> <span class="nf">node_array_equal</span><span class="p">(</span><span class="n">nodes_a</span><span class="p">,</span> <span class="n">nodes_b</span><span class="p">):</span>
+<div class="viewcode-block" id="node_array_equal"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.node_array_equal.html#gplib.solutions.node.node_array_equal">[docs]</a><span class="k">def</span> <span class="nf">node_array_equal</span><span class="p">(</span><span class="n">nodes_a</span><span class="p">,</span> <span class="n">nodes_b</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">nodes_a</span><span class="p">,</span> <span class="n">nodes_b</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">node_equal</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -454,7 +454,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<span class="k">def</span> <span class="nf">_func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">):</span>
+<div class="viewcode-block" id="_func_id_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._func_id_checker.html#gplib.solutions.node._func_id_checker">[docs]</a><span class="k">def</span> <span class="nf">_func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">func_id</span><span class="p">))</span>
@@ -464,29 +464,29 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span>
 
-    <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="_node_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._node_checker.html#gplib.solutions.node._node_checker">[docs]</a><span class="k">def</span> <span class="nf">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span>
 
-    <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">_nodes_checker</span><span class="p">(</span><span class="o">*</span><span class="n">nodes</span><span class="p">):</span>
+<div class="viewcode-block" id="_nodes_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._nodes_checker.html#gplib.solutions.node._nodes_checker">[docs]</a><span class="k">def</span> <span class="nf">_nodes_checker</span><span class="p">(</span><span class="o">*</span><span class="n">nodes</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-        <span class="n">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">_children_checker</span><span class="p">(</span><span class="n">children</span><span class="p">):</span>
+<div class="viewcode-block" id="_children_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._children_checker.html#gplib.solutions.node._children_checker">[docs]</a><span class="k">def</span> <span class="nf">_children_checker</span><span class="p">(</span><span class="n">children</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">))</span>
 
-    <span class="n">_nodes_checker</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span>
+    <span class="n">_nodes_checker</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

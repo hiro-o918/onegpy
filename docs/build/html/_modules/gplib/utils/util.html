@@ -142,7 +142,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for gplib.utils.util</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="get_generator_builder"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.util.html#gplib.utils.util.get_generator_builder">[docs]</a><span></span><span class="k">def</span> <span class="nf">get_generator_builder</span><span class="p">(</span><span class="n">selection</span><span class="p">):</span>
+<div class="viewcode-block" id="get_generator_builder"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.util.get_generator_builder.html#gplib.utils.util.get_generator_builder">[docs]</a><span></span><span class="k">def</span> <span class="nf">get_generator_builder</span><span class="p">(</span><span class="n">selection</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get a generator builder.</span>
 <span class="sd">    The generator generates list of solutions by means of `selection`.</span>
@@ -156,7 +156,7 @@
     <span class="k">return</span> <span class="n">generator_builder</span></div>
 
 
-<div class="viewcode-block" id="get_fitness_info"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.util.html#gplib.utils.util.get_fitness_info">[docs]</a><span class="k">def</span> <span class="nf">get_fitness_info</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+<div class="viewcode-block" id="get_fitness_info"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.util.get_fitness_info.html#gplib.utils.util.get_fitness_info">[docs]</a><span class="k">def</span> <span class="nf">get_fitness_info</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
     <span class="n">sorted_pop</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">max_fit</span> <span class="o">=</span> <span class="n">sorted_pop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">previous_fitness</span>
     <span class="n">min_fit</span> <span class="o">=</span> <span class="n">sorted_pop</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">previous_fitness</span>

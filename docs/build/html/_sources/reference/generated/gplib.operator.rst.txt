@@ -1,7 +1,33 @@
-gplib\.operator module
-======================
+gplib.operator
+==============
 
 .. automodule:: gplib.operator
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      build_population_operator
+      operator_checker
+      pop_operator_checker
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AbstractOperator
+      PopulationOperator
+      PopulationOperatorAdapter
+      ProblemBasedOperator
+   
+   
+
+   
+   
+   

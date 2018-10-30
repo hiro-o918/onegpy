@@ -1,7 +1,24 @@
-gplib\.operators\.initializer module
-====================================
+gplib.operators.initializer
+===========================
 
 .. automodule:: gplib.operators.initializer
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AbstractInitializer
+      PopulationRandomInitializer
+      RandomInitializer
+   
+   
+
+   
+   
+   

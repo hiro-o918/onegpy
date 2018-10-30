@@ -149,8 +149,8 @@
 <span class="kn">from</span> <span class="nn">gplib.solutions.solution</span> <span class="k">import</span> <span class="n">is_solution_in_pop</span><span class="p">,</span> <span class="n">copy_solution</span>
 
 
-<div class="viewcode-block" id="AbstractSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.html#gplib.operators.selection.AbstractSelection">[docs]</a><span class="k">class</span> <span class="nc">AbstractSelection</span><span class="p">(</span><span class="n">PopulationOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.AbstractSelection.html#gplib.operators.selection.AbstractSelection">[docs]</a><span class="k">class</span> <span class="nc">AbstractSelection</span><span class="p">(</span><span class="n">PopulationOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractSelection.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.AbstractSelection.html#gplib.operators.selection.AbstractSelection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param k: int. The number of solutions which are selected.</span>
 <span class="sd">        :param replacement: bool. If replacement is True, duplicated solutions are selected.</span>
@@ -159,7 +159,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">AbstractSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_out</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_k</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">replacement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">replacement</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">k</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -174,9 +174,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="AbstractProblemBasedSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.html#gplib.operators.selection.AbstractProblemBasedSelection">[docs]</a><span class="k">class</span> <span class="nc">AbstractProblemBasedSelection</span><span class="p">(</span><span class="n">AbstractSelection</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractProblemBasedSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.AbstractProblemBasedSelection.html#gplib.operators.selection.AbstractProblemBasedSelection">[docs]</a><span class="k">class</span> <span class="nc">AbstractProblemBasedSelection</span><span class="p">(</span><span class="n">AbstractSelection</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractProblemBasedSelection.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.AbstractProblemBasedSelection.html#gplib.operators.selection.AbstractProblemBasedSelection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param k: int. The number of solutions which are selected.</span>
 <span class="sd">        :param replacement: bool. If replacement is True, duplicated solutions are selected.</span>
@@ -186,17 +186,17 @@
         <span class="n">AbstractSelection</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="n">replacement</span><span class="p">)</span>
         <span class="n">ProblemBasedOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_k</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">replacement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">replacement</span></div>
 
     <span class="k">def</span> <span class="nf">_cal_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">population</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RandomSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.html#gplib.operators.selection.RandomSelection">[docs]</a><span class="k">class</span> <span class="nc">RandomSelection</span><span class="p">(</span><span class="n">AbstractSelection</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.RandomSelection.html#gplib.operators.selection.RandomSelection">[docs]</a><span class="k">class</span> <span class="nc">RandomSelection</span><span class="p">(</span><span class="n">AbstractSelection</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">RandomSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">)</span>
+<div class="viewcode-block" id="RandomSelection.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.RandomSelection.html#gplib.operators.selection.RandomSelection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RandomSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Random Selection</span>
@@ -227,15 +227,15 @@
             <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="EliteSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.html#gplib.operators.selection.EliteSelection">[docs]</a><span class="k">class</span> <span class="nc">EliteSelection</span><span class="p">(</span><span class="n">AbstractProblemBasedSelection</span><span class="p">):</span>
+<div class="viewcode-block" id="EliteSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.EliteSelection.html#gplib.operators.selection.EliteSelection">[docs]</a><span class="k">class</span> <span class="nc">EliteSelection</span><span class="p">(</span><span class="n">AbstractProblemBasedSelection</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Elite Selection</span>
 
 <span class="sd">        # Returns</span>
 <span class="sd">           list of solutions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">EliteSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+<div class="viewcode-block" id="EliteSelection.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.EliteSelection.html#gplib.operators.selection.EliteSelection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EliteSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cal_fitness</span><span class="p">(</span><span class="n">population</span><span class="p">)</span>
@@ -251,20 +251,20 @@
         <span class="k">return</span> <span class="n">chosen</span></div>
 
 
-<div class="viewcode-block" id="TournamentSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.html#gplib.operators.selection.TournamentSelection">[docs]</a><span class="k">class</span> <span class="nc">TournamentSelection</span><span class="p">(</span><span class="n">AbstractProblemBasedSelection</span><span class="p">):</span>
+<div class="viewcode-block" id="TournamentSelection"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.TournamentSelection.html#gplib.operators.selection.TournamentSelection">[docs]</a><span class="k">class</span> <span class="nc">TournamentSelection</span><span class="p">(</span><span class="n">AbstractProblemBasedSelection</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    TODO: **Warning**</span>
 <span class="sd">    Tournament Selection takes a lot of time, because it copies solutions deeply.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tournament_size</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="TournamentSelection.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.TournamentSelection.html#gplib.operators.selection.TournamentSelection.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tournament_size</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">replacement</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;If replacement is False, selection_size must be set.&#39;</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tournament_size</span> <span class="o">=</span> <span class="n">tournament_size</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TournamentSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="n">replacement</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">replacement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replacement</span> <span class="o">=</span> <span class="n">replacement</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -305,7 +305,7 @@
         <span class="k">return</span> <span class="n">chosen</span></div>
 
 
-<div class="viewcode-block" id="reduce_population"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.html#gplib.operators.selection.reduce_population">[docs]</a><span class="k">def</span> <span class="nf">reduce_population</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+<div class="viewcode-block" id="reduce_population"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.selection.reduce_population.html#gplib.operators.selection.reduce_population">[docs]</a><span class="k">def</span> <span class="nf">reduce_population</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
     <span class="n">solutions</span> <span class="o">=</span> <span class="p">[</span><span class="n">population</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">population</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_solution_in_pop</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">solutions</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>

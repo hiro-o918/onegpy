@@ -145,18 +145,18 @@
 <span></span><span class="kn">from</span> <span class="nn">gplib.operator</span> <span class="k">import</span> <span class="n">operator_checker</span>
 
 
-<div class="viewcode-block" id="Sequential"><a class="viewcode-back" href="../../reference/generated/gplib.sequential.html#gplib.sequential.Sequential">[docs]</a><span class="k">class</span> <span class="nc">Sequential</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operators</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Sequential"><a class="viewcode-back" href="../../reference/generated/gplib.sequential.Sequential.html#gplib.sequential.Sequential">[docs]</a><span class="k">class</span> <span class="nc">Sequential</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Sequential.__init__"><a class="viewcode-back" href="../../reference/generated/gplib.sequential.Sequential.html#gplib.sequential.Sequential.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operators</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">operators</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">operators</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_operators</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">operator</span> <span class="ow">in</span> <span class="n">operators</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Sequential.add"><a class="viewcode-back" href="../../reference/generated/gplib.sequential.html#gplib.sequential.Sequential.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_added_operator_checker</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_operators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_operators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">operators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

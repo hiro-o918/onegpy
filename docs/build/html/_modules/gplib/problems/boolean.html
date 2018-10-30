@@ -147,12 +147,12 @@
 <span class="kn">from</span> <span class="nn">gplib.solutions</span> <span class="k">import</span> <span class="n">node</span>
 
 
-<div class="viewcode-block" id="EvenParity"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.EvenParity">[docs]</a><span class="k">class</span> <span class="nc">EvenParity</span><span class="p">(</span><span class="n">AbstractProblem</span><span class="p">):</span>
+<div class="viewcode-block" id="EvenParity"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.EvenParity.html#gplib.problems.boolean.EvenParity">[docs]</a><span class="k">class</span> <span class="nc">EvenParity</span><span class="p">(</span><span class="n">AbstractProblem</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">function_bank_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="EvenParity.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.EvenParity.html#gplib.problems.boolean.EvenParity.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">function_bank_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_data</span><span class="p">()</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">EvenParity</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">function_bank_builder</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EvenParity</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">function_bank_builder</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_make_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
@@ -189,7 +189,7 @@
         <span class="k">return</span> <span class="n">get_default_function_bank</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_default_function_bank"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.get_default_function_bank">[docs]</a><span class="k">def</span> <span class="nf">get_default_function_bank</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+<div class="viewcode-block" id="get_default_function_bank"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.get_default_function_bank.html#gplib.problems.boolean.get_default_function_bank">[docs]</a><span class="k">def</span> <span class="nf">get_default_function_bank</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
 
     <span class="n">func_bank</span> <span class="o">=</span> <span class="n">FunctionBank</span><span class="p">()</span>
 
@@ -204,7 +204,7 @@
     <span class="k">return</span> <span class="n">func_bank</span></div>
 
 
-<div class="viewcode-block" id="get_and"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.get_and">[docs]</a><span class="k">def</span> <span class="nf">get_and</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="get_and"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.get_and.html#gplib.problems.boolean.get_and">[docs]</a><span class="k">def</span> <span class="nf">get_and</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">and_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -214,7 +214,7 @@
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">build_func</span><span class="p">(</span><span class="n">and_func</span><span class="p">,</span> <span class="n">n_children</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_or"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.get_or">[docs]</a><span class="k">def</span> <span class="nf">get_or</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="get_or"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.get_or.html#gplib.problems.boolean.get_or">[docs]</a><span class="k">def</span> <span class="nf">get_or</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">or_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -224,7 +224,7 @@
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">build_func</span><span class="p">(</span><span class="n">or_func</span><span class="p">,</span> <span class="n">n_children</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_nand"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.get_nand">[docs]</a><span class="k">def</span> <span class="nf">get_nand</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="get_nand"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.get_nand.html#gplib.problems.boolean.get_nand">[docs]</a><span class="k">def</span> <span class="nf">get_nand</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">nand_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -235,7 +235,7 @@
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">build_func</span><span class="p">(</span><span class="n">nand_func</span><span class="p">,</span> <span class="n">n_children</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_nor"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.get_nor">[docs]</a><span class="k">def</span> <span class="nf">get_nor</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="get_nor"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.get_nor.html#gplib.problems.boolean.get_nor">[docs]</a><span class="k">def</span> <span class="nf">get_nor</span><span class="p">(</span><span class="n">n_children</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">nor_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -246,7 +246,7 @@
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">build_func</span><span class="p">(</span><span class="n">nor_func</span><span class="p">,</span> <span class="n">n_children</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_x"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.html#gplib.problems.boolean.get_x">[docs]</a><span class="k">def</span> <span class="nf">get_x</span><span class="p">(</span><span class="n">dim_i</span><span class="p">):</span>
+<div class="viewcode-block" id="get_x"><a class="viewcode-back" href="../../../reference/generated/gplib.problems.boolean.get_x.html#gplib.problems.boolean.get_x">[docs]</a><span class="k">def</span> <span class="nf">get_x</span><span class="p">(</span><span class="n">dim_i</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">x_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">dim_i</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">build_func</span><span class="p">(</span><span class="n">x_func</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
