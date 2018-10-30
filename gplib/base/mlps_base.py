@@ -8,7 +8,7 @@ import numpy as np
 class MLPS_GP(object):
 
     def __init__(self, initializer, localsearch, problem, max_evals, t_prob, max_depth, simplify=None,
-                 is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000):
+                 is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000, **kwargs):
         """
 
         :param initializer: function. Initialize operator of MLPS-GP.

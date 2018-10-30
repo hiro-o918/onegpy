@@ -14,7 +14,7 @@ __license__ = 'MIT'
 
 class PopulationGP(object):
 
-    def __init__(self, n_generations, initializer, sequential,  viewer):
+    def __init__(self, n_generations, initializer, sequential,  viewer, **kwargs):
         self.n_generations = n_generations
         self.initializer = initializer
         self.sequential = sequential
