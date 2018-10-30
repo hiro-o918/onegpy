@@ -13,6 +13,10 @@ class Node(object):
         self.func_id = func_id
         self.children = []
 
+    @property
+    def is_terminal(self):
+        return not self.children
+
 
 class Function(object):
     """Function object.
@@ -113,7 +117,7 @@ def get_parent_node(root, target_node):
     """
 
     def find_parent_node(current_node):
-        if not current_node.children:
+        if current_node.is_terminal:
             return
 
         children = current_node.children
@@ -153,7 +157,7 @@ def get_graph_to_target(root, target_node):
 
     def find_parent_node(current_node):
         nonlocal graph
-        if not current_node.children:
+        if current_node.is_terminal:
             return
 
         children = current_node.children
@@ -197,7 +201,7 @@ def get_all_node(root):
     def add_children_to_nodes(current_node):
         children = current_node.children
         nonlocal nodes
-        if not children:
+        if current_node.is_terminal:
             return
         for c in children:
             nodes.append(c)
@@ -212,7 +216,7 @@ def calc_node_depth(node):
     d_list = []
 
     def cal_depth(c_node, depth):
-        if c_node.children:
+        if not c_node.is_terminal:
             for c in c_node.children:
                 cal_depth(c, depth+1)
         else:
@@ -237,7 +241,7 @@ def get_all_terminal_node(root):
     def add_children_to_nodes(current_node):
         children = current_node.children
         nonlocal terminal_nodes
-        if children is None:
+        if current_node.is_terminal:
             terminal_nodes.append(current_node)
             return
         for c in children:
@@ -262,7 +266,7 @@ def get_all_nonterminal_node(root):
     def add_children_to_nodes(current_node):
         children = current_node.children
         nonlocal nonterminal_nodes
-        if children is not None:
+        if not current_node.is_terminal:
             nonterminal_nodes.append(current_node)
             for c in children:
                 add_children_to_nodes(c)
@@ -287,10 +291,10 @@ def get_all_terminal_points(root):
     def add_children_to_nodes(current_node):
         children = current_node.children
         nonlocal points
-        if children is None:
+        if current_node.is_terminal:
             return
         for index, c in enumerate(children):
-            if c.children is None:
+            if c.is_terminal:
                 points.append((current_node, index))
             add_children_to_nodes(c)
 
