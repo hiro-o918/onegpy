@@ -4,7 +4,8 @@ from gplib.operator import AbstractOperator, PopulationOperatorAdapter
 from gplib.operators.selection import RandomSelection
 # TODO: we must consider the number of parents and crossover points.
 # TODO: + checking the number of parents and crossover points in each function
-from gplib.solutions.solution import select_random_points, replace_node
+from gplib.solutions.node import nodes_checker
+from gplib.solutions.solution import select_random_points, replace_node, solutions_checker
 from gplib.utils.util import get_generator_builder
 
 
@@ -25,6 +26,21 @@ def get_crossover_core(destructive=True):
         return crossover
     else:
         return destructive_crossover
+
+
+def check_parents_and_points(parents, points):
+    solutions_checker(parents)
+    nodes_checker(points)
+
+    if len(parents) != 2:
+        msg = 'The length of parents must be 2, but actual {}'\
+            .format(len(parents))
+        raise ValueError(msg)
+
+    if len(points) != 2:
+        msg = 'The length of points must be 2, but actual {}'\
+            .format(len(parents))
+        raise ValueError(msg)
 
 
 class OnePointCrossover(AbstractOperator):
