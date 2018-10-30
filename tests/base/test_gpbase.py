@@ -8,7 +8,7 @@ from gplib.sequential import Sequential
 from gplib.solutions.node import Node
 from gplib.solutions.solution import Solution
 from gplib.base import gpbase
-from gplib.viewer import viewer
+from gplib.loggers import loggers
 from gplib.solutions import node
 from tests.test_problem import EmptyProblem
 
@@ -25,7 +25,7 @@ class TestSequential(unittest.TestCase):
         # self.sequential.add(self.co)
 
         gp = gpbase.PopulationGP(initializer=self.initializer, sequential=self.sequential,
-                                 n_generations=10, viewer=viewer.DefaultViewer())
+                                 n_generations=10, logger=loggers.DefaultLogger())
         gp.__call__()
 
 

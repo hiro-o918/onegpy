@@ -1,13 +1,12 @@
 import unittest
 
-from gplib.viewer.viewer import DefaultViewer
+from gplib.loggers.loggers import DefaultLogger
 from gplib.solutions import solution, node
-from gplib.utils import util
 
 
-class TestDefaultViewer(unittest.TestCase):
+class TestDefaultLogger(unittest.TestCase):
     def setUp(self):
-        self.viewer = DefaultViewer()
+        self.logger = DefaultLogger()
         s1 = solution.Solution(node.Node())
         s2 = solution.Solution(node.Node())
         s3 = solution.Solution(node.Node())
@@ -21,16 +20,13 @@ class TestDefaultViewer(unittest.TestCase):
         self.pop = self.pop*2
 
     def test_begin(self):
-        self.viewer.begin()
+        self.logger.begin()
 
     def test_update(self):
-        self.viewer.update(1, self.pop)
+        self.logger.update(1, self.pop)
 
     def test_end(self):
-        self.viewer.end(self.pop)
-
-
-
+        self.logger.end(self.pop)
 
 
 if __name__ == '__main__':

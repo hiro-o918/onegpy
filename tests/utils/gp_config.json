@@ -12,7 +12,7 @@
      ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
      ["gplib.operators", "TournamentSelection", {"k": 100, "tournament_size": 3}]
    ],
-  "viewer": [
-    "gplib.viewer", "DefaultViewer"
+  "logger": [
+    "gplib.loggers", "DefaultLogger"
   ]
 }

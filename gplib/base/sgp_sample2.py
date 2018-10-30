@@ -16,7 +16,7 @@ if __name__ == '__main__':
             ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 3}]
         ],
         "viewer": [
-            "gplib.viewer", "DefaultViewer"
+            "gplib.loggers", "DefaultLogger"
         ]
     }
 

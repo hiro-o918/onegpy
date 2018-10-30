@@ -15,8 +15,8 @@ if __name__ == '__main__':
             ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
             ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
         ],
-        "viewer": [
-            "gplib.viewer", "DefaultViewer"
+        "logger": [
+            "gplib.loggers", "DefaultLogger"
         ]
     }
 

@@ -56,7 +56,7 @@ def build_sequential(operator_configs, **kwargs):
     return sequential
 
 
-def build_viewer(module, name, params, **kwargs):
+def build_logger(module, name, params, **kwargs):
     return build_instance(module, name, params)
 
 
@@ -100,8 +100,8 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                 ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
                 ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
             ],
-            "viewer": [
-                "gplib.viewer", "DefaultViewer"
+            "logger": [
+                "gplib.logger", "DefaultLogger"
             ]
         }
     """
@@ -119,14 +119,14 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                        'initializer',
                        'sequential',
                        'localsearch',
-                       'viewer',
+                       'logger',
                        'gp']
     if builder_map is None:
         builder_map = {'problem': build_problem,
                        'initializer': build_operator,
                        'sequential': build_sequential,
                        'localsearch': build_operator,
-                       'viewer': build_viewer,
+                       'logger': build_logger,
                        'gp': build_instance}
 
     check_config(config, config_tags)
