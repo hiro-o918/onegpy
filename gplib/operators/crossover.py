@@ -2,14 +2,13 @@ import random
 
 from gplib.operator import AbstractOperator, PopulationOperatorAdapter
 from gplib.operators.selection import RandomSelection
-# TODO: we must consider the number of parents and crossover points.
-# TODO: + checking the number of parents and crossover points in each function
 from gplib.solutions.node import nodes_checker
 from gplib.solutions.solution import select_random_points, replace_node, solutions_checker
 from gplib.utils.util import get_generator_builder
 
 
 def crossover(parents, points, destructive=False):
+    check_parents_and_points(parents, points)
     new_p1 = replace_node(parents[0], points[0], points[1], destructive)
     new_p2 = replace_node(parents[1], points[1], points[0], destructive)
     new_parents = (new_p1, new_p2)
@@ -18,6 +17,7 @@ def crossover(parents, points, destructive=False):
 
 
 def destructive_crossover(parents, points):
+    check_parents_and_points(parents, points)
     return crossover(parents, points, destructive=True)
 
 
