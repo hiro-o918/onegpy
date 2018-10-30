@@ -2,6 +2,7 @@ import numpy as np
 from gplib.problem import AbstractProblem, FunctionBank
 from gplib.solutions import node
 import math
+import random
 
 
 class Cos2XProblem(AbstractProblem):
@@ -12,9 +13,9 @@ class Cos2XProblem(AbstractProblem):
     def _make_data(self, data):
         x = []
         y = []
-        for point in data:
-            x.append(float(point[0]))
-            y.append(float(point[1]))
+        for i in range(data):
+            x.append(random.uniform(-math.pi, math.pi))
+            y.append(math.cos(2*x[i]))
         return x, y
 
     def _cal_fitness(self, target_solution):
@@ -29,12 +30,12 @@ class Cos2XProblem(AbstractProblem):
         for x, y in zip(self.x, self.y):
             error = abs(self._eval(target_solution.root, x) - y)
 
-            if error <= 0.01:
+            if error <= 0.001:
                 hitcounter += 1
-        return  hitcounter
+        return hitcounter
 
     def _eval(self, current_node, x):
-        eval_func = self.func_bank.function_list[current_node.func_id]
+        eval_func = self.func_bank.get_func(current_node.func_id)
         if not current_node.children:
             if eval_func.n_children != 0:
                 raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
