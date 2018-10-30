@@ -7,7 +7,7 @@ import numpy as np
 
 class MLPS_GP(object):
 
-    def __init__(self, initializer, localsearch, problem, max_evals, t_prob, max_depth, simplify=None,
+    def __init__(self, initializer, localsearch, problem, max_evals, simplify=None,
                  is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000, **kwargs):
         """
 
@@ -15,8 +15,6 @@ class MLPS_GP(object):
         :param localsearch: local search object. Local search operator of MLPS_GP.
         :param problem: Problem object. problem to solve.
         :param max_evals: int. the number of maximum evaluations for the terminal condition.
-        :param t_prob: float. terminal probability for initialization.
-        :param max_depth: int. a limit depth of a tree for initialization.
         :param simplify: simplify object. Simplify operator of MLPS-GP. Default is None.
         :param is_add_terminal: bool. a control parameter of MLPS-GP. Default is True.
         :param only_add_best: bool. a control parameter of MLPS-GP. Default is False.
@@ -34,8 +32,6 @@ class MLPS_GP(object):
         self.only_add_improvements = only_add_improvements
         self.depth_limit = depth_limit
         self.population_list = []
-        self.t_prob = t_prob
-        self.max_depth = max_depth
         self.terminal_initializer = PopulationTerminalInitializer(self.problem)
 
     def __call__(self):
