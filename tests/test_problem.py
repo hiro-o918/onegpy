@@ -8,14 +8,14 @@ def f_non_terminal(n_children=2):
     def print_non_terminal(x):
         print('non_terminal')
 
-    return node.build_func(print_non_terminal, n_children)
+    return node.Function(n_children, print_non_terminal)
 
 
 def f_terminal(n_children=0):
     def print_terminal(x):
         print('terminal')
 
-    return node.build_func(print_terminal, n_children)
+    return node.Function(n_children, print_terminal)
 
 
 class EmptyProblem(AbstractProblem):
