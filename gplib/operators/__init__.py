@@ -12,3 +12,6 @@ from gplib.operators.selection import RandomSelection
 from gplib.operators.selection import TournamentSelection
 from gplib.operators.selection import EliteSelection
 from gplib.operators.selection import reduce_population
+# import local search
+from gplib.operators.localsearch import FIHC
+from gplib.operators.localsearch import BIHC
