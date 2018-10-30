@@ -42,24 +42,22 @@ class TestBooleanFunctions(unittest.TestCase):
     def setUp(self):
         self.x1 = 1.0
         self.x2 = -1.0
+        self.x = [self.x1, self.x2]
 
     def test_sin_func(self):
-        self.assertEqual(arithmetic.get_sin()(self.x1), math.sin(self.x1))
-
-    def test_cos_func(self):
-        self.assertEqual(arithmetic.get_sin()(self.x1), math.cos(self.x1))
+        self.assertEqual(arithmetic.get_sin()(self.x), math.sin(self.x1))
 
     def test_add_func(self):
-        self.assertEqual(arithmetic.get_add()([self.x1, self.x2]), self.x1+self.x2)
+        self.assertEqual(arithmetic.get_add()(self.x), self.x1 + self.x2)
 
     def test_sub_func(self):
-        self.assertEqual(arithmetic.get_sub()([self.x1, self.x2]), self.x1-self.x2)
+        self.assertEqual(arithmetic.get_sub()(self.x), self.x1 - self.x2)
 
     def test_mul_func(self):
-        self.assertEqual(arithmetic.get_mul()([self.x1, self.x2]), self.x1*self.x2)
+        self.assertEqual(arithmetic.get_mul()(self.x), self.x1 * self.x2)
 
     def test_div_func(self):
-        self.assertEqual(arithmetic.get_div()([self.x1, self.x2]), self.x1/self.x2)
+        self.assertEqual(arithmetic.get_div()(self.x), self.x1 / self.x2)
 
     def test_get_x_func(self):
         self.assertEqual(arithmetic.get_x()(self.x1), self.x1)

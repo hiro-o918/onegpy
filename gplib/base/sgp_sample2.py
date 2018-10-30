@@ -8,7 +8,7 @@ if __name__ == '__main__':
             "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
         ],
         "problem": [
-            "gplib.problems", "Cos2XProblem", {"data": 10}
+            "gplib.problems", "Cos2XProblem", {"n_data": 10}
         ],
         "sequential": [
             ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.9, "destructive": False}],

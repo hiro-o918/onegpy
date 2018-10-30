@@ -9,7 +9,16 @@ from gplib.utils.checkers import prob_checker
 
 
 class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):
+    """
+    Abstract class of initializer
+    """
     def __init__(self, n_in, n_out, problem):
+        """
+
+        :param n_in: int. the number of inputs
+        :param n_out: int. the number of outputs
+        :param problem: problem object. target problem.
+        """
         problem_checker(problem)
         AbstractOperator.__init__(self, n_in, n_out)
         ProblemBasedOperator.__init__(self, problem)
@@ -48,7 +57,7 @@ class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):
 
 class RandomInitializer(AbstractInitializer):
     """
-    Generating a new solution.
+    Generate a new solution.
     """
 
     def __init__(self, t_prob, max_depth, problem):
@@ -66,10 +75,9 @@ class RandomInitializer(AbstractInitializer):
 
     def __call__(self):
         """
-        Generating a new solution.
+        Generate a new solution.
         :return: solution object. solution
         """
-
 
         def new_node(parent, depth):
             current_node = node.Node()
@@ -96,7 +104,7 @@ class RandomInitializer(AbstractInitializer):
 
 class PopulationTerminalInitializer(AbstractInitializer, PopulationOperator):
     """
-    Generating all solutions which have an only terminal node.
+    Generate all solutions which have an only terminal node.
     """
     def __init__(self, problem):
         """
@@ -109,7 +117,7 @@ class PopulationTerminalInitializer(AbstractInitializer, PopulationOperator):
 
     def __call__(self):
         """
-        Generating all solutions which have an only terminal node.
+        Generate all solutions which have an only terminal node.
         :return: list of solution object. list of all terminal solutions
         """
         def make_node(func_id):
@@ -123,20 +131,24 @@ class PopulationTerminalInitializer(AbstractInitializer, PopulationOperator):
 
 class PopulationRandomInitializer(RandomInitializer, PopulationOperator):
     """
-    Generating solutions using random initializer.
+    Generate solutions using random initializer.
     """
     def __init__(self, k, t_prob, max_depth, problem):
         """
         :param k: int. the number of solutions to generate.
         :param t_prob: float((0, 1]). probability of terminal node.
         :param max_depth: int. The limit of depth of the solution.
-        :param problem: problem object. problem to solve
+        :param problem: problem object. problem to solve.
         """
         self.k = k
         RandomInitializer.__init__(self, t_prob=t_prob, max_depth=max_depth, problem=problem)
         PopulationOperator.__init__(self, 0, k)
 
     def __call__(self):
+        """
+        Initialize population
+        :return: list of solutions. initialized population.
+        """
         population = [RandomInitializer.__call__(self) for _ in range(self.k)]
 
         return population
