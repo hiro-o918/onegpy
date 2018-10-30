@@ -3,7 +3,7 @@
 import unittest
 
 from gplib.terminal_condition import TerminalCondition
-from gplib.terminatior import AbstractTerminator
+from gplib.terminator import AbstractTerminator
 from gplib.problems import arithmetic
 
 
@@ -20,8 +20,8 @@ class TestFalse(AbstractTerminator):
 class TestTerminalCondition(unittest.TestCase):
     def setUp(self):
         self.problem = arithmetic.Cos2XProblem(1)
-        self.t1 = TestTrue(self.problem)
-        self.t2 = TestFalse(self.problem)
+        self.t1 = TestTrue
+        self.t2 = TestFalse
         self.T1 = TerminalCondition([self.t1, self.t2])
         self.T2 = TerminalCondition([self.t2, self.t2])
 

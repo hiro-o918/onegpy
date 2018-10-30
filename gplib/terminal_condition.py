@@ -1,4 +1,4 @@
-from gplib.terminatior import terminator_checker, AbstractTerminator
+from gplib.terminator import terminator_checker
 
 
 class TerminalCondition(object):

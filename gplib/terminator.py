@@ -2,13 +2,12 @@ from abc import ABC
 
 
 class AbstractTerminator(ABC):
-    def __init__(self, problem):
-        self.problem = problem
+    def __call__(self):
+        return True
 
 
 class GenerationTerminator(AbstractTerminator):
-    def __init__(self, problem, generation):
-        AbstractTerminator.__init__(self, problem)
+    def __init__(self, generation):
         self.generation = generation
         self.gene = 0
 
@@ -17,22 +16,27 @@ class GenerationTerminator(AbstractTerminator):
         return self.gene > self.generation
 
 
-class EvalCountTerminator(AbstractTerminator):
+class ProblemBasedTerminator(AbstractTerminator):
+    def __init__(self, problem):
+        self.problem = problem
+
+
+class EvalCountTerminator(ProblemBasedTerminator):
     def __init__(self, problem, t_eval_cnt):
-        AbstractTerminator.__init__(self, problem)
+        ProblemBasedTerminator.__init__(self, problem)
         self.t_eval_cnt = t_eval_cnt
 
     def __call__(self):
-        return self.t_eval_cnt >= self.problem.get_eval_count()
+        return self.t_eval_cnt <= self.problem.get_eval_count()
 
 
-class FitnessTerminator(AbstractTerminator):
+class FitnessTerminator(ProblemBasedTerminator):
     def __init__(self, problem, t_fitness):
-        AbstractTerminator.__init__(self, problem)
+        ProblemBasedTerminator.__init__(self, problem)
         self.t_fitness = t_fitness
 
     def __call__(self):
-        return self.t_fitness >= self.problem.get_elite_fitness
+        return self.t_fitness <= self.problem.get_elite_fitness
 
 
 def terminator_checker(terminator):
