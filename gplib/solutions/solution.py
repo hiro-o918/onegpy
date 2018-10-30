@@ -199,3 +199,17 @@ def replace_node(solution, replaced_node, new_node, destructive=True):
     set_solution_n_nodes(solution, n_nodes)
 
     return solution
+
+
+def solution_checker(solution):
+    if not isinstance(solution, Solution):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(Solution, type(Solution))
+    else:
+        return
+    raise typ(msg)
+
+
+def solutions_checker(*solutions):
+    for solution in solutions:
+        solution_checker(solution)
