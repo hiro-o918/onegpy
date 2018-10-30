@@ -31,6 +31,7 @@ class Function(object):
         self.f_eval = f_eval
 
     def __call__(self, x):
+        n_children_checker(self.n_children, len(x))
         return self.f_eval(x)
 
 
@@ -361,3 +362,9 @@ def children_checker(children):
         raise TypeError('Expected type: {}'.format(list))
 
     nodes_checker(children)
+
+
+def n_children_checker(n_children, len_x):
+    if n_children != len_x:
+        raise ValueError('expect the n_children == len_x, but got n_children{} != len_x'
+                         .format(n_children, len_x))
