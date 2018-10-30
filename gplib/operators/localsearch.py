@@ -7,13 +7,16 @@ from gplib.operator import AbstractOperator, ProblemBasedOperator
 
 
 class AbstractLocalSearch(AbstractOperator, ProblemBasedOperator, ABC):
+    """
+    Abstract class for Local Search
+    """
     def __init__(self, problem, target_node, func_search_type):
         """
-        Abstract class of localsearch.
+        Abstract class for local search.
 
-        :param problem: problem
-        :param target_node: String. type of target nodes
-        :param func_search_type: String, function name
+        :param problem: problem object. target problem.
+        :param target_node: String. type of target nodes.
+        :param func_search_type: String, function name.
         """
         AbstractOperator.__init__(self, n_in=1, n_out=1)
         ProblemBasedOperator.__init__(self, problem)
@@ -21,6 +24,11 @@ class AbstractLocalSearch(AbstractOperator, ProblemBasedOperator, ABC):
         self._func_search_type = func_search_type
 
     def get_target_node(self, root):
+        """
+        get a list of target nodes
+        :param root: node object. a node of target solution
+        :return: list of node object. target node list.
+        """
         if self.target_node == 'nonterminal':
             return node.get_all_nonterminal_nodes(root)
         elif self.target_node == 'terminal':
@@ -70,8 +78,8 @@ class AbstractLocalSearch(AbstractOperator, ProblemBasedOperator, ABC):
 
 def improve(target_solution, target_node, candidate_id, problem):
     """
-    core function for local search.
-    replace the old function with a new function and then revert it if fitness is not improved.
+    Core function for local search.
+    Replace the old function with a new function and then revert it if fitness is not improved.
     :param target_solution: solution object. target solution of local search.
     :param target_node: node object. target node of the target solution.
     :param candidate_id: int. ID of candidate function for local search.
@@ -95,8 +103,8 @@ def improve(target_solution, target_node, candidate_id, problem):
 
 def all_check(target_solution, target_node, problem):
     """
-    search function for a target node.
-    try to replace a current function with all candidate function and replace best improving function.
+    Search function for a target node.
+    Try to replace a current function with all candidate function and replace best improving function.
     :param target_solution: solution object. target solution of local search.
     :param target_node: node object. target node of the target solution.
     :param problem: problem object. problem for calculation of fitness.
@@ -116,8 +124,8 @@ def all_check(target_solution, target_node, problem):
 
 def stop_improvement(target_solution, target_node, problem, is_shuffle=True):
     """
-    search function for a target node.
-    try to replace a current function with candidate functions and replace first improving function.
+    Search function for a target node.
+    Try to replace a current function with candidate functions and replace first improving function.
     :param target_solution: solution object. target solution of local search.
     :param target_node: node object. target node of the target solution.
     :param problem: problem object. problem for calculation of fitness.
@@ -201,7 +209,7 @@ def bihc(target_solution, node_list, fs_core):
 
 def get_func_search_core(func_search_type, **kwargs):
     """
-    getter of function search function.
+    Get a "function search" function.
     :param func_search_type: String. name of function of func search.
     :param kwargs:
     :return: function. funcsearch_core
@@ -219,10 +227,11 @@ def get_func_search_core(func_search_type, **kwargs):
 
 
 class FIHC(AbstractLocalSearch):
-
+    """
+    First Improvement Hill Climber class
+    """
     def __init__(self, problem, target_node='nonterminal', func_search_type='all_check'):
         """
-        FIHC class.
         :param problem: problem object. problem for calculation of fitness.
         :param target_node: String. target node type (eg. nonterminal, terminal)
         :param func_search_type: String. String. name of function of function search.
@@ -242,10 +251,11 @@ class FIHC(AbstractLocalSearch):
 
 
 class BIHC(AbstractLocalSearch):
-
+    """
+    Best Improvement Hill Climber
+    """
     def __init__(self, problem, target_node='nonterminal'):
         """
-        BIHC class.
         :param problem: problem object. problem for calculation of fitness.
         :param target_node: String. target node type (eg. nonterminal, terminal)
         :param func_search_type: String. String. name of function of function search.

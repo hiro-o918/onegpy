@@ -62,7 +62,15 @@ class PopulationOperator(AbstractOperator, ABC):
 
 
 class PopulationOperatorAdapter(PopulationOperator):
+    """
+    TODO: comment by yama*
+    """
     def __init__(self, operator, generator_builder=None, n_out=None):
+        """
+        :param operator: operator object. operator object to apply.
+        :param generator_builder: function of generator builder. Default is None (default generator).
+        :param n_out: int. the number of output.
+        """
         super(PopulationOperatorAdapter, self).__init__(n_out=n_out)
         operator_checker(operator)
         if operator.n_in is None:
@@ -78,6 +86,13 @@ class PopulationOperatorAdapter(PopulationOperator):
         self.generator_builder = generator_builder or self._get_default_generator_builder()
 
     def __call__(self, population, *args, **kwargs):
+        """
+        TODO: comment by yama*
+        :param population: list of solutions. population.
+        :param args:
+        :param kwargs:
+        :return:
+        """
         new_pop = []
         generator = self.generator_builder(population)
 
@@ -110,10 +125,22 @@ class PopulationOperatorAdapter(PopulationOperator):
 
 class ProblemBasedOperator(ABC):
     def __init__(self, problem):
+        """
+        :param problem: problem object. The target problem.
+        """
         self.problem = problem
 
 
 def build_population_operator(operator, selection_class=None, n_out=None, cls_name=None, **kwargs):
+    """
+    Builder function for population operator
+    :param operator: operator object. The target operator to build.
+    :param selection_class: selection class. #TODO: add comment by yama*
+    :param n_out: int. the number of output of the target operator.
+    :param cls_name: #TODO: comment by yama*
+    :param kwargs:
+    :return:
+    """
     operator_checker(operator)
 
     if selection_class is not None:
@@ -128,6 +155,9 @@ def build_population_operator(operator, selection_class=None, n_out=None, cls_na
 
 
 def operator_checker(operator):
+    """
+    checker for operator.
+    """
     if not isinstance(operator, AbstractOperator):
         typ = TypeError
         msg = 'Expected type: {} not {}.'.format(AbstractOperator, type(operator))
@@ -138,6 +168,9 @@ def operator_checker(operator):
 
 
 def pop_operator_checker(operator):
+    """
+        checker for population operator.
+        """
     if not isinstance(operator, PopulationOperator):
         typ = TypeError
         msg = 'Expected type: {} not {}.'.format(PopulationOperator, type(operator))
