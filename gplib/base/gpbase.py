@@ -14,17 +14,19 @@ __license__ = 'MIT'
 
 class PopulationGP(object):
 
-    def __init__(self, n_generations, initializer, sequential,  viewer):
-        self.n_generations = n_generations
+    def __init__(self, initializer, sequential, viewer, t_condition):
         self.initializer = initializer
         self.sequential = sequential
         self.viewer = viewer
+        self.t_condition = t_condition
 
     def __call__(self):
         population = self.initializer()
         self.viewer.begin()
-        for gene in range(self.n_generations):
+        gene = 0
+        while self.t_condition():
             population = self.sequential(population)
             self.viewer.update(gene, population)
+            gene += 1
 
         self.viewer.end(population)
