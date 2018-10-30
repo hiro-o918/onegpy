@@ -17,8 +17,7 @@ class PopulationGP(object):
     base class of population based GP
     """
 
-
-    def __init__(self, initializer, sequential, viewer, t_condition):
+    def __init__(self, initializer, sequential, viewer, terminal_condition, **kwargs):
         """
         :param n_generations: int. the number of generations
         :param initializer: population initializer object. initializer of population
@@ -28,7 +27,7 @@ class PopulationGP(object):
         self.initializer = initializer
         self.sequential = sequential
         self.viewer = viewer
-        self.t_condition = t_condition
+        self.terminal_condition = terminal_condition
 
     def __call__(self):
         """
@@ -38,7 +37,7 @@ class PopulationGP(object):
         population = self.initializer()
         self.viewer.begin()
         gene = 0
-        while self.t_condition():
+        while self.terminal_condition():
             population = self.sequential(population)
             self.viewer.update(gene, population)
             gene += 1
