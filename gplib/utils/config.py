@@ -3,7 +3,9 @@ from pathlib import Path
 import importlib
 
 from gplib.operator import ProblemBasedOperator
+from gplib.terminator import ProblemBasedTerminator
 from gplib.sequential import Sequential
+from gplib.terminal_condition import TerminalCondition
 
 
 def build_instance(module, name, params, *args, **kwargs):
@@ -58,6 +60,22 @@ def build_sequential(operator_configs, **kwargs):
 
 def build_viewer(module, name, params, **kwargs):
     return build_instance(module, name, params)
+
+
+def build_terminator(module, name, params, **kwargs):
+    if issubclass(getattr(module, name), ProblemBasedTerminator):
+        return build_instance(module, name, params, problem=kwargs['problem'])
+    else:
+        return build_instance(module, name, params)
+
+
+def build_terminal_condition(terminator_configs, **kwargs):
+    t_condition = TerminalCondition()
+    for terminator_config in terminator_configs:
+        module, name, params = unwrap_instance_info(terminator_config)
+        t_condition.add(build_terminator(module, name, params, **kwargs))
+
+    return t_condition
 
 
 def check_config(config, config_tags):
@@ -120,6 +138,7 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                        'sequential',
                        'localsearch',
                        'viewer',
+                       'terminal_condition',
                        'gp']
     if builder_map is None:
         builder_map = {'problem': build_problem,
@@ -127,6 +146,7 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                        'sequential': build_sequential,
                        'localsearch': build_operator,
                        'viewer': build_viewer,
+                       'terminal_condition': build_terminal_condition,
                        'gp': build_instance}
 
     check_config(config, config_tags)
@@ -139,6 +159,8 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
 
         if tag == 'sequential':
             instance_dict.update({tag: build_sequential(config[tag], **instance_dict)})
+        elif tag == 'terminal_condition':
+            instance_dict.update({tag: build_terminal_condition(config[tag], **instance_dict)})
         else:
             module, name, params = unwrap_instance_info(config[tag])
             builder = builder_map[tag]

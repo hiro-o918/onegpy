@@ -13,7 +13,12 @@ if __name__ == '__main__':
         ],
         "localsearch": [
             "gplib.operators", "FIHC", {"target_node": 'nonterminal', "func_search_type": 'all_check'}
-        ]
+        ],
+        "terminal_condition": [
+            ["gplib.terminator", "GenerationTerminator", {"generation": 10}],
+            ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
+        ],
+
     }
 
     mlps = gp_from_config(config)
