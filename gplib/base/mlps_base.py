@@ -2,8 +2,6 @@ from gplib.operators.mlps_crossover import MLPS_Crossover
 from gplib.utils import util
 from gplib.solutions import node, solution
 import numpy as np
-from gplib.problems import boolean
-from gplib.operators import initializer
 
 
 class MLPS_GP(object):
@@ -37,7 +35,6 @@ class MLPS_GP(object):
         self.population_list = []
         self.t_prob = t_prob
         self.max_depth = max_depth
-        self.func_bank = problem.func_bank
 
     def __call__(self):
         cnt = 0
@@ -56,7 +53,7 @@ class MLPS_GP(object):
                 fitness_info = util.get_fitness_info(sub_pop)
                 ave.append(fitness_info['ave_fit'])
                 max_fit.append(fitness_info['max_fit'])
-            print('{}, max:{}, ave:{}'.format(cnt, max(max_fit), np.average(ave)))
+            print('{}, max:{}, ave:{}, level:{}'.format(cnt, max(max_fit), np.average(ave), len(self.population_list)))
             if max(max_fit) == 1.0:
                 break
 
@@ -78,8 +75,8 @@ class MLPS_GP(object):
         return self.population_list[level]
 
     def initialize_solution(self):
-        candidate_solution = self.initializer(self.t_prob, self.max_depth, self.func_bank)
-        problem.fitness(candidate_solution)
+        candidate_solution = self.initializer()
+        self.problem.fitness(candidate_solution)
 
         if self.localsearch is not None:
             self.localsearch(candidate_solution)
@@ -154,20 +151,4 @@ class MLPS_GP(object):
         return False
 
 
-if __name__ == '__main__':
 
-    t_prob = 0.1
-    max_depth = 3
-    dim = 6
-    max_evals = 100000
-
-    init_op = initializer.initialize
-    ls_op = None
-
-    problem = boolean.EvenParity(dim=dim)
-
-    population = []
-    mlps = MLPS_GP(initializer= init_op, localsearch=ls_op, problem=problem, max_evals=max_evals, t_prob=t_prob,
-                   max_depth=max_depth, is_add_terminal=False)
-
-    mlps()
