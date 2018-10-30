@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from gplib.solutions.solution import Solution
 from gplib.solutions.node import Function
+from gplib.solutions import solution
 
 
 class AbstractProblem(ABC):
@@ -16,13 +17,13 @@ class AbstractProblem(ABC):
         if isinstance(target_solution_or_solutions, Solution):
             fitness = self._cal_fitness(target_solution=target_solution_or_solutions)
             self._eval_cnt += 1
-            target_solution_or_solutions.previous_fitness = fitness
+            solution.set_previous_fitness(target_solution_or_solutions, fitness)
             return fitness
         elif isinstance(target_solution_or_solutions, list):
             fitness_list = []
-            for s in target_solution_or_solutions:
-                fitness = self._cal_fitness(target_solution=s)
-                s.previous_fitness = fitness
+            for target_solution in target_solution_or_solutions:
+                fitness = self._cal_fitness(target_solution=target_solution)
+                solution.set_previous_fitness(target_solution, fitness)
                 fitness_list.append(fitness_list)
             self._eval_cnt += len(target_solution_or_solutions)
             return fitness_list
@@ -44,15 +45,15 @@ class AbstractProblem(ABC):
 class FunctionBank(object):
 
     def __init__(self):
-        self.function_list = []
+        self._function_list = []
         self.children_dict = {}
 
     def add_function(self, func):
         if not isinstance(func, Function):
             raise ValueError('func must be Function class, but this func is {}.'.format(type(func)))
         n_children = func.n_children
-        func_id = len(self.function_list)
-        self.function_list.append(func)
+        func_id = len(self._function_list)
+        self._function_list.append(func)
 
         if n_children not in self.children_dict:
             self.children_dict[n_children] = []
@@ -60,8 +61,12 @@ class FunctionBank(object):
 
     def get_function_list(self, n_children=None):
         if n_children is None:
-            return self.function_list
+            return self._function_list[:]
         if n_children not in self.children_dict:
             raise KeyError('Key {} is not in children_dict'.format(n_children))
         else:
             return self.children_dict[n_children]
+
+    def get_func(self, func_id):
+        return self._function_list[func_id]
+

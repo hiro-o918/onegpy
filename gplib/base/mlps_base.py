@@ -84,16 +84,16 @@ class MLPS_GP(object):
         if self.localsearch is not None:
             self.localsearch(candidate_solution)
 
-        depth = solution.get_depth(candidate_solution)
-        self.add_indiv(candidate_solution, True, depth)
+        solution.set_solution_depth(candidate_solution)
+        self.add_indiv(candidate_solution, True, candidate_solution.depth)
 
         return candidate_solution
 
     def do_crossover(self, candidate_solution, terminal_points):
-        depth = solution.get_depth(candidate_solution)
+        solution.set_solution_depth(candidate_solution)
         ## TODO: if you use a subtree node, you should calculate depth again here.
         for i, donors in enumerate(self.population_list):
-            if depth < i:
+            if candidate_solution.depth < i:
                 break
 
             ## TODO: check the total number of fitness evaluations. if it is over the limitation, close this loop
@@ -101,11 +101,11 @@ class MLPS_GP(object):
             if len(donors) > 0:
                 previous_fitness = candidate_solution.previous_fitness
                 self.crossover(recipient=candidate_solution, cross_points=terminal_points, donors=donors)
-                depth = solution.get_depth(candidate_solution)
+                solution.set_solution_depth(candidate_solution)
                 ## TODO: if you use a subtree node, you should calculate depth again here.
 
                 if (not self.only_add_improvements) or (previous_fitness < candidate_solution.previous_fitness):
-                    self.add_indiv(candidate_solution, False, depth)
+                    self.add_indiv(candidate_solution, False, candidate_solution.depth)
 
             #TODO: if you want to use only continue improvements or use not continue only one, implement here!
 
