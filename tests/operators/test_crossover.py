@@ -78,10 +78,6 @@ class TestCrossover(unittest.TestCase, ExampleParents):
             check_parents_and_points(self.parents, 2)
             check_parents_and_points(1, points)
 
-        with self.assertRaises(ValueError):
-            check_parents_and_points([self.parents[0]], points)
-            check_parents_and_points(self.parents, [points[1]])
-
         check_parents_and_points(self.parents, points)
 
 

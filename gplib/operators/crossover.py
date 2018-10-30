@@ -32,16 +32,6 @@ def check_parents_and_points(parents, points):
     solutions_checker(parents)
     nodes_checker(points)
 
-    if len(parents) != 2:
-        msg = 'The length of parents must be 2, but actual {}'\
-            .format(len(parents))
-        raise ValueError(msg)
-
-    if len(points) != 2:
-        msg = 'The length of points must be 2, but actual {}'\
-            .format(len(parents))
-        raise ValueError(msg)
-
 
 class OnePointCrossover(AbstractOperator):
     def __init__(self, c_rate, destructive=True):
