@@ -74,13 +74,13 @@ def get_default_function_bank():
 
     func_bank = FunctionBank()
 
-    func_bank.add_function(get_add(2))
-    func_bank.add_function(get_sub(2))
-    func_bank.add_function(get_mul(2))
-    func_bank.add_function(get_div(2))
-    func_bank.add_function(get_val(0, 1.0))
-    func_bank.add_function(get_sin(1))
-    func_bank.add_function(get_x(0))
+    func_bank.add_function(get_add())
+    func_bank.add_function(get_sub())
+    func_bank.add_function(get_mul())
+    func_bank.add_function(get_div())
+    func_bank.add_function(get_val(1.0))
+    func_bank.add_function(get_sin())
+    func_bank.add_function(get_x())
 
     return func_bank
 
