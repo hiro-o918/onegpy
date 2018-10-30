@@ -227,7 +227,7 @@ def calc_node_depth(node):
     return max(d_list)
 
 
-def get_all_terminal_node(root):
+def get_all_terminal_nodes(root):
     """
     function for getting all terminal node in the solution
 
@@ -252,7 +252,7 @@ def get_all_terminal_node(root):
     return terminal_nodes
 
 
-def get_all_nonterminal_node(root):
+def get_all_nonterminal_nodes(root):
     """
     function for getting all terminal node in the solution
 
