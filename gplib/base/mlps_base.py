@@ -1,4 +1,5 @@
 from gplib.operators.mlps_crossover import MLPS_Crossover
+from gplib.operators.initializer import PopulationTerminalInitializer
 from gplib.utils import util
 from gplib.solutions import node, solution
 import numpy as np
@@ -35,12 +36,13 @@ class MLPS_GP(object):
         self.population_list = []
         self.t_prob = t_prob
         self.max_depth = max_depth
+        self.terminal_initializer = PopulationTerminalInitializer(self.problem)
 
     def __call__(self):
         cnt = 0
         if self.is_add_terminal:
-            ##TODO: implement terminal initializer
-            pass
+            terminal_solutions = self.terminal_initializer()
+            self.add_terminals(terminal_solutions)
 
         while self.problem.get_eval_count() < self.max_evals:
             self.mlps_iterate()
@@ -53,7 +55,8 @@ class MLPS_GP(object):
                 fitness_info = util.get_fitness_info(sub_pop)
                 ave.append(fitness_info['ave_fit'])
                 max_fit.append(fitness_info['max_fit'])
-            print('{}, max:{}, ave:{}, level:{}'.format(cnt, max(max_fit), np.average(ave), len(self.population_list)))
+            print('ite:{}, evals:{}, max:{}, ave:{}, level:{}'.format(cnt, self.problem.get_eval_count(), max(max_fit),
+                                                                      np.average(ave), len(self.population_list)))
             if max(max_fit) == 1.0:
                 break
 
@@ -150,5 +153,9 @@ class MLPS_GP(object):
 
         return False
 
-
+    def add_terminals(self, terminal_solutions):
+        sub_population = self.get_skip_pop(0)
+        self.problem.fitness(terminal_solutions)
+        sub_population.extend(terminal_solutions)
+        sub_population.sort(key=lambda x: x.previous_fitness, reverse=True)
 

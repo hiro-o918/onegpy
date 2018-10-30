@@ -43,7 +43,16 @@ class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):
 
 
 class RandomInitializer(AbstractInitializer):
+    """
+    Generating a new solution.
+    """
+
     def __init__(self, t_prob, max_depth, problem):
+        """
+        :param t_prob: float((0, 1]). probability of terminal node.
+        :param max_depth: int. The limit of depth of the solution.
+        :param problem: problem object. problem to solve
+        """
         super(RandomInitializer, self).__init__(n_in=0, n_out=1, problem=problem)
         self.t_prob = t_prob
         self.max_depth = max_depth
@@ -51,17 +60,10 @@ class RandomInitializer(AbstractInitializer):
         self.terminal_list = self._get_terminal_list()
 
     def __call__(self):
-        """Generating a new solution.
-
-                # Arguments
-                    t_prob: float((0, 1]). probability of terminal node.
-                    max_depth: int. The limit of depth of the solution.
-                    func_bank: tuple of dictionary
-
-                # Return
-                    solution
-                    :param **kwargs:
-            """
+        """
+        Generating a new solution.
+        :return: solution object. solution
+        """
         # TODO check t_prob range and all the arguments are correct.
         # TODO check problem is class Problem
 
@@ -88,8 +90,44 @@ class RandomInitializer(AbstractInitializer):
         return solution.Solution(root)
 
 
+class PopulationTerminalInitializer(AbstractInitializer, PopulationOperator):
+    """
+    Generating all solutions which have an only terminal node.
+    """
+    def __init__(self, problem):
+        """
+        :param k: int. the number of solutions to generate
+        :param problem: problem object. problem to solve
+        """
+        AbstractInitializer.__init__(self, n_in=0, n_out=None, problem=problem)
+        self.terminal_list = self._get_terminal_list()
+        PopulationOperator.__init__(self, 0, len(self.terminal_list))
+
+    def __call__(self):
+        """
+        Generating all solutions which have an only terminal node.
+        :return: list of solution object. list of all terminal solutions
+        """
+        def make_node(func_id):
+            new_node = node.Node()
+            node.set_id(new_node, func_id)
+            return new_node
+
+        population = [solution.Solution(make_node(func_id)) for func_id in self.terminal_list]
+        return population
+
+
 class PopulationRandomInitializer(RandomInitializer, PopulationOperator):
+    """
+    Generating solutions using random initializer.
+    """
     def __init__(self, k, t_prob, max_depth, problem):
+        """
+        :param k: int. the number of solutions to generate.
+        :param t_prob: float((0, 1]). probability of terminal node.
+        :param max_depth: int. The limit of depth of the solution.
+        :param problem: problem object. problem to solve
+        """
         self.k = k
         RandomInitializer.__init__(self, t_prob=t_prob, max_depth=max_depth, problem=problem)
         PopulationOperator.__init__(self, 0, k)
