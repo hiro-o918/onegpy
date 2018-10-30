@@ -36,7 +36,7 @@ class Cos2XProblem(AbstractProblem):
 
     def _eval(self, current_node, x):
         eval_func = self.func_bank.get_func(current_node.func_id)
-        if not current_node.children:
+        if current_node.is:
             if eval_func.n_children != 0:
                 raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
             return eval_func(x)
@@ -69,28 +69,28 @@ def get_sin(n_children=1):
     def sin_func(x):
         return math.sin(x[0])
 
-    return node.build_func(sin_func, n_children)
+    return node.Function(sin_func, n_children)
 
 
 def get_add(n_children=2):
     def add_func(x):
         return x[0] + x[1]
 
-    return node.build_func(add_func, n_children)
+    return node.Function(add_func, n_children)
 
 
 def get_sub(n_children=2):
     def sub_func(x):
         return x[0] - x[1]
 
-    return node.build_func(sub_func, n_children)
+    return node.Function(sub_func, n_children)
 
 
 def get_mul(n_children=2):
     def mul_func(x):
         return x[0] * x[1]
 
-    return node.build_func(mul_func, n_children)
+    return node.Function(mul_func, n_children)
 
 
 def get_div(n_children=2):
@@ -100,18 +100,18 @@ def get_div(n_children=2):
             right = 1.0
         return x[0] / right
 
-    return node.build_func(div_func, n_children)
+    return node.Function(div_func, n_children)
 
 
 def get_x(n_children=0):
     def x_func(x):
         return x
 
-    return node.build_func(x_func, n_children)
+    return node.Function(x_func, n_children)
 
 
 def get_val(n_children=0, val=1.0):
     def val_func(x):
         return val
 
-    return node.build_func(val_func, n_children)
+    return node.Function(val_func, n_children)
