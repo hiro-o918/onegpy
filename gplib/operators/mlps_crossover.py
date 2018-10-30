@@ -2,6 +2,7 @@ import random
 from gplib.solutions import solution
 from gplib.operator import AbstractOperator
 
+
 class MLPS_Crossover(AbstractOperator):
 
     def __init__(self, problem, stop_after_one=False, donor_order='random'):
@@ -45,7 +46,7 @@ class MLPS_Crossover(AbstractOperator):
 
         if previous_fitness >= fitness:
             parent_node.children[index] = pre_node
-            recipient.previous_fitness = previous_fitness
+            solution.set_previous_fitness(recipient, previous_fitness)
         else:
             stop = True
 
