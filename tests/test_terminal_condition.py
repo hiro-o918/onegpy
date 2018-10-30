@@ -23,7 +23,7 @@ class TestTerminalCondition(unittest.TestCase):
         self.t1 = TestTrue(self.problem)
         self.t2 = TestFalse(self.problem)
         self.T1 = TerminalCondition([self.t1, self.t2])
-        self.T2 = TerminalCondition([self.t1, self.t1])
+        self.T2 = TerminalCondition([self.t2, self.t2])
 
     def testT1(self):
         self.assertFalse(self.T1())
