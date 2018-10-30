@@ -70,3 +70,12 @@ class FunctionBank(object):
     def get_func(self, func_id):
         return self._function_list[func_id]
 
+
+def problem_checker(problem):
+    if not isinstance(problem, AbstractProblem):
+        typ = TypeError
+        msg = 'Expected type: {} not {}.'.format(AbstractProblem, type(problem))
+    else:
+        return
+
+    raise typ(msg)

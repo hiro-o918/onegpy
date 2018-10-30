@@ -1,4 +1,6 @@
-from gplib.problem import AbstractProblem, FunctionBank
+import unittest
+
+from gplib.problem import AbstractProblem, FunctionBank, problem_checker
 from gplib.solutions import node
 
 
@@ -29,3 +31,14 @@ class EmptyProblem(AbstractProblem):
 
     def _cal_fitness(self, target_solution):
         return target_solution.root.func_id
+
+
+class TestProblem(unittest.TestCase):
+    def setUp(self):
+        self.p = EmptyProblem()
+
+    def test_problem_checker(self):
+        with self.assertRaises(TypeError):
+            problem_checker(1)
+
+        problem_checker(self.p)
