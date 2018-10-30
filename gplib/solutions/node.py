@@ -63,7 +63,7 @@ def set_children(node, children):
     """ TODO: implement a method to check follows:
               the number of children of node = len(children)
     """
-    nodes_checker(node)
+    node_checker(node)
     children_checker(children)
 
     node.children = children
@@ -128,7 +128,7 @@ def get_parent_node(root, target_node):
                     break
         return p
 
-    nodes_checker(root, target_node)
+    nodes_checker([root, target_node])
     if target_node is root:
         msg = 'There is no parent of root.'
         raise ValueError(msg)
@@ -170,7 +170,7 @@ def get_graph_to_target(root, target_node):
 
         return p
 
-    nodes_checker(root, target_node)
+    nodes_checker([root, target_node])
     if target_node is root:
         msg = 'There is no parent of root.'
         raise ValueError(msg)
@@ -271,6 +271,7 @@ def get_all_nonterminal_node(root):
 
     return nonterminal_nodes
 
+
 def get_all_terminal_points(root):
     """
     function for getting all terminal points in the solution
@@ -314,7 +315,7 @@ def node_equal(node_a, node_b, as_tree=False):
         else:
             return False
 
-    nodes_checker(node_a, node_b)
+    nodes_checker([node_a, node_b])
     if not as_tree:
         return func_id_equal(node_a, node_b)
 
@@ -356,7 +357,7 @@ def node_checker(node):
     raise typ(msg)
 
 
-def nodes_checker(*nodes):
+def nodes_checker(nodes):
     for node in nodes:
         node_checker(node)
 
@@ -365,4 +366,4 @@ def children_checker(children):
     if not isinstance(children, list):
         raise TypeError('Expected type: {}'.format(list))
 
-    nodes_checker(*children)
+    nodes_checker(children)

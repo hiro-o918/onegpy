@@ -121,9 +121,9 @@ class TestSolutionFunctions(unittest.TestCase):
 
     def test_solutions_checker(self):
         with self.assertRaises(TypeError):
-            solution.solutions_checker(1, 1)
+            solution.solutions_checker([1, 1])
 
-        self.assertEqual(solution.solutions_checker(self.s1, self.s1), None)
+        self.assertEqual(solution.solutions_checker([self.s1, self.s1]), None)
 
 
 if __name__ == '__main__':

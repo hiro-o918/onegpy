@@ -133,24 +133,24 @@ class TestNodeFunctions(unittest.TestCase):
         node.set_id(self.n4, 0)
         self.assertFalse(node.node_array_equal([self.n1, self.n2], [self.n3, self.n4]))
 
-    def test__func_id_checker(self):
+    def test_func_id_checker(self):
         with self.assertRaises(ValueError):
             node.func_id_checker(-1)
         with self.assertRaises(TypeError):
             node.func_id_checker('1')
         self.assertEqual(node.func_id_checker(1), None)
 
-    def test__node_checker(self):
+    def test_node_checker(self):
         with self.assertRaises(TypeError):
             node.node_checker(1)
         self.assertEqual(node.node_checker(self.n1), None)
 
-    def test__nodes_checker(self):
+    def test_nodes_checker(self):
         with self.assertRaises(TypeError):
-            node.nodes_checker(1, 1)
-        self.assertEqual(node.nodes_checker(self.n1, self.n2), None)
+            node.nodes_checker([1, 1])
+        self.assertEqual(node.nodes_checker([self.n1, self.n2]), None)
 
-    def test__children_checker(self):
+    def test_children_checker(self):
         le_msg = 'Expected type: {} not {}.'.format(node.Node, list)
         with self.assertRaises(TypeError, msg=le_msg):
             node.children_checker(self.n1)

@@ -210,6 +210,6 @@ def solution_checker(solution):
     raise typ(msg)
 
 
-def solutions_checker(*solutions):
+def solutions_checker(solutions):
     for solution in solutions:
         solution_checker(solution)
