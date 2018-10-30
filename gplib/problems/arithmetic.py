@@ -5,14 +5,14 @@ import random
 
 
 class Cos2XProblem(AbstractProblem):
-    def __init__(self, data, function_bank_builder=None):
-        self.x, self.y = self._make_data(data)
+    def __init__(self, n_data, function_bank_builder=None):
+        self.x, self.y = self._make_data(n_data)
         super(Cos2XProblem, self).__init__(function_bank_builder)
 
-    def _make_data(self, data):
+    def _make_data(self, n_data):
         x = []
         y = []
-        for i in range(data):
+        for i in range(n_data):
             x.append(random.uniform(-math.pi, math.pi))
             y.append(math.cos(2*x[i]))
         return x, y
@@ -36,7 +36,7 @@ class Cos2XProblem(AbstractProblem):
 
     def _eval(self, current_node, x):
         eval_func = self.func_bank.get_func(current_node.func_id)
-        
+
         if current_node.is_terminal:
             if eval_func.n_children != 0:
                 raise ValueError("node must have {} children. but {} have no child.".format(eval_func.n_children, current_node))
