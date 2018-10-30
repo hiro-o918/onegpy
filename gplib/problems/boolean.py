@@ -67,7 +67,7 @@ def get_and(n_children=2):
             result = np.logical_and(result, x[i+1])
         return result
 
-    return node.build_func(and_func, n_children)
+    return node.Function(n_children, and_func)
 
 
 def get_or(n_children=2):
@@ -77,7 +77,7 @@ def get_or(n_children=2):
             result = np.logical_or(result, x[i+1])
         return result
 
-    return node.build_func(or_func, n_children)
+    return node.Function(n_children, or_func)
 
 
 def get_nand(n_children=2):
@@ -88,7 +88,7 @@ def get_nand(n_children=2):
         result = np.logical_not(result)
         return result
 
-    return node.build_func(nand_func, n_children)
+    return node.Function(n_children, nand_func)
 
 
 def get_nor(n_children=2):
@@ -99,11 +99,11 @@ def get_nor(n_children=2):
         result = np.logical_not(result)
         return result
 
-    return node.build_func(nor_func, n_children)
+    return node.Function(n_children, nor_func)
 
 
 def get_x(dim_i):
     def x_func(x):
         return x[:, dim_i]
-    return node.build_func(x_func, 0)
+    return node.Function(0, x_func)
 

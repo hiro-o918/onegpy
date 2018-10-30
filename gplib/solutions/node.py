@@ -34,16 +34,6 @@ class Function(object):
         return self.f_eval(x)
 
 
-#TODO: Remove this function.
-def build_func(f_eval, n_children):
-    def eval_func(x):
-        return f_eval(x)
-
-    func = Function(n_children, f_eval=eval_func)
-
-    return func
-
-
 def set_id(node, func_id):
     """function for setting id to node object.
 

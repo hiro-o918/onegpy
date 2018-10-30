@@ -64,6 +64,9 @@ def one_point(solution, func_bank):
     if function_list is None:
         raise ValueError("function bank must have {}'s function list, but it has no list.".format(n_children))
 
+    if len(function_list) == 1:
+        return solution
+
     candidate_id = random.sample(function_list, 2)
     if point.func_id != candidate_id[0]:
         node.set_id(point, candidate_id[0])

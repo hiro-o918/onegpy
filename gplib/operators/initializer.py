@@ -1,12 +1,16 @@
 from abc import ABC
 
 from gplib.operator import AbstractOperator, PopulationOperator, ProblemBasedOperator
+from gplib.problem import problem_checker
 from gplib.solutions import solution, node
 import random
+
+from gplib.utils.checkers import prob_checker
 
 
 class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):
     def __init__(self, n_in, n_out, problem):
+        problem_checker(problem)
         AbstractOperator.__init__(self, n_in, n_out)
         ProblemBasedOperator.__init__(self, problem)
 
@@ -53,6 +57,7 @@ class RandomInitializer(AbstractInitializer):
         :param max_depth: int. The limit of depth of the solution.
         :param problem: problem object. problem to solve
         """
+        prob_checker(t_prob)
         super(RandomInitializer, self).__init__(n_in=0, n_out=1, problem=problem)
         self.t_prob = t_prob
         self.max_depth = max_depth
@@ -64,8 +69,7 @@ class RandomInitializer(AbstractInitializer):
         Generating a new solution.
         :return: solution object. solution
         """
-        # TODO check t_prob range and all the arguments are correct.
-        # TODO check problem is class Problem
+
 
         def new_node(parent, depth):
             current_node = node.Node()
