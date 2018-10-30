@@ -6,6 +6,8 @@ base package
    :undoc-members:
    :show-inheritance:
 
+.. mdinclude:: base.readme.md
+
 .. toctree::
 
    base.gpbase
