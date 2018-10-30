@@ -161,6 +161,32 @@ class TestNodeFunctions(unittest.TestCase):
 
         self.assertEqual(node.children_checker([self.n1, self.n2]), None)
 
+    def test_get_all_terminal_nodes(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 1)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n2, [self.n4, self.n5])
+        node.set_children(self.n3, [self.n6])
+
+        terminal_nodes = node.get_all_terminal_nodes(self.n1)
+        expected_terminal_nodes = [self.n4, self.n5, self.n6]
+
+        for n in terminal_nodes:
+            self.assertTrue(n in expected_terminal_nodes)
+
+    def test_get_nonterminal_nodes(self):
+        node.set_id(self.n1, 0)
+        node.set_id(self.n2, 1)
+        node.set_children(self.n1, [self.n2, self.n3])
+        node.set_children(self.n2, [self.n4, self.n5])
+        node.set_children(self.n3, [self.n6])
+
+        nonterminal_nodes = node.get_all_nonterminal_nodes(self.n1)
+        expected_nonterminal_nodes = [self.n1, self.n2, self.n3]
+
+        for n in nonterminal_nodes:
+            self.assertTrue(n in expected_nonterminal_nodes)
+
 
 if __name__ == '__main__':
     unittest.main()
