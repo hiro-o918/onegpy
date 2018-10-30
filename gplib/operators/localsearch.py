@@ -22,9 +22,9 @@ class AbstractLocalSearch(AbstractOperator, ProblemBasedOperator, ABC):
 
     def get_target_node(self, root):
         if self.target_node == 'nonterminal':
-            return node.get_all_nonterminal_node(root)
+            return node.get_all_nonterminal_nodes(root)
         elif self.target_node == 'terminal':
-            return node.get_all_nonterminal_node(root)
+            return node.get_all_nonterminal_nodes(root)
         elif self.target_node == 'all':
             return node.get_all_node(root)
         else:
