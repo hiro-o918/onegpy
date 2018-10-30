@@ -23,7 +23,7 @@ def get_fitness_info(population):
 
     ave_fit = sum / float(len(population))
 
-    info = {'max_fit':max_fit, 'ave_fit':ave_fit, 'min_fit':min_fit}
+    info = {'max_fit': max_fit, 'ave_fit': ave_fit, 'min_fit': min_fit}
 
     return info
 
