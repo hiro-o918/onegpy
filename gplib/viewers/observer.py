@@ -15,10 +15,10 @@ def generate_sgp_log(gene, population):
     return log
 
 
-def generate_mlpsgp_log(iter_cnt, eval_cnt, population_list):
+def generate_mlpsgp_log(gene_cnt, eval_cnt, population_list):
     detailed_log = []
     for i, sub_pop in enumerate(population_list):
-        general_log = {'iter_cnt': iter_cnt, 'eval_cnt': eval_cnt, 'level': i + 1}
+        general_log = {'gene_cnt': gene_cnt, 'eval_cnt': eval_cnt, 'level': i + 1}
         fitness_log = util.get_fitness_info(sub_pop)
         detailed_log.append({**general_log, **fitness_log})
 
@@ -27,7 +27,7 @@ def generate_mlpsgp_log(iter_cnt, eval_cnt, population_list):
                                      [x['min_fit'], x['ave_fit'], x['max_fit']],
                                      detailed_log)))
 
-    summary_log = {'iter_count': iter_cnt,
+    summary_log = {'iter_count': gene_cnt,
                    'eval_cnt': eval_cnt,
                    'min': min(fitness_list[:, fitness_list_mapper['min']]),
                    'ave': np.average(fitness_list[:, fitness_list_mapper['ave']]),
@@ -130,8 +130,8 @@ class MLPS_Observer(AbstractObserver):
     def begin(self):
         [l.begin() for l in self._loggers]
 
-    def end(self, iter_cnt, eval_cnt, population_list):
-        log_dict = generate_mlpsgp_log(iter_cnt, eval_cnt, population_list)
+    def end(self, gene_cnt, eval_cnt, population_list):
+        log_dict = generate_mlpsgp_log(gene_cnt, eval_cnt, population_list)
         for t in self.history_tag:
             self.history_dict[t].append(log_dict[t])
             if len(self.loggers_mapper[t]) == 1:
@@ -141,8 +141,8 @@ class MLPS_Observer(AbstractObserver):
                 [l.end(log=log_dict[t], history=self.history_dict[t])
                  for l in itemgetter(*self.loggers_mapper[t])(self._loggers)]
 
-    def update(self, iter_cnt, eval_cnt, population_list):
-        log_dict = generate_mlpsgp_log(iter_cnt, eval_cnt, population_list)
+    def update(self, gene_cnt, eval_cnt, population_list):
+        log_dict = generate_mlpsgp_log(gene_cnt, eval_cnt, population_list)
 
         for t in self.history_tag:
             self.history_dict[t].append(log_dict[t])
