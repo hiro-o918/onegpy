@@ -31,7 +31,8 @@ class Function(object):
         self.f_eval = f_eval
 
     def __call__(self, x):
-        n_children_checker(self.n_children, len(x))
+        if self.n_children > 0:
+            n_children_checker(self.n_children, len(x))
         return self.f_eval(x)
 
 

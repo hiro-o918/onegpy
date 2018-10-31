@@ -61,10 +61,10 @@ class Cos2XProblem(AbstractProblem):
             return eval_func([self._eval(c, x) for c in current_node.children])
 
     def _function_bank_builder(self):
-        return get_default_function_bank()
+        return get_default_function_bank(1)
 
 
-def get_default_function_bank():
+def get_default_function_bank(dim):
     """
     make a function bank with default settings.
     :return: function bank object.
@@ -78,7 +78,8 @@ def get_default_function_bank():
     func_bank.add_function(get_div())
     func_bank.add_function(get_val(1.0))
     func_bank.add_function(get_sin())
-    func_bank.add_function(get_x())
+    for i in range(dim):
+        func_bank.add_function(get_x(dim))
 
     return func_bank
 
@@ -138,13 +139,13 @@ def get_div():
     return node.Function(2, div_func)
 
 
-def get_x():
+def get_x(dim_i):
     """
     get function of x.
     :return: function object.
     """
     def x_func(x):
-        return x
+        return x[:, dim_i]
 
     return node.Function(0, x_func)
 
