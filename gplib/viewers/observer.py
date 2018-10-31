@@ -63,15 +63,15 @@ class DefaultObserver(AbstractObserver):
         """
         Observer for SGP.
 
-            :param verbose: int.
+        :param verbose: int.
             0 -> No log,
             1 -> print a log.
             2 -> save a log.
-            3 -> print and sve a log
-            :param out: String.output output to print.
-            :param filepath: filepath: str or Path. Path to dump json.
-            :param save_every_updating: bool. if true, save history every updating.
-             otherwise save only in the end.
+            3 -> print and save a log
+        :param out: String.output output to print.
+        :param filepath: filepath: str or Path. Path to dump json.
+        :param save_every_updating: bool. if true, save history every updating.
+         otherwise save only in the end.
         """
         super(DefaultObserver, self).__init__()
         self.set_loggers(verbose, **kwargs)
@@ -102,15 +102,15 @@ class MLPS_Observer(AbstractObserver):
         """
         Observer for MLPS-GP.
 
-            :param verbose: int.
+        :param verbose: int.
             0 -> No log,
             1 -> print a log.
             2 -> save a log.
-            3 -> print and sve a log
-            :param out: String.output output to print.
-            :param filedir: filedir: str or Path. Path to dump json.
-            :param save_every_updating: bool. if true, save history every updating.
-             otherwise save only in the end.
+            3 -> print and save a log
+        :param out: String.output output to print.
+        :param filedir: filedir: str or Path. Path to dump json.
+        :param save_every_updating: bool. if true, save history every updating.
+         otherwise save only in the end.
         """
 
         super(MLPS_Observer, self).__init__()
