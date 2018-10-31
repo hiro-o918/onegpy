@@ -61,6 +61,7 @@ class TestBooleanFunctions(unittest.TestCase):
     def test_x_func(self):
         self.assertTrue(np.array_equal(arithmetic.get_sin()(self.x1), self.x1))
 
+
     def test_val_func(self):
         self.assertTrue(np.array_equal(arithmetic.get_sin()(self.x1), np.array([1.0, 1.0], float)))
 

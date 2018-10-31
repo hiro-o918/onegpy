@@ -21,15 +21,6 @@ class TestNodeFunctions(unittest.TestCase):
         # such as non-terminal nodes or terminal nodes here.
         self.function_dict = {0: self.f1, 1: self.f2}
 
-    def test_build_func(self):
-        def do_nothing(*args):
-            return 'do_nothing'
-        n_children = 1
-        f_eval = do_nothing
-        f = node.build_func(f_eval, n_children)
-        self.assertEqual(f.n_children, n_children)
-        self.assertEqual(f(self.n1), 'do_nothing')
-
     def test_set_id(self):
         func_id = 0
         node.set_id(self.n1, func_id)
