@@ -159,7 +159,7 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs, is_
     # source files in that folder.
     # (depending on settings - but shall_skip() takes care of that)
     subs = [sub for sub in subs if not
-            shall_skip(path.join(root, sub, INITPY), opts, excludes)]
+    shall_skip(path.join(root, sub, INITPY), opts, excludes)]
     # if there are some package directories, add a TOC for theses subpackages
     if subs:
         text += '.. toctree::\n\n'
@@ -237,7 +237,7 @@ def shall_skip(module, opts, excludes=[]):
     # skip if it has a "private" name and this is selected
     filename = path.basename(module)
     if filename != '__init__.py' and filename.startswith('_') and \
-       not opts.includeprivate:
+            not opts.includeprivate:
         return True
     return False
 
@@ -287,7 +287,7 @@ def recurse_tree(rootpath, excludes, opts):
         if is_pkg or is_namespace:
             # we are in a package with something to document
             if subs or len(py_files) > 1 or not shall_skip(path.join(root, INITPY), opts):
-                subpackage = root[len(rootpath):].lstrip(path.sep).\
+                subpackage = root[len(rootpath):].lstrip(path.sep). \
                     replace(path.sep, '.')
                 # if this is not a namespace or
                 # a namespace and there is something there to document
@@ -342,7 +342,7 @@ Note: By default this script will not overwrite already created files.""")
                         help='path to module to document')
     parser.add_argument('exclude_pattern', nargs='*',
                         help='fnmatch-style file and/or directory patterns '
-                        'to exclude from generation')
+                             'to exclude from generation')
 
     parser.add_argument('-o', '--output-dir', action='store', dest='destdir',
                         required=True,
@@ -356,7 +356,7 @@ Note: By default this script will not overwrite already created files.""")
     parser.add_argument('-l', '--follow-links', action='store_true',
                         dest='followlinks', default=False,
                         help='follow symbolic links. Powerful when combined '
-                              'with collective.recipe.omelette.')
+                             'with collective.recipe.omelette.')
     parser.add_argument('-n', '--dry-run', action='store_true', dest='dryrun',
                         help='run the script without creating files')
     parser.add_argument('-e', '--separate', action='store_true',
@@ -441,26 +441,26 @@ def main(argv=sys.argv[1:]):
             prev_module = module
             text += '   %s\n' % module
         d = dict(
-            path = args.destdir,
-            sep = False,
-            dot = '_',
-            project = args.header,
-            author = args.author or 'Author',
-            version = args.version or '',
-            release = args.release or args.version or '',
-            suffix = '.' + args.suffix,
-            master = 'index',
-            epub = True,
-            extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode',
-                          'sphinx.ext.todo'],
-            makefile = True,
-            batchfile = True,
-            make_mode = True,
-            mastertocmaxdepth = args.maxdepth,
-            mastertoctree = text,
-            language = 'en',
-            module_path = rootpath,
-            append_syspath = args.append_syspath,
+            path=args.destdir,
+            sep=False,
+            dot='_',
+            project=args.header,
+            author=args.author or 'Author',
+            version=args.version or '',
+            release=args.release or args.version or '',
+            suffix='.' + args.suffix,
+            master='index',
+            epub=True,
+            extensions=['sphinx.ext.autodoc', 'sphinx.ext.viewcode',
+                        'sphinx.ext.todo'],
+            makefile=True,
+            batchfile=True,
+            make_mode=True,
+            mastertocmaxdepth=args.maxdepth,
+            mastertoctree=text,
+            language='en',
+            module_path=rootpath,
+            append_syspath=args.append_syspath,
         )
         if args.extensions:
             d['extensions'].extend(args.extensions)
