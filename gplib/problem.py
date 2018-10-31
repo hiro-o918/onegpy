@@ -19,8 +19,7 @@ class AbstractProblem(ABC):
             fitness = self._cal_fitness(target_solution=target_solution_or_solutions)
             self._eval_cnt += 1
             solution.set_previous_fitness(target_solution_or_solutions, fitness)
-            if self._elite_fitness < fitness:
-                self._elite_fitness = fitness
+            self._elite_fitness = max(self._elite_fitness, fitness)
             return fitness
         elif isinstance(target_solution_or_solutions, list):
             fitness_list = []
@@ -28,8 +27,7 @@ class AbstractProblem(ABC):
                 fitness = self._cal_fitness(target_solution=target_solution)
                 solution.set_previous_fitness(target_solution, fitness)
                 fitness_list.append(fitness_list)
-                if self._elite_fitness < fitness:
-                    self._elite_fitness = fitness
+                self._elite_fitness = max(self._elite_fitness, fitness)
             self._eval_cnt += len(target_solution_or_solutions)
             return fitness_list
         else:
