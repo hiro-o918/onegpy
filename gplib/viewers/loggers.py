@@ -65,7 +65,7 @@ class JSONLogger(AbstractLogger):
          otherwise save only in the end.
         """
         self._filepath = Path(filepath)
-        if not self._filepath.exists():
+        if not self._filepath.parent.exists():
             self._filepath.mkdir(parents=True)
         self._save_every_updating = save_every_updating
 

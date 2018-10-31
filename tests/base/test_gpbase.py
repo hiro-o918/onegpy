@@ -20,7 +20,7 @@ class TestSequential(unittest.TestCase):
         # self.sequential.add(self.co)
 
         gp = gpbase.PopulationGP(initializer=self.initializer, sequential=self.sequential,
-                                 n_generations=10, observer=observer.DefaultObserver)
+                                 n_generations=10, observer=observer.DefaultObserver(verbose=3))
         gp.__call__()
 
 
