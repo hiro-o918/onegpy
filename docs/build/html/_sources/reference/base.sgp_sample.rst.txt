@@ -1,0 +1,8 @@
+base.sgp\_sample
+================
+
+.. module:: gplib.base.sgp_sample
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+

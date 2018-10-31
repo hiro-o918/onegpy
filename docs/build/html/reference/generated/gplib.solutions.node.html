@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gplib.solutions.node module &mdash; GPLib 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GPLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GPLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>gplib.solutions.node module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generated/gplib.solutions.node.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-gplib.solutions.node">
+<span id="gplib-solutions-node-module"></span><h1>gplib.solutions.node module<a class="headerlink" href="#module-gplib.solutions.node" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gplib.solutions.node.Function">
+<em class="property">class </em><code class="descclassname">gplib.solutions.node.</code><code class="descname">Function</code><span class="sig-paren">(</span><em>n_children</em>, <em>f_eval=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#Function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Function object.</p>
+<dl class="docutils">
+<dt># Attribute</dt>
+<dd>n_children: int, the number of children of this function.
+eval: function, function of node to evaluate.</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.solutions.node.Node">
+<em class="property">class </em><code class="descclassname">gplib.solutions.node.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>func_id=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Node object.</p>
+<dl class="docutils">
+<dt># Attribute</dt>
+<dd>id: int, symbolic id for Function. This id is not assigned for each node object.
+children: list of Node object, children of this node.</dd>
+</dl>
+<dl class="attribute">
+<dt id="gplib.solutions.node.Node.is_terminal">
+<code class="descname">is_terminal</code><a class="headerlink" href="#gplib.solutions.node.Node.is_terminal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.calc_node_depth">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">calc_node_depth</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#calc_node_depth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.calc_node_depth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.children_checker">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">children_checker</code><span class="sig-paren">(</span><em>children</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#children_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.children_checker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.copy_node">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">copy_node</code><span class="sig-paren">(</span><em>node</em>, <em>deep=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#copy_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.copy_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.copy_nodes_along_graph">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">copy_nodes_along_graph</code><span class="sig-paren">(</span><em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#copy_nodes_along_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.copy_nodes_along_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy node object from <code class="docutils literal notranslate"><span class="pre">root</span></code> to the target node based on <a href="#id1"><span class="problematic" id="id2">``</span></a>graph’’
+This method differs from deepcopy(root) in that it copies only the nodes along <a href="#id3"><span class="problematic" id="id4">``</span></a>graph’‘.
+:param graph: list of <a href="#id5"><span class="problematic" id="id6">``</span></a>(i, Node object)’’ where <a href="#id7"><span class="problematic" id="id8">``</span></a>i’’ is the index of the next node of graph
+and <a href="#id9"><span class="problematic" id="id10">``</span></a>Node object’’ is the parent node. This graph is obtained by using <a href="#id11"><span class="problematic" id="id12">``</span></a>get_parent_node’‘.
+:return: the index of target node node in the parent, copied the target node object and copied root object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.func_id_checker">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">func_id_checker</code><span class="sig-paren">(</span><em>func_id</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#func_id_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.func_id_checker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_all_node">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_all_node</code><span class="sig-paren">(</span><em>root</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_all_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_all_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for getting all node in the solution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>root</strong> – Node object. root node of target solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of Node object. All node in the solution</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_all_nonterminal_nodes">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_all_nonterminal_nodes</code><span class="sig-paren">(</span><em>root</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_all_nonterminal_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_all_nonterminal_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for getting all terminal node in the solution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>root</strong> – Node object. root node of target solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of Node object. All terminal node in the solution</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_all_terminal_nodes">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_all_terminal_nodes</code><span class="sig-paren">(</span><em>root</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_all_terminal_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_all_terminal_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for getting all terminal node in the solution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>root</strong> – Node object. root node of target solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of Node object. All terminal node in the solution</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_all_terminal_points">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_all_terminal_points</code><span class="sig-paren">(</span><em>root</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_all_terminal_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_all_terminal_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for getting all terminal points in the solution
+this function is for crossover in MLPS-GP</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>root</strong> – Node object. root node of target solution.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of tuple(Node, int). (parent, index of terminal node)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_graph_to_target">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_graph_to_target</code><span class="sig-paren">(</span><em>root</em>, <em>target_node</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_graph_to_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_graph_to_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for searching a graph from root node to a target node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> – Node object, root node.</li>
+<li><strong>target_node</strong> – Node object, target node.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>:return Graph from <a href="#id13"><span class="problematic" id="id14">``</span></a>root’’ to <a href="#id15"><span class="problematic" id="id16">``</span></a>target_node’‘</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_n_children">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_n_children</code><span class="sig-paren">(</span><em>func_id</em>, <em>function_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_n_children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_n_children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.get_parent_node">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">get_parent_node</code><span class="sig-paren">(</span><em>root</em>, <em>target_node</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#get_parent_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.get_parent_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for searching parent node of target node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> – Node object, root node.</li>
+<li><strong>target_node</strong> – Node object, target node.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>:return Position of target_node in parent node, node object of parent node</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.n_children_checker">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">n_children_checker</code><span class="sig-paren">(</span><em>n_children</em>, <em>len_x</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#n_children_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.n_children_checker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.node_array_equal">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">node_array_equal</code><span class="sig-paren">(</span><em>nodes_a</em>, <em>nodes_b</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#node_array_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.node_array_equal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.node_checker">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">node_checker</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#node_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.node_checker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.node_equal">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">node_equal</code><span class="sig-paren">(</span><em>node_a</em>, <em>node_b</em>, <em>as_tree=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#node_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.node_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for comparing two nodes.
+:param node_a: Node object
+:param node_b: Node object
+:param as_tree: If False, compare the nodes based the node’s type and the function id,</p>
+<blockquote>
+<div>otherwise based on their tree structures as well as the node’s type and the function id.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.nodes_checker">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">nodes_checker</code><span class="sig-paren">(</span><em>nodes</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#nodes_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.nodes_checker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.set_children">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">set_children</code><span class="sig-paren">(</span><em>node</em>, <em>children</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#set_children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.set_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: implement a method to check follows:
+the number of children of node = len(children)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.solutions.node.set_id">
+<code class="descclassname">gplib.solutions.node.</code><code class="descname">set_id</code><span class="sig-paren">(</span><em>node</em>, <em>func_id</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/solutions/node.html#set_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.solutions.node.set_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>function for setting id to node object.</p>
+<dl class="docutils">
+<dt># Arguments</dt>
+<dd>node: Node object, target node.
+id: int, id of node.</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

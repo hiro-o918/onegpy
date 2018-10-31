@@ -1,0 +1,9 @@
+tests.viewer.test\_viewer
+=========================
+
+.. module:: tests.viewer.test_viewer
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   TestDefaultViewer

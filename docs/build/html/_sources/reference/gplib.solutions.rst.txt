@@ -1,0 +1,13 @@
+gplib.solutions package
+=======================
+
+.. automodule:: gplib.solutions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   gplib.solutions.node
+   gplib.solutions.solution
+

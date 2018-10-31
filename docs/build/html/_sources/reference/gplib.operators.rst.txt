@@ -1,0 +1,17 @@
+gplib.operators package
+=======================
+
+.. automodule:: gplib.operators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   gplib.operators.crossover
+   gplib.operators.initializer
+   gplib.operators.localsearch
+   gplib.operators.mlps_crossover
+   gplib.operators.mutation
+   gplib.operators.selection
+

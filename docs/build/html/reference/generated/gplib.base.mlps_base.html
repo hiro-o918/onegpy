@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gplib.base.mlps_base module &mdash; GPLib 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GPLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GPLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>gplib.base.mlps_base module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generated/gplib.base.mlps_base.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-gplib.base.mlps_base">
+<span id="gplib-base-mlps-base-module"></span><h1>gplib.base.mlps_base module<a class="headerlink" href="#module-gplib.base.mlps_base" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gplib.base.mlps_base.MLPS_GP">
+<em class="property">class </em><code class="descclassname">gplib.base.mlps_base.</code><code class="descname">MLPS_GP</code><span class="sig-paren">(</span><em>initializer</em>, <em>localsearch</em>, <em>problem</em>, <em>terminal_condition</em>, <em>simplify=None</em>, <em>is_add_terminal=True</em>, <em>only_add_best=False</em>, <em>only_add_improvements=False</em>, <em>depth_limit=1000000</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gplib.base.mlps_base.MLPS_GP.add_indiv">
+<code class="descname">add_indiv</code><span class="sig-paren">(</span><em>candidate</em>, <em>is_init</em>, <em>depth</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.add_indiv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.add_indiv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gplib.base.mlps_base.MLPS_GP.add_terminals">
+<code class="descname">add_terminals</code><span class="sig-paren">(</span><em>terminal_solutions</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.add_terminals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.add_terminals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gplib.base.mlps_base.MLPS_GP.do_crossover">
+<code class="descname">do_crossover</code><span class="sig-paren">(</span><em>candidate_solution</em>, <em>terminal_points</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.do_crossover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.do_crossover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gplib.base.mlps_base.MLPS_GP.get_skip_pop">
+<code class="descname">get_skip_pop</code><span class="sig-paren">(</span><em>level</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.get_skip_pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.get_skip_pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gplib.base.mlps_base.MLPS_GP.initialize_solution">
+<code class="descname">initialize_solution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.initialize_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.initialize_solution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gplib.base.mlps_base.MLPS_GP.mlps_iterate">
+<code class="descname">mlps_iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.mlps_iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.mlps_iterate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

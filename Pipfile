@@ -13,6 +13,7 @@ sphinx-rtd-theme = "*"
 sphinx = "*"
 sphinx-autobuild = "*"
 recommonmark = "*"
+"m2r" = "*"
 
 [requires]
 python_version = "3.6"

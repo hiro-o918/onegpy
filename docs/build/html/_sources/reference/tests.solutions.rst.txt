@@ -1,0 +1,13 @@
+tests.solutions package
+=======================
+
+.. automodule:: tests.solutions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   tests.solutions.test_node
+   tests.solutions.test_solution
+

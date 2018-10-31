@@ -1,0 +1,12 @@
+tests.operators.test\_localsearch
+=================================
+
+.. module:: tests.operators.test_localsearch
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   ExampleSolution
+   TestAllCheck
+   TestImprove
+   TestStopImprovement

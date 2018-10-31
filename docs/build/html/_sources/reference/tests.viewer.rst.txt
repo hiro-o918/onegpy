@@ -1,0 +1,12 @@
+tests.viewer package
+====================
+
+.. automodule:: tests.viewer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   tests.viewer.test_viewer
+

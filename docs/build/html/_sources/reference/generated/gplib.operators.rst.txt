@@ -1,0 +1,22 @@
+gplib\.operators package
+========================
+
+Submodules
+----------
+
+.. toctree::
+
+   gplib.operators.crossover
+   gplib.operators.initializer
+   gplib.operators.mlps_crossover 2
+   gplib.operators.mlps_crossover
+   gplib.operators.mutation
+   gplib.operators.selection
+
+Module contents
+---------------
+
+.. automodule:: gplib.operators
+    :members:
+    :undoc-members:
+    :show-inheritance:
