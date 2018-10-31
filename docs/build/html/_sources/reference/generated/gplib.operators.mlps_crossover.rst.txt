@@ -1,22 +1,7 @@
-gplib.operators.mlps\_crossover
-===============================
+gplib\.operators\.mlps\_crossover module
+========================================
 
 .. automodule:: gplib.operators.mlps_crossover
-
-   
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      MLPS_Crossover
-   
-   
-
-   
-   
-   
+    :members:
+    :undoc-members:
+    :show-inheritance:

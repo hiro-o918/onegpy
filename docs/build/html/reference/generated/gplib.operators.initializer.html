@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gplib.operators.initializer &mdash; GPLib 0.0 documentation</title>
+  <title>gplib.operators.initializer module &mdash; GPLib 0.0 documentation</title>
   
 
   
@@ -124,7 +124,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>gplib.operators.initializer</li>
+      <li>gplib.operators.initializer module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -144,25 +144,40 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-gplib.operators.initializer">
-<span id="gplib-operators-initializer"></span><h1>gplib.operators.initializer<a class="headerlink" href="#module-gplib.operators.initializer" title="Permalink to this headline">¶</a></h1>
-<p class="rubric">Classes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="gplib.operators.initializer.AbstractInitializer.html#gplib.operators.initializer.AbstractInitializer" title="gplib.operators.initializer.AbstractInitializer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbstractInitializer</span></code></a>(n_in,&nbsp;n_out,&nbsp;problem)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="gplib.operators.initializer.PopulationRandomInitializer.html#gplib.operators.initializer.PopulationRandomInitializer" title="gplib.operators.initializer.PopulationRandomInitializer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationRandomInitializer</span></code></a>(k,&nbsp;t_prob,&nbsp;…)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="gplib.operators.initializer.RandomInitializer.html#gplib.operators.initializer.RandomInitializer" title="gplib.operators.initializer.RandomInitializer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RandomInitializer</span></code></a>(t_prob,&nbsp;max_depth,&nbsp;problem)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<span id="gplib-operators-initializer-module"></span><h1>gplib.operators.initializer module<a class="headerlink" href="#module-gplib.operators.initializer" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gplib.operators.initializer.AbstractInitializer">
+<em class="property">class </em><code class="descclassname">gplib.operators.initializer.</code><code class="descname">AbstractInitializer</code><span class="sig-paren">(</span><em>n_in</em>, <em>n_out</em>, <em>problem</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/initializer.html#AbstractInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.initializer.AbstractInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operator.AbstractOperator.html#gplib.operator.AbstractOperator" title="gplib.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.AbstractOperator</span></code></a>, <a class="reference internal" href="gplib.operator.ProblemBasedOperator.html#gplib.operator.ProblemBasedOperator" title="gplib.operator.ProblemBasedOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.ProblemBasedOperator</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract class of initializer</p>
+<dl class="attribute">
+<dt id="gplib.operators.initializer.AbstractInitializer.func_bank">
+<code class="descname">func_bank</code><a class="headerlink" href="#gplib.operators.initializer.AbstractInitializer.func_bank" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.initializer.PopulationRandomInitializer">
+<em class="property">class </em><code class="descclassname">gplib.operators.initializer.</code><code class="descname">PopulationRandomInitializer</code><span class="sig-paren">(</span><em>k</em>, <em>t_prob</em>, <em>max_depth</em>, <em>problem</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/initializer.html#PopulationRandomInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.initializer.PopulationRandomInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.initializer.RandomInitializer.html#gplib.operators.initializer.RandomInitializer" title="gplib.operators.initializer.RandomInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.initializer.RandomInitializer</span></code></a>, <a class="reference internal" href="gplib.operator.PopulationOperator.html#gplib.operator.PopulationOperator" title="gplib.operator.PopulationOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.PopulationOperator</span></code></a></p>
+<p>Generate solutions using random initializer.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.initializer.PopulationTerminalInitializer">
+<em class="property">class </em><code class="descclassname">gplib.operators.initializer.</code><code class="descname">PopulationTerminalInitializer</code><span class="sig-paren">(</span><em>problem</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/initializer.html#PopulationTerminalInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.initializer.PopulationTerminalInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.initializer.AbstractInitializer.html#gplib.operators.initializer.AbstractInitializer" title="gplib.operators.initializer.AbstractInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.initializer.AbstractInitializer</span></code></a>, <a class="reference internal" href="gplib.operator.PopulationOperator.html#gplib.operator.PopulationOperator" title="gplib.operator.PopulationOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.PopulationOperator</span></code></a></p>
+<p>Generate all solutions which have an only terminal node.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.initializer.RandomInitializer">
+<em class="property">class </em><code class="descclassname">gplib.operators.initializer.</code><code class="descname">RandomInitializer</code><span class="sig-paren">(</span><em>t_prob</em>, <em>max_depth</em>, <em>problem</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/initializer.html#RandomInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.initializer.RandomInitializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.initializer.AbstractInitializer.html#gplib.operators.initializer.AbstractInitializer" title="gplib.operators.initializer.AbstractInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.initializer.AbstractInitializer</span></code></a></p>
+<p>Generate a new solution.</p>
+</dd></dl>
+
 </div>
 
 

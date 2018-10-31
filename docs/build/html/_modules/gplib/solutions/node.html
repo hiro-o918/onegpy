@@ -155,7 +155,11 @@
 
 <div class="viewcode-block" id="Node.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.Node.html#gplib.solutions.node.Node.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func_id</span> <span class="o">=</span> <span class="n">func_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span></div>
 
 
 <div class="viewcode-block" id="Function"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.Function.html#gplib.solutions.node.Function">[docs]</a><span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -171,17 +175,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">f_eval</span> <span class="o">=</span> <span class="n">f_eval</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_children</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n_children_checker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_children</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
-
-
-<span class="c1">#TODO: Remove this function.</span>
-<div class="viewcode-block" id="build_func"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.build_func.html#gplib.solutions.node.build_func">[docs]</a><span class="k">def</span> <span class="nf">build_func</span><span class="p">(</span><span class="n">f_eval</span><span class="p">,</span> <span class="n">n_children</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">eval_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">f_eval</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-    <span class="n">func</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">n_children</span><span class="p">,</span> <span class="n">f_eval</span><span class="o">=</span><span class="n">eval_func</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">func</span></div>
 
 
 <div class="viewcode-block" id="set_id"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.set_id.html#gplib.solutions.node.set_id">[docs]</a><span class="k">def</span> <span class="nf">set_id</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">func_id</span><span class="p">):</span>
@@ -191,13 +187,13 @@
 <span class="sd">                node: Node object, target node.</span>
 <span class="sd">                id: int, id of node.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-    <span class="n">_func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
+    <span class="n">node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
     <span class="n">node</span><span class="o">.</span><span class="n">func_id</span> <span class="o">=</span> <span class="n">func_id</span></div>
 
 
 <div class="viewcode-block" id="get_n_children"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_n_children.html#gplib.solutions.node.get_n_children">[docs]</a><span class="k">def</span> <span class="nf">get_n_children</span><span class="p">(</span><span class="n">func_id</span><span class="p">,</span> <span class="n">function_dict</span><span class="p">):</span>
-    <span class="n">_func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
+    <span class="n">func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">)</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">function_dict</span><span class="p">[</span><span class="n">func_id</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">func</span><span class="o">.</span><span class="n">n_children</span></div>
@@ -207,8 +203,8 @@
     <span class="sd">&quot;&quot;&quot; TODO: implement a method to check follows:</span>
 <span class="sd">              the number of children of node = len(children)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_nodes_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-    <span class="n">_children_checker</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+    <span class="n">node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">children_checker</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
 
     <span class="n">node</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="n">children</span></div>
 
@@ -257,7 +253,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">find_parent_node</span><span class="p">(</span><span class="n">current_node</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="n">children</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span>
@@ -272,7 +268,7 @@
                     <span class="k">break</span>
         <span class="k">return</span> <span class="n">p</span>
 
-    <span class="n">_nodes_checker</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">)</span>
+    <span class="n">nodes_checker</span><span class="p">([</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">target_node</span> <span class="ow">is</span> <span class="n">root</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;There is no parent of root.&#39;</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -297,7 +293,7 @@
 
     <span class="k">def</span> <span class="nf">find_parent_node</span><span class="p">(</span><span class="n">current_node</span><span class="p">):</span>
         <span class="k">nonlocal</span> <span class="n">graph</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="n">children</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span>
@@ -314,7 +310,7 @@
 
         <span class="k">return</span> <span class="n">p</span>
 
-    <span class="n">_nodes_checker</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">)</span>
+    <span class="n">nodes_checker</span><span class="p">([</span><span class="n">root</span><span class="p">,</span> <span class="n">target_node</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">target_node</span> <span class="ow">is</span> <span class="n">root</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;There is no parent of root.&#39;</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -335,13 +331,13 @@
 <span class="sd">    :return: list of Node object. All node in the solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">add_children_to_nodes</span><span class="p">(</span><span class="n">current_node</span><span class="p">):</span>
         <span class="n">children</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span>
         <span class="k">nonlocal</span> <span class="n">nodes</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">children</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
             <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -356,7 +352,7 @@
     <span class="n">d_list</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">cal_depth</span><span class="p">(</span><span class="n">c_node</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">c_node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">c_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">c_node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                 <span class="n">cal_depth</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -367,7 +363,7 @@
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">d_list</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_all_terminal_node"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_terminal_node.html#gplib.solutions.node.get_all_terminal_node">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_node</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<div class="viewcode-block" id="get_all_terminal_nodes"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_terminal_nodes.html#gplib.solutions.node.get_all_terminal_nodes">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    function for getting all terminal node in the solution</span>
 
@@ -375,13 +371,13 @@
 <span class="sd">    :return: list of Node object. All terminal node in the solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
     <span class="n">terminal_nodes</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">add_children_to_nodes</span><span class="p">(</span><span class="n">current_node</span><span class="p">):</span>
         <span class="n">children</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span>
         <span class="k">nonlocal</span> <span class="n">terminal_nodes</span>
-        <span class="k">if</span> <span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="n">terminal_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_node</span><span class="p">)</span>
             <span class="k">return</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
@@ -390,6 +386,30 @@
     <span class="n">add_children_to_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">terminal_nodes</span></div>
+
+
+<div class="viewcode-block" id="get_all_nonterminal_nodes"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_nonterminal_nodes.html#gplib.solutions.node.get_all_nonterminal_nodes">[docs]</a><span class="k">def</span> <span class="nf">get_all_nonterminal_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    function for getting all terminal node in the solution</span>
+
+<span class="sd">    :param root: Node object. root node of target solution.</span>
+<span class="sd">    :return: list of Node object. All terminal node in the solution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">nonterminal_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">add_children_to_nodes</span><span class="p">(</span><span class="n">current_node</span><span class="p">):</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span>
+        <span class="k">nonlocal</span> <span class="n">nonterminal_nodes</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">current_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
+            <span class="n">nonterminal_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_node</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+                <span class="n">add_children_to_nodes</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="n">add_children_to_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">nonterminal_nodes</span></div>
 
 
 <div class="viewcode-block" id="get_all_terminal_points"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.get_all_terminal_points.html#gplib.solutions.node.get_all_terminal_points">[docs]</a><span class="k">def</span> <span class="nf">get_all_terminal_points</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -401,16 +421,16 @@
 <span class="sd">    :return: list of tuple(Node, int). (parent, index of terminal node)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">node_checker</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
     <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">add_children_to_nodes</span><span class="p">(</span><span class="n">current_node</span><span class="p">):</span>
         <span class="n">children</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">children</span>
         <span class="k">nonlocal</span> <span class="n">points</span>
-        <span class="k">if</span> <span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">children</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
                 <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">current_node</span><span class="p">,</span> <span class="n">index</span><span class="p">))</span>
             <span class="n">add_children_to_nodes</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
@@ -435,7 +455,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="n">_nodes_checker</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
+    <span class="n">nodes_checker</span><span class="p">([</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">])</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">as_tree</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">func_id_equal</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>
 
@@ -454,7 +474,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="_func_id_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._func_id_checker.html#gplib.solutions.node._func_id_checker">[docs]</a><span class="k">def</span> <span class="nf">_func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">):</span>
+<div class="viewcode-block" id="func_id_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.func_id_checker.html#gplib.solutions.node.func_id_checker">[docs]</a><span class="k">def</span> <span class="nf">func_id_checker</span><span class="p">(</span><span class="n">func_id</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">func_id</span><span class="p">))</span>
@@ -467,7 +487,7 @@
     <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="_node_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._node_checker.html#gplib.solutions.node._node_checker">[docs]</a><span class="k">def</span> <span class="nf">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="node_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.node_checker.html#gplib.solutions.node.node_checker">[docs]</a><span class="k">def</span> <span class="nf">node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Node</span><span class="p">):</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
@@ -477,16 +497,22 @@
     <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="_nodes_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._nodes_checker.html#gplib.solutions.node._nodes_checker">[docs]</a><span class="k">def</span> <span class="nf">_nodes_checker</span><span class="p">(</span><span class="o">*</span><span class="n">nodes</span><span class="p">):</span>
+<div class="viewcode-block" id="nodes_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.nodes_checker.html#gplib.solutions.node.nodes_checker">[docs]</a><span class="k">def</span> <span class="nf">nodes_checker</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-        <span class="n">_node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
+        <span class="n">node_checker</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="_children_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node._children_checker.html#gplib.solutions.node._children_checker">[docs]</a><span class="k">def</span> <span class="nf">_children_checker</span><span class="p">(</span><span class="n">children</span><span class="p">):</span>
+<div class="viewcode-block" id="children_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.children_checker.html#gplib.solutions.node.children_checker">[docs]</a><span class="k">def</span> <span class="nf">children_checker</span><span class="p">(</span><span class="n">children</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">))</span>
 
-    <span class="n">_nodes_checker</span><span class="p">(</span><span class="o">*</span><span class="n">children</span><span class="p">)</span></div>
+    <span class="n">nodes_checker</span><span class="p">(</span><span class="n">children</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="n_children_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.node.n_children_checker.html#gplib.solutions.node.n_children_checker">[docs]</a><span class="k">def</span> <span class="nf">n_children_checker</span><span class="p">(</span><span class="n">n_children</span><span class="p">,</span> <span class="n">len_x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n_children</span> <span class="o">!=</span> <span class="n">len_x</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;expect the n_children == len_x, but got n_children</span><span class="si">{}</span><span class="s1"> != len_x&#39;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_children</span><span class="p">,</span> <span class="n">len_x</span><span class="p">))</span></div>
 </pre></div>
 
            </div>

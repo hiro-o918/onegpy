@@ -25,5 +25,6 @@ gplib.solutions.solution.Solution
    
       ~Solution.depth
       ~Solution.n_nodes
+      ~Solution.previous_fitness
    
    

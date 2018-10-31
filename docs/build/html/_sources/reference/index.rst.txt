@@ -7,7 +7,6 @@ Reference
    :show-inheritance:
 
 .. toctree::
-   :maxdepth: 1
 
    base
    operators
@@ -17,9 +16,10 @@ Reference
    viewer
 
 .. toctree::
-   :maxdepth: 1
 
    operator
    problem
    sequential
+   terminal_condition
+   terminator
 

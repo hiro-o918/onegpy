@@ -1,31 +1,7 @@
-gplib.operators.crossover
-=========================
+gplib\.operators\.crossover module
+==================================
 
 .. automodule:: gplib.operators.crossover
-
-   
-   
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      crossover
-      destructive_crossover
-      get_crossover_core
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      OnePointCrossover
-      PopulationOnePointCrossover
-   
-   
-
-   
-   
-   
+    :members:
+    :undoc-members:
+    :show-inheritance:

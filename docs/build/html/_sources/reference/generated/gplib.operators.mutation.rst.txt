@@ -1,31 +1,7 @@
-gplib.operators.mutation
-========================
+gplib\.operators\.mutation module
+=================================
 
 .. automodule:: gplib.operators.mutation
-
-   
-   
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      get_mutation_core
-      one_point
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      AbstractMutation
-      PointMutation
-      PopulationPointMutation
-   
-   
-
-   
-   
-   
+    :members:
+    :undoc-members:
+    :show-inheritance:

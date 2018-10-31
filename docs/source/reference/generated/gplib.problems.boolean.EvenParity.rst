@@ -15,6 +15,7 @@ gplib.problems.boolean.EvenParity
    
       ~EvenParity.__init__
       ~EvenParity.fitness
+      ~EvenParity.get_elite_fitness
       ~EvenParity.get_eval_count
    
    

@@ -143,12 +143,13 @@
             
   <h1>Source code for gplib.utils.config</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 
 <span class="kn">from</span> <span class="nn">gplib.operator</span> <span class="k">import</span> <span class="n">ProblemBasedOperator</span>
+<span class="kn">from</span> <span class="nn">gplib.terminator</span> <span class="k">import</span> <span class="n">ProblemBasedTerminator</span>
 <span class="kn">from</span> <span class="nn">gplib.sequential</span> <span class="k">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">gplib.terminal_condition</span> <span class="k">import</span> <span class="n">TerminalCondition</span>
 
 
 <div class="viewcode-block" id="build_instance"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.build_instance.html#gplib.utils.config.build_instance">[docs]</a><span class="k">def</span> <span class="nf">build_instance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -205,27 +206,68 @@
     <span class="k">return</span> <span class="n">build_instance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="build_gp"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.build_gp.html#gplib.utils.config.build_gp">[docs]</a><span class="k">def</span> <span class="nf">build_gp</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">initializer</span><span class="p">,</span> <span class="n">sequential</span><span class="p">,</span> <span class="n">viewer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">build_instance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span>
-                          <span class="n">initializer</span><span class="o">=</span><span class="n">initializer</span><span class="p">,</span> <span class="n">sequential</span><span class="o">=</span><span class="n">sequential</span><span class="p">,</span> <span class="n">viewer</span><span class="o">=</span><span class="n">viewer</span><span class="p">)</span></div>
+<div class="viewcode-block" id="build_terminator"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.build_terminator.html#gplib.utils.config.build_terminator">[docs]</a><span class="k">def</span> <span class="nf">build_terminator</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">ProblemBasedTerminator</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">build_instance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;problem&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">build_instance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
 
 
-<span class="n">CONFIG_TAGS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;problem&#39;</span><span class="p">,</span> <span class="s1">&#39;initializer&#39;</span><span class="p">,</span> <span class="s1">&#39;sequential&#39;</span><span class="p">,</span> <span class="s1">&#39;viewer&#39;</span><span class="p">,</span> <span class="s1">&#39;gp&#39;</span><span class="p">]</span>
-<span class="n">BUILDER_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;problem&#39;</span><span class="p">:</span> <span class="n">build_problem</span><span class="p">,</span>
-               <span class="s1">&#39;initializer&#39;</span><span class="p">:</span> <span class="n">build_operator</span><span class="p">,</span>
-               <span class="s1">&#39;sequential&#39;</span><span class="p">:</span> <span class="n">build_sequential</span><span class="p">,</span>
-               <span class="s1">&#39;viewer&#39;</span><span class="p">:</span> <span class="n">build_viewer</span><span class="p">,</span>
-               <span class="s1">&#39;gp&#39;</span><span class="p">:</span> <span class="n">build_gp</span><span class="p">}</span>
+<div class="viewcode-block" id="build_terminal_condition"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.build_terminal_condition.html#gplib.utils.config.build_terminal_condition">[docs]</a><span class="k">def</span> <span class="nf">build_terminal_condition</span><span class="p">(</span><span class="n">terminator_configs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">t_condition</span> <span class="o">=</span> <span class="n">TerminalCondition</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">terminator_config</span> <span class="ow">in</span> <span class="n">terminator_configs</span><span class="p">:</span>
+        <span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">unwrap_instance_info</span><span class="p">(</span><span class="n">terminator_config</span><span class="p">)</span>
+        <span class="n">t_condition</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">build_terminator</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">t_condition</span></div>
 
 
-<div class="viewcode-block" id="check_config"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.check_config.html#gplib.utils.config.check_config">[docs]</a><span class="k">def</span> <span class="nf">check_config</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<div class="viewcode-block" id="check_config"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.check_config.html#gplib.utils.config.check_config">[docs]</a><span class="k">def</span> <span class="nf">check_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">config_tags</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONFIG_TAGS</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;key must be selected from </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">CONFIG_TAGS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config_tags</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;key must be selected from </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config_tags</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="gp_from_config"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.gp_from_config.html#gplib.utils.config.gp_from_config">[docs]</a><span class="k">def</span> <span class="nf">gp_from_config</span><span class="p">(</span><span class="n">path_or_config</span><span class="p">):</span>
+<div class="viewcode-block" id="check_builder_map"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.check_builder_map.html#gplib.utils.config.check_builder_map">[docs]</a><span class="k">def</span> <span class="nf">check_builder_map</span><span class="p">(</span><span class="n">config_tags</span><span class="p">,</span> <span class="n">builder_map</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">config_tags</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">builder_map</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;There is no </span><span class="si">{}</span><span class="s1"> in builder_map&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="gp_from_config"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.gp_from_config.html#gplib.utils.config.gp_from_config">[docs]</a><span class="k">def</span> <span class="nf">gp_from_config</span><span class="p">(</span><span class="n">path_or_config</span><span class="p">,</span> <span class="n">config_tags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">builder_map</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a gp instance based on config.</span>
+<span class="sd">    Keys of config indicate instances&#39; name and values follows below format.</span>
+<span class="sd">    `[module, class or function, list or dict of arguments]`</span>
+<span class="sd">    where list or dict of arguments only contains hyper parameters not dependent instances</span>
+
+<span class="sd">    :param path_or_config: filepath or dict</span>
+<span class="sd">    :param config_tags: list of instance names. All the instances are built in this order.</span>
+<span class="sd">    Tags which are not in `config` will be skipped.</span>
+<span class="sd">    :param builder_map: dict. the mapper of instances&#39; names to their builder</span>
+<span class="sd">    :return gp: a gp instance</span>
+
+<span class="sd">    - Example of config</span>
+<span class="sd">        config = {</span>
+<span class="sd">            &quot;gp&quot;: [&quot;gplib.base&quot;, &quot;PopulationGP&quot;, [20]],</span>
+<span class="sd">            &quot;initializer&quot;: [</span>
+<span class="sd">                &quot;gplib.operators&quot;, &quot;PopulationRandomInitializer&quot;, [500, 0.1, 10]</span>
+<span class="sd">            ],</span>
+<span class="sd">            &quot;problem&quot;: [</span>
+<span class="sd">                &quot;gplib.problems&quot;, &quot;EvenParity&quot;, {&quot;dim&quot;: 3}</span>
+<span class="sd">            ],</span>
+<span class="sd">            &quot;sequential&quot;: [</span>
+<span class="sd">                [&quot;gplib.operators&quot;, &quot;PopulationOnePointCrossover&quot;, {&quot;c_rate&quot;: 0.5, &quot;destructive&quot;: False}],</span>
+<span class="sd">                [&quot;gplib.operators&quot;, &quot;PopulationPointMutation&quot;, {&quot;m_rate&quot;: 0.2}],</span>
+<span class="sd">                [&quot;gplib.operators&quot;, &quot;TournamentSelection&quot;, {&quot;k&quot;: 500, &quot;tournament_size&quot;: 5}]</span>
+<span class="sd">            ],</span>
+<span class="sd">            &quot;viewer&quot;: [</span>
+<span class="sd">                &quot;gplib.viewer&quot;, &quot;DefaultViewer&quot;</span>
+<span class="sd">            ]</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path_or_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">path_or_config</span>
     <span class="k">else</span><span class="p">:</span>
@@ -233,13 +275,39 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_or_config</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
+    <span class="c1"># set default config_tags and builder_map.</span>
+    <span class="k">if</span> <span class="n">config_tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">config_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;problem&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;initializer&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;sequential&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;localsearch&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;viewer&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;terminal_condition&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;gp&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">builder_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">builder_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;problem&#39;</span><span class="p">:</span> <span class="n">build_problem</span><span class="p">,</span>
+                       <span class="s1">&#39;initializer&#39;</span><span class="p">:</span> <span class="n">build_operator</span><span class="p">,</span>
+                       <span class="s1">&#39;sequential&#39;</span><span class="p">:</span> <span class="n">build_sequential</span><span class="p">,</span>
+                       <span class="s1">&#39;localsearch&#39;</span><span class="p">:</span> <span class="n">build_operator</span><span class="p">,</span>
+                       <span class="s1">&#39;viewer&#39;</span><span class="p">:</span> <span class="n">build_viewer</span><span class="p">,</span>
+                       <span class="s1">&#39;terminal_condition&#39;</span><span class="p">:</span> <span class="n">build_terminal_condition</span><span class="p">,</span>
+                       <span class="s1">&#39;gp&#39;</span><span class="p">:</span> <span class="n">build_instance</span><span class="p">}</span>
+
+    <span class="n">check_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">config_tags</span><span class="p">)</span>
+    <span class="n">check_builder_map</span><span class="p">(</span><span class="n">config_tags</span><span class="p">,</span> <span class="n">builder_map</span><span class="p">)</span>
+
     <span class="n">instance_dict</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">CONFIG_TAGS</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">config_tags</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">continue</span>
+
         <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;sequential&#39;</span><span class="p">:</span>
             <span class="n">instance_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">tag</span><span class="p">:</span> <span class="n">build_sequential</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">tag</span><span class="p">],</span> <span class="o">**</span><span class="n">instance_dict</span><span class="p">)})</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;terminal_condition&#39;</span><span class="p">:</span>
+            <span class="n">instance_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">tag</span><span class="p">:</span> <span class="n">build_terminal_condition</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">tag</span><span class="p">],</span> <span class="o">**</span><span class="n">instance_dict</span><span class="p">)})</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">unwrap_instance_info</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">tag</span><span class="p">])</span>
-            <span class="n">builder</span> <span class="o">=</span> <span class="n">BUILDER_MAP</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
+            <span class="n">builder</span> <span class="o">=</span> <span class="n">builder_map</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
             <span class="n">instance_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">tag</span><span class="p">:</span> <span class="n">builder</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">instance_dict</span><span class="p">)})</span>
 
     <span class="n">gp</span> <span class="o">=</span> <span class="n">instance_dict</span><span class="p">[</span><span class="s1">&#39;gp&#39;</span><span class="p">]</span>

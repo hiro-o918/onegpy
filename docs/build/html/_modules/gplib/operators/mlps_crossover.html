@@ -146,22 +146,46 @@
 <span class="kn">from</span> <span class="nn">gplib.solutions</span> <span class="k">import</span> <span class="n">solution</span>
 <span class="kn">from</span> <span class="nn">gplib.operator</span> <span class="k">import</span> <span class="n">AbstractOperator</span>
 
-<div class="viewcode-block" id="MLPS_Crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mlps_crossover.MLPS_Crossover.html#gplib.operators.mlps_crossover.MLPS_Crossover">[docs]</a><span class="k">class</span> <span class="nc">MLPS_Crossover</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
 
+<div class="viewcode-block" id="MLPS_Crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mlps_crossover.MLPS_Crossover.html#gplib.operators.mlps_crossover.MLPS_Crossover">[docs]</a><span class="k">class</span> <span class="nc">MLPS_Crossover</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crossover class for the MLPS-GP</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="MLPS_Crossover.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mlps_crossover.MLPS_Crossover.html#gplib.operators.mlps_crossover.MLPS_Crossover.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">stop_after_one</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">donor_order</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param problem: problem object. target problem.</span>
+<span class="sd">        :param stop_after_one: bool. stop a crossover after the first donation.</span>
+<span class="sd">        :param donor_order:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MLPS_Crossover</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop_after_one</span> <span class="o">=</span> <span class="n">stop_after_one</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">donor_order</span> <span class="o">=</span> <span class="n">donor_order</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="n">problem</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">cross_points</span><span class="p">,</span> <span class="n">donors</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crossover class for MLPS-GP</span>
+<span class="sd">        :param recipient: solution object. recipient of the MLPS-GP crossover.</span>
+<span class="sd">        :param cross_points: list of node objects. crossover points list for the MLPS-GP.</span>
+<span class="sd">                              Basically, this is terminal node positions of the candidate solution after local search.</span>
+<span class="sd">        :param donors: list of solutions. a candidate donor subtree list.</span>
+<span class="sd">                        Basically, this is a layer(sub-population) in pyramid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">##cross_points: list of tuple, (parent of crosspoint, children index)</span>
         <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">cross_points</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cross_point</span> <span class="ow">in</span> <span class="n">cross_points</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">improve</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">cross_point</span><span class="p">,</span> <span class="n">donors</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">improve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">cross_point</span><span class="p">,</span> <span class="n">donors</span><span class="p">):</span>
-
+<div class="viewcode-block" id="MLPS_Crossover.improve"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mlps_crossover.html#gplib.operators.mlps_crossover.MLPS_Crossover.improve">[docs]</a>    <span class="k">def</span> <span class="nf">improve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">cross_point</span><span class="p">,</span> <span class="n">donors</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replace a sub-tree of the recipient at a crossover point with donors</span>
+<span class="sd">        :param recipient: solution object. recipient of the MLPS-GP crossover.</span>
+<span class="sd">        :param cross_point: node object. a crossover point.</span>
+<span class="sd">        :param donors: list of solutions. a candidate donor subtree list.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check if the recipient and each donor have a same tree structure or not.</span>
+        <span class="c1"># options is list of donors which are used for replacement</span>
         <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_options</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">donors</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">donor_order</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
@@ -171,12 +195,20 @@
             <span class="n">donor</span> <span class="o">=</span> <span class="n">donors</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
             <span class="n">stop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">donate</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">cross_point</span><span class="p">,</span> <span class="n">donor</span><span class="p">)</span>
 
+            <span class="c1"># if stop after one is True, stop the donation soon.</span>
             <span class="k">if</span> <span class="n">stop</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_after_one</span><span class="p">:</span>
                 <span class="k">break</span>
 
-        <span class="k">del</span> <span class="n">options</span>
+        <span class="k">del</span> <span class="n">options</span></div>
 
-    <span class="k">def</span> <span class="nf">donate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">cross_point</span><span class="p">,</span> <span class="n">donor</span><span class="p">):</span>
+<div class="viewcode-block" id="MLPS_Crossover.donate"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mlps_crossover.html#gplib.operators.mlps_crossover.MLPS_Crossover.donate">[docs]</a>    <span class="k">def</span> <span class="nf">donate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">cross_point</span><span class="p">,</span> <span class="n">donor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replace a sub-tree of the recipient with a donor</span>
+<span class="sd">        :param recipient: solution object. recipient of the MLPS-GP crossover.</span>
+<span class="sd">        :param cross_point: node object. a crossover point.</span>
+<span class="sd">        :param donor: node object. root node of subtree(donor&#39;s root).</span>
+<span class="sd">        :return: bool. if fitness is improved or not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">previous_fitness</span> <span class="o">=</span> <span class="n">recipient</span><span class="o">.</span><span class="n">previous_fitness</span>
         <span class="n">parent_node</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cross_point</span>
@@ -189,19 +221,24 @@
 
         <span class="k">if</span> <span class="n">previous_fitness</span> <span class="o">&gt;=</span> <span class="n">fitness</span><span class="p">:</span>
             <span class="n">parent_node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pre_node</span>
-            <span class="n">recipient</span><span class="o">.</span><span class="n">previous_fitness</span> <span class="o">=</span> <span class="n">previous_fitness</span>
+            <span class="n">solution</span><span class="o">.</span><span class="n">set_previous_fitness</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">previous_fitness</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="k">return</span> <span class="n">stop</span>
+        <span class="k">return</span> <span class="n">stop</span></div>
 
-
-    <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">donors</span><span class="p">):</span>
+<div class="viewcode-block" id="MLPS_Crossover.get_options"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mlps_crossover.html#gplib.operators.mlps_crossover.MLPS_Crossover.get_options">[docs]</a>    <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">donors</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the recipient and each donor have a same tree structure or not.</span>
+<span class="sd">        :param recipient: solution object. recipient of the MLPS-GP crossover.</span>
+<span class="sd">        :param donors: list of solutions. a candidate donor subtree list.</span>
+<span class="sd">        :return: list of solutions. solutions list which are used as donor in crossover</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">options</span> <span class="o">=</span><span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">donor</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">donors</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">solution</span><span class="o">.</span><span class="n">solution_equal</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">donor</span><span class="p">,</span> <span class="n">as_tree</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
                 <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">options</span></div>
+        <span class="k">return</span> <span class="n">options</span></div></div>
 
 
 

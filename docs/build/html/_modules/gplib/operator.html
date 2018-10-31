@@ -170,11 +170,11 @@
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
-    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="AbstractOperator.not_changeable_warning"><a class="viewcode-back" href="../../reference/generated/gplib.operator.html#gplib.operator.AbstractOperator.not_changeable_warning">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">not_changeable_warning</span><span class="p">():</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;This variable is not changeable.&#39;</span> \
               <span class="s1">&#39; Thus, the operation has no effect.&#39;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -206,7 +206,15 @@
 
 
 <div class="viewcode-block" id="PopulationOperatorAdapter"><a class="viewcode-back" href="../../reference/generated/gplib.operator.PopulationOperatorAdapter.html#gplib.operator.PopulationOperatorAdapter">[docs]</a><span class="k">class</span> <span class="nc">PopulationOperatorAdapter</span><span class="p">(</span><span class="n">PopulationOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TODO: comment by yama*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PopulationOperatorAdapter.__init__"><a class="viewcode-back" href="../../reference/generated/gplib.operator.PopulationOperatorAdapter.html#gplib.operator.PopulationOperatorAdapter.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">generator_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param operator: operator object. operator object to apply.</span>
+<span class="sd">        :param generator_builder: function of generator builder. Default is None (default generator).</span>
+<span class="sd">        :param n_out: int. the number of output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PopulationOperatorAdapter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_out</span><span class="o">=</span><span class="n">n_out</span><span class="p">)</span>
         <span class="n">operator_checker</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">operator</span><span class="o">.</span><span class="n">n_in</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -222,6 +230,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">generator_builder</span> <span class="o">=</span> <span class="n">generator_builder</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_default_generator_builder</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        TODO: comment by yama*</span>
+<span class="sd">        :param population: list of solutions. population.</span>
+<span class="sd">        :param args:</span>
+<span class="sd">        :param kwargs:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_pop</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator_builder</span><span class="p">(</span><span class="n">population</span><span class="p">)</span>
 
@@ -254,10 +269,22 @@
 
 <div class="viewcode-block" id="ProblemBasedOperator"><a class="viewcode-back" href="../../reference/generated/gplib.operator.ProblemBasedOperator.html#gplib.operator.ProblemBasedOperator">[docs]</a><span class="k">class</span> <span class="nc">ProblemBasedOperator</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <div class="viewcode-block" id="ProblemBasedOperator.__init__"><a class="viewcode-back" href="../../reference/generated/gplib.operator.ProblemBasedOperator.html#gplib.operator.ProblemBasedOperator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param problem: problem object. The target problem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="n">problem</span></div></div>
 
 
 <div class="viewcode-block" id="build_population_operator"><a class="viewcode-back" href="../../reference/generated/gplib.operator.build_population_operator.html#gplib.operator.build_population_operator">[docs]</a><span class="k">def</span> <span class="nf">build_population_operator</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">selection_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cls_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder function for population operator</span>
+<span class="sd">    :param operator: operator object. The target operator to build.</span>
+<span class="sd">    :param selection_class: selection class. #TODO: add comment by yama*</span>
+<span class="sd">    :param n_out: int. the number of output of the target operator.</span>
+<span class="sd">    :param cls_name: #TODO: comment by yama*</span>
+<span class="sd">    :param kwargs:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">operator_checker</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">selection_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -272,6 +299,9 @@
 
 
 <div class="viewcode-block" id="operator_checker"><a class="viewcode-back" href="../../reference/generated/gplib.operator.operator_checker.html#gplib.operator.operator_checker">[docs]</a><span class="k">def</span> <span class="nf">operator_checker</span><span class="p">(</span><span class="n">operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    checker for operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">AbstractOperator</span><span class="p">):</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">operator</span><span class="p">))</span>
@@ -282,6 +312,9 @@
 
 
 <div class="viewcode-block" id="pop_operator_checker"><a class="viewcode-back" href="../../reference/generated/gplib.operator.pop_operator_checker.html#gplib.operator.pop_operator_checker">[docs]</a><span class="k">def</span> <span class="nf">pop_operator_checker</span><span class="p">(</span><span class="n">operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        checker for population operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">PopulationOperator</span><span class="p">):</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PopulationOperator</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">operator</span><span class="p">))</span>

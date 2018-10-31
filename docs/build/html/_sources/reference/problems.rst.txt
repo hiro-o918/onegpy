@@ -8,5 +8,6 @@ problems package
 
 .. toctree::
 
+   problems.arithmetic
    problems.boolean
 

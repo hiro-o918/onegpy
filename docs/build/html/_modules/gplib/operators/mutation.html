@@ -151,10 +151,11 @@
 
 
 <div class="viewcode-block" id="AbstractMutation"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.AbstractMutation.html#gplib.operators.mutation.AbstractMutation">[docs]</a><span class="k">class</span> <span class="nc">AbstractMutation</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract class for mutation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="AbstractMutation.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.AbstractMutation.html#gplib.operators.mutation.AbstractMutation.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_rate</span><span class="p">,</span> <span class="n">mutation_type</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Abstract class of mutation.</span>
-
 <span class="sd">        :param m_rate: float([0, 1.0]). mutation rate for each iteration</span>
 <span class="sd">        :param mutation_type: function name</span>
 <span class="sd">        :param problem: problem</span>
@@ -202,11 +203,20 @@
 
 
 <div class="viewcode-block" id="one_point"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.one_point.html#gplib.operators.mutation.one_point">[docs]</a><span class="k">def</span> <span class="nf">one_point</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">func_bank</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Core function of one_point mutation.</span>
+<span class="sd">    :param solution: solution object. solution which is applied mutation.</span>
+<span class="sd">    :param func_bank: function bank object. function bank which is defined in problem.py.</span>
+<span class="sd">    :return: solution object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">point</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">get_all_node</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">root</span><span class="p">))</span>
     <span class="n">n_children</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
     <span class="n">function_list</span> <span class="o">=</span> <span class="n">func_bank</span><span class="o">.</span><span class="n">get_function_list</span><span class="p">(</span><span class="n">n_children</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">function_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;function bank must have </span><span class="si">{}</span><span class="s2">&#39;s function list, but it has no list.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_children</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">function_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">solution</span>
 
     <span class="n">candidate_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">function_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">point</span><span class="o">.</span><span class="n">func_id</span> <span class="o">!=</span> <span class="n">candidate_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
@@ -218,6 +228,11 @@
 
 
 <div class="viewcode-block" id="get_mutation_core"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.get_mutation_core.html#gplib.operators.mutation.get_mutation_core">[docs]</a><span class="k">def</span> <span class="nf">get_mutation_core</span><span class="p">(</span><span class="n">mutation_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    getter of core function of mutation.</span>
+<span class="sd">    :param mutation_type: String. type of mutation.</span>
+<span class="sd">    :return: function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">mutation_type</span> <span class="o">==</span> <span class="s1">&#39;onepoint&#39;</span><span class="p">:</span>
         <span class="c1"># Obtain `one_point` function fixed `func_bank`</span>
         <span class="n">mutation_core</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">one_point</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -229,7 +244,16 @@
 
 
 <div class="viewcode-block" id="PointMutation"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.PointMutation.html#gplib.operators.mutation.PointMutation">[docs]</a><span class="k">class</span> <span class="nc">PointMutation</span><span class="p">(</span><span class="n">AbstractMutation</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Point mutation class.</span>
+<span class="sd">    This mutation is not for population but for a solution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PointMutation.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.PointMutation.html#gplib.operators.mutation.PointMutation.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_rate</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">mutation_type</span><span class="o">=</span><span class="s1">&#39;onepoint&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param m_rate: float. mutation rate.</span>
+<span class="sd">        :param problem: problem object. target problem.</span>
+<span class="sd">        :param mutation_type: String. mutation type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PointMutation</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">m_rate</span><span class="p">,</span> <span class="n">mutation_type</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mutation_core</span> <span class="o">=</span> <span class="n">get_mutation_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mutation_type</span><span class="p">,</span> <span class="n">func_bank</span><span class="o">=</span><span class="n">problem</span><span class="o">.</span><span class="n">func_bank</span><span class="p">)</span></div>
 
@@ -253,7 +277,19 @@
 
 
 <div class="viewcode-block" id="PopulationPointMutation"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.PopulationPointMutation.html#gplib.operators.mutation.PopulationPointMutation">[docs]</a><span class="k">class</span> <span class="nc">PopulationPointMutation</span><span class="p">(</span><span class="n">PopulationOperatorAdapter</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Point mutation class for population.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PopulationPointMutation.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.mutation.PopulationPointMutation.html#gplib.operators.mutation.PopulationPointMutation.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_rate</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">mutation_type</span><span class="o">=</span><span class="s1">&#39;onepoint&#39;</span><span class="p">,</span> <span class="n">generator_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param m_rate: float. mutation rate.</span>
+<span class="sd">        :param problem: problem object. target problem.</span>
+<span class="sd">        :param mutation_type: String. mutation type.</span>
+<span class="sd">        :param generator_builder: generator builder. Builder of generator for a target solution.</span>
+<span class="sd">                                  Default is None (default generator).</span>
+<span class="sd">                                  e.g. If you want to use elite selection,</span>
+<span class="sd">                                        you can write &#39;get_generator_builder(EliteSelection(...))&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">operator</span> <span class="o">=</span> <span class="n">PointMutation</span><span class="p">(</span><span class="n">m_rate</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">mutation_type</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">PopulationPointMutation</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">generator_builder</span><span class="p">)</span></div></div>

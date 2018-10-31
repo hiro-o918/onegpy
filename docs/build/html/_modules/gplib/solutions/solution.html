@@ -152,9 +152,20 @@
 <div class="viewcode-block" id="Solution.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.Solution.html#gplib.solutions.solution.Solution.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="c1"># TODO type check if ``root&#39;&#39; is node.Node</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">previous_fitness</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_depth</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_n_nodes</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_fitness</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">previous_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_fitness</span>
+
+    <span class="nd">@previous_fitness</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">previous_fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;To set previous fitness to solution, use the function </span><span class="si">{}</span><span class="s1">&#39;</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_previous_fitness</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -181,6 +192,11 @@
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;To set depth to solution, use the function </span><span class="si">{}</span><span class="s1">&#39;</span>\
             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_solution_depth</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_previous_fitness"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.set_previous_fitness.html#gplib.solutions.solution.set_previous_fitness">[docs]</a><span class="k">def</span> <span class="nf">set_previous_fitness</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">fitness</span><span class="p">):</span>
+    <span class="c1"># super danger!!!!!!!!!!</span>
+    <span class="n">solution</span><span class="o">.</span><span class="n">_previous_fitness</span> <span class="o">=</span> <span class="n">fitness</span></div>
 
 
 <div class="viewcode-block" id="_calc_solution_depth"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution._calc_solution_depth.html#gplib.solutions.solution._calc_solution_depth">[docs]</a><span class="k">def</span> <span class="nf">_calc_solution_depth</span><span class="p">(</span><span class="n">solution</span><span class="p">):</span>
@@ -327,6 +343,20 @@
     <span class="n">set_solution_n_nodes</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">solution</span></div>
+
+
+<div class="viewcode-block" id="solution_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.solution_checker.html#gplib.solutions.solution.solution_checker">[docs]</a><span class="k">def</span> <span class="nf">solution_checker</span><span class="p">(</span><span class="n">solution</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">Solution</span><span class="p">):</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Solution</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">Solution</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="solutions_checker"><a class="viewcode-back" href="../../../reference/generated/gplib.solutions.solution.solutions_checker.html#gplib.solutions.solution.solutions_checker">[docs]</a><span class="k">def</span> <span class="nf">solutions_checker</span><span class="p">(</span><span class="n">solutions</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">solutions</span><span class="p">:</span>
+        <span class="n">solution_checker</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

@@ -1,32 +1,7 @@
-gplib.operators.selection
-=========================
+gplib\.operators\.selection module
+==================================
 
 .. automodule:: gplib.operators.selection
-
-   
-   
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      reduce_population
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      AbstractProblemBasedSelection
-      AbstractSelection
-      EliteSelection
-      RandomSelection
-      TournamentSelection
-   
-   
-
-   
-   
-   
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gplib.operators.selection &mdash; GPLib 0.0 documentation</title>
+  <title>gplib.operators.selection module &mdash; GPLib 0.0 documentation</title>
   
 
   
@@ -124,7 +124,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>gplib.operators.selection</li>
+      <li>gplib.operators.selection module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -144,43 +144,55 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-gplib.operators.selection">
-<span id="gplib-operators-selection"></span><h1>gplib.operators.selection<a class="headerlink" href="#module-gplib.operators.selection" title="Permalink to this headline">¶</a></h1>
-<p class="rubric">Functions</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="gplib.operators.selection.reduce_population.html#gplib.operators.selection.reduce_population" title="gplib.operators.selection.reduce_population"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reduce_population</span></code></a>(population)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Classes</p>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="gplib.operators.selection.AbstractProblemBasedSelection.html#gplib.operators.selection.AbstractProblemBasedSelection" title="gplib.operators.selection.AbstractProblemBasedSelection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbstractProblemBasedSelection</span></code></a>(k,&nbsp;…)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="gplib.operators.selection.AbstractSelection.html#gplib.operators.selection.AbstractSelection" title="gplib.operators.selection.AbstractSelection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbstractSelection</span></code></a>(k,&nbsp;replacement)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="gplib.operators.selection.EliteSelection.html#gplib.operators.selection.EliteSelection" title="gplib.operators.selection.EliteSelection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EliteSelection</span></code></a>(k,&nbsp;problem[,&nbsp;replacement])</td>
-<td>Elite Selection</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="gplib.operators.selection.RandomSelection.html#gplib.operators.selection.RandomSelection" title="gplib.operators.selection.RandomSelection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RandomSelection</span></code></a>(k,&nbsp;replacement)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="gplib.operators.selection.TournamentSelection.html#gplib.operators.selection.TournamentSelection" title="gplib.operators.selection.TournamentSelection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TournamentSelection</span></code></a>(k,&nbsp;tournament_size,&nbsp;problem)</td>
-<td>TODO: <strong>Warning</strong> Tournament Selection takes a lot of time, because it copies solutions deeply.</td>
-</tr>
-</tbody>
-</table>
+<span id="gplib-operators-selection-module"></span><h1>gplib.operators.selection module<a class="headerlink" href="#module-gplib.operators.selection" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gplib.operators.selection.AbstractProblemBasedSelection">
+<em class="property">class </em><code class="descclassname">gplib.operators.selection.</code><code class="descname">AbstractProblemBasedSelection</code><span class="sig-paren">(</span><em>k</em>, <em>problem</em>, <em>replacement</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/selection.html#AbstractProblemBasedSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.selection.AbstractProblemBasedSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.selection.AbstractSelection.html#gplib.operators.selection.AbstractSelection" title="gplib.operators.selection.AbstractSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.selection.AbstractSelection</span></code></a>, <a class="reference internal" href="gplib.operator.ProblemBasedOperator.html#gplib.operator.ProblemBasedOperator" title="gplib.operator.ProblemBasedOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.ProblemBasedOperator</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract class for problem based selection.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.selection.AbstractSelection">
+<em class="property">class </em><code class="descclassname">gplib.operators.selection.</code><code class="descname">AbstractSelection</code><span class="sig-paren">(</span><em>k</em>, <em>replacement</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/selection.html#AbstractSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.selection.AbstractSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operator.PopulationOperator.html#gplib.operator.PopulationOperator" title="gplib.operator.PopulationOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operator.PopulationOperator</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract class for selection.</p>
+<dl class="attribute">
+<dt id="gplib.operators.selection.AbstractSelection.k">
+<code class="descname">k</code><a class="headerlink" href="#gplib.operators.selection.AbstractSelection.k" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.selection.EliteSelection">
+<em class="property">class </em><code class="descclassname">gplib.operators.selection.</code><code class="descname">EliteSelection</code><span class="sig-paren">(</span><em>k</em>, <em>problem</em>, <em>replacement=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/selection.html#EliteSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.selection.EliteSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.selection.AbstractProblemBasedSelection.html#gplib.operators.selection.AbstractProblemBasedSelection" title="gplib.operators.selection.AbstractProblemBasedSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.selection.AbstractProblemBasedSelection</span></code></a></p>
+<p>Elite selection class</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.selection.RandomSelection">
+<em class="property">class </em><code class="descclassname">gplib.operators.selection.</code><code class="descname">RandomSelection</code><span class="sig-paren">(</span><em>k</em>, <em>replacement</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/selection.html#RandomSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.selection.RandomSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.selection.AbstractSelection.html#gplib.operators.selection.AbstractSelection" title="gplib.operators.selection.AbstractSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.selection.AbstractSelection</span></code></a></p>
+<p>Random selection class.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gplib.operators.selection.TournamentSelection">
+<em class="property">class </em><code class="descclassname">gplib.operators.selection.</code><code class="descname">TournamentSelection</code><span class="sig-paren">(</span><em>k</em>, <em>tournament_size</em>, <em>problem</em>, <em>replacement=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/selection.html#TournamentSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.selection.TournamentSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gplib.operators.selection.AbstractProblemBasedSelection.html#gplib.operators.selection.AbstractProblemBasedSelection" title="gplib.operators.selection.AbstractProblemBasedSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">gplib.operators.selection.AbstractProblemBasedSelection</span></code></a></p>
+<p>Tournament selection class.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gplib.operators.selection.reduce_population">
+<code class="descclassname">gplib.operators.selection.</code><code class="descname">reduce_population</code><span class="sig-paren">(</span><em>population</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operators/selection.html#reduce_population"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operators.selection.reduce_population" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the solutions which have same tree structure.
+:param population: list of solutions. population of solutions.
+:return: list of solutions. the dumped population.</p>
+</dd></dl>
+
 </div>
 
 

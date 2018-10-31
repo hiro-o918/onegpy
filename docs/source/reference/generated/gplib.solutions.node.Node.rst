@@ -19,4 +19,10 @@ gplib.solutions.node.Node
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Node.is_terminal
+   
    

@@ -1,22 +1,7 @@
-gplib.base.mlps\_base
-=====================
+gplib\.base\.mlps\_base module
+==============================
 
 .. automodule:: gplib.base.mlps_base
-
-   
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      MLPS_GP
-   
-   
-
-   
-   
-   
+    :members:
+    :undoc-members:
+    :show-inheritance:

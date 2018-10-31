@@ -15,6 +15,7 @@ gplib.problem.AbstractProblem
    
       ~AbstractProblem.__init__
       ~AbstractProblem.fitness
+      ~AbstractProblem.get_elite_fitness
       ~AbstractProblem.get_eval_count
    
    

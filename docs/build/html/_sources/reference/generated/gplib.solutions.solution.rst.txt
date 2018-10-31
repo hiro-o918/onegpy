@@ -1,34 +1,7 @@
-gplib.solutions.solution
-========================
+gplib\.solutions\.solution module
+=================================
 
 .. automodule:: gplib.solutions.solution
-
-   
-   
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      copy_solution
-      is_solution_in_pop
-      replace_node
-      select_random_points
-      set_solution_depth
-      set_solution_n_nodes
-      solution_equal
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      Solution
-   
-   
-
-   
-   
-   
+    :members:
+    :undoc-members:
+    :show-inheritance:

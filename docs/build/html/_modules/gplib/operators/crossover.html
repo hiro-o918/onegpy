@@ -146,13 +146,21 @@
 
 <span class="kn">from</span> <span class="nn">gplib.operator</span> <span class="k">import</span> <span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">PopulationOperatorAdapter</span>
 <span class="kn">from</span> <span class="nn">gplib.operators.selection</span> <span class="k">import</span> <span class="n">RandomSelection</span>
-<span class="c1"># TODO: we must consider the number of parents and crossover points.</span>
-<span class="c1"># TODO: + checking the number of parents and crossover points in each function</span>
-<span class="kn">from</span> <span class="nn">gplib.solutions.solution</span> <span class="k">import</span> <span class="n">select_random_points</span><span class="p">,</span> <span class="n">replace_node</span>
+<span class="kn">from</span> <span class="nn">gplib.solutions.node</span> <span class="k">import</span> <span class="n">nodes_checker</span>
+<span class="kn">from</span> <span class="nn">gplib.solutions.solution</span> <span class="k">import</span> <span class="n">select_random_points</span><span class="p">,</span> <span class="n">replace_node</span><span class="p">,</span> <span class="n">solutions_checker</span>
 <span class="kn">from</span> <span class="nn">gplib.utils.util</span> <span class="k">import</span> <span class="n">get_generator_builder</span>
 
 
 <div class="viewcode-block" id="crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.crossover.html#gplib.operators.crossover.crossover">[docs]</a><span class="k">def</span> <span class="nf">crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Core function for crossover</span>
+<span class="sd">    :param parents: list of solution objects. solutions to do crossover.</span>
+<span class="sd">    :param points: list of node. crossover points. these nodes are replaced each other.</span>
+<span class="sd">    :param destructive: bool. If true, solution is replaced, keeping its object.</span>
+<span class="sd">    Otherwise, new solution instance is created, protecting original solution.</span>
+<span class="sd">    :return: list of solution objects. new_solutions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_parents_and_points</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
     <span class="n">new_p1</span> <span class="o">=</span> <span class="n">replace_node</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">destructive</span><span class="p">)</span>
     <span class="n">new_p2</span> <span class="o">=</span> <span class="n">replace_node</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">destructive</span><span class="p">)</span>
     <span class="n">new_parents</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_p1</span><span class="p">,</span> <span class="n">new_p2</span><span class="p">)</span>
@@ -161,22 +169,46 @@
 
 
 <div class="viewcode-block" id="destructive_crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.destructive_crossover.html#gplib.operators.crossover.destructive_crossover">[docs]</a><span class="k">def</span> <span class="nf">destructive_crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A function for destructive crossover</span>
+<span class="sd">    :param parents: list of solution objects. solutions to do crossover.</span>
+<span class="sd">    :param points: list of node. crossover points. these nodes are replaced each other.</span>
+<span class="sd">    :return: list of solution objects. new_solutions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_parents_and_points</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">crossover</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_crossover_core"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.get_crossover_core.html#gplib.operators.crossover.get_crossover_core">[docs]</a><span class="k">def</span> <span class="nf">get_crossover_core</span><span class="p">(</span><span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Getter of core function for crossover</span>
+<span class="sd">    :param destructive: bool. If true, solution is replaced, keeping its object.</span>
+<span class="sd">    Otherwise, new solution instance is created, protecting original solution.</span>
+<span class="sd">    :return: function. crossover function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">destructive</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">crossover</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">destructive_crossover</span></div>
 
 
+<div class="viewcode-block" id="check_parents_and_points"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.check_parents_and_points.html#gplib.operators.crossover.check_parents_and_points">[docs]</a><span class="k">def</span> <span class="nf">check_parents_and_points</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checker for parents and points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">solutions_checker</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span>
+    <span class="n">nodes_checker</span><span class="p">(</span><span class="n">points</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="OnePointCrossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.OnePointCrossover.html#gplib.operators.crossover.OnePointCrossover">[docs]</a><span class="k">class</span> <span class="nc">OnePointCrossover</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    One point crossover class.</span>
+<span class="sd">    This crossover is not for population but for a single set of parents.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="OnePointCrossover.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.OnePointCrossover.html#gplib.operators.crossover.OnePointCrossover.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        One point crossover.</span>
-<span class="sd">        :param c_rate: Crossover rate.</span>
-<span class="sd">        :param destructive: If destructive is true, parents also are changed.</span>
+<span class="sd">        :param c_rate: float. crossover rate.</span>
+<span class="sd">        :param destructive: bool. If destructive is true, parents also are changed.</span>
 <span class="sd">                            Otherwise, parents are copied and keep their structures.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">OnePointCrossover</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -185,6 +217,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">crossover_core</span> <span class="o">=</span> <span class="n">get_crossover_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_destructive</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parents</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Do crossover with crossover probability c_rate.</span>
+<span class="sd">        :param parents: list of solution objects. solutions to do crossover.</span>
+<span class="sd">        :return: list of solution objects. new_solutions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;parents must be a list consisting of two solutions&#39;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -222,9 +259,20 @@
 
 
 <div class="viewcode-block" id="PopulationOnePointCrossover"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.PopulationOnePointCrossover.html#gplib.operators.crossover.PopulationOnePointCrossover">[docs]</a><span class="k">class</span> <span class="nc">PopulationOnePointCrossover</span><span class="p">(</span><span class="n">PopulationOperatorAdapter</span><span class="p">):</span>
-
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    One point crossover class for population.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PopulationOnePointCrossover.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.crossover.PopulationOnePointCrossover.html#gplib.operators.crossover.PopulationOnePointCrossover.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generator_builder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="sd">        :param c_rate: float. Crossover rate</span>
+<span class="sd">        :param destructive: bool. If destructive is true, parents also are changed.</span>
+<span class="sd">                            Otherwise, parents are copied and keep their structures.</span>
+<span class="sd">        :param generator_builder: generator builder. Builder of generator for parents.</span>
+<span class="sd">                                  Default is None (generator builder using Random Selection).</span>
+<span class="sd">                                  e.g. If you want to use tournament selection as parents selection,</span>
+<span class="sd">                                        you can write &#39;get_generator_builder(TournamentSelection(...))&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">operator</span> <span class="o">=</span> <span class="n">OnePointCrossover</span><span class="p">(</span><span class="n">c_rate</span><span class="p">,</span> <span class="n">destructive</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">generator_builder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">generator_builder</span> <span class="o">=</span> <span class="n">get_generator_builder</span><span class="p">(</span><span class="n">RandomSelection</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">n_in</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>

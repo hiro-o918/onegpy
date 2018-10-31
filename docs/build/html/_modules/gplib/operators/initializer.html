@@ -145,12 +145,25 @@
 <span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span>
 
 <span class="kn">from</span> <span class="nn">gplib.operator</span> <span class="k">import</span> <span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">PopulationOperator</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span>
+<span class="kn">from</span> <span class="nn">gplib.problem</span> <span class="k">import</span> <span class="n">problem_checker</span>
 <span class="kn">from</span> <span class="nn">gplib.solutions</span> <span class="k">import</span> <span class="n">solution</span><span class="p">,</span> <span class="n">node</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
+<span class="kn">from</span> <span class="nn">gplib.utils.checkers</span> <span class="k">import</span> <span class="n">prob_checker</span>
+
 
 <div class="viewcode-block" id="AbstractInitializer"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.AbstractInitializer.html#gplib.operators.initializer.AbstractInitializer">[docs]</a><span class="k">class</span> <span class="nc">AbstractInitializer</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract class of initializer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="AbstractInitializer.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.AbstractInitializer.html#gplib.operators.initializer.AbstractInitializer.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param n_in: int. the number of inputs</span>
+<span class="sd">        :param n_out: int. the number of outputs</span>
+<span class="sd">        :param problem: problem object. target problem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">problem_checker</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
         <span class="n">AbstractOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">)</span>
         <span class="n">ProblemBasedOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span></div>
 
@@ -187,7 +200,17 @@
 
 
 <div class="viewcode-block" id="RandomInitializer"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.RandomInitializer.html#gplib.operators.initializer.RandomInitializer">[docs]</a><span class="k">class</span> <span class="nc">RandomInitializer</span><span class="p">(</span><span class="n">AbstractInitializer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a new solution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="RandomInitializer.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.RandomInitializer.html#gplib.operators.initializer.RandomInitializer.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_prob</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param t_prob: float((0, 1]). probability of terminal node.</span>
+<span class="sd">        :param max_depth: int. The limit of depth of the solution.</span>
+<span class="sd">        :param problem: problem object. problem to solve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prob_checker</span><span class="p">(</span><span class="n">t_prob</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">RandomInitializer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t_prob</span> <span class="o">=</span> <span class="n">t_prob</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="o">=</span> <span class="n">max_depth</span>
@@ -195,19 +218,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">terminal_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_terminal_list</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generating a new solution.</span>
-
-<span class="sd">                # Arguments</span>
-<span class="sd">                    t_prob: float((0, 1]). probability of terminal node.</span>
-<span class="sd">                    max_depth: int. The limit of depth of the solution.</span>
-<span class="sd">                    func_bank: tuple of dictionary</span>
-
-<span class="sd">                # Return</span>
-<span class="sd">                    solution</span>
-<span class="sd">                    :param **kwargs:</span>
-<span class="sd">            &quot;&quot;&quot;</span>
-        <span class="c1"># TODO check t_prob range and all the arguments are correct.</span>
-        <span class="c1"># TODO check problem is class Problem</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a new solution.</span>
+<span class="sd">        :return: solution object. solution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">new_node</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
             <span class="n">current_node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">Node</span><span class="p">()</span>
@@ -232,13 +246,53 @@
         <span class="k">return</span> <span class="n">solution</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">root</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="PopulationTerminalInitializer"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.PopulationTerminalInitializer.html#gplib.operators.initializer.PopulationTerminalInitializer">[docs]</a><span class="k">class</span> <span class="nc">PopulationTerminalInitializer</span><span class="p">(</span><span class="n">AbstractInitializer</span><span class="p">,</span> <span class="n">PopulationOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate all solutions which have an only terminal node.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PopulationTerminalInitializer.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.PopulationTerminalInitializer.html#gplib.operators.initializer.PopulationTerminalInitializer.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param k: int. the number of solutions to generate</span>
+<span class="sd">        :param problem: problem object. problem to solve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AbstractInitializer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_terminal_list</span><span class="p">()</span>
+        <span class="n">PopulationOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terminal_list</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate all solutions which have an only terminal node.</span>
+<span class="sd">        :return: list of solution object. list of all terminal solutions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">make_node</span><span class="p">(</span><span class="n">func_id</span><span class="p">):</span>
+            <span class="n">new_node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">Node</span><span class="p">()</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">func_id</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">new_node</span>
+
+        <span class="n">population</span> <span class="o">=</span> <span class="p">[</span><span class="n">solution</span><span class="o">.</span><span class="n">Solution</span><span class="p">(</span><span class="n">make_node</span><span class="p">(</span><span class="n">func_id</span><span class="p">))</span> <span class="k">for</span> <span class="n">func_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_list</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">population</span></div>
+
+
 <div class="viewcode-block" id="PopulationRandomInitializer"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.PopulationRandomInitializer.html#gplib.operators.initializer.PopulationRandomInitializer">[docs]</a><span class="k">class</span> <span class="nc">PopulationRandomInitializer</span><span class="p">(</span><span class="n">RandomInitializer</span><span class="p">,</span> <span class="n">PopulationOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate solutions using random initializer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PopulationRandomInitializer.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.operators.initializer.PopulationRandomInitializer.html#gplib.operators.initializer.PopulationRandomInitializer.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">t_prob</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param k: int. the number of solutions to generate.</span>
+<span class="sd">        :param t_prob: float((0, 1]). probability of terminal node.</span>
+<span class="sd">        :param max_depth: int. The limit of depth of the solution.</span>
+<span class="sd">        :param problem: problem object. problem to solve.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
         <span class="n">RandomInitializer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_prob</span><span class="o">=</span><span class="n">t_prob</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">)</span>
         <span class="n">PopulationOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize population</span>
+<span class="sd">        :return: list of solutions. initialized population.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">population</span> <span class="o">=</span> <span class="p">[</span><span class="n">RandomInitializer</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)]</span>
 
         <span class="k">return</span> <span class="n">population</span></div>

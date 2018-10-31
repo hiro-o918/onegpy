@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="operators.crossover" href="operators.crossover.html" />
-    <link rel="prev" title="base.sgp_sample" href="base.sgp_sample.html" /> 
+    <link rel="prev" title="base.sgp_sample2" href="base.sgp_sample2.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,10 +82,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="base.html">base package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="base.html#this-is-a-base">This is a base</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">operators package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="operators.crossover.html">operators.crossover</a></li>
 <li class="toctree-l3"><a class="reference internal" href="operators.initializer.html">operators.initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.localsearch.html">operators.localsearch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="operators.mlps_crossover.html">operators.mlps_crossover</a></li>
 <li class="toctree-l3"><a class="reference internal" href="operators.mutation.html">operators.mutation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="operators.selection.html">operators.selection</a></li>
@@ -98,6 +98,8 @@
 <li class="toctree-l2"><a class="reference internal" href="operator.html">operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="problem.html">problem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sequential.html">sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal_condition.html">terminal_condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminator.html">terminator</a></li>
 </ul>
 </li>
 </ul>
@@ -170,39 +172,22 @@
 <span id="operators-package"></span><h1>operators package<a class="headerlink" href="#module-gplib.operators" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="operators.crossover.html">operators.crossover</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.crossover.OnePointCrossover.html">gplib.operators.crossover.OnePointCrossover</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.crossover.PopulationOnePointCrossover.html">gplib.operators.crossover.PopulationOnePointCrossover</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.crossover.crossover.html">gplib.operators.crossover.crossover</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.crossover.destructive_crossover.html">gplib.operators.crossover.destructive_crossover</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.crossover.get_crossover_core.html">gplib.operators.crossover.get_crossover_core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.crossover.html">operators.crossover</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="operators.initializer.html">operators.initializer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.initializer.AbstractInitializer.html">gplib.operators.initializer.AbstractInitializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.initializer.PopulationRandomInitializer.html">gplib.operators.initializer.PopulationRandomInitializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.initializer.RandomInitializer.html">gplib.operators.initializer.RandomInitializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.initializer.html">operators.initializer</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="operators.mlps_crossover.html">operators.mlps_crossover</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.mlps_crossover.MLPS_Crossover.html">gplib.operators.mlps_crossover.MLPS_Crossover</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.localsearch.html">operators.localsearch</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="operators.mutation.html">operators.mutation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.mutation.AbstractMutation.html">gplib.operators.mutation.AbstractMutation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.mutation.PointMutation.html">gplib.operators.mutation.PointMutation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.mutation.PopulationPointMutation.html">gplib.operators.mutation.PopulationPointMutation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.mutation.get_mutation_core.html">gplib.operators.mutation.get_mutation_core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.mutation.one_point.html">gplib.operators.mutation.one_point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.mlps_crossover.html">operators.mlps_crossover</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="operators.selection.html">operators.selection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.selection.AbstractProblemBasedSelection.html">gplib.operators.selection.AbstractProblemBasedSelection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.selection.AbstractSelection.html">gplib.operators.selection.AbstractSelection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.selection.EliteSelection.html">gplib.operators.selection.EliteSelection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.selection.RandomSelection.html">gplib.operators.selection.RandomSelection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.selection.TournamentSelection.html">gplib.operators.selection.TournamentSelection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/gplib.operators.selection.reduce_population.html">gplib.operators.selection.reduce_population</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.mutation.html">operators.mutation</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.selection.html">operators.selection</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -220,7 +205,7 @@
         <a href="operators.crossover.html" class="btn btn-neutral float-right" title="operators.crossover" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="base.sgp_sample.html" class="btn btn-neutral" title="base.sgp_sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="base.sgp_sample2.html" class="btn btn-neutral" title="base.sgp_sample2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

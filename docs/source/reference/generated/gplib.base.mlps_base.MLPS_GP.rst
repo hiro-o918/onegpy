@@ -15,6 +15,7 @@ gplib.base.mlps\_base.MLPS\_GP
    
       ~MLPS_GP.__init__
       ~MLPS_GP.add_indiv
+      ~MLPS_GP.add_terminals
       ~MLPS_GP.do_crossover
       ~MLPS_GP.get_skip_pop
       ~MLPS_GP.initialize_solution
