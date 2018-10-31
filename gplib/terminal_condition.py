@@ -19,9 +19,6 @@ class TerminalCondition(object):
         return self._terminators
 
     def __call__(self):
-        result = False
-        for terminator in self._terminators:
-            result = result or terminator()
+        is_t_condition = any([t() for t in self._terminators])
 
-        return not result
-
+        return is_t_condition

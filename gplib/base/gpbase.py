@@ -37,7 +37,7 @@ class PopulationGP(object):
         population = self.initializer()
         self.viewer.begin()
         gene = 0
-        while self.terminal_condition():
+        while not self.terminal_condition():
             population = self.sequential(population)
             self.viewer.update(gene, population)
             gene += 1

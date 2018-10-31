@@ -40,7 +40,7 @@ class MLPS_GP(object):
             terminal_solutions = self.terminal_initializer()
             self.add_terminals(terminal_solutions)
 
-        while self.terminal_condition():
+        while not self.terminal_condition():
             self.mlps_iterate()
             cnt += 1
             max_fit = []
