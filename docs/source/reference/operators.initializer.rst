@@ -8,4 +8,5 @@ operators.initializer
 
    AbstractInitializer
    PopulationRandomInitializer
+   PopulationTerminalInitializer
    RandomInitializer

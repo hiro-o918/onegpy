@@ -13,6 +13,9 @@ solutions.solution
    is_solution_in_pop
    replace_node
    select_random_points
+   set_previous_fitness
    set_solution_depth
    set_solution_n_nodes
+   solution_checker
    solution_equal
+   solutions_checker

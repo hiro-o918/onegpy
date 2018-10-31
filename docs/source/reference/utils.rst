@@ -8,6 +8,8 @@ utils package
 
 .. toctree::
 
+   utils.checkers
    utils.config
+   utils.test_checkers
    utils.util
 

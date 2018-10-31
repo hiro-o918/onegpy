@@ -8,3 +8,4 @@ problem
 
    AbstractProblem
    FunctionBank
+   problem_checker

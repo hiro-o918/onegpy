@@ -8,6 +8,7 @@ operators.crossover
 
    OnePointCrossover
    PopulationOnePointCrossover
+   check_parents_and_points
    crossover
    destructive_crossover
    get_crossover_core
