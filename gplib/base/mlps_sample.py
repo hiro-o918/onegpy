@@ -3,7 +3,7 @@ from gplib.utils.config import gp_from_config
 if __name__ == '__main__':
     config = {
         "gp": [
-            "gplib.base", "MLPS_GP", {'max_evals': 100000, 'depth_limit': 20}
+            "gplib.base", "MLPS_GP", {'depth_limit': 20}
         ],
         "initializer": [
             "gplib.operators", "RandomInitializer", [0.1, 10]
@@ -13,7 +13,12 @@ if __name__ == '__main__':
         ],
         "localsearch": [
             "gplib.operators", "FIHC", {"target_node": 'nonterminal', "func_search_type": 'all_check'}
-        ]
+        ],
+        "terminal_condition": [
+            ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
+            ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
+        ],
+
     }
 
     mlps = gp_from_config(config)

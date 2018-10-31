@@ -3,7 +3,7 @@ from gplib.utils.config import gp_from_config
 
 if __name__ == '__main__':
     config = {
-        "gp": ["gplib.base", "PopulationGP", [50]],
+        "gp": ["gplib.base", "PopulationGP"],
         "initializer": [
             "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
         ],
@@ -17,7 +17,11 @@ if __name__ == '__main__':
         ],
         "viewer": [
             "gplib.viewer", "DefaultViewer"
-        ]
+        ],
+        "terminal_condition": [
+            ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
+            ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
+        ],
     }
 
     gp = gp_from_config(config)
