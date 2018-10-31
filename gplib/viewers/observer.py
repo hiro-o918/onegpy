@@ -26,7 +26,7 @@ class AbstractObserver(ABC):
 
 
 class DefaultObserver(AbstractObserver):
-    def __init__(self, verbose, **kwargs):
+    def __init__(self, verbose=3, **kwargs):
         """
         Observer for SGP.
 
