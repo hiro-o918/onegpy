@@ -3,7 +3,7 @@ from gplib.utils.config import gp_from_config
 
 if __name__ == '__main__':
     config = {
-        'gp': ['gplib.base', 'PopulationGP', [50]],
+        'gp': ['gplib.base', 'PopulationGP'],
         'initializer': [
             'gplib.operators', 'PopulationRandomInitializer', [500, 0.1, 10]
         ],
