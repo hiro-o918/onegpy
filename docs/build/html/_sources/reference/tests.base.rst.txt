@@ -1,0 +1,12 @@
+tests.base package
+==================
+
+.. automodule:: tests.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   tests.base.test_gpbase
+

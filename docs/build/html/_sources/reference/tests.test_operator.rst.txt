@@ -1,0 +1,10 @@
+tests.test\_operator
+====================
+
+.. module:: tests.test_operator
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   TestOperatorFunctions
+   TestPopulationOperatorAdapter

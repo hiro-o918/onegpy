@@ -1,0 +1,16 @@
+tests.operators package
+=======================
+
+.. automodule:: tests.operators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   tests.operators.test_crossover
+   tests.operators.test_initializer
+   tests.operators.test_localsearch
+   tests.operators.test_mutation
+   tests.operators.test_selection
+

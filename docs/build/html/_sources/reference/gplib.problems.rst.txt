@@ -1,0 +1,13 @@
+gplib.problems package
+======================
+
+.. automodule:: gplib.problems
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   gplib.problems.arithmetic
+   gplib.problems.boolean
+

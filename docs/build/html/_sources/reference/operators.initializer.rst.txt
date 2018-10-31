@@ -1,0 +1,12 @@
+operators.initializer
+=====================
+
+.. module:: gplib.operators.initializer
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   AbstractInitializer
+   PopulationRandomInitializer
+   PopulationTerminalInitializer
+   RandomInitializer

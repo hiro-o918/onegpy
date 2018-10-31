@@ -1,0 +1,10 @@
+tests.problems.test\_evenParity
+===============================
+
+.. module:: tests.problems.test_evenParity
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   TestBooleanFunctions
+   TestEvenParity

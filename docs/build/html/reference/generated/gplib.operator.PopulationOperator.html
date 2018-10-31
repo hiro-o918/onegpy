@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gplib.operator.PopulationOperator &mdash; GPLib 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="gplib.operator.PopulationOperatorAdapter" href="gplib.operator.PopulationOperatorAdapter.html" />
+    <link rel="prev" title="gplib.operator.AbstractOperator" href="gplib.operator.AbstractOperator.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GPLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../base.html">base package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operators.html">operators package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">problems package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solutions.html">solutions package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../viewer.html">viewer package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../operator.html">operator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gplib.operator.AbstractOperator.html">gplib.operator.AbstractOperator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gplib.operator.PopulationOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gplib.operator.PopulationOperatorAdapter.html">gplib.operator.PopulationOperatorAdapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gplib.operator.ProblemBasedOperator.html">gplib.operator.ProblemBasedOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gplib.operator.build_population_operator.html">gplib.operator.build_population_operator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gplib.operator.operator_checker.html">gplib.operator.operator_checker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gplib.operator.pop_operator_checker.html">gplib.operator.pop_operator_checker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../problem.html">problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sequential.html">sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terminal_condition.html">terminal_condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terminator.html">terminator</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GPLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../operator.html">operator</a> &raquo;</li>
+        
+      <li>gplib.operator.PopulationOperator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generated/gplib.operator.PopulationOperator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gplib-operator-populationoperator">
+<h1>gplib.operator.PopulationOperator<a class="headerlink" href="#gplib-operator-populationoperator" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gplib.operator.PopulationOperator">
+<em class="property">class </em><code class="descclassname">gplib.operator.</code><code class="descname">PopulationOperator</code><span class="sig-paren">(</span><em>n_in=None</em>, <em>n_out=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/operator.html#PopulationOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.operator.PopulationOperator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="gplib.operator.PopulationOperator.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>n_in=None</em>, <em>n_out=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gplib.operator.PopulationOperator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of input solution to the operator and outputs one of the operator
+<cite>None</cite> means that the operator handles variable length solutions.
+:param n_in: int or None
+:param n_out: int or None</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#gplib.operator.PopulationOperator.__init__" title="gplib.operator.PopulationOperator.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([n_in,&nbsp;n_out])</td>
+<td>The number of input solution to the operator and outputs one of the operator <cite>None</cite> means that the operator handles variable length solutions.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">not_changeable_warning</span></code>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_in</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_out</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gplib.operator.PopulationOperatorAdapter.html" class="btn btn-neutral float-right" title="gplib.operator.PopulationOperatorAdapter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gplib.operator.AbstractOperator.html" class="btn btn-neutral" title="gplib.operator.AbstractOperator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

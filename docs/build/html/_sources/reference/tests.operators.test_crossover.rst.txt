@@ -1,0 +1,12 @@
+tests.operators.test\_crossover
+===============================
+
+.. module:: tests.operators.test_crossover
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   ExampleParents
+   TestCrossover
+   TestOnePointCrossover
+   TestPopulationOnePointCrossover

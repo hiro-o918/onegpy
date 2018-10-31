@@ -1,0 +1,9 @@
+tests.utils.test\_config
+========================
+
+.. module:: tests.utils.test_config
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   TestConfig

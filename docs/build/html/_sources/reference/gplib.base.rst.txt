@@ -1,0 +1,16 @@
+gplib.base package
+==================
+
+.. automodule:: gplib.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   gplib.base.gpbase
+   gplib.base.mlps_base
+   gplib.base.mlps_sample
+   gplib.base.sgp_sample
+   gplib.base.sgp_sample2
+

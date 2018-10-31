@@ -1,0 +1,25 @@
+tests package
+=============
+
+.. automodule:: tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   tests.base
+   tests.operators
+   tests.problems
+   tests.solutions
+   tests.utils
+   tests.viewer
+
+.. toctree::
+
+   tests.test_operator
+   tests.test_problem
+   tests.test_sequenctial
+   tests.test_terminal_condition
+   tests.test_terminator
+

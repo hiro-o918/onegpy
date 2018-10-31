@@ -1,0 +1,10 @@
+tests.problems.test\_cos2X
+==========================
+
+.. module:: tests.problems.test_cos2X
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+
+   TestArithmeticFunctions
+   TestCos2XParity

@@ -1,0 +1,13 @@
+tests.utils package
+===================
+
+.. automodule:: tests.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   tests.utils.test_config
+   tests.utils.test_util
+

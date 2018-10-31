@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>solutions.solution &mdash; GPLib 0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gplib.solutions.solution.Solution" href="generated/gplib.solutions.solution.Solution.html" />
+    <link rel="prev" title="gplib.solutions.node.set_id" href="generated/gplib.solutions.node.set_id.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GPLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="base.html">base package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">operators package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html">problems package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="solutions.html">solutions package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="solutions.node.html">solutions.node</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">solutions.solution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.Solution.html">gplib.solutions.solution.Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution._calc_solution_depth.html">gplib.solutions.solution._calc_solution_depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution._calc_solution_n_nodes.html">gplib.solutions.solution._calc_solution_n_nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.copy_solution.html">gplib.solutions.solution.copy_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.is_solution_in_pop.html">gplib.solutions.solution.is_solution_in_pop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.replace_node.html">gplib.solutions.solution.replace_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.select_random_points.html">gplib.solutions.solution.select_random_points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.set_previous_fitness.html">gplib.solutions.solution.set_previous_fitness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.set_solution_depth.html">gplib.solutions.solution.set_solution_depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.set_solution_n_nodes.html">gplib.solutions.solution.set_solution_n_nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.solution_checker.html">gplib.solutions.solution.solution_checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.solution_equal.html">gplib.solutions.solution.solution_equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.solution.solutions_checker.html">gplib.solutions.solution.solutions_checker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viewer.html">viewer package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator.html">operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem.html">problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sequential.html">sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminal_condition.html">terminal_condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminator.html">terminator</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GPLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Reference</a> &raquo;</li>
+        
+          <li><a href="solutions.html">solutions package</a> &raquo;</li>
+        
+      <li>solutions.solution</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/solutions.solution.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-gplib.solutions.solution">
+<span id="solutions-solution"></span><h1>solutions.solution<a class="headerlink" href="#module-gplib.solutions.solution" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution.Solution.html#gplib.solutions.solution.Solution" title="gplib.solutions.solution.Solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Solution</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.solution._calc_solution_depth.html#gplib.solutions.solution._calc_solution_depth" title="gplib.solutions.solution._calc_solution_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_calc_solution_depth</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution._calc_solution_n_nodes.html#gplib.solutions.solution._calc_solution_n_nodes" title="gplib.solutions.solution._calc_solution_n_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_calc_solution_n_nodes</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.solution.copy_solution.html#gplib.solutions.solution.copy_solution" title="gplib.solutions.solution.copy_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_solution</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution.is_solution_in_pop.html#gplib.solutions.solution.is_solution_in_pop" title="gplib.solutions.solution.is_solution_in_pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_solution_in_pop</span></code></a></td>
+<td>check the tree of <a href="#id1"><span class="problematic" id="id2">``</span></a>solution’’ is in <a href="#id3"><span class="problematic" id="id4">``</span></a>population’’ or not :param solution: Solution object :param population: list of Solution object :param as_tree: If as_tree is true, solution is compared by all the nodes’ structure                 Otherwise, compared by object id.:return: bool.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.solution.replace_node.html#gplib.solutions.solution.replace_node" title="gplib.solutions.solution.replace_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_node</span></code></a></td>
+<td>Replace a node in a solution by another node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution.select_random_points.html#gplib.solutions.solution.select_random_points" title="gplib.solutions.solution.select_random_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_random_points</span></code></a></td>
+<td>Obtain <cite>k</cite> points in the solution at random.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.solution.set_previous_fitness.html#gplib.solutions.solution.set_previous_fitness" title="gplib.solutions.solution.set_previous_fitness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_previous_fitness</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution.set_solution_depth.html#gplib.solutions.solution.set_solution_depth" title="gplib.solutions.solution.set_solution_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_solution_depth</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.solution.set_solution_n_nodes.html#gplib.solutions.solution.set_solution_n_nodes" title="gplib.solutions.solution.set_solution_n_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_solution_n_nodes</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution.solution_checker.html#gplib.solutions.solution.solution_checker" title="gplib.solutions.solution.solution_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solution_checker</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.solution.solution_equal.html#gplib.solutions.solution.solution_equal" title="gplib.solutions.solution.solution_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solution_equal</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.solution.solutions_checker.html#gplib.solutions.solution.solutions_checker" title="gplib.solutions.solution.solutions_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solutions_checker</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="generated/gplib.solutions.solution.Solution.html" class="btn btn-neutral float-right" title="gplib.solutions.solution.Solution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="generated/gplib.solutions.node.set_id.html" class="btn btn-neutral" title="gplib.solutions.node.set_id" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

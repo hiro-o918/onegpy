@@ -1,0 +1,25 @@
+ package
+========
+
+.. automodule:: gplib
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. toctree::
+
+   base
+   operators
+   problems
+   solutions
+   utils
+   viewer
+
+.. toctree::
+
+   operator
+   problem
+   sequential
+   terminal_condition
+   terminator
+
