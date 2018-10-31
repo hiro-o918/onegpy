@@ -19,7 +19,7 @@ if __name__ == '__main__':
             "gplib.viewer", "DefaultViewer"
         ],
         "terminal_condition": [
-            ["gplib.terminator", "GenerationTerminator", {"generation": 10}],
+            ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
             ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
         ],
     }
