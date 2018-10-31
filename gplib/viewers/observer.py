@@ -4,6 +4,36 @@ from gplib.utils import util
 from gplib.viewers.loggers import JSONLogger, PrintLogger
 
 
+def generate_sgp_log(gene, population):
+    general_log = {'generation': gene, 'pop_num': len(population)}
+    fit_log = util.get_fitness_info(population)
+    log = {**general_log, **fit_log}
+
+    return log
+
+
+def generate_mlpsgp_log(iter_cnt, eval_cnt, population_list):
+    detailed_log = []
+    for i, sub_pop in enumerate(population_list):
+        general_log = {'iter_cnt': iter_cnt, 'eval_cnt': eval_cnt, 'level': i + 1}
+        fitness_log = util.get_fitness_info(sub_pop)
+        detailed_log.append({**general_log, **fitness_log})
+
+    fitness_list_mapper = {'min': 0, 'ave': 1, 'max': 2}
+    fitness_list = np.array(list(map(lambda x:
+                                     [x['min_fit'], x['ave_fit'], x['max_fit']],
+                                     detailed_log)))
+
+    summary_log = {'iter_count': iter_cnt,
+                   'eval_cnt': eval_cnt,
+                   'min': min(fitness_list[:, fitness_list_mapper['min']]),
+                   'ave': np.average(fitness_list[:, fitness_list_mapper['ave']]),
+                   'max': max(fitness_list[:, fitness_list_mapper['max']]),
+                   'n_level': len(population_list)}
+
+    return {'detail': detailed_log, 'summary': summary_log}
+
+
 class AbstractObserver(ABC):
     def __init__(self):
         self._loggers = []
