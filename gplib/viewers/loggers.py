@@ -56,17 +56,20 @@ class PrintLogger(AbstractLogger):
 
 
 class JSONLogger(AbstractLogger):
-    def __init__(self, filepath=Path('log'), save_every_updating=False):
+    def __init__(self, filedir=Path('.'), filename='log', save_every_updating=False):
         """
         JSON Logger
 
-        :param filepath: str or Path. Path to dump json.
+        :param filedir: str or Path. Directory to dump json.
+        :param filename: str or Path. Name of json
         :param save_every_updating: bool. if true, save history every updating.
          otherwise save only in the end.
         """
-        self._filepath = Path(filepath)
-        if not self._filepath.parent.exists():
-            self._filepath.mkdir(parents=True)
+        self._filedir = Path(filedir)
+        if not self._filedir.exists():
+            self._filedir.mkdir(parents=True)
+
+        self._filepath = self._filedir.joinpath(filename)
         self._save_every_updating = save_every_updating
 
     def begin(self, **kwargs):
