@@ -4,7 +4,7 @@ from gplib.viewers.loggers import PrintLogger
 from gplib.solutions import solution, node
 
 
-class TestDefaultLogger(unittest.TestCase):
+class TestPrintLogger(unittest.TestCase):
     def setUp(self):
         self.logger = PrintLogger()
         s1 = solution.Solution(node.Node())
@@ -23,10 +23,15 @@ class TestDefaultLogger(unittest.TestCase):
         self.logger.begin()
 
     def test_update(self):
-        self.logger.update(1, self.pop)
+        self.logger.update(1)
 
     def test_end(self):
-        self.logger.end(self.pop)
+        self.logger.end('log')
+
+
+class TestJSONLogger(unittest.TestCase):
+    # TODO: write this
+    pass
 
 
 if __name__ == '__main__':
