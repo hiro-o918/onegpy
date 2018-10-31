@@ -9,7 +9,7 @@ from gplib.solutions import node, solution
 import math
 
 
-class TestEvenParity(unittest.TestCase):
+class TestCos2XParity(unittest.TestCase):
     def setUp(self):
         self.data = 5
         self.cos2X = arithmetic.Cos2XProblem(self.data)
@@ -35,35 +35,34 @@ class TestEvenParity(unittest.TestCase):
         print(self.cos2X.fitness(s))
 
     def test__eval(self):
-        self.assertEqual(self.cos2X._eval(self.n1, 1), 1)
+        self.assertEqual(self.cos2X._eval(self.n1, [[1]]), 1)
 
 
-class TestBooleanFunctions(unittest.TestCase):
+class TestArithmeticFunctions(unittest.TestCase):
     def setUp(self):
-        self.x1 = np.array([1.0, -1.0], float)
-        self.x2 = np.array([-1.0, 0.0], float)
+        self.x1 = np.array([0.0, -1.0], float)
+        self.x2 = np.array([-1.0, 1.0], float)
 
     def test_sin_func(self):
         self.assertTrue(np.array_equal(arithmetic.get_sin()([self.x1]), np.sin(self.x1)))
 
     def test_add_func(self):
-        self.assertTrue(np.array_equal(arithmetic.get_add()([self.x1, self.x2]), self.x1+self.x2))
+        self.assertTrue(np.array_equal(arithmetic.get_add()(np.array([self.x1, self.x2])).T, self.x1+self.x2))
 
     def test_sub_func(self):
-        self.assertTrue(np.array_equal(arithmetic.get_sub()([self.x1, self.x2]), self.x1-self.x2))
+        self.assertTrue(np.array_equal(arithmetic.get_sub()(np.array([self.x1, self.x2])).T, self.x1-self.x2))
 
     def test_mul_func(self):
-        self.assertTrue(np.array_equal(arithmetic.get_mul()([self.x1, self.x2]), self.x1*self.x2))
+        self.assertTrue(np.array_equal(arithmetic.get_mul()(np.array([self.x1, self.x2])).T, self.x1*self.x2))
 
     def test_div_func(self):
-        self.assertTrue(np.array_equal(arithmetic.get_div()([self.x1, self.x2]), self.x1/np.array([-1.0, 1.0], float)))
+        self.assertTrue(np.array_equal(arithmetic.get_div()(np.array([self.x1, self.x2])).T, self.x1/self.x2))
 
     def test_x_func(self):
-        self.assertTrue(np.array_equal(arithmetic.get_sin()(self.x1), self.x1))
-
+        self.assertTrue(np.array_equal(arithmetic.get_x(0)(np.array([self.x1]).T), self.x1))
 
     def test_val_func(self):
-        self.assertTrue(np.array_equal(arithmetic.get_sin()(self.x1), np.array([1.0, 1.0], float)))
+        self.assertTrue(np.array_equal(arithmetic.get_val()(self.x1), np.array([1.0, 1.0], float)))
 
 
 if __name__ == '__main__':
