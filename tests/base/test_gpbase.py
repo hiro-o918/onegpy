@@ -8,7 +8,7 @@ from gplib.sequential import Sequential
 from gplib.solutions.node import Node
 from gplib.solutions.solution import Solution
 from gplib.base import gpbase
-from gplib.loggers import loggers
+from gplib.viewers import loggers
 from gplib.solutions import node
 from tests.test_problem import EmptyProblem
 

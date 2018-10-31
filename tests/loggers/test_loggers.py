@@ -1,6 +1,6 @@
 import unittest
 
-from gplib.loggers.loggers import DefaultLogger
+from gplib.viewers.loggers import DefaultLogger
 from gplib.solutions import solution, node
 
 
