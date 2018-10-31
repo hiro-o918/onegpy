@@ -2,6 +2,7 @@ from gplib.problem import AbstractProblem, FunctionBank
 from gplib.solutions import node
 import math
 import random
+import numpy as np
 
 
 class Cos2XProblem(AbstractProblem):
@@ -11,20 +12,17 @@ class Cos2XProblem(AbstractProblem):
 
     def _make_data(self, n_data):
         x = []
-        y = []
         for i in range(n_data):
             x.append(random.uniform(-math.pi, math.pi))
-            y.append(math.cos(2*x[i]))
+        x = np.array(x, dtype=float)
+        y = np.cos(2*x)
         return x, y
 
     def _cal_fitness(self, target_solution):
-        fitness = 0.0
-        for x, y in zip(self.x, self.y):
-            error = abs(self._eval(target_solution.root, x) - y)
-            fitness += error
+        fitness = np.sum(np.abs(self._eval(target_solution.root, self.x) - self.y))
         return 1.0 / (1 + fitness)
 
-    # TODO: use for termination condition
+    # TODO: use for terminal condition
     def get_hitcounter(self, target_solution, t):
         hitcounter = 0
         for x, y in zip(self.x, self.y):
@@ -65,7 +63,7 @@ def get_default_function_bank():
 
 def get_sin(n_children=1):
     def sin_func(x):
-        return math.sin(x[0])
+        return np.sin(x[0])
 
     return node.Function(n_children, sin_func)
 
@@ -93,9 +91,7 @@ def get_mul(n_children=2):
 
 def get_div(n_children=2):
     def div_func(x):
-        right = x[1]
-        if abs(x[1]) <= 0.0:
-            right = 1.0
+        right = np.where(x[1] != 0.0, x[1], np.array([1.0 for _ in range(len(x[1]))], float))
         return x[0] / right
 
     return node.Function(n_children, div_func)
@@ -110,6 +106,6 @@ def get_x(n_children=0):
 
 def get_val(n_children=0, val=1.0):
     def val_func(x):
-        return val
+        return np.array([val for _ in range(len(x))], float)
 
     return node.Function(n_children, val_func)
