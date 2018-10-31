@@ -4,86 +4,81 @@ from abc import ABC, abstractmethod
 import sys
 from pathlib import Path
 
-from gplib.utils import util
-
 
 class AbstractLogger(ABC):
-    def __init__(self, verbose=1, out=sys.stdout, filepath=Path('log')):
-        """
-            Class of logger.
 
-            :param verbose: int.
-            0 -> No log,
-            1 -> print a log and save it in the end,
-            2 -> print a log and save it every updating.
-            :param out: String.output
-            :param filepath: Path
-        """
+    @abstractmethod
+    def begin(self, *args, **kwargs):
+        raise NotImplementedError
 
-        verbose_list = [0, 1, 2]
-        if verbose not in verbose_list:
-            msg = 'verbose must be selected from {}'.format(verbose_list)
-            raise ValueError(msg)
+    @abstractmethod
+    def end(self, *args, **kwargs):
+        raise NotImplementedError
+
+    @abstractmethod
+    def update(self, *args, **kwargs):
+        raise NotImplementedError
+
+
+class PrintLogger(AbstractLogger):
+    def __init__(self, out=sys.stdout):
+        """
+            Print Logger
+
+            :param out: String.output output to print.
+        """
 
         self._out = out
-        self._verbose = verbose
-        self._filename = Path(filepath)
-        self.log = []
 
-    def get_out(self, info):
-        if self._verbose > 0:
-            if isinstance(info, dict):
-                info = ', '.join(['{}: {}'.format(k, v) for k, v in info.items()])
+    def begin(self, **kwargs):
+        self._get_out(datetime.datetime.today())
+        self._get_out("-----------begin-----------")
 
-            print(info, file=self._out)
-
-    def update_log(self, info):
-        self.log.append(info)
-        if self._verbose > 1:
-            with open(self._filename, 'w') as f:
-                json.dump(self.log, f, indent=4)
-
-    @abstractmethod
-    def begin(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    def end(self, population):
-        raise NotImplementedError
-
-    @abstractmethod
-    def update(self, gene, population):
-        raise NotImplementedError
-
-
-class DefaultLogger(AbstractLogger):
-    def __init__(self, verbose=1, out=sys.stdout, filepath=Path('log')):
+    def end(self, log, **kwargs):
         """
-            Default Logger
-
-            :param verbose: int.
-            0 -> No log,
-            1 -> print a log and save it in the end,
-            2 -> print a log and save it every updating.
-            :param out: String.output
-            :param filepath: Path
+        :param log: dict.
         """
-        super(DefaultLogger, self).__init__(verbose, out, filepath)
+        self._get_out("------------end------------")
+        self._get_out(datetime.datetime.today())
 
-    def begin(self):
-        self.get_out(datetime.datetime.today())
-        self.get_out("-----------begin-----------")
+        self._get_out(log)
 
-    def end(self, population):
-        self.get_out("------------end------------")
-        self.get_out(datetime.datetime.today())
-        info = {'max_fit: {}': util.get_fitness_info(population).get('max_fit')}
-        self.get_out(info)
+    def update(self, log, **kwargs):
+        self._get_out(log)
 
-    def update(self, gene, population):
-        info = {'generation': gene, 'pop_num': len(population)}
-        fit_info = util.get_fitness_info(population)
-        info.update(fit_info)
+    def _get_out(self, log):
+        if isinstance(log, dict):
+            log = ', '.join(['{}: {}'.format(k, v) for k, v in log.items()])
+        if isinstance(log, list):
+            log = ', '.join(log)
 
-        self.get_out(info)
-        self.update_log(info)
+        print(log, file=self._out)
+
+
+class JSONLogger(AbstractLogger):
+    def __init__(self, filepath=Path('log'), save_every_updating=False):
+        """
+        JSON Logger
+
+        :param filepath: str or Path. Path to dump json.
+        :param save_every_updating: bool. if true, save history every updating.
+         otherwise save only in the end.
+        """
+        self._filepath = Path(filepath)
+        if not self._filepath.exists():
+            self._filepath.mkdir(parents=True)
+        self._save_every_updating = save_every_updating
+
+    def begin(self, **kwargs):
+        pass
+
+    def end(self, history, **kwargs):
+        self._dump(history)
+
+    def update(self, history, **kwargs):
+        if self._save_every_updating:
+            self._dump(history)
+
+    def _dump(self, history):
+        with open(self._filepath, 'w') as f:
+            json.dump(history, f, indent=4)
