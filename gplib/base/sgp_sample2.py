@@ -17,7 +17,11 @@ if __name__ == '__main__':
         ],
         'observer': [
             'gplib.viewers', 'DefaultObserver', {'verbose': 1}
-        ]
+        ],
+        "terminal_condition": [
+            ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
+            ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
+        ],
     }
 
     gp = gp_from_config(config)
