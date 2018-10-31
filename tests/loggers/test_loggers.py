@@ -1,12 +1,12 @@
 import unittest
 
-from gplib.viewers.loggers import DefaultLogger
+from gplib.viewers.loggers import PrintLogger
 from gplib.solutions import solution, node
 
 
 class TestDefaultLogger(unittest.TestCase):
     def setUp(self):
-        self.logger = DefaultLogger()
+        self.logger = PrintLogger()
         s1 = solution.Solution(node.Node())
         s2 = solution.Solution(node.Node())
         s3 = solution.Solution(node.Node())

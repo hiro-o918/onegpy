@@ -1,15 +1,10 @@
 import unittest
 
-from gplib.operator import AbstractOperator
 from gplib.operators import PopulationRandomInitializer, TournamentSelection
-from gplib.operators.crossover import RandomSelection, PopulationOnePointCrossover, OnePointCrossover
-from gplib.problem import AbstractProblem
+from gplib.operators.crossover import PopulationOnePointCrossover
 from gplib.sequential import Sequential
-from gplib.solutions.node import Node
-from gplib.solutions.solution import Solution
 from gplib.base import gpbase
-from gplib.viewers import loggers
-from gplib.solutions import node
+from gplib.viewers import observer
 from tests.test_problem import EmptyProblem
 
 
@@ -25,7 +20,7 @@ class TestSequential(unittest.TestCase):
         # self.sequential.add(self.co)
 
         gp = gpbase.PopulationGP(initializer=self.initializer, sequential=self.sequential,
-                                 n_generations=10, logger=loggers.DefaultLogger())
+                                 n_generations=10, observer=observer.DefaultObserver)
         gp.__call__()
 
 

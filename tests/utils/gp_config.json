@@ -13,6 +13,6 @@
      ["gplib.operators", "TournamentSelection", {"k": 100, "tournament_size": 3}]
    ],
   "logger": [
-    "gplib.viewers", "DefaultLogger"
+    "gplib.viewers", "DefaultObserver"
   ]
 }
