@@ -2,19 +2,19 @@ from gplib.operators.mlps_crossover import MLPS_Crossover
 from gplib.operators.initializer import PopulationTerminalInitializer
 from gplib.utils import util
 from gplib.solutions import node, solution
-import numpy as np
+from gplib.viewers.observer import MLPS_Observer
 
 
 class MLPS_GP(object):
 
-    def __init__(self, initializer, localsearch, problem, terminal_condition, simplify=None,
+    def __init__(self, initializer, localsearch, problem, terminal_condition, observer=MLPS_Observer(), simplify=None,
                  is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000, **kwargs):
         """
 
         :param initializer: function. Initialize operator of MLPS-GP.
         :param localsearch: local search object. Local search operator of MLPS_GP.
         :param problem: Problem object. problem to solve.
-        :param max_evals: int. the number of maximum evaluations for the terminal condition.
+        :param observer: Observer object.
         :param simplify: simplify object. Simplify operator of MLPS-GP. Default is None.
         :param is_add_terminal: bool. a control parameter of MLPS-GP. Default is True.
         :param only_add_best: bool. a control parameter of MLPS-GP. Default is False.
@@ -25,6 +25,7 @@ class MLPS_GP(object):
         self.localsearch = localsearch
         self.crossover = MLPS_Crossover(problem)
         self.problem = problem
+        self.observer = observer
         self.simplify = simplify
         self.is_add_terminal = is_add_terminal
         self.only_add_best = only_add_best
@@ -39,22 +40,17 @@ class MLPS_GP(object):
         if self.is_add_terminal:
             terminal_solutions = self.terminal_initializer()
             self.add_terminals(terminal_solutions)
-
+        self.observer.begin()
         while not self.terminal_condition():
             self.mlps_iterate()
             cnt += 1
-            max_fit = []
-            ave = []
-            for i, sub_pop in enumerate(self.population_list):
-                if len(sub_pop) == 0:
-                    continue
-                fitness_info = util.get_fitness_info(sub_pop)
-                ave.append(fitness_info['ave_fit'])
-                max_fit.append(fitness_info['max_fit'])
-            print('ite:{}, evals:{}, max:{}, ave:{}, level:{}'.format(cnt, self.problem.get_eval_count(), max(max_fit),
-                                                                      np.average(ave), len(self.population_list)))
-            if max(max_fit) == 1.0:
-                break
+            self.observer.update(gene_cnt=cnt,
+                                 eval_cnt=self.problem.get_eval_count(),
+                                 population_list=self.population_list)
+
+        self.observer.end(gene_cnt=cnt,
+                          eval_cnt=self.problem.get_eval_count(),
+                          population_list=self.population_list)
 
     def mlps_iterate(self):
         ## initialization

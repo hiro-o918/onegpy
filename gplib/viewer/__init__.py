@@ -1,1 +1,0 @@
-from gplib.viewer.viewer import DefaultViewer

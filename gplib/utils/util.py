@@ -13,6 +13,10 @@ def get_generator_builder(selection):
 
 
 def get_fitness_info(population):
+    if len(population) == 0:
+        info = {'max_fit': 0., 'ave_fit': 0., 'min_fit': 0.}
+        return info
+
     sorted_pop = sorted(population, key=lambda x: x.previous_fitness, reverse=True)
     max_fit = sorted_pop[0].previous_fitness
     min_fit = sorted_pop[-1].previous_fitness
@@ -23,7 +27,7 @@ def get_fitness_info(population):
 
     ave_fit = sum / float(len(population))
 
-    info = {'max_fit':max_fit, 'ave_fit':ave_fit, 'min_fit':min_fit}
+    info = {'max_fit': max_fit, 'ave_fit': ave_fit, 'min_fit': min_fit}
 
     return info
 

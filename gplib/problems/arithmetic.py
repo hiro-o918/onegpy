@@ -23,9 +23,7 @@ class Cos2XProblem(AbstractProblem):
         :param n_data:  the number of training data.
         :return: tuple of ndarray. (x, y)
         """
-        x = []
-        for i in range(n_data):
-            x.append(random.uniform(-math.pi, math.pi))
+        x = [[random.uniform(-math.pi, math.pi)] for i in range(n_data)]
         x = np.array(x, dtype=float)
         y = np.cos(2*x)
         return x, y
@@ -79,7 +77,7 @@ def get_default_function_bank(dim):
     func_bank.add_function(get_val(1.0))
     func_bank.add_function(get_sin())
     for i in range(dim):
-        func_bank.add_function(get_x(dim))
+        func_bank.add_function(get_x(i))
 
     return func_bank
 
@@ -101,7 +99,7 @@ def get_add():
     :return: function object.
     """
     def add_func(x):
-        return x[0] + x[1]
+        return np.nan_to_num(x[0] + x[1])
 
     return node.Function(2, add_func)
 
@@ -112,7 +110,7 @@ def get_sub():
     :return: function object.
     """
     def sub_func(x):
-        return x[0] - x[1]
+        return np.nan_to_num(x[0] - x[1])
 
     return node.Function(2, sub_func)
 
