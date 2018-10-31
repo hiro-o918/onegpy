@@ -7,13 +7,13 @@ class AbstractTerminator(ABC):
 
 
 class GenerationTerminator(AbstractTerminator):
-    def __init__(self, generation):
-        self.generation = generation
+    def __init__(self, t_gene):
+        self.t_gene = t_gene
         self.gene = 0
 
     def __call__(self):
         self.gene += 1
-        return self.gene > self.generation
+        return self.gene > self.t_gene
 
 
 class ProblemBasedTerminator(AbstractTerminator):
