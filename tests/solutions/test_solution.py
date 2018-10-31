@@ -113,6 +113,18 @@ class TestSolutionFunctions(unittest.TestCase):
         self.assertFalse(solution.solution_equal(original_s1, new_s1))
         self.assertTrue(self.s1 is new_s1)
 
+    def test_solution_checker(self):
+        with self.assertRaises(TypeError):
+            solution.solution_checker(1)
+
+        self.assertEqual(solution.solution_checker(self.s1), None)
+
+    def test_solutions_checker(self):
+        with self.assertRaises(TypeError):
+            solution.solutions_checker([1, 1])
+
+        self.assertEqual(solution.solutions_checker([self.s1, self.s1]), None)
+
 
 if __name__ == '__main__':
     unittest.main()

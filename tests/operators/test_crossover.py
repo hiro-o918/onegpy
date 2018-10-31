@@ -3,8 +3,9 @@ import unittest
 import warnings
 
 from gplib.operators import crossover as co
-from gplib.operators.crossover import PopulationOnePointCrossover
+from gplib.operators.crossover import PopulationOnePointCrossover, check_parents_and_points
 from gplib.solutions import node, solution
+from gplib.solutions.solution import select_random_points
 
 
 class ExampleParents(object):
@@ -69,6 +70,15 @@ class TestCrossover(unittest.TestCase, ExampleParents):
         self.assertTrue(node.node_equal(expected_nodes2[0], new_s2.root, as_tree=True))
         self.assertTrue(self.parents[0] is new_s1)
         self.assertTrue(self.parents[1] is new_s2)
+
+    def test_check_parents_and_points(self):
+        points = [select_random_points(p, 1)[0] for p in self.parents]
+        with self.assertRaises(TypeError):
+            check_parents_and_points(1, 2)
+            check_parents_and_points(self.parents, 2)
+            check_parents_and_points(1, points)
+
+        check_parents_and_points(self.parents, points)
 
 
 class TestOnePointCrossover(unittest.TestCase, ExampleParents):

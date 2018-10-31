@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gplib.operators import initializer, RandomInitializer
+from gplib.operators import RandomInitializer
 from gplib.problem import AbstractProblem, FunctionBank
 from gplib.solutions import node, solution
 
@@ -10,18 +10,17 @@ def f_non_terminal(n_children=2):
     def print_non_terminal(x):
         print('non_terminal')
 
-    return node.build_func(print_non_terminal, n_children)
+    return node.Function(n_children, print_non_terminal)
 
 
 def f_terminal():
     def print_terminal(x):
         print('terminal')
 
-    return node.build_func(print_terminal, 0)
+    return node.Function(0, print_terminal)
 
 
 class DummyProblem(AbstractProblem):
-
     def __init__(self):
         super(DummyProblem, self).__init__(function_bank_builder=None)
 
@@ -47,7 +46,7 @@ class TestInitializer(unittest.TestCase):
         s = initializer()
         solution.set_solution_depth(s)
         self.assertEqual(s.depth, self.max_depth)
-        self.assertEqual(node._nodes_checker(*node.get_all_node(s.root)), None)
+        self.assertEqual(node.nodes_checker(node.get_all_node(s.root)), None)
 
         t_prob = 1
         initializer = RandomInitializer(t_prob, self.max_depth, self.problem)

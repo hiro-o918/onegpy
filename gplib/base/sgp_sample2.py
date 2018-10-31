@@ -8,12 +8,12 @@ if __name__ == '__main__':
             "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
         ],
         "problem": [
-            "gplib.problems", "EvenParity", {"dim": 3}
+            "gplib.problems", "Cos2XProblem", {"n_data": 10}
         ],
         "sequential": [
-            ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.5, "destructive": False}],
-            ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
-            ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
+            ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.9, "destructive": False}],
+            ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.1}],
+            ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 3}]
         ],
         "viewer": [
             "gplib.viewer", "DefaultViewer"

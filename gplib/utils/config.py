@@ -1,10 +1,11 @@
 import json
-from collections import OrderedDict
 from pathlib import Path
 import importlib
 
 from gplib.operator import ProblemBasedOperator
+from gplib.terminator import ProblemBasedTerminator
 from gplib.sequential import Sequential
+from gplib.terminal_condition import TerminalCondition
 
 
 def build_instance(module, name, params, *args, **kwargs):
@@ -61,27 +62,68 @@ def build_viewer(module, name, params, **kwargs):
     return build_instance(module, name, params)
 
 
-def build_gp(module, name, params, initializer, sequential, viewer, **kwargs):
-    return build_instance(module, name, params,
-                          initializer=initializer, sequential=sequential, viewer=viewer)
+def build_terminator(module, name, params, **kwargs):
+    if issubclass(getattr(module, name), ProblemBasedTerminator):
+        return build_instance(module, name, params, problem=kwargs['problem'])
+    else:
+        return build_instance(module, name, params)
 
 
-CONFIG_TAGS = ['problem', 'initializer', 'sequential', 'viewer', 'gp']
-BUILDER_MAP = {'problem': build_problem,
-               'initializer': build_operator,
-               'sequential': build_sequential,
-               'viewer': build_viewer,
-               'gp': build_gp}
+def build_terminal_condition(terminator_configs, **kwargs):
+    t_condition = TerminalCondition()
+    for terminator_config in terminator_configs:
+        module, name, params = unwrap_instance_info(terminator_config)
+        t_condition.add(build_terminator(module, name, params, **kwargs))
+
+    return t_condition
 
 
-def check_config(config):
+def check_config(config, config_tags):
     for key in config.keys():
-        if key not in CONFIG_TAGS:
-            msg = 'key must be selected from {}'.format(CONFIG_TAGS)
+        if key not in config_tags:
+            msg = 'key must be selected from {}'.format(config_tags)
             raise ValueError(msg)
 
 
-def gp_from_config(path_or_config):
+def check_builder_map(config_tags, builder_map):
+    for tag in config_tags:
+        if tag not in builder_map:
+            raise ValueError('There is no {} in builder_map'.format(tag))
+
+
+def gp_from_config(path_or_config, config_tags=None, builder_map=None):
+    """
+    Create a gp instance based on config.
+    Keys of config indicate instances' name and values follows below format.
+    `[module, class or function, list or dict of arguments]`
+    where list or dict of arguments only contains hyper parameters not dependent instances
+
+    :param path_or_config: filepath or dict
+    :param config_tags: list of instance names. All the instances are built in this order.
+    Tags which are not in `config` will be skipped.
+    :param builder_map: dict. the mapper of instances' names to their builder
+    :return gp: a gp instance
+
+    - Example of config
+        config = {
+            "gp": ["gplib.base", "PopulationGP", [20]],
+            "initializer": [
+                "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
+            ],
+            "problem": [
+                "gplib.problems", "EvenParity", {"dim": 3}
+            ],
+            "sequential": [
+                ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.5, "destructive": False}],
+                ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
+                ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
+            ],
+            "viewer": [
+                "gplib.viewer", "DefaultViewer"
+            ]
+        }
+    """
+
     if isinstance(path_or_config, dict):
         config = path_or_config
     else:
@@ -89,13 +131,39 @@ def gp_from_config(path_or_config):
         with open(path_or_config, 'r') as f:
             config = json.load(f)
 
+    # set default config_tags and builder_map.
+    if config_tags is None:
+        config_tags = ['problem',
+                       'initializer',
+                       'sequential',
+                       'localsearch',
+                       'viewer',
+                       'terminal_condition',
+                       'gp']
+    if builder_map is None:
+        builder_map = {'problem': build_problem,
+                       'initializer': build_operator,
+                       'sequential': build_sequential,
+                       'localsearch': build_operator,
+                       'viewer': build_viewer,
+                       'terminal_condition': build_terminal_condition,
+                       'gp': build_instance}
+
+    check_config(config, config_tags)
+    check_builder_map(config_tags, builder_map)
+
     instance_dict = {}
-    for tag in CONFIG_TAGS:
+    for tag in config_tags:
+        if tag not in config:
+            continue
+
         if tag == 'sequential':
             instance_dict.update({tag: build_sequential(config[tag], **instance_dict)})
+        elif tag == 'terminal_condition':
+            instance_dict.update({tag: build_terminal_condition(config[tag], **instance_dict)})
         else:
             module, name, params = unwrap_instance_info(config[tag])
-            builder = BUILDER_MAP[tag]
+            builder = builder_map[tag]
             instance_dict.update({tag: builder(module, name, params, **instance_dict)})
 
     gp = instance_dict['gp']

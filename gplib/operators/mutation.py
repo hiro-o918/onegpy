@@ -7,10 +7,11 @@ from gplib.operator import AbstractOperator, PopulationOperatorAdapter, ProblemB
 
 
 class AbstractMutation(AbstractOperator, ProblemBasedOperator, ABC):
+    """
+    Abstract class for mutation.
+    """
     def __init__(self, m_rate, mutation_type, problem):
         """
-        Abstract class of mutation.
-
         :param m_rate: float([0, 1.0]). mutation rate for each iteration
         :param mutation_type: function name
         :param problem: problem
@@ -58,11 +59,20 @@ class AbstractMutation(AbstractOperator, ProblemBasedOperator, ABC):
 
 
 def one_point(solution, func_bank):
+    """
+    Core function of one_point mutation.
+    :param solution: solution object. solution which is applied mutation.
+    :param func_bank: function bank object. function bank which is defined in problem.py.
+    :return: solution object.
+    """
     point = random.choice(node.get_all_node(solution.root))
     n_children = len(point.children)
     function_list = func_bank.get_function_list(n_children)
     if function_list is None:
         raise ValueError("function bank must have {}'s function list, but it has no list.".format(n_children))
+
+    if len(function_list) == 1:
+        return solution
 
     candidate_id = random.sample(function_list, 2)
     if point.func_id != candidate_id[0]:
@@ -74,6 +84,11 @@ def one_point(solution, func_bank):
 
 
 def get_mutation_core(mutation_type, **kwargs):
+    """
+    getter of core function of mutation.
+    :param mutation_type: String. type of mutation.
+    :return: function
+    """
     if mutation_type == 'onepoint':
         # Obtain `one_point` function fixed `func_bank`
         mutation_core = partial(one_point, **kwargs)
@@ -85,7 +100,16 @@ def get_mutation_core(mutation_type, **kwargs):
 
 
 class PointMutation(AbstractMutation):
+    """
+    Point mutation class.
+    This mutation is not for population but for a solution.
+    """
     def __init__(self, m_rate, problem, mutation_type='onepoint'):
+        """
+        :param m_rate: float. mutation rate.
+        :param problem: problem object. target problem.
+        :param mutation_type: String. mutation type
+        """
         super(PointMutation, self).__init__(m_rate, mutation_type, problem)
         self.mutation_core = get_mutation_core(self._mutation_type, func_bank=problem.func_bank)
 
@@ -109,7 +133,19 @@ class PointMutation(AbstractMutation):
 
 
 class PopulationPointMutation(PopulationOperatorAdapter, ProblemBasedOperator):
+    """
+    Point mutation class for population.
+    """
     def __init__(self, m_rate, problem, mutation_type='onepoint', generator_builder=None):
+        """
+        :param m_rate: float. mutation rate.
+        :param problem: problem object. target problem.
+        :param mutation_type: String. mutation type.
+        :param generator_builder: generator builder. Builder of generator for a target solution.
+                                  Default is None (default generator).
+                                  e.g. If you want to use elite selection,
+                                        you can write 'get_generator_builder(EliteSelection(...))'
+        """
         operator = PointMutation(m_rate, problem, mutation_type)
 
         super(PopulationPointMutation, self).__init__(operator, generator_builder)
