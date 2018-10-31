@@ -1,18 +1,21 @@
 {
-   "gp": ["gplib.base", "PopulationGP", [20]],
-   "initializer": [
-     "gplib.operators", "PopulationRandomInitializer", [100, 0.5, 3]
-   ],
-   "problem": [
-      "gplib.problems", "EvenParity", {"dim": 6}
-   ],
-   "sequential": [
-     ["gplib.operators", "RandomSelection", [100, true]],
-     ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.5}],
-     ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
-     ["gplib.operators", "TournamentSelection", {"k": 100, "tournament_size": 3}]
-   ],
-  "logger": [
-    "gplib.viewers", "DefaultObserver"
-  ]
+    "gp": ["gplib.base", "PopulationGP"],
+    "initializer": [
+        "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
+    ],
+    "problem": [
+        "gplib.problems", "EvenParity", {"dim": 3}
+    ],
+    "sequential": [
+        ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.5, "destructive": false}],
+        ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
+        ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
+    ],
+    "observer": [
+        "gplib.viewers", "DefaultObserver", {"verbose": 3}
+    ],
+    "terminal_condition": [
+        ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
+        ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
+    ]
 }
