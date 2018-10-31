@@ -16,6 +16,7 @@ class PopulationGP(object):
     """
     base class of population based GP
     """
+    
     def __init__(self, n_generations, initializer, sequential,  viewer):
         """
 

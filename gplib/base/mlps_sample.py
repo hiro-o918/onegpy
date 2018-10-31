@@ -1,24 +1,20 @@
-from gplib.base.mlps_base import MLPS_GP
-from gplib.operators.initializer import RandomInitializer
-from gplib.operators.localsearch import FIHC
-from gplib.problems import boolean
-
+from gplib.utils.config import gp_from_config
 
 if __name__ == '__main__':
+    config = {
+        "gp": [
+            "gplib.base", "MLPS_GP", {'max_evals': 100000, 'depth_limit': 20}
+        ],
+        "initializer": [
+            "gplib.operators", "RandomInitializer", [0.1, 10]
+        ],
+        "problem": [
+            "gplib.problems", "EvenParity", {"dim": 5}
+        ],
+        "localsearch": [
+            "gplib.operators", "FIHC", {"target_node": 'nonterminal', "func_search_type": 'all_check'}
+        ]
+    }
 
-    t_prob = 0.1
-    max_depth = 3
-    dim = 5
-    max_evals = 100000
-
-    problem = boolean.EvenParity(dim=dim)
-
-    init_op = RandomInitializer(t_prob, max_depth, problem)
-    ls_op = FIHC(problem, target_node='nonterminal', func_search_type='all_check')
-
-    population = []
-    mlps = MLPS_GP(initializer=init_op, localsearch=ls_op, problem=problem, max_evals=max_evals, t_prob=t_prob,
-                   max_depth=max_depth, is_add_terminal=True)
-
+    mlps = gp_from_config(config)
     mlps()
-

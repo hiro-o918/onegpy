@@ -24,10 +24,10 @@ class Cos2XProblem(AbstractProblem):
         :return: tuple of ndarray. (x, y)
         """
         x = []
-        y = []
         for i in range(n_data):
             x.append(random.uniform(-math.pi, math.pi))
-            y.append(math.cos(2*x[i]))
+        x = np.array(x, dtype=float)
+        y = np.cos(2*x)
         return x, y
 
     def _cal_fitness(self, target_solution):
@@ -36,13 +36,11 @@ class Cos2XProblem(AbstractProblem):
         :param target_solution: solution object. a target solution to calculate fitness.
         :return: float. fitness of the target solution.
         """
-        fitness = 0.0
-        for x, y in zip(self.x, self.y):
-            error = abs(self._eval(target_solution.root, x) - y)
-            fitness += error
+        fitness = np.sum(np.abs(self._eval(target_solution.root, self.x) - self.y))
+
         return 1.0 / (1 + fitness)
 
-    # TODO: use for termination condition
+    # TODO: use for terminal condition
     def get_hitcounter(self, target_solution, t):
         hitcounter = 0
         for x, y in zip(self.x, self.y):
@@ -91,7 +89,7 @@ def get_sin():
     :return: function object.
     """
     def sin_func(x):
-        return math.sin(x[0])
+        return np.sin(x[0])
 
     return node.Function(1, sin_func)
 
@@ -158,6 +156,6 @@ def get_val(val=1.0):
     :return: function object.
     """
     def val_func(x):
-        return val
+        return np.array([val for _ in range(len(x))], float)
 
     return node.Function(0, val_func)
