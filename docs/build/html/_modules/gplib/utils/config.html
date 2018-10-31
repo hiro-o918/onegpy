@@ -202,7 +202,7 @@
     <span class="k">return</span> <span class="n">sequential</span></div>
 
 
-<div class="viewcode-block" id="build_viewer"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.build_viewer.html#gplib.utils.config.build_viewer">[docs]</a><span class="k">def</span> <span class="nf">build_viewer</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="build_observer"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.config.build_observer.html#gplib.utils.config.build_observer">[docs]</a><span class="k">def</span> <span class="nf">build_observer</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">build_instance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
 
 
@@ -262,8 +262,8 @@
 <span class="sd">                [&quot;gplib.operators&quot;, &quot;PopulationPointMutation&quot;, {&quot;m_rate&quot;: 0.2}],</span>
 <span class="sd">                [&quot;gplib.operators&quot;, &quot;TournamentSelection&quot;, {&quot;k&quot;: 500, &quot;tournament_size&quot;: 5}]</span>
 <span class="sd">            ],</span>
-<span class="sd">            &quot;viewer&quot;: [</span>
-<span class="sd">                &quot;gplib.viewer&quot;, &quot;DefaultViewer&quot;</span>
+<span class="sd">            &quot;logger&quot;: [</span>
+<span class="sd">                &quot;gplib.viewers&quot;, &quot;DefaultObserver&quot;</span>
 <span class="sd">            ]</span>
 <span class="sd">        }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -281,7 +281,7 @@
                        <span class="s1">&#39;initializer&#39;</span><span class="p">,</span>
                        <span class="s1">&#39;sequential&#39;</span><span class="p">,</span>
                        <span class="s1">&#39;localsearch&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;viewer&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;observer&#39;</span><span class="p">,</span>
                        <span class="s1">&#39;terminal_condition&#39;</span><span class="p">,</span>
                        <span class="s1">&#39;gp&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">builder_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -289,7 +289,7 @@
                        <span class="s1">&#39;initializer&#39;</span><span class="p">:</span> <span class="n">build_operator</span><span class="p">,</span>
                        <span class="s1">&#39;sequential&#39;</span><span class="p">:</span> <span class="n">build_sequential</span><span class="p">,</span>
                        <span class="s1">&#39;localsearch&#39;</span><span class="p">:</span> <span class="n">build_operator</span><span class="p">,</span>
-                       <span class="s1">&#39;viewer&#39;</span><span class="p">:</span> <span class="n">build_viewer</span><span class="p">,</span>
+                       <span class="s1">&#39;observer&#39;</span><span class="p">:</span> <span class="n">build_observer</span><span class="p">,</span>
                        <span class="s1">&#39;terminal_condition&#39;</span><span class="p">:</span> <span class="n">build_terminal_condition</span><span class="p">,</span>
                        <span class="s1">&#39;gp&#39;</span><span class="p">:</span> <span class="n">build_instance</span><span class="p">}</span>
 

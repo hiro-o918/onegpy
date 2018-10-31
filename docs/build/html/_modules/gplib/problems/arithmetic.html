@@ -167,9 +167,7 @@
 <span class="sd">        :param n_data:  the number of training data.</span>
 <span class="sd">        :return: tuple of ndarray. (x, y)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_data</span><span class="p">):</span>
-            <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_data</span><span class="p">)]</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
@@ -223,7 +221,7 @@
     <span class="n">func_bank</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">get_val</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
     <span class="n">func_bank</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">get_sin</span><span class="p">())</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
-        <span class="n">func_bank</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">get_x</span><span class="p">(</span><span class="n">dim</span><span class="p">))</span>
+        <span class="n">func_bank</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">get_x</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">func_bank</span></div>
 
@@ -245,7 +243,7 @@
 <span class="sd">    :return: function object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">add_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">add_func</span><span class="p">)</span></div>
 
@@ -256,7 +254,7 @@
 <span class="sd">    :return: function object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">sub_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sub_func</span><span class="p">)</span></div>
 

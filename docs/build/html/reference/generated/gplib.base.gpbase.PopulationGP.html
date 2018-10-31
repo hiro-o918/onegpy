@@ -178,20 +178,19 @@
 <h1>gplib.base.gpbase.PopulationGP<a class="headerlink" href="#gplib-base-gpbase-populationgp" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="gplib.base.gpbase.PopulationGP">
-<em class="property">class </em><code class="descclassname">gplib.base.gpbase.</code><code class="descname">PopulationGP</code><span class="sig-paren">(</span><em>initializer</em>, <em>sequential</em>, <em>viewer</em>, <em>terminal_condition</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/gpbase.html#PopulationGP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.gpbase.PopulationGP" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">gplib.base.gpbase.</code><code class="descname">PopulationGP</code><span class="sig-paren">(</span><em>initializer</em>, <em>sequential</em>, <em>observer</em>, <em>terminal_condition</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/gpbase.html#PopulationGP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.gpbase.PopulationGP" title="Permalink to this definition">¶</a></dt>
 <dd><p>base class of population based GP</p>
 <dl class="method">
 <dt id="gplib.base.gpbase.PopulationGP.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>initializer</em>, <em>sequential</em>, <em>viewer</em>, <em>terminal_condition</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/gpbase.html#PopulationGP.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.gpbase.PopulationGP.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>initializer</em>, <em>sequential</em>, <em>observer</em>, <em>terminal_condition</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/gpbase.html#PopulationGP.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.gpbase.PopulationGP.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_generations</strong> – int. the number of generations</li>
 <li><strong>initializer</strong> – population initializer object. initializer of population</li>
 <li><strong>sequential</strong> – sequential object. genetic operators</li>
-<li><strong>viewer</strong> – viewer object. viewer for population based GP</li>
+<li><strong>observer</strong> – Observer object.</li>
 </ul>
 </td>
 </tr>
@@ -206,13 +205,13 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#gplib.base.gpbase.PopulationGP.__init__" title="gplib.base.gpbase.PopulationGP.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(initializer,&nbsp;sequential,&nbsp;viewer,&nbsp;…)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#gplib.base.gpbase.PopulationGP.__init__" title="gplib.base.gpbase.PopulationGP.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(initializer,&nbsp;sequential,&nbsp;observer,&nbsp;…)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">param n_generations:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">int. the number of generations</td>
+<tr class="field-odd field"><th class="field-name" colspan="2">param initializer:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">population initializer object. initializer of population</td>
 </tr>
 </tbody>
 </table>

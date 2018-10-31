@@ -13,7 +13,7 @@ Reference
    problems
    solutions
    utils
-   viewer
+   viewers
 
 .. toctree::
 

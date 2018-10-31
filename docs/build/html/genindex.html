@@ -155,6 +155,7 @@
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -247,9 +248,17 @@
 </li>
         <li><a href="reference/generated/gplib.utils.test_checkers.TestCheckers.html#gplib.utils.test_checkers.TestCheckers.__init__">(gplib.utils.test_checkers.TestCheckers method)</a>
 </li>
-        <li><a href="reference/generated/gplib.viewer.viewer.AbstractViewer.html#gplib.viewer.viewer.AbstractViewer.__init__">(gplib.viewer.viewer.AbstractViewer method)</a>
+        <li><a href="reference/generated/gplib.viewers.loggers.AbstractLogger.html#gplib.viewers.loggers.AbstractLogger.__init__">(gplib.viewers.loggers.AbstractLogger method)</a>
 </li>
-        <li><a href="reference/generated/gplib.viewer.viewer.DefaultViewer.html#gplib.viewer.viewer.DefaultViewer.__init__">(gplib.viewer.viewer.DefaultViewer method)</a>
+        <li><a href="reference/generated/gplib.viewers.loggers.JSONLogger.html#gplib.viewers.loggers.JSONLogger.__init__">(gplib.viewers.loggers.JSONLogger method)</a>
+</li>
+        <li><a href="reference/generated/gplib.viewers.loggers.PrintLogger.html#gplib.viewers.loggers.PrintLogger.__init__">(gplib.viewers.loggers.PrintLogger method)</a>
+</li>
+        <li><a href="reference/generated/gplib.viewers.observer.AbstractObserver.html#gplib.viewers.observer.AbstractObserver.__init__">(gplib.viewers.observer.AbstractObserver method)</a>
+</li>
+        <li><a href="reference/generated/gplib.viewers.observer.DefaultObserver.html#gplib.viewers.observer.DefaultObserver.__init__">(gplib.viewers.observer.DefaultObserver method)</a>
+</li>
+        <li><a href="reference/generated/gplib.viewers.observer.MLPS_Observer.html#gplib.viewers.observer.MLPS_Observer.__init__">(gplib.viewers.observer.MLPS_Observer method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -268,21 +277,23 @@
 </li>
       <li><a href="reference/generated/gplib.operators.localsearch.AbstractLocalSearch.html#gplib.operators.localsearch.AbstractLocalSearch">AbstractLocalSearch (class in gplib.operators.localsearch)</a>
 </li>
+      <li><a href="reference/generated/gplib.viewers.loggers.AbstractLogger.html#gplib.viewers.loggers.AbstractLogger">AbstractLogger (class in gplib.viewers.loggers)</a>
+</li>
       <li><a href="reference/generated/gplib.operators.mutation.AbstractMutation.html#gplib.operators.mutation.AbstractMutation">AbstractMutation (class in gplib.operators.mutation)</a>
 </li>
+      <li><a href="reference/generated/gplib.viewers.observer.AbstractObserver.html#gplib.viewers.observer.AbstractObserver">AbstractObserver (class in gplib.viewers.observer)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/gplib.operator.AbstractOperator.html#gplib.operator.AbstractOperator">AbstractOperator (class in gplib.operator)</a>
 </li>
       <li><a href="reference/generated/gplib.problem.AbstractProblem.html#gplib.problem.AbstractProblem">AbstractProblem (class in gplib.problem)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/gplib.operators.selection.AbstractProblemBasedSelection.html#gplib.operators.selection.AbstractProblemBasedSelection">AbstractProblemBasedSelection (class in gplib.operators.selection)</a>
 </li>
       <li><a href="reference/generated/gplib.operators.selection.AbstractSelection.html#gplib.operators.selection.AbstractSelection">AbstractSelection (class in gplib.operators.selection)</a>
 </li>
       <li><a href="reference/generated/gplib.terminator.AbstractTerminator.html#gplib.terminator.AbstractTerminator">AbstractTerminator (class in gplib.terminator)</a>
-</li>
-      <li><a href="reference/generated/gplib.viewer.viewer.AbstractViewer.html#gplib.viewer.viewer.AbstractViewer">AbstractViewer (class in gplib.viewer.viewer)</a>
 </li>
       <li><a href="reference/generated/gplib.operators.localsearch.all_check.html#gplib.operators.localsearch.all_check">all_check() (in module gplib.operators.localsearch)</a>
 </li>
@@ -296,12 +307,14 @@
 </li>
       <li><a href="reference/generated/gplib.utils.config.build_instance.html#gplib.utils.config.build_instance">build_instance() (in module gplib.utils.config)</a>
 </li>
-      <li><a href="reference/generated/gplib.utils.config.build_operator.html#gplib.utils.config.build_operator">build_operator() (in module gplib.utils.config)</a>
+      <li><a href="reference/generated/gplib.utils.config.build_observer.html#gplib.utils.config.build_observer">build_observer() (in module gplib.utils.config)</a>
 </li>
-      <li><a href="reference/generated/gplib.operator.build_population_operator.html#gplib.operator.build_population_operator">build_population_operator() (in module gplib.operator)</a>
+      <li><a href="reference/generated/gplib.utils.config.build_operator.html#gplib.utils.config.build_operator">build_operator() (in module gplib.utils.config)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/gplib.operator.build_population_operator.html#gplib.operator.build_population_operator">build_population_operator() (in module gplib.operator)</a>
+</li>
       <li><a href="reference/generated/gplib.utils.config.build_problem.html#gplib.utils.config.build_problem">build_problem() (in module gplib.utils.config)</a>
 </li>
       <li><a href="reference/generated/gplib.utils.config.build_sequential.html#gplib.utils.config.build_sequential">build_sequential() (in module gplib.utils.config)</a>
@@ -309,8 +322,6 @@
       <li><a href="reference/generated/gplib.utils.config.build_terminal_condition.html#gplib.utils.config.build_terminal_condition">build_terminal_condition() (in module gplib.utils.config)</a>
 </li>
       <li><a href="reference/generated/gplib.utils.config.build_terminator.html#gplib.utils.config.build_terminator">build_terminator() (in module gplib.utils.config)</a>
-</li>
-      <li><a href="reference/generated/gplib.utils.config.build_viewer.html#gplib.utils.config.build_viewer">build_viewer() (in module gplib.utils.config)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -346,7 +357,7 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/generated/gplib.viewer.viewer.DefaultViewer.html#gplib.viewer.viewer.DefaultViewer">DefaultViewer (class in gplib.viewer.viewer)</a>
+      <li><a href="reference/generated/gplib.viewers.observer.DefaultObserver.html#gplib.viewers.observer.DefaultObserver">DefaultObserver (class in gplib.viewers.observer)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -390,6 +401,10 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/gplib.viewers.observer.generate_mlpsgp_log.html#gplib.viewers.observer.generate_mlpsgp_log">generate_mlpsgp_log() (in module gplib.viewers.observer)</a>
+</li>
+      <li><a href="reference/generated/gplib.viewers.observer.generate_sgp_log.html#gplib.viewers.observer.generate_sgp_log">generate_sgp_log() (in module gplib.viewers.observer)</a>
+</li>
       <li><a href="reference/generated/gplib.terminator.GenerationTerminator.html#gplib.terminator.GenerationTerminator">GenerationTerminator (class in gplib.terminator)</a>
 </li>
       <li><a href="reference/generated/gplib.problems.arithmetic.get_add.html#gplib.problems.arithmetic.get_add">get_add() (in module gplib.problems.arithmetic)</a>
@@ -452,10 +467,10 @@
 </li>
       <li><a href="reference/.html#module-gplib">gplib (module)</a>, <a href="reference/index.html#module-gplib">[1]</a>
 </li>
-      <li><a href="reference/base.html#module-gplib.base">gplib.base (module)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/base.html#module-gplib.base">gplib.base (module)</a>
+</li>
       <li><a href="reference/base.gpbase.html#module-gplib.base.gpbase">gplib.base.gpbase (module)</a>
 </li>
       <li><a href="reference/base.mlps_base.html#module-gplib.base.mlps_base">gplib.base.mlps_base (module)</a>
@@ -512,9 +527,11 @@
 </li>
       <li><a href="reference/utils.util.html#module-gplib.utils.util">gplib.utils.util (module)</a>
 </li>
-      <li><a href="reference/viewer.html#module-gplib.viewer">gplib.viewer (module)</a>
+      <li><a href="reference/viewers.html#module-gplib.viewers">gplib.viewers (module)</a>
 </li>
-      <li><a href="reference/viewer.viewer.html#module-gplib.viewer.viewer">gplib.viewer.viewer (module)</a>
+      <li><a href="reference/viewers.loggers.html#module-gplib.viewers.loggers">gplib.viewers.loggers (module)</a>
+</li>
+      <li><a href="reference/viewers.observer.html#module-gplib.viewers.observer">gplib.viewers.observer (module)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -531,6 +548,14 @@
   </ul></td>
 </tr></table>
 
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/gplib.viewers.loggers.JSONLogger.html#gplib.viewers.loggers.JSONLogger">JSONLogger (class in gplib.viewers.loggers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -539,6 +564,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/gplib.base.mlps_base.MLPS_GP.html#gplib.base.mlps_base.MLPS_GP">MLPS_GP (class in gplib.base.mlps_base)</a>
+</li>
+      <li><a href="reference/generated/gplib.viewers.observer.MLPS_Observer.html#gplib.viewers.observer.MLPS_Observer">MLPS_Observer (class in gplib.viewers.observer)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -592,13 +619,15 @@
 </li>
       <li><a href="reference/generated/gplib.operator.PopulationOperatorAdapter.html#gplib.operator.PopulationOperatorAdapter">PopulationOperatorAdapter (class in gplib.operator)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/gplib.operators.mutation.PopulationPointMutation.html#gplib.operators.mutation.PopulationPointMutation">PopulationPointMutation (class in gplib.operators.mutation)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/gplib.operators.initializer.PopulationRandomInitializer.html#gplib.operators.initializer.PopulationRandomInitializer">PopulationRandomInitializer (class in gplib.operators.initializer)</a>
 </li>
       <li><a href="reference/generated/gplib.operators.initializer.PopulationTerminalInitializer.html#gplib.operators.initializer.PopulationTerminalInitializer">PopulationTerminalInitializer (class in gplib.operators.initializer)</a>
+</li>
+      <li><a href="reference/generated/gplib.viewers.loggers.PrintLogger.html#gplib.viewers.loggers.PrintLogger">PrintLogger (class in gplib.viewers.loggers)</a>
 </li>
       <li><a href="reference/generated/gplib.utils.checkers.prob_checker.html#gplib.utils.checkers.prob_checker">prob_checker() (in module gplib.utils.checkers)</a>
 </li>

@@ -146,19 +146,19 @@
 <span class="kn">from</span> <span class="nn">gplib.operators.initializer</span> <span class="k">import</span> <span class="n">PopulationTerminalInitializer</span>
 <span class="kn">from</span> <span class="nn">gplib.utils</span> <span class="k">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">gplib.solutions</span> <span class="k">import</span> <span class="n">node</span><span class="p">,</span> <span class="n">solution</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">gplib.viewers.observer</span> <span class="k">import</span> <span class="n">MLPS_Observer</span>
 
 
 <div class="viewcode-block" id="MLPS_GP"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.MLPS_GP.html#gplib.base.mlps_base.MLPS_GP">[docs]</a><span class="k">class</span> <span class="nc">MLPS_GP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-<div class="viewcode-block" id="MLPS_GP.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.MLPS_GP.html#gplib.base.mlps_base.MLPS_GP.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initializer</span><span class="p">,</span> <span class="n">localsearch</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">terminal_condition</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="MLPS_GP.__init__"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.MLPS_GP.html#gplib.base.mlps_base.MLPS_GP.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initializer</span><span class="p">,</span> <span class="n">localsearch</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">terminal_condition</span><span class="p">,</span> <span class="n">observer</span><span class="o">=</span><span class="n">MLPS_Observer</span><span class="p">(),</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">is_add_terminal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">only_add_best</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">only_add_improvements</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param initializer: function. Initialize operator of MLPS-GP.</span>
 <span class="sd">        :param localsearch: local search object. Local search operator of MLPS_GP.</span>
 <span class="sd">        :param problem: Problem object. problem to solve.</span>
-<span class="sd">        :param max_evals: int. the number of maximum evaluations for the terminal condition.</span>
+<span class="sd">        :param observer: Observer object.</span>
 <span class="sd">        :param simplify: simplify object. Simplify operator of MLPS-GP. Default is None.</span>
 <span class="sd">        :param is_add_terminal: bool. a control parameter of MLPS-GP. Default is True.</span>
 <span class="sd">        :param only_add_best: bool. a control parameter of MLPS-GP. Default is False.</span>
@@ -169,6 +169,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">localsearch</span> <span class="o">=</span> <span class="n">localsearch</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crossover</span> <span class="o">=</span> <span class="n">MLPS_Crossover</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="n">problem</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">observer</span> <span class="o">=</span> <span class="n">observer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simplify</span> <span class="o">=</span> <span class="n">simplify</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_add_terminal</span> <span class="o">=</span> <span class="n">is_add_terminal</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">only_add_best</span> <span class="o">=</span> <span class="n">only_add_best</span>
@@ -183,24 +184,19 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_add_terminal</span><span class="p">:</span>
             <span class="n">terminal_solutions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_initializer</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_terminals</span><span class="p">(</span><span class="n">terminal_solutions</span><span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">observer</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span>
         <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_condition</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mlps_iterate</span><span class="p">()</span>
             <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">max_fit</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">ave</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sub_pop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_pop</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">continue</span>
-                <span class="n">fitness_info</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_fitness_info</span><span class="p">(</span><span class="n">sub_pop</span><span class="p">)</span>
-                <span class="n">ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fitness_info</span><span class="p">[</span><span class="s1">&#39;ave_fit&#39;</span><span class="p">])</span>
-                <span class="n">max_fit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fitness_info</span><span class="p">[</span><span class="s1">&#39;max_fit&#39;</span><span class="p">])</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ite:</span><span class="si">{}</span><span class="s1">, evals:</span><span class="si">{}</span><span class="s1">, max:</span><span class="si">{}</span><span class="s1">, ave:</span><span class="si">{}</span><span class="s1">, level:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">get_eval_count</span><span class="p">(),</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_fit</span><span class="p">),</span>
-                                                                      <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ave</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_fit</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">:</span>
-                <span class="k">break</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">observer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">gene_cnt</span><span class="o">=</span><span class="n">cnt</span><span class="p">,</span>
+                                 <span class="n">eval_cnt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">get_eval_count</span><span class="p">(),</span>
+                                 <span class="n">population_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MLPS_GP.mlps_iterate"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.html#gplib.base.mlps_base.MLPS_GP.mlps_iterate">[docs]</a>    <span class="k">def</span> <span class="nf">mlps_iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">observer</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">gene_cnt</span><span class="o">=</span><span class="n">cnt</span><span class="p">,</span>
+                          <span class="n">eval_cnt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">get_eval_count</span><span class="p">(),</span>
+                          <span class="n">population_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">mlps_iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1">## initialization</span>
         <span class="n">candidate_solution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_solution</span><span class="p">()</span>
 
@@ -208,16 +204,16 @@
         <span class="n">terminal_points</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get_all_terminal_points</span><span class="p">(</span><span class="n">candidate_solution</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
 
         <span class="c1">##crossover</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">do_crossover</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">,</span> <span class="n">terminal_points</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do_crossover</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">,</span> <span class="n">terminal_points</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MLPS_GP.get_skip_pop"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.html#gplib.base.mlps_base.MLPS_GP.get_skip_pop">[docs]</a>    <span class="k">def</span> <span class="nf">get_skip_pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_skip_pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">[</span><span class="n">level</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">[</span><span class="n">level</span><span class="p">]</span>
 
-<div class="viewcode-block" id="MLPS_GP.initialize_solution"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.html#gplib.base.mlps_base.MLPS_GP.initialize_solution">[docs]</a>    <span class="k">def</span> <span class="nf">initialize_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">initialize_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">candidate_solution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initializer</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">)</span>
 
@@ -227,9 +223,9 @@
         <span class="n">solution</span><span class="o">.</span><span class="n">set_solution_depth</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_indiv</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">candidate_solution</span><span class="o">.</span><span class="n">depth</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">candidate_solution</span></div>
+        <span class="k">return</span> <span class="n">candidate_solution</span>
 
-<div class="viewcode-block" id="MLPS_GP.do_crossover"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.html#gplib.base.mlps_base.MLPS_GP.do_crossover">[docs]</a>    <span class="k">def</span> <span class="nf">do_crossover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate_solution</span><span class="p">,</span> <span class="n">terminal_points</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">do_crossover</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate_solution</span><span class="p">,</span> <span class="n">terminal_points</span><span class="p">):</span>
         <span class="n">solution</span><span class="o">.</span><span class="n">set_solution_depth</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">)</span>
         <span class="c1">## TODO: if you use a subtree node, you should calculate depth again here.</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">donors</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">population_list</span><span class="p">):</span>
@@ -245,11 +241,11 @@
                 <span class="c1">## TODO: if you use a subtree node, you should calculate depth again here.</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_add_improvements</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">previous_fitness</span> <span class="o">&lt;</span> <span class="n">candidate_solution</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">add_indiv</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">candidate_solution</span><span class="o">.</span><span class="n">depth</span><span class="p">)</span></div>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_indiv</span><span class="p">(</span><span class="n">candidate_solution</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">candidate_solution</span><span class="o">.</span><span class="n">depth</span><span class="p">)</span>
 
             <span class="c1">#TODO: if you want to use only continue improvements or use not continue only one, implement here!</span>
 
-<div class="viewcode-block" id="MLPS_GP.add_indiv"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.html#gplib.base.mlps_base.MLPS_GP.add_indiv">[docs]</a>    <span class="k">def</span> <span class="nf">add_indiv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">is_init</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_indiv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">is_init</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
         <span class="n">is_containts</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">is_best</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -291,13 +287,13 @@
             <span class="n">sub_population</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">True</span>
 
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="MLPS_GP.add_terminals"><a class="viewcode-back" href="../../../reference/generated/gplib.base.mlps_base.html#gplib.base.mlps_base.MLPS_GP.add_terminals">[docs]</a>    <span class="k">def</span> <span class="nf">add_terminals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal_solutions</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_terminals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal_solutions</span><span class="p">):</span>
         <span class="n">sub_population</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_skip_pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">terminal_solutions</span><span class="p">)</span>
         <span class="n">sub_population</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">terminal_solutions</span><span class="p">)</span>
-        <span class="n">sub_population</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+        <span class="n">sub_population</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 </pre></div>
 

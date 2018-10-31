@@ -178,10 +178,10 @@
 <h1>gplib.base.mlps_base.MLPS_GP<a class="headerlink" href="#gplib-base-mlps-base-mlps-gp" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="gplib.base.mlps_base.MLPS_GP">
-<em class="property">class </em><code class="descclassname">gplib.base.mlps_base.</code><code class="descname">MLPS_GP</code><span class="sig-paren">(</span><em>initializer</em>, <em>localsearch</em>, <em>problem</em>, <em>terminal_condition</em>, <em>simplify=None</em>, <em>is_add_terminal=True</em>, <em>only_add_best=False</em>, <em>only_add_improvements=False</em>, <em>depth_limit=1000000</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">gplib.base.mlps_base.</code><code class="descname">MLPS_GP</code><span class="sig-paren">(</span><em>initializer</em>, <em>localsearch</em>, <em>problem</em>, <em>terminal_condition</em>, <em>observer=&lt;gplib.viewers.observer.MLPS_Observer object&gt;</em>, <em>simplify=None</em>, <em>is_add_terminal=True</em>, <em>only_add_best=False</em>, <em>only_add_improvements=False</em>, <em>depth_limit=1000000</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="gplib.base.mlps_base.MLPS_GP.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>initializer</em>, <em>localsearch</em>, <em>problem</em>, <em>terminal_condition</em>, <em>simplify=None</em>, <em>is_add_terminal=True</em>, <em>only_add_best=False</em>, <em>only_add_improvements=False</em>, <em>depth_limit=1000000</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>initializer</em>, <em>localsearch</em>, <em>problem</em>, <em>terminal_condition</em>, <em>observer=&lt;gplib.viewers.observer.MLPS_Observer object&gt;</em>, <em>simplify=None</em>, <em>is_add_terminal=True</em>, <em>only_add_best=False</em>, <em>only_add_improvements=False</em>, <em>depth_limit=1000000</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gplib/base/mlps_base.html#MLPS_GP.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gplib.base.mlps_base.MLPS_GP.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -190,7 +190,7 @@
 <li><strong>initializer</strong> – function. Initialize operator of MLPS-GP.</li>
 <li><strong>localsearch</strong> – local search object. Local search operator of MLPS_GP.</li>
 <li><strong>problem</strong> – Problem object. problem to solve.</li>
-<li><strong>max_evals</strong> – int. the number of maximum evaluations for the terminal condition.</li>
+<li><strong>observer</strong> – Observer object.</li>
 <li><strong>simplify</strong> – simplify object. Simplify operator of MLPS-GP. Default is None.</li>
 <li><strong>is_add_terminal</strong> – bool. a control parameter of MLPS-GP. Default is True.</li>
 <li><strong>only_add_best</strong> – bool. a control parameter of MLPS-GP. Default is False.</li>

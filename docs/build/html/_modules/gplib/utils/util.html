@@ -157,6 +157,10 @@
 
 
 <div class="viewcode-block" id="get_fitness_info"><a class="viewcode-back" href="../../../reference/generated/gplib.utils.util.get_fitness_info.html#gplib.utils.util.get_fitness_info">[docs]</a><span class="k">def</span> <span class="nf">get_fitness_info</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_fit&#39;</span><span class="p">:</span> <span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;ave_fit&#39;</span><span class="p">:</span> <span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;min_fit&#39;</span><span class="p">:</span> <span class="mf">0.</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">info</span>
+
     <span class="n">sorted_pop</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">max_fit</span> <span class="o">=</span> <span class="n">sorted_pop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">previous_fitness</span>
     <span class="n">min_fit</span> <span class="o">=</span> <span class="n">sorted_pop</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">previous_fitness</span>
@@ -167,7 +171,7 @@
 
     <span class="n">ave_fit</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">))</span>
 
-    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_fit&#39;</span><span class="p">:</span><span class="n">max_fit</span><span class="p">,</span> <span class="s1">&#39;ave_fit&#39;</span><span class="p">:</span><span class="n">ave_fit</span><span class="p">,</span> <span class="s1">&#39;min_fit&#39;</span><span class="p">:</span><span class="n">min_fit</span><span class="p">}</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_fit&#39;</span><span class="p">:</span> <span class="n">max_fit</span><span class="p">,</span> <span class="s1">&#39;ave_fit&#39;</span><span class="p">:</span> <span class="n">ave_fit</span><span class="p">,</span> <span class="s1">&#39;min_fit&#39;</span><span class="p">:</span> <span class="n">min_fit</span><span class="p">}</span>
 
     <span class="k">return</span> <span class="n">info</span></div>
 
