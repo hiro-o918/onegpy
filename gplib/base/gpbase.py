@@ -17,18 +17,18 @@ class PopulationGP(object):
     base class of population based GP
     """
     
-    def __init__(self, n_generations, initializer, sequential, logger, **kwargs):
+    def __init__(self, n_generations, initializer, sequential, observer, **kwargs):
         """
 
         :param n_generations: int. the number of generations
         :param initializer: population initializer object. initializer of population
         :param sequential: sequential object. genetic operators
-        :param logger: logger object. logger for population based GP
+        :param observer: Observer object.
         """
         self.n_generations = n_generations
         self.initializer = initializer
         self.sequential = sequential
-        self.logger = logger
+        self.observer = observer
 
     def __call__(self):
         """
@@ -36,9 +36,9 @@ class PopulationGP(object):
         :return:
         """
         population = self.initializer()
-        self.logger.begin()
+        self.observer.begin()
         for gene in range(self.n_generations):
             population = self.sequential(population)
-            self.logger.update(gene, population)
+            self.observer.update(gene, population)
 
-        self.logger.end(population)
+        self.observer.end(population)
