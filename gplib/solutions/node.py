@@ -10,6 +10,9 @@ class Node(object):
     """
 
     def __init__(self, func_id=-1):
+        """
+        :param func_id: int. function id
+        """
         self.func_id = func_id
         self.children = []
 
@@ -27,21 +30,30 @@ class Function(object):
     """
 
     def __init__(self, n_children, f_eval=None):
+        """
+        :param n_children: int. the number of children of this function.
+        :param f_eval: function, function of node to evaluate.
+        """
         self.n_children = n_children
         self.f_eval = f_eval
 
     def __call__(self, x):
+        """
+        evaluate x
+        :param x: ndarray(shape = (#data, dim)). data to evaluate
+        :return: evaluated value
+        """
         if self.n_children > 0:
             n_children_checker(self.n_children, len(x))
         return self.f_eval(x)
 
 
 def set_id(node, func_id):
-    """function for setting id to node object.
-
-            # Arguments
-                node: Node object, target node.
-                id: int, id of node.
+    """
+    Function for setting id to node object.
+    :param node: Node object. target node.
+    :param func_id: int. id of node.
+    :return:
     """
     node_checker(node)
     func_id_checker(func_id)
@@ -49,6 +61,12 @@ def set_id(node, func_id):
 
 
 def get_n_children(func_id, function_dict):
+    """
+    Get the number of children of function that id = func_id.
+    :param func_id: int. function id.
+    :param function_dict: Function dict object.
+    :return: int. the number of children.
+    """
     func_id_checker(func_id)
     func = function_dict[func_id]
 
@@ -56,8 +74,10 @@ def get_n_children(func_id, function_dict):
 
 
 def set_children(node, children):
-    """ TODO: implement a method to check follows:
-              the number of children of node = len(children)
+    """
+    Setter for children to node
+    :param node: node object. target node.
+    :param children: list of node. children to set to target node.
     """
     node_checker(node)
     children_checker(children)
@@ -66,6 +86,12 @@ def set_children(node, children):
 
 
 def copy_node(node, deep=False):
+    """
+    Copy function
+    :param node: node object, target node to copy.
+    :param deep: bool. deep copy or not
+    :return: node object. copy node.
+    """
     if not deep:
         new_node = node.__class__(node.func_id)
         if node.children:
@@ -205,6 +231,11 @@ def get_all_node(root):
 
 
 def calc_node_depth(node):
+    """
+    Calculate the depth of nodes which is following under the target node.
+    :param node: node object. target node.
+    :return: int. calculated depth.
+    """
     d_list = []
 
     def cal_depth(c_node, depth):

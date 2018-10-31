@@ -133,6 +133,12 @@ def select_random_points(solution, k):
 
 
 def copy_solution(solution, deep=False):
+    """
+    Copy the target solution
+    :param solution: solution object. target solution to copy
+    :param deep: bool. deep copy or not.
+    :return: solution object. copied solution.
+    """
     if not deep:
         new_solution = solution.__class__(solution.root)
         if solution.previous_fitness is not None:
