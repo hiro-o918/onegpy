@@ -58,7 +58,7 @@ def build_sequential(operator_configs, **kwargs):
     return sequential
 
 
-def build_viewer(module, name, params, **kwargs):
+def build_observer(module, name, params, **kwargs):
     return build_instance(module, name, params)
 
 
@@ -118,8 +118,8 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                 ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
                 ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
             ],
-            "viewer": [
-                "gplib.viewer", "DefaultViewer"
+            "logger": [
+                "gplib.viewers", "DefaultObserver"
             ]
         }
     """
@@ -137,7 +137,7 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                        'initializer',
                        'sequential',
                        'localsearch',
-                       'viewer',
+                       'observer',
                        'terminal_condition',
                        'gp']
     if builder_map is None:
@@ -145,7 +145,7 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
                        'initializer': build_operator,
                        'sequential': build_sequential,
                        'localsearch': build_operator,
-                       'viewer': build_viewer,
+                       'observer': build_observer,
                        'terminal_condition': build_terminal_condition,
                        'gp': build_instance}
 

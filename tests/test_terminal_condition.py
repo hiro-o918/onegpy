@@ -20,9 +20,9 @@ class TestFalse(AbstractTerminator):
 class TestTerminalCondition(unittest.TestCase):
     def setUp(self):
         self.problem = arithmetic.Cos2XProblem(1)
-        self.t1 = TestTrue
-        self.t2 = TestFalse
-        self.T1 = TerminalCondition([self.t1, self.t2])
+        self.t1 = TestFalse()
+        self.t2 = TestTrue()
+        self.T1 = TerminalCondition([self.t1, self.t1])
         self.T2 = TerminalCondition([self.t2, self.t2])
 
     def testT1(self):
