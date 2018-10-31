@@ -44,14 +44,11 @@ class MLPS_GP(object):
         while not self.terminal_condition():
             self.mlps_iterate()
             cnt += 1
-            self.observer.update(iter_cnt=cnt,
+            self.observer.update(gene_cnt=cnt,
                                  eval_cnt=self.problem.get_eval_count(),
                                  population_list=self.population_list)
 
-            if cnt >= 5:
-                break
-
-        self.observer.end(iter_cnt=cnt,
+        self.observer.end(gene_cnt=cnt,
                           eval_cnt=self.problem.get_eval_count(),
                           population_list=self.population_list)
 
