@@ -17,10 +17,9 @@ class PopulationGP(object):
     base class of population based GP
     """
     
-    def __init__(self, n_generations, initializer, sequential, observer, terminal_condition, **kwargs):
+    def __init__(self, initializer, sequential, observer, terminal_condition, **kwargs):
         """
 
-        :param n_generations: int. the number of generations
         :param initializer: population initializer object. initializer of population
         :param sequential: sequential object. genetic operators
         :param observer: Observer object.

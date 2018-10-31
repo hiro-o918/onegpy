@@ -7,7 +7,7 @@ from gplib.viewers.observer import MLPS_Observer
 
 class MLPS_GP(object):
 
-    def __init__(self, initializer, localsearch, problem, max_evals, terminal_condition, observer=MLPS_Observer(), simplify=None,
+    def __init__(self, initializer, localsearch, problem, terminal_condition, observer=MLPS_Observer(), simplify=None,
                  is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000, **kwargs):
         """
 
@@ -15,7 +15,6 @@ class MLPS_GP(object):
         :param localsearch: local search object. Local search operator of MLPS_GP.
         :param problem: Problem object. problem to solve.
         :param observer: Observer object.
-        :param max_evals: int. the number of maximum evaluations for the terminal condition.
         :param simplify: simplify object. Simplify operator of MLPS-GP. Default is None.
         :param is_add_terminal: bool. a control parameter of MLPS-GP. Default is True.
         :param only_add_best: bool. a control parameter of MLPS-GP. Default is False.
@@ -27,7 +26,6 @@ class MLPS_GP(object):
         self.crossover = MLPS_Crossover(problem)
         self.problem = problem
         self.observer = observer
-        self.max_evals = max_evals
         self.simplify = simplify
         self.is_add_terminal = is_add_terminal
         self.only_add_best = only_add_best
