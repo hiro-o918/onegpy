@@ -7,7 +7,7 @@ from gplib.viewers.observer import MLPS_Observer
 
 class MLPS_GP(object):
 
-    def __init__(self, initializer, localsearch, problem, terminal_condition, observer=MLPS_Observer(), simplify=None,
+    def __init__(self, initializer, localsearch, problem, observer, terminal_condition, simplify=None,
                  is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000, **kwargs):
         """
 

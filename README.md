@@ -12,12 +12,37 @@ Read the documentation at ONEG.io.
 
 ONEG is compatible with: Python 3.6-.
 
-### Downloads
+## Documentation
 
-### Documentation
 
-### Installation
+## Installation
+To install ONEG, follow the below.
 
-### Requirements
+#### install ONEG using pip
+[W.I.P]
 
-### Example
+#### install ONEG from the GitHub
+
+```
+TODO: fill below
+$ git clone https://github.com/***
+```
+Then,
+```
+TODO: Fill the below
+$ cd ***
+$ python setup.py install
+```
+
+**NOTE:**
+
+If you are using of an environment of your system, you need to use `sudo` to install;
+```
+$ sudo python setup.py install
+``` 
+
+## Requirements
+- [numpy](https://github.com/numpy/numpy/tree/master/doc/source/reference) is required.
+
+## Examples
+Some examples are located in [examples](./examples)
