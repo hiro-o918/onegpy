@@ -13,6 +13,11 @@ def get_generator_builder(selection):
 
 
 def get_fitness_info(population):
+    """
+    Get the fitness information from population
+    :param population: list of solutions. population to get information
+    :return: dictionary of fitness information. fitness information
+    """
     if len(population) == 0:
         info = {'max_fit': 0., 'ave_fit': 0., 'min_fit': 0.}
         return info
