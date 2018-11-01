@@ -7,13 +7,13 @@ name = "pypi"
 numpy = "*"
 
 [dev-packages]
-pytest = "*"
-restructuredtext-lint = "*"
-sphinx-rtd-theme = "*"
-sphinx = "*"
-sphinx-autobuild = "*"
-recommonmark = "*"
-"m2r" = "*"
+pytest = ">=3.9.3"
+restructuredtext-lint = ">=1.1.3"
+sphinx-rtd-theme = ">=0.4.1"
+sphinx = ">=1.8.1"
+sphinx-autobuild = ">=0.7.1"
+recommonmark = ">=0.4.0"
+"m2r" = ">=0.2"
 
 [requires]
-python_version = "3.6"
+python_version = ">=3.6"
