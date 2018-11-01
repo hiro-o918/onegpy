@@ -9,13 +9,14 @@ from gplib.utils.util import get_generator_builder
 
 class AbstractOperator(ABC):
     """
-        This is the base class for operators.
+    This is the base class for operators.
     """
 
     def __init__(self, n_in=None, n_out=None):
         """
         The number of input solution to the operator and outputs one of the operator
         `None` means that the operator handles variable length solutions.
+
         :param n_in: int or None
         :param n_out: int or None
         """
@@ -58,17 +59,23 @@ class AbstractOperator(ABC):
 
 
 class PopulationOperator(AbstractOperator, ABC):
+    """
+    This is a base class a population operator.
+    Population operator aims at population or a list of solutions.
+    """
     pass
 
 
 class PopulationOperatorAdapter(PopulationOperator):
     """
-    TODO: comment by yama*
+    This is an adapter to make an operator aim at population.
     """
+
     def __init__(self, operator, generator_builder=None, n_out=None):
         """
         :param operator: operator object. operator object to apply.
         :param generator_builder: function of generator builder. Default is None (default generator).
+        This function makes a generator from input population.
         :param n_out: int. the number of output.
         """
         super(PopulationOperatorAdapter, self).__init__(n_out=n_out)
@@ -87,7 +94,9 @@ class PopulationOperatorAdapter(PopulationOperator):
 
     def __call__(self, population, *args, **kwargs):
         """
-        TODO: comment by yama*
+        Apply an operator of this instance to population.
+        A candidate is selected by generator.
+
         :param population: list of solutions. population.
         :param args:
         :param kwargs:
@@ -124,6 +133,10 @@ class PopulationOperatorAdapter(PopulationOperator):
 
 
 class ProblemBasedOperator(ABC):
+    """
+    This is a base class a operator based on population,
+    that is, it requires a problem instance.
+    """
     def __init__(self, problem):
         """
         :param problem: problem object. The target problem.
@@ -133,11 +146,13 @@ class ProblemBasedOperator(ABC):
 
 def build_population_operator(operator, selection_class=None, n_out=None, cls_name=None, **kwargs):
     """
-    Builder function for population operator
+    Builder function for population operator.
+
     :param operator: operator object. The target operator to build.
-    :param selection_class: selection class. #TODO: add comment by yama*
+    :param selection_class: selection class. **NOTE** not instance.
+    a generator is built by using a logic of the selection class.
     :param n_out: int. the number of output of the target operator.
-    :param cls_name: #TODO: comment by yama*
+    :param cls_name: str. a name of a new class build by this function.
     :param kwargs:
     :return:
     """
@@ -169,8 +184,8 @@ def operator_checker(operator):
 
 def pop_operator_checker(operator):
     """
-        checker for population operator.
-        """
+    checker for population operator.
+    """
     if not isinstance(operator, PopulationOperator):
         typ = TypeError
         msg = 'Expected type: {} not {}.'.format(PopulationOperator, type(operator))

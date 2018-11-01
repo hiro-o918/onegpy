@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ONEG',
-    version='0.1.0b',
+    version='0.1.0b1',
     install_requires=['numpy'],
     extras_require={
         'tests': ['pytest'],
