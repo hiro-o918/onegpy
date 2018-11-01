@@ -52,6 +52,8 @@ class MLPS_GP(object):
                           eval_cnt=self.problem.get_eval_count(),
                           population_list=self.population_list)
 
+        return self.population_list
+
     def mlps_iterate(self):
         ## initialization
         candidate_solution = self.initialize_solution()
