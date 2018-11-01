@@ -1,5 +1,6 @@
 from gplib.utils.config import gp_from_config
 
+
 if __name__ == '__main__':
     config = {
         "gp": [
