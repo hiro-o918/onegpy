@@ -19,7 +19,9 @@ if __name__ == '__main__':
             ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
             ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
         ],
-
+        'observer': [
+            'gplib.viewers', 'MLPS_Observer', {'verbose': 3}
+        ],
     }
 
     mlps = gp_from_config(config)
