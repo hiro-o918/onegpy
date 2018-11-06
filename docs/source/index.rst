@@ -7,15 +7,14 @@
 .. include:: ../../README.rst
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents
 
    reference/index
 
 
 Indices and tables
-~~~~~~~~~~~~~~~~~~~
-
+-------------------
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
