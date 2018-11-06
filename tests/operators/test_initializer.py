@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gplib.operators import RandomInitializer
-from gplib.problem import AbstractProblem, FunctionBank
-from gplib.solutions import node, solution
+from onegpy.operators import RandomInitializer
+from onegpy.problem import AbstractProblem, FunctionBank
+from onegpy.solutions import node, solution
 
 
 def f_non_terminal(n_children=2):

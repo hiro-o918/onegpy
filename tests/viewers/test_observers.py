@@ -1,8 +1,8 @@
 import unittest
 
-from gplib.solutions import solution, node
-from gplib.viewers import DefaultObserver
-from gplib.viewers.observer import MLPS_Observer
+from onegpy.solutions import solution, node
+from onegpy.viewers import DefaultObserver
+from onegpy.viewers.observer import MLPS_Observer
 
 
 def get_population():

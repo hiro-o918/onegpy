@@ -1,9 +1,9 @@
 import unittest
 
-from gplib.operator import build_population_operator, PopulationOperator, operator_checker
-from gplib.operators.crossover import PopulationOnePointCrossover, OnePointCrossover
-from gplib.solutions.node import Node
-from gplib.solutions.solution import Solution
+from onegpy.operator import build_population_operator, PopulationOperator, operator_checker
+from onegpy.operators.crossover import PopulationOnePointCrossover, OnePointCrossover
+from onegpy.solutions.node import Node
+from onegpy.solutions.solution import Solution
 
 
 class TestPopulationOperatorAdapter(unittest.TestCase):

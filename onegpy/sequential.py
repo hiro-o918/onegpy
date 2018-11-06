@@ -1,4 +1,4 @@
-from gplib.operator import operator_checker
+from onegpy.operator import operator_checker
 
 
 class Sequential(object):

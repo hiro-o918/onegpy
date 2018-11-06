@@ -2,9 +2,9 @@
 
 import unittest
 
-from gplib.terminal_condition import TerminalCondition
-from gplib.terminator import AbstractTerminator
-from gplib.problems import arithmetic
+from onegpy.terminal_condition import TerminalCondition
+from onegpy.terminator import AbstractTerminator
+from onegpy.problems import arithmetic
 
 
 class TestTrue(AbstractTerminator):

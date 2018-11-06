@@ -3,8 +3,8 @@ from operator import itemgetter
 
 import numpy as np
 
-from gplib.utils import util
-from gplib.viewers.loggers import JSONLogger, PrintLogger
+from onegpy.utils import util
+from onegpy.viewers.loggers import JSONLogger, PrintLogger
 
 
 def generate_sgp_log(gene, population):

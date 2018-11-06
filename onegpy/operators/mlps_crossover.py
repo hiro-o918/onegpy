@@ -1,6 +1,6 @@
 import random
-from gplib.solutions import solution
-from gplib.operator import AbstractOperator
+from onegpy.solutions import solution
+from onegpy.operator import AbstractOperator
 
 
 class MLPS_Crossover(AbstractOperator):

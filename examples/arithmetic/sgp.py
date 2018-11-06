@@ -1,26 +1,26 @@
-from gplib.utils.config import gp_from_config
+from onegpy.utils.config import gp_from_config
 
 
 if __name__ == '__main__':
     config = {
-        "gp": ["gplib.base", "PopulationGP"],
+        "gp": ["onegpy.base", "PopulationGP"],
         "initializer": [
-            "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
+            "onegpy.operators", "PopulationRandomInitializer", [500, 0.1, 10]
         ],
         "problem": [
-            "gplib.problems", "Cos2XProblem", {"n_data": 10}
+            "onegpy.problems", "Cos2XProblem", {"n_data": 10}
         ],
         "sequential": [
-            ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.9, "destructive": False}],
-            ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.1}],
-            ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 3}]
+            ["onegpy.operators", "PopulationOnePointCrossover", {"c_rate": 0.9, "destructive": False}],
+            ["onegpy.operators", "PopulationPointMutation", {"m_rate": 0.1}],
+            ["onegpy.operators", "TournamentSelection", {"k": 500, "tournament_size": 3}]
         ],
         "observer": [
-            "gplib.viewers", "DefaultObserver", {"verbose": 1}
+            "onegpy.viewers", "DefaultObserver", {"verbose": 1}
         ],
         "terminal_condition": [
-            ["gplib.terminator", "GenerationTerminator", {"t_gene": 10}],
-            ["gplib.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
+            ["onegpy.terminator", "GenerationTerminator", {"t_gene": 10}],
+            ["onegpy.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
         ],
     }
 

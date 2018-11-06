@@ -1,10 +1,10 @@
 import unittest
 
-from gplib.operator import AbstractOperator
-from gplib.operators.crossover import RandomSelection, PopulationOnePointCrossover, OnePointCrossover
-from gplib.sequential import Sequential
-from gplib.solutions.node import Node
-from gplib.solutions.solution import Solution
+from onegpy.operator import AbstractOperator
+from onegpy.operators.crossover import RandomSelection, PopulationOnePointCrossover, OnePointCrossover
+from onegpy.sequential import Sequential
+from onegpy.solutions.node import Node
+from onegpy.solutions.solution import Solution
 
 
 class TestSequential(unittest.TestCase):

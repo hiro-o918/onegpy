@@ -1,12 +1,12 @@
 import unittest
 
-from gplib.operators import PopulationRandomInitializer, TournamentSelection
-from gplib.operators.crossover import PopulationOnePointCrossover
-from gplib.sequential import Sequential
-from gplib.base import gpbase
-from gplib.terminal_condition import TerminalCondition
-from gplib.terminator import GenerationTerminator
-from gplib.viewers import observer
+from onegpy.operators import PopulationRandomInitializer, TournamentSelection
+from onegpy.operators.crossover import PopulationOnePointCrossover
+from onegpy.sequential import Sequential
+from onegpy.base import gpbase
+from onegpy.terminal_condition import TerminalCondition
+from onegpy.terminator import GenerationTerminator
+from onegpy.viewers import observer
 from tests.test_problem import EmptyProblem
 
 

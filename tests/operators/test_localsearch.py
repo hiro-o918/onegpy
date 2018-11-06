@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 from tests.test_problem import EmptyProblem
-from gplib.solutions import node, solution
-from gplib.operators import localsearch
+from onegpy.solutions import node, solution
+from onegpy.operators import localsearch
 
 
 class ExampleSolution(object):

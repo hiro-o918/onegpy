@@ -1,9 +1,9 @@
 import unittest
 
-from gplib.operators import RandomSelection
-from gplib.solutions.node import Node
-from gplib.solutions.solution import Solution
-from gplib.utils.util import get_generator_builder
+from onegpy.operators import RandomSelection
+from onegpy.solutions.node import Node
+from onegpy.solutions.solution import Solution
+from onegpy.utils.util import get_generator_builder
 
 
 class TestUtil(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-from gplib.utils.config import gp_from_config
+from onegpy.utils.config import gp_from_config
 
 
 # TODO: Develop test cases

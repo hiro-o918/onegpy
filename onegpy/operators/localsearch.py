@@ -2,8 +2,8 @@ from abc import ABC
 from functools import partial
 import random
 
-from gplib.solutions import node, solution
-from gplib.operator import AbstractOperator, ProblemBasedOperator
+from onegpy.solutions import node, solution
+from onegpy.operator import AbstractOperator, ProblemBasedOperator
 
 
 class AbstractLocalSearch(AbstractOperator, ProblemBasedOperator, ABC):

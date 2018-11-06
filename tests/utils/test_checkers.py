@@ -1,6 +1,6 @@
 import unittest
 
-from gplib.utils import checkers
+from onegpy.utils import checkers
 
 
 class TestCheckers(unittest.TestCase):

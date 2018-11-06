@@ -2,8 +2,8 @@ from abc import ABC
 from functools import partial
 import random
 
-from gplib.solutions import node
-from gplib.operator import AbstractOperator, PopulationOperatorAdapter, ProblemBasedOperator
+from onegpy.solutions import node
+from onegpy.operator import AbstractOperator, PopulationOperatorAdapter, ProblemBasedOperator
 
 
 class AbstractMutation(AbstractOperator, ProblemBasedOperator, ABC):

@@ -1,10 +1,10 @@
 import random
 
-from gplib.operator import AbstractOperator, PopulationOperatorAdapter
-from gplib.operators.selection import RandomSelection
-from gplib.solutions.node import nodes_checker
-from gplib.solutions.solution import select_random_points, replace_node, solutions_checker
-from gplib.utils.util import get_generator_builder
+from onegpy.operator import AbstractOperator, PopulationOperatorAdapter
+from onegpy.operators.selection import RandomSelection
+from onegpy.solutions.node import nodes_checker
+from onegpy.solutions.solution import select_random_points, replace_node, solutions_checker
+from onegpy.utils.util import get_generator_builder
 
 
 def crossover(parents, points, destructive=False):

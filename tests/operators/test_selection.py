@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gplib.operators.selection import RandomSelection, TournamentSelection, EliteSelection,\
+from onegpy.operators.selection import RandomSelection, TournamentSelection, EliteSelection,\
     reduce_population
-from gplib.solutions import node, solution
-from gplib.solutions.solution import Solution
+from onegpy.solutions import node, solution
+from onegpy.solutions.solution import Solution
 from tests.test_problem import EmptyProblem
 
 

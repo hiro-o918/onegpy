@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
-from gplib.operators import mutation as mu
-from gplib.problem import AbstractProblem
-from gplib.solutions import node, solution
+from onegpy.operators import mutation as mu
+from onegpy.problem import AbstractProblem
+from onegpy.solutions import node, solution
 from tests.test_problem import EmptyProblem
 
 

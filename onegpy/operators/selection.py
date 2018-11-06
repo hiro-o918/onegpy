@@ -1,8 +1,8 @@
 import random
 from abc import ABC
 
-from gplib.operator import PopulationOperator, ProblemBasedOperator
-from gplib.solutions.solution import is_solution_in_pop, copy_solution
+from onegpy.operator import PopulationOperator, ProblemBasedOperator
+from onegpy.solutions.solution import is_solution_in_pop, copy_solution
 
 
 class AbstractSelection(PopulationOperator, ABC):

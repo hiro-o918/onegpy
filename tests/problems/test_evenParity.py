@@ -3,8 +3,8 @@ import unittest
 
 import numpy as np
 
-from gplib.problems import boolean
-from gplib.solutions import node, solution
+from onegpy.problems import boolean
+from onegpy.solutions import node, solution
 
 
 class TestEvenParity(unittest.TestCase):

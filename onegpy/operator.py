@@ -4,7 +4,7 @@ import types
 import warnings
 from abc import ABC, abstractmethod
 
-from gplib.utils.util import get_generator_builder
+from onegpy.utils.util import get_generator_builder
 
 
 class AbstractOperator(ABC):

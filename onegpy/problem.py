@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from gplib.solutions.solution import Solution
-from gplib.solutions.node import Function
-from gplib.solutions import solution
+from onegpy.solutions.solution import Solution
+from onegpy.solutions.node import Function
+from onegpy.solutions import solution
 
 
 class AbstractProblem(ABC):

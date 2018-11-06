@@ -2,7 +2,7 @@
 
 import unittest
 
-from gplib.terminator import GenerationTerminator
+from onegpy.terminator import GenerationTerminator
 
 
 class TestGenerationTerminator(unittest.TestCase):

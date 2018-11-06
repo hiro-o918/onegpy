@@ -1,11 +1,11 @@
 from abc import ABC
 
-from gplib.operator import AbstractOperator, PopulationOperator, ProblemBasedOperator
-from gplib.problem import problem_checker
-from gplib.solutions import solution, node
+from onegpy.operator import AbstractOperator, PopulationOperator, ProblemBasedOperator
+from onegpy.problem import problem_checker
+from onegpy.solutions import solution, node
 import random
 
-from gplib.utils.checkers import prob_checker
+from onegpy.utils.checkers import prob_checker
 
 
 class AbstractInitializer(AbstractOperator, ProblemBasedOperator, ABC):

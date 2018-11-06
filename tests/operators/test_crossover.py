@@ -2,10 +2,10 @@
 import unittest
 import warnings
 
-from gplib.operators import crossover as co
-from gplib.operators.crossover import PopulationOnePointCrossover, check_parents_and_points
-from gplib.solutions import node, solution
-from gplib.solutions.solution import select_random_points
+from onegpy.operators import crossover as co
+from onegpy.operators.crossover import PopulationOnePointCrossover, check_parents_and_points
+from onegpy.solutions import node, solution
+from onegpy.solutions.solution import select_random_points
 
 
 class ExampleParents(object):

@@ -1,7 +1,7 @@
 import copy
 import random
 
-from gplib.solutions.node import node_equal, get_all_node, get_graph_to_target, calc_node_depth, copy_nodes_along_graph
+from onegpy.solutions.node import node_equal, get_all_node, get_graph_to_target, calc_node_depth, copy_nodes_along_graph
 
 
 class Solution(object):

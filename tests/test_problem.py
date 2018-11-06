@@ -1,7 +1,7 @@
 import unittest
 
-from gplib.problem import AbstractProblem, FunctionBank, problem_checker
-from gplib.solutions import node
+from onegpy.problem import AbstractProblem, FunctionBank, problem_checker
+from onegpy.solutions import node
 
 
 def f_non_terminal(n_children=2):

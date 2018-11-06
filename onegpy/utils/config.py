@@ -2,10 +2,10 @@ import json
 from pathlib import Path
 import importlib
 
-from gplib.operator import ProblemBasedOperator
-from gplib.terminator import ProblemBasedTerminator
-from gplib.sequential import Sequential
-from gplib.terminal_condition import TerminalCondition
+from onegpy.operator import ProblemBasedOperator
+from onegpy.terminator import ProblemBasedTerminator
+from onegpy.sequential import Sequential
+from onegpy.terminal_condition import TerminalCondition
 
 
 def build_instance(module, name, params, *args, **kwargs):
@@ -106,20 +106,20 @@ def gp_from_config(path_or_config, config_tags=None, builder_map=None):
 
     - Example of config
         config = {
-            "gp": ["gplib.base", "PopulationGP", [20]],
+            "gp": ["onegpy.base", "PopulationGP", [20]],
             "initializer": [
-                "gplib.operators", "PopulationRandomInitializer", [500, 0.1, 10]
+                "onegpy.operators", "PopulationRandomInitializer", [500, 0.1, 10]
             ],
             "problem": [
-                "gplib.problems", "EvenParity", {"dim": 3}
+                "onegpy.problems", "EvenParity", {"dim": 3}
             ],
             "sequential": [
-                ["gplib.operators", "PopulationOnePointCrossover", {"c_rate": 0.5, "destructive": False}],
-                ["gplib.operators", "PopulationPointMutation", {"m_rate": 0.2}],
-                ["gplib.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
+                ["onegpy.operators", "PopulationOnePointCrossover", {"c_rate": 0.5, "destructive": False}],
+                ["onegpy.operators", "PopulationPointMutation", {"m_rate": 0.2}],
+                ["onegpy.operators", "TournamentSelection", {"k": 500, "tournament_size": 5}]
             ],
             "logger": [
-                "gplib.viewers", "DefaultObserver"
+                "onegpy.viewers", "DefaultObserver"
             ]
         }
     """

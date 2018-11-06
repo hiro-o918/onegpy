@@ -1,8 +1,8 @@
-from gplib.operators.mlps_crossover import MLPS_Crossover
-from gplib.operators.initializer import PopulationTerminalInitializer
-from gplib.utils import util
-from gplib.solutions import node, solution
-from gplib.viewers.observer import MLPS_Observer
+from onegpy.operators.mlps_crossover import MLPS_Crossover
+from onegpy.operators.initializer import PopulationTerminalInitializer
+from onegpy.utils import util
+from onegpy.solutions import node, solution
+from onegpy.viewers.observer import MLPS_Observer
 
 
 class MLPS_GP(object):

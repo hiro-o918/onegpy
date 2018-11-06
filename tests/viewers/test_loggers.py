@@ -1,7 +1,7 @@
 import unittest
 
-from gplib.viewers.loggers import PrintLogger, JSONLogger
-from gplib.solutions import solution, node
+from onegpy.viewers.loggers import PrintLogger, JSONLogger
+from onegpy.solutions import solution, node
 
 
 class TestPrintLogger(unittest.TestCase):

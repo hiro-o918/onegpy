@@ -3,8 +3,8 @@ import unittest
 
 import numpy as np
 
-from gplib.problems import arithmetic
-from gplib.solutions import node, solution
+from onegpy.problems import arithmetic
+from onegpy.solutions import node, solution
 
 import math
 

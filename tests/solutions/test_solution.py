@@ -2,7 +2,7 @@
 import copy
 import unittest
 
-from gplib.solutions import node, solution
+from onegpy.solutions import node, solution
 
 
 class TestSolutionFunctions(unittest.TestCase):

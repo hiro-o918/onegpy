@@ -1,4 +1,4 @@
-from gplib.terminator import terminator_checker
+from onegpy.terminator import terminator_checker
 
 
 class TerminalCondition(object):

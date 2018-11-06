@@ -1,5 +1,5 @@
-from gplib.problem import AbstractProblem, FunctionBank
-from gplib.solutions import node
+from onegpy.problem import AbstractProblem, FunctionBank
+from onegpy.solutions import node
 import math
 import random
 import numpy as np
