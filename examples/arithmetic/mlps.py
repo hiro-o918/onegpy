@@ -4,7 +4,7 @@ from onegpy.utils.config import gp_from_config
 if __name__ == '__main__':
     config = {
         "gp": [
-            "onegpy.base", "MLPS_GP", {'depth_limit': 20}
+            "onegpy.base", "MLPSGP", {'depth_limit': 20}
         ],
         "initializer": [
             "onegpy.operators", "RandomInitializer", [0.1, 10]

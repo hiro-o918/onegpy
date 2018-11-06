@@ -4,14 +4,14 @@ from onegpy.utils import util
 from onegpy.solutions import node, solution
 
 
-class MLPS_GP(object):
+class MLPSGP(object):
 
     def __init__(self, initializer, localsearch, problem, observer, terminal_condition, simplify=None,
                  is_add_terminal=True, only_add_best=False, only_add_improvements=False, depth_limit=1000000, **kwargs):
         """
 
         :param initializer: function. Initialize operator of MLPS-GP.
-        :param localsearch: local search object. Local search operator of MLPS_GP.
+        :param localsearch: local search object. Local search operator of MLPSGP.
         :param problem: Problem object. problem to solve.
         :param observer: Observer object.
         :param simplify: simplify object. Simplify operator of MLPS-GP. Default is None.
@@ -22,7 +22,7 @@ class MLPS_GP(object):
         """
         self.initializer = initializer
         self.localsearch = localsearch
-        self.crossover = MLPS_Crossover(problem)
+        self.crossover = MLPSCrossover(problem)
         self.problem = problem
         self.observer = observer
         self.simplify = simplify

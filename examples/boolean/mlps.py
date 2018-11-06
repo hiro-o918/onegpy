@@ -4,13 +4,13 @@ from onegpy.utils.config import gp_from_config
 if __name__ == '__main__':
     config = {
         "gp": [
-            "onegpy.base", "MLPS_GP", {'depth_limit': 20}
+            "onegpy.base", "MLPSGP", {'depth_limit': 20}
         ],
         "initializer": [
             "onegpy.operators", "RandomInitializer", [0.1, 10]
         ],
         "problem": [
-            "onegpy.problems", "EvenParity", {"dim": 5}
+            "onegpy.problems", "EvenParity", {"dim": 3}
         ],
         "localsearch": [
             "onegpy.operators", "FIHC", {"target_node": 'nonterminal', "func_search_type": 'all_check'}
