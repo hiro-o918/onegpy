@@ -5,7 +5,7 @@ OnegPy is a genetic programming (GP) framework, written in Python.
 It was developed with a focus on easy setting or customizing 
 of GP algorithm.
 
-Supports both classical tree-based GPs and MLPS-GP, as well as combinations of genetic operators 
+Supports both classical tree-based GPs and `Genetic programming with multi-layered population structure (MLPS-GP) <https://dl.acm.org/citation.cfm?id=3067695.3076048>`_, as well as combinations of genetic operators
 which are adopted in these algorithms.
 
 OnegPy is compatible with: Python 3.6-.
@@ -48,5 +48,5 @@ Requirements
 
 Examples
 ---------
-Some examples are located in `examples <./examples>`_.
+Some examples are located in `examples <https://github.com/onegpy-team/onegpy/examples>`_.
 
