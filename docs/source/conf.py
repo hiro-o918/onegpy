@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'ONEG'
+project = 'OnegPy'
 copyright = '2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka'
 author = 'Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka'
 
@@ -114,7 +114,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ONEGdoc'
+htmlhelp_basename = 'OnegPydoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ONEG.tex', 'ONEG Documentation',
+    (master_doc, 'OnegPy.tex', 'OnegPy Documentation',
      'Taku Hasegawa', 'manual'),
 ]
 
@@ -151,7 +151,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'gplib', 'ONEG Documentation',
+    (master_doc, 'onegpy', 'OnegPy Documentation',
      [author], 1)
 ]
 
@@ -162,8 +162,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ONEG', 'ONEG Documentation',
-     author, 'ONEG', 'One line description of project.',
+    (master_doc, 'OnegPy', 'OnegPy Documentation',
+     author, 'OnegPy', 'One line description of project.',
      'Miscellaneous'),
 ]
 
