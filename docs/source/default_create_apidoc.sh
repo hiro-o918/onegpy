@@ -1,5 +1,6 @@
 mv reference/index.rst ./index.rst.bk
 rm -r reference
+rm -r ../build/*
 pushd ../../
 python docs/source/create_apidoc.py -f -e -M -m -T -o docs/source/reference/ onegpy
 popd
