@@ -1,8 +1,7 @@
-from onegpy.operators.mlps_crossover import MLPS_Crossover
+from onegpy.operators import MLPSCrossover
 from onegpy.operators.initializer import PopulationTerminalInitializer
 from onegpy.utils import util
 from onegpy.solutions import node, solution
-from onegpy.viewers.observer import MLPS_Observer
 
 
 class MLPS_GP(object):

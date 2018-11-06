@@ -1,6 +1,7 @@
 # Import crossovers
 from onegpy.operators.crossover import OnePointCrossover
 from onegpy.operators.crossover import PopulationOnePointCrossover
+from onegpy.operators.crossover import MLPSCrossover
 # Import initializing functions
 from onegpy.operators.initializer import RandomInitializer
 from onegpy.operators.initializer import PopulationRandomInitializer

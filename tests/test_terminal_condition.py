@@ -2,7 +2,7 @@
 
 import unittest
 
-from onegpy.terminal_condition import TerminalCondition
+from onegpy.terminator import TerminalCondition
 from onegpy.terminator import AbstractTerminator
 from onegpy.problems import arithmetic
 

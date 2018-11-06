@@ -5,7 +5,7 @@ import importlib
 from onegpy.operator import ProblemBasedOperator
 from onegpy.terminator import ProblemBasedTerminator
 from onegpy.sequential import Sequential
-from onegpy.terminal_condition import TerminalCondition
+from onegpy.terminator import TerminalCondition
 
 
 def build_instance(module, name, params, *args, **kwargs):

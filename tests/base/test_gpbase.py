@@ -4,7 +4,7 @@ from onegpy.operators import PopulationRandomInitializer, TournamentSelection
 from onegpy.operators.crossover import PopulationOnePointCrossover
 from onegpy.sequential import Sequential
 from onegpy.base import sgp
-from onegpy.terminal_condition import TerminalCondition
+from onegpy.terminator import TerminalCondition
 from onegpy.terminator import GenerationTerminator
 from onegpy.viewers import observer
 from tests.test_problem import EmptyProblem
