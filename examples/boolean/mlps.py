@@ -20,7 +20,7 @@ if __name__ == '__main__':
             ["onegpy.terminator", "EvalCountTerminator", {"t_eval_cnt": 100000}]
         ],
         'observer': [
-            'onegpy.viewers', 'MLPS_Observer', {'verbose': 3}
+            'onegpy.viewers', 'MLPSObserver', {'verbose': 3}
         ],
     }
 

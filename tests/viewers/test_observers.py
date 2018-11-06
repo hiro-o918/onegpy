@@ -2,7 +2,7 @@ import unittest
 
 from onegpy.solutions import solution, node
 from onegpy.viewers import DefaultObserver
-from onegpy.viewers.observer import MLPS_Observer
+from onegpy.viewers.observer import MLPSObserver
 
 
 def get_population():
@@ -38,7 +38,7 @@ class TestDefaultObserver(unittest.TestCase):
 
 class TestMLPS_Observer(unittest.TestCase):
     def setUp(self):
-        self.observer = MLPS_Observer()
+        self.observer = MLPSObserver()
         self.population_list = [get_population()] * 3
 
     def begin(self):

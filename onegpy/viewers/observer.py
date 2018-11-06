@@ -97,7 +97,7 @@ class DefaultObserver(AbstractObserver):
         [l.update(log=log, history=self.history) for l in self._loggers]
 
 
-class MLPS_Observer(AbstractObserver):
+class MLPSObserver(AbstractObserver):
     def __init__(self, verbose=3, **kwargs):
         """
         Observer for MLPS-GP.
@@ -113,7 +113,7 @@ class MLPS_Observer(AbstractObserver):
          otherwise save only in the end.
         """
 
-        super(MLPS_Observer, self).__init__()
+        super(MLPSObserver, self).__init__()
         self.history_tag = ['detail', 'summary']
         self.history_dict = {t: [] for t in self.history_tag}
         self.loggers_mapper = {self.history_tag[0]: [1],  # detail
