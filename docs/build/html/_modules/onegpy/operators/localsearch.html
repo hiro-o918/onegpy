@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>onegpy.operators.localsearch &mdash; OnegPy 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OnegPy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OnegPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>onegpy.operators.localsearch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for onegpy.operators.localsearch</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">from</span> <span class="nn">onegpy.solutions</span> <span class="k">import</span> <span class="n">node</span><span class="p">,</span> <span class="n">solution</span>
+<span class="kn">from</span> <span class="nn">onegpy.operator</span> <span class="k">import</span> <span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span>
+
+
+<div class="viewcode-block" id="AbstractLocalSearch"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.AbstractLocalSearch.html#onegpy.operators.localsearch.AbstractLocalSearch">[docs]</a><span class="k">class</span> <span class="nc">AbstractLocalSearch</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">ProblemBasedOperator</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract class for Local Search</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="AbstractLocalSearch.__init__"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.AbstractLocalSearch.html#onegpy.operators.localsearch.AbstractLocalSearch.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">func_search_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Abstract class for local search.</span>
+
+<span class="sd">        :param problem: problem object. target problem.</span>
+<span class="sd">        :param target_node: String. type of target nodes.</span>
+<span class="sd">        :param func_search_type: String, function name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AbstractOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ProblemBasedOperator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_target_node</span> <span class="o">=</span> <span class="n">target_node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_func_search_type</span> <span class="o">=</span> <span class="n">func_search_type</span></div>
+
+    <span class="k">def</span> <span class="nf">get_target_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get a list of target nodes</span>
+<span class="sd">        :param root: node object. a node of target solution</span>
+<span class="sd">        :return: list of node object. target node list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_node</span> <span class="o">==</span> <span class="s1">&#39;nonterminal&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">get_all_nonterminal_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_node</span> <span class="o">==</span> <span class="s1">&#39;terminal&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">get_all_nonterminal_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_node</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">get_all_node</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_node</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">func_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">func_bank</span>
+
+    <span class="nd">@func_bank</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">func_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span>
+
+    <span class="nd">@func_bank</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">func_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">target_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target_node</span>
+
+    <span class="nd">@target_node</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">target_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span>
+
+    <span class="nd">@target_node</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">target_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">func_search_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_search_type</span>
+
+    <span class="nd">@func_search_type</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">func_search_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span>
+
+    <span class="nd">@func_search_type</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">func_search_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">not_changeable_warning</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="improve"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.improve.html#onegpy.operators.localsearch.improve">[docs]</a><span class="k">def</span> <span class="nf">improve</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Core function for local search.</span>
+<span class="sd">    Replace the old function with a new function and then revert it if fitness is not improved.</span>
+<span class="sd">    :param target_solution: solution object. target solution of local search.</span>
+<span class="sd">    :param target_node: node object. target node of the target solution.</span>
+<span class="sd">    :param candidate_id: int. ID of candidate function for local search.</span>
+<span class="sd">    :param problem: problem object. problem for calculation of fitness.</span>
+<span class="sd">    :return: bool. if improvement is success, return True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pre_id</span> <span class="o">=</span> <span class="n">target_node</span><span class="o">.</span><span class="n">func_id</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="n">target_node</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">target_solution</span><span class="o">.</span><span class="n">previous_fitness</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if the solution does not have previous fitness, calculate it.</span>
+        <span class="n">pre_fit</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">target_solution</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pre_fit</span> <span class="o">=</span> <span class="n">target_solution</span><span class="o">.</span><span class="n">previous_fitness</span>
+    <span class="n">new_fit</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">fitness</span><span class="p">(</span><span class="n">target_solution</span><span class="p">)</span>  <span class="c1"># check the fitness.</span>
+    <span class="k">if</span> <span class="n">pre_fit</span> <span class="o">&gt;=</span> <span class="n">new_fit</span><span class="p">:</span>  <span class="c1"># if it is not success, revert the function.</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="n">target_node</span><span class="p">,</span> <span class="n">pre_id</span><span class="p">)</span>
+        <span class="n">solution</span><span class="o">.</span><span class="n">set_previous_fitness</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">pre_fit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="all_check"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.all_check.html#onegpy.operators.localsearch.all_check">[docs]</a><span class="k">def</span> <span class="nf">all_check</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search function for a target node.</span>
+<span class="sd">    Try to replace a current function with all candidate function and replace best improving function.</span>
+<span class="sd">    :param target_solution: solution object. target solution of local search.</span>
+<span class="sd">    :param target_node: node object. target node of the target solution.</span>
+<span class="sd">    :param problem: problem object. problem for calculation of fitness.</span>
+<span class="sd">    :return: bool. if improvement is success, return True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">func_bank</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">func_bank</span>
+    <span class="n">n_children</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_node</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+    <span class="n">function_list</span> <span class="o">=</span> <span class="n">func_bank</span><span class="o">.</span><span class="n">get_function_list</span><span class="p">(</span><span class="n">n_children</span><span class="p">)</span>
+
+    <span class="n">improved</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">candidate_id</span> <span class="ow">in</span> <span class="n">function_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">target_node</span><span class="o">.</span><span class="n">func_id</span> <span class="o">!=</span> <span class="n">candidate_id</span><span class="p">:</span>  <span class="c1"># if the current function equals to the candidate one, skip checking</span>
+            <span class="n">improved</span> <span class="o">|=</span> <span class="n">improve</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">improved</span></div>
+
+
+<div class="viewcode-block" id="stop_improvement"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.stop_improvement.html#onegpy.operators.localsearch.stop_improvement">[docs]</a><span class="k">def</span> <span class="nf">stop_improvement</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">is_shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search function for a target node.</span>
+<span class="sd">    Try to replace a current function with candidate functions and replace first improving function.</span>
+<span class="sd">    :param target_solution: solution object. target solution of local search.</span>
+<span class="sd">    :param target_node: node object. target node of the target solution.</span>
+<span class="sd">    :param problem: problem object. problem for calculation of fitness.</span>
+<span class="sd">    :param is_shuffle: bool. if candidate functions are shuffled or not. default is True</span>
+<span class="sd">    :return: bool. if improvement is success, return True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">func_bank</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">func_bank</span>
+    <span class="n">n_children</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_node</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+    <span class="n">function_list</span> <span class="o">=</span> <span class="n">func_bank</span><span class="o">.</span><span class="n">get_function_list</span><span class="p">(</span><span class="n">n_children</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">is_shuffle</span><span class="p">:</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">function_list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">candidate_id</span> <span class="ow">in</span> <span class="n">function_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">target_node</span><span class="o">.</span><span class="n">func_id</span> <span class="o">!=</span> <span class="n">candidate_id</span><span class="p">:</span>  <span class="c1"># if the current function equals to the candidate one, skip checking</span>
+            <span class="n">improved</span> <span class="o">=</span> <span class="n">improve</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">candidate_id</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">improved</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">improved</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<span class="k">def</span> <span class="nf">fihc</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">node_list</span><span class="p">,</span> <span class="n">fs_core</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    First improvement hill climber (FIHC) function.</span>
+<span class="sd">    :param target_solution: solution object. target solution of local search.</span>
+<span class="sd">    :param node_list: list of node object. candidate node list.</span>
+<span class="sd">    :param fs_core: function. search function for a target node.</span>
+<span class="sd">    :return: solution object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">searched</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">node_list</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">node_list</span><span class="p">:</span>
+        <span class="n">target_node</span> <span class="o">=</span> <span class="n">node_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">improved</span> <span class="o">=</span> <span class="n">fs_core</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">improved</span><span class="p">:</span>  <span class="c1"># if the solution is improved, nodes in searched list are added candidate list again.</span>
+            <span class="n">node_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">searched</span><span class="p">)</span>
+            <span class="n">searched</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">node_list</span><span class="p">)</span>
+        <span class="n">searched</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_node</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">target_solution</span>
+
+
+<span class="k">def</span> <span class="nf">bihc</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">node_list</span><span class="p">,</span> <span class="n">fs_core</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Best improvement hill climber (BIHC) function.</span>
+<span class="sd">    :param node_list: list of node object. candidate node list.</span>
+<span class="sd">    :param fs_core: function. search function for a target node.</span>
+<span class="sd">    :return: solution object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pre_node</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">node_list</span><span class="p">:</span>
+        <span class="n">ori_fit</span> <span class="o">=</span> <span class="n">target_solution</span><span class="o">.</span><span class="n">previous_fitness</span>
+        <span class="n">best_fit</span> <span class="o">=</span> <span class="n">target_solution</span><span class="o">.</span><span class="n">previous_fitness</span>
+        <span class="n">best_node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">best_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">target_node</span> <span class="ow">in</span> <span class="n">node_list</span><span class="p">:</span>  <span class="c1"># Try to find the best-improving target node and the function id.</span>
+            <span class="n">ori_id</span> <span class="o">=</span> <span class="n">target_node</span><span class="o">.</span><span class="n">func_id</span>
+            <span class="n">fs_core</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_node</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">best_fit</span> <span class="o">&lt;</span> <span class="n">target_solution</span><span class="o">.</span><span class="n">previous_fitness</span><span class="p">:</span>
+                <span class="n">best_node</span> <span class="o">=</span> <span class="n">target_node</span>
+                <span class="n">best_id</span> <span class="o">=</span> <span class="n">target_node</span><span class="o">.</span><span class="n">func_id</span>
+            <span class="c1"># the target solution is reverted to the original for the next iteration.</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="n">target_node</span><span class="p">,</span> <span class="n">ori_id</span><span class="p">)</span>
+            <span class="n">solution</span><span class="o">.</span><span class="n">set_previous_fitness</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">ori_fit</span><span class="p">)</span>
+        <span class="c1"># If there is no improvement, end this local search.</span>
+        <span class="k">if</span> <span class="n">best_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Otherwise, adopt the improvement to the solution.</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="n">best_node</span><span class="p">,</span> <span class="n">best_id</span><span class="p">)</span>
+        <span class="n">solution</span><span class="o">.</span><span class="n">set_previous_fitness</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">best_fit</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">pre_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pre_node</span><span class="p">)</span>
+        <span class="n">node_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">best_node</span><span class="p">)</span>  <span class="c1"># remove the replaced node from candidate node list</span>
+        <span class="n">pre_node</span> <span class="o">=</span> <span class="n">best_node</span>
+
+    <span class="k">return</span> <span class="n">target_solution</span>
+
+
+<div class="viewcode-block" id="get_func_search_core"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.get_func_search_core.html#onegpy.operators.localsearch.get_func_search_core">[docs]</a><span class="k">def</span> <span class="nf">get_func_search_core</span><span class="p">(</span><span class="n">func_search_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get a &quot;function search&quot; function.</span>
+<span class="sd">    :param func_search_type: String. name of function of func search.</span>
+<span class="sd">    :param kwargs:</span>
+<span class="sd">    :return: function. funcsearch_core</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">func_search_type</span> <span class="o">==</span> <span class="s1">&#39;all_check&#39;</span><span class="p">:</span>
+        <span class="c1"># Obtain `one_point` function fixed `func_bank`</span>
+        <span class="n">func_search_core</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">all_check</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func_search_type</span> <span class="o">==</span> <span class="s1">&#39;stop_improvement&#39;</span><span class="p">:</span>
+        <span class="n">func_search_core</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">stop_improvement</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> is not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func_search_type</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">func_search_core</span></div>
+
+
+<div class="viewcode-block" id="FIHC"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.FIHC.html#onegpy.operators.localsearch.FIHC">[docs]</a><span class="k">class</span> <span class="nc">FIHC</span><span class="p">(</span><span class="n">AbstractLocalSearch</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    First Improvement Hill Climber class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="FIHC.__init__"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.FIHC.html#onegpy.operators.localsearch.FIHC.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">target_node</span><span class="o">=</span><span class="s1">&#39;nonterminal&#39;</span><span class="p">,</span> <span class="n">func_search_type</span><span class="o">=</span><span class="s1">&#39;all_check&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param problem: problem object. problem for calculation of fitness.</span>
+<span class="sd">        :param target_node: String. target node type (eg. nonterminal, terminal)</span>
+<span class="sd">        :param func_search_type: String. String. name of function of function search.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FIHC</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">func_search_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_search_core</span> <span class="o">=</span> <span class="n">get_func_search_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func_search_type</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_solution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        First Improvement Hill Climber</span>
+<span class="sd">        :param target_solution: solution object. target solution of FIHC</span>
+<span class="sd">        :return: solution object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">target_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_target_node</span><span class="p">(</span><span class="n">target_solution</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fihc</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_search_core</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BIHC"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.BIHC.html#onegpy.operators.localsearch.BIHC">[docs]</a><span class="k">class</span> <span class="nc">BIHC</span><span class="p">(</span><span class="n">AbstractLocalSearch</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Best Improvement Hill Climber</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="BIHC.__init__"><a class="viewcode-back" href="../../../reference/generated/onegpy.operators.localsearch.BIHC.html#onegpy.operators.localsearch.BIHC.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">target_node</span><span class="o">=</span><span class="s1">&#39;nonterminal&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param problem: problem object. problem for calculation of fitness.</span>
+<span class="sd">        :param target_node: String. target node type (eg. nonterminal, terminal)</span>
+<span class="sd">        :param func_search_type: String. String. name of function of function search.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BIHC</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">func_search_type</span><span class="o">=</span><span class="s1">&#39;all_check&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_search_core</span> <span class="o">=</span> <span class="n">get_func_search_core</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func_search_type</span><span class="p">,</span> <span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_solution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Best Improvement Hill Climber</span>
+<span class="sd">        :param target_solution: solution object. target solution of BIHC</span>
+<span class="sd">        :return: solution object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">target_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_target_node</span><span class="p">(</span><span class="n">target_solution</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bihc</span><span class="p">(</span><span class="n">target_solution</span><span class="p">,</span> <span class="n">target_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_search_core</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

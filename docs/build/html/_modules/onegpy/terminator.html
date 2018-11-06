@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>onegpy.terminator &mdash; OnegPy 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OnegPy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OnegPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>onegpy.terminator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for onegpy.terminator</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span>
+
+
+<div class="viewcode-block" id="AbstractTerminator"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.AbstractTerminator.html#onegpy.terminator.AbstractTerminator">[docs]</a><span class="k">class</span> <span class="nc">AbstractTerminator</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base of Terminator class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="GenerationTerminator"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.GenerationTerminator.html#onegpy.terminator.GenerationTerminator">[docs]</a><span class="k">class</span> <span class="nc">GenerationTerminator</span><span class="p">(</span><span class="n">AbstractTerminator</span><span class="p">):</span>
+<div class="viewcode-block" id="GenerationTerminator.__init__"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.GenerationTerminator.html#onegpy.terminator.GenerationTerminator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_gene</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A terminator based on the number of generation.</span>
+
+<span class="sd">        :param t_gene: int. a target generation count.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_gene</span> <span class="o">=</span> <span class="n">t_gene</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns `True`, if the number of generation is greater than `self.t_gene`</span>
+
+<span class="sd">        :return : bool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gene</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gene</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_gene</span></div>
+
+
+<div class="viewcode-block" id="ProblemBasedTerminator"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.ProblemBasedTerminator.html#onegpy.terminator.ProblemBasedTerminator">[docs]</a><span class="k">class</span> <span class="nc">ProblemBasedTerminator</span><span class="p">(</span><span class="n">AbstractTerminator</span><span class="p">):</span>
+<div class="viewcode-block" id="ProblemBasedTerminator.__init__"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.ProblemBasedTerminator.html#onegpy.terminator.ProblemBasedTerminator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Base of Terminator class based on problem.</span>
+
+<span class="sd">        :param problem: Problem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="n">problem</span></div></div>
+
+
+<div class="viewcode-block" id="EvalCountTerminator"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.EvalCountTerminator.html#onegpy.terminator.EvalCountTerminator">[docs]</a><span class="k">class</span> <span class="nc">EvalCountTerminator</span><span class="p">(</span><span class="n">ProblemBasedTerminator</span><span class="p">):</span>
+<div class="viewcode-block" id="EvalCountTerminator.__init__"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.EvalCountTerminator.html#onegpy.terminator.EvalCountTerminator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">t_eval_cnt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A terminator based on the number of evaluation.</span>
+
+<span class="sd">        :param problem: Problem.</span>
+<span class="sd">        :param t_eval_cnt: int. a target evaluation count.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ProblemBasedTerminator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_eval_cnt</span> <span class="o">=</span> <span class="n">t_eval_cnt</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns `True` if the number of evaluation is greater than or equals to `self.t_eval_count`.</span>
+
+<span class="sd">        :return : bool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_eval_cnt</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">get_eval_count</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FitnessTerminator"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.FitnessTerminator.html#onegpy.terminator.FitnessTerminator">[docs]</a><span class="k">class</span> <span class="nc">FitnessTerminator</span><span class="p">(</span><span class="n">ProblemBasedTerminator</span><span class="p">):</span>
+<div class="viewcode-block" id="FitnessTerminator.__init__"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.FitnessTerminator.html#onegpy.terminator.FitnessTerminator.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">t_fitness</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A terminator based on the value of fitness.</span>
+
+<span class="sd">        :param problem: Problem.</span>
+<span class="sd">        :param t_fitness: float. a target value of fitness.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ProblemBasedTerminator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_fitness</span> <span class="o">=</span> <span class="n">t_fitness</span></div>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns `True` if the value of fitness is greater than or equals to `self.t_fitness`</span>
+
+<span class="sd">        :return : bool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_fitness</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">get_elite_fitness</span></div>
+
+
+<div class="viewcode-block" id="terminator_checker"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.terminator_checker.html#onegpy.terminator.terminator_checker">[docs]</a><span class="k">def</span> <span class="nf">terminator_checker</span><span class="p">(</span><span class="n">terminator</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">terminator</span><span class="p">,</span> <span class="n">AbstractTerminator</span><span class="p">):</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="ne">TypeError</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected type: </span><span class="si">{}</span><span class="s1"> not </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">AbstractTerminator</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">terminator</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="k">raise</span> <span class="n">typ</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TerminalCondition"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.TerminalCondition.html#onegpy.terminator.TerminalCondition">[docs]</a><span class="k">class</span> <span class="nc">TerminalCondition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="TerminalCondition.__init__"><a class="viewcode-back" href="../../reference/generated/onegpy.terminator.TerminalCondition.html#onegpy.terminator.TerminalCondition.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminators</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This class handles a set of terminators.</span>
+<span class="sd">        :param terminators: list of Terminator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">terminators</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">terminators</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_terminators</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">terminator</span> <span class="ow">in</span> <span class="n">terminators</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">terminator</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a terminator to an instance of condition.</span>
+<span class="sd">        :param terminator: Terminator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">terminator_checker</span><span class="p">(</span><span class="n">terminator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_terminators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terminator</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">terminators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_terminators</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If any one of terminators indicates `True`, return `True`.</span>
+<span class="sd">        Otherwise returns False</span>
+<span class="sd">        :return is_t_condition: bool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">is_t_condition</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="n">t</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_terminators</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">is_t_condition</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
