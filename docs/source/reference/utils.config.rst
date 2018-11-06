@@ -1,7 +1,7 @@
 utils.config
 ============
 
-.. module:: gplib.utils.config
+.. module:: onegpy.utils.config
 .. autosummary::
    :toctree: generated/
    :nosignatures:

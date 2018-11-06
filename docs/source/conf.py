@@ -26,7 +26,7 @@ author = 'Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka'
 # The short X.Y version
 version = '0.1'
 # The full version, including alpha/beta/rc tags
-release = '0b'
+release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------

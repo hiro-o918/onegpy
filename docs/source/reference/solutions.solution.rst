@@ -1,7 +1,7 @@
 solutions.solution
 ==================
 
-.. module:: gplib.solutions.solution
+.. module:: onegpy.solutions.solution
 .. autosummary::
    :toctree: generated/
    :nosignatures:

@@ -1,7 +1,7 @@
 solutions package
 =================
 
-.. automodule:: gplib.solutions
+.. automodule:: onegpy.solutions
    :members:
    :undoc-members:
    :show-inheritance:

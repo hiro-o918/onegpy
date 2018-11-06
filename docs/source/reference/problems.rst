@@ -1,7 +1,7 @@
 problems package
 ================
 
-.. automodule:: gplib.problems
+.. automodule:: onegpy.problems
    :members:
    :undoc-members:
    :show-inheritance:

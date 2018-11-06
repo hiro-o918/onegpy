@@ -1,7 +1,7 @@
 utils package
 =============
 
-.. automodule:: gplib.utils
+.. automodule:: onegpy.utils
    :members:
    :undoc-members:
    :show-inheritance:
@@ -10,6 +10,5 @@ utils package
 
    utils.checkers
    utils.config
-   utils.test_checkers
    utils.util
 

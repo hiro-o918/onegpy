@@ -1,7 +1,7 @@
 operators.selection
 ===================
 
-.. module:: gplib.operators.selection
+.. module:: onegpy.operators.selection
 .. autosummary::
    :toctree: generated/
    :nosignatures:

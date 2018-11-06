@@ -1,7 +1,7 @@
 problems.boolean
 ================
 
-.. module:: gplib.problems.boolean
+.. module:: onegpy.problems.boolean
 .. autosummary::
    :toctree: generated/
    :nosignatures:

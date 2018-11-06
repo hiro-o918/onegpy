@@ -1,7 +1,7 @@
 terminator
 ==========
 
-.. module:: gplib.terminator
+.. module:: onegpy.terminator
 .. autosummary::
    :toctree: generated/
    :nosignatures:
@@ -11,4 +11,5 @@ terminator
    FitnessTerminator
    GenerationTerminator
    ProblemBasedTerminator
+   TerminalCondition
    terminator_checker

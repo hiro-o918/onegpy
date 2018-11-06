@@ -1,7 +1,7 @@
 operators.initializer
 =====================
 
-.. module:: gplib.operators.initializer
+.. module:: onegpy.operators.initializer
 .. autosummary::
    :toctree: generated/
    :nosignatures:
