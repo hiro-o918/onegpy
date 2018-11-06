@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>onegpy.solutions.solution.set_previous_fitness &mdash; OnegPy 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="onegpy.solutions.solution.set_solution_depth" href="onegpy.solutions.solution.set_solution_depth.html" />
+    <link rel="prev" title="onegpy.solutions.solution.select_random_points" href="onegpy.solutions.solution.select_random_points.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OnegPy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../base.html">base package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operators.html">operators package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">problems package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../solutions.html">solutions package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../solutions.node.html">solutions.node</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../solutions.solution.html">solutions.solution</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.Solution.html">onegpy.solutions.solution.Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution._calc_solution_depth.html">onegpy.solutions.solution._calc_solution_depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution._calc_solution_n_nodes.html">onegpy.solutions.solution._calc_solution_n_nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.copy_solution.html">onegpy.solutions.solution.copy_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.is_solution_in_pop.html">onegpy.solutions.solution.is_solution_in_pop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.replace_node.html">onegpy.solutions.solution.replace_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.select_random_points.html">onegpy.solutions.solution.select_random_points</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">onegpy.solutions.solution.set_previous_fitness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.set_solution_depth.html">onegpy.solutions.solution.set_solution_depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.set_solution_n_nodes.html">onegpy.solutions.solution.set_solution_n_nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.solution_checker.html">onegpy.solutions.solution.solution_checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.solution_equal.html">onegpy.solutions.solution.solution_equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="onegpy.solutions.solution.solutions_checker.html">onegpy.solutions.solution.solutions_checker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../viewers.html">viewers package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operator.html">operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problem.html">problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sequential.html">sequential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../terminator.html">terminator</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OnegPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../solutions.html">solutions package</a> &raquo;</li>
+        
+          <li><a href="../solutions.solution.html">solutions.solution</a> &raquo;</li>
+        
+      <li>onegpy.solutions.solution.set_previous_fitness</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/generated/onegpy.solutions.solution.set_previous_fitness.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="onegpy-solutions-solution-set-previous-fitness">
+<h1>onegpy.solutions.solution.set_previous_fitness<a class="headerlink" href="#onegpy-solutions-solution-set-previous-fitness" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="onegpy.solutions.solution.set_previous_fitness">
+<code class="descclassname">onegpy.solutions.solution.</code><code class="descname">set_previous_fitness</code><span class="sig-paren">(</span><em>solution</em>, <em>fitness</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/onegpy/solutions/solution.html#set_previous_fitness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onegpy.solutions.solution.set_previous_fitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="onegpy.solutions.solution.set_solution_depth.html" class="btn btn-neutral float-right" title="onegpy.solutions.solution.set_solution_depth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="onegpy.solutions.solution.select_random_points.html" class="btn btn-neutral" title="onegpy.solutions.solution.select_random_points" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -15,11 +15,11 @@ Installation
 -------------
 To install OnegPy, follow the below.
 
-install OnegPy using pip
+Install onegpy using pip
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 [W.I.P]
 
-install OnegPy from the GitHub
+Install onegpy from the GitHub
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
@@ -48,5 +48,5 @@ Requirements
 
 Examples
 ---------
-Some examples are located in `examples <https://github.com/onegpy-team/onegpy/examples>`_.
+Some examples are located in `examples <https://github.com/onegpy-team/onegpy/tree/master/examples>`_.
 

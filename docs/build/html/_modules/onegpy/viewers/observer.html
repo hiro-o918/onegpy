@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>onegpy.viewers.observer &mdash; OnegPy 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OnegPy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OnegPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>onegpy.viewers.observer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for onegpy.viewers.observer</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="k">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">onegpy.utils</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">onegpy.viewers.loggers</span> <span class="k">import</span> <span class="n">JSONLogger</span><span class="p">,</span> <span class="n">PrintLogger</span>
+
+
+<div class="viewcode-block" id="generate_sgp_log"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.generate_sgp_log.html#onegpy.viewers.observer.generate_sgp_log">[docs]</a><span class="k">def</span> <span class="nf">generate_sgp_log</span><span class="p">(</span><span class="n">gene</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
+    <span class="n">general_log</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;generation&#39;</span><span class="p">:</span> <span class="n">gene</span><span class="p">,</span> <span class="s1">&#39;pop_num&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">)}</span>
+    <span class="n">fit_log</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_fitness_info</span><span class="p">(</span><span class="n">population</span><span class="p">)</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">general_log</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_log</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">log</span></div>
+
+
+<div class="viewcode-block" id="generate_mlpsgp_log"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.generate_mlpsgp_log.html#onegpy.viewers.observer.generate_mlpsgp_log">[docs]</a><span class="k">def</span> <span class="nf">generate_mlpsgp_log</span><span class="p">(</span><span class="n">gene_cnt</span><span class="p">,</span> <span class="n">eval_cnt</span><span class="p">,</span> <span class="n">population_list</span><span class="p">):</span>
+    <span class="n">detailed_log</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sub_pop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">population_list</span><span class="p">):</span>
+        <span class="n">general_log</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gene_cnt&#39;</span><span class="p">:</span> <span class="n">gene_cnt</span><span class="p">,</span> <span class="s1">&#39;eval_cnt&#39;</span><span class="p">:</span> <span class="n">eval_cnt</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
+        <span class="n">fitness_log</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_fitness_info</span><span class="p">(</span><span class="n">sub_pop</span><span class="p">)</span>
+        <span class="n">detailed_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">**</span><span class="n">general_log</span><span class="p">,</span> <span class="o">**</span><span class="n">fitness_log</span><span class="p">})</span>
+
+    <span class="n">fitness_list_mapper</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ave&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+    <span class="n">fitness_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+                                     <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;min_fit&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;ave_fit&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;max_fit&#39;</span><span class="p">]],</span>
+                                     <span class="n">detailed_log</span><span class="p">)))</span>
+
+    <span class="n">summary_log</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;iter_count&#39;</span><span class="p">:</span> <span class="n">gene_cnt</span><span class="p">,</span>
+                   <span class="s1">&#39;eval_cnt&#39;</span><span class="p">:</span> <span class="n">eval_cnt</span><span class="p">,</span>
+                   <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">fitness_list</span><span class="p">[:,</span> <span class="n">fitness_list_mapper</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]]),</span>
+                   <span class="s1">&#39;ave&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">fitness_list</span><span class="p">[:,</span> <span class="n">fitness_list_mapper</span><span class="p">[</span><span class="s1">&#39;ave&#39;</span><span class="p">]]),</span>
+                   <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">fitness_list</span><span class="p">[:,</span> <span class="n">fitness_list_mapper</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]]),</span>
+                   <span class="s1">&#39;n_level&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">population_list</span><span class="p">)}</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="n">detailed_log</span><span class="p">,</span> <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="n">summary_log</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="AbstractObserver"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.AbstractObserver.html#onegpy.viewers.observer.AbstractObserver">[docs]</a><span class="k">class</span> <span class="nc">AbstractObserver</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractObserver.__init__"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.AbstractObserver.html#onegpy.viewers.observer.AbstractObserver.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">set_loggers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="DefaultObserver"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.DefaultObserver.html#onegpy.viewers.observer.DefaultObserver">[docs]</a><span class="k">class</span> <span class="nc">DefaultObserver</span><span class="p">(</span><span class="n">AbstractObserver</span><span class="p">):</span>
+<div class="viewcode-block" id="DefaultObserver.__init__"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.DefaultObserver.html#onegpy.viewers.observer.DefaultObserver.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Observer for SGP.</span>
+
+<span class="sd">        :param verbose: int.</span>
+<span class="sd">            0 -&gt; No log,</span>
+<span class="sd">            1 -&gt; print a log.</span>
+<span class="sd">            2 -&gt; save a log.</span>
+<span class="sd">            3 -&gt; print and save a log</span>
+<span class="sd">        :param out: String.output output to print.</span>
+<span class="sd">        :param filepath: filepath: str or Path. Path to dump json.</span>
+<span class="sd">        :param save_every_updating: bool. if true, save history every updating.</span>
+<span class="sd">         otherwise save only in the end.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DefaultObserver</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_loggers</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+    <span class="k">def</span> <span class="nf">set_loggers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&amp;</span> <span class="mb">0b01</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PrintLogger</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&amp;</span> <span class="mb">0b10</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">JSONLogger</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_fit&#39;</span><span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">get_fitness_info</span><span class="p">(</span><span class="n">population</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_fit&#39;</span><span class="p">)}</span>
+        <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene</span><span class="p">,</span> <span class="n">population</span><span class="p">):</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">generate_sgp_log</span><span class="p">(</span><span class="n">gene</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+
+        <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="MLPSObserver"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.MLPSObserver.html#onegpy.viewers.observer.MLPSObserver">[docs]</a><span class="k">class</span> <span class="nc">MLPSObserver</span><span class="p">(</span><span class="n">AbstractObserver</span><span class="p">):</span>
+<div class="viewcode-block" id="MLPSObserver.__init__"><a class="viewcode-back" href="../../../reference/generated/onegpy.viewers.observer.MLPSObserver.html#onegpy.viewers.observer.MLPSObserver.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Observer for MLPS-GP.</span>
+
+<span class="sd">        :param verbose: int.</span>
+<span class="sd">            0 -&gt; No log,</span>
+<span class="sd">            1 -&gt; print a log.</span>
+<span class="sd">            2 -&gt; save a log.</span>
+<span class="sd">            3 -&gt; print and save a log</span>
+<span class="sd">        :param out: String.output output to print.</span>
+<span class="sd">        :param filedir: filedir: str or Path. Path to dump json.</span>
+<span class="sd">        :param save_every_updating: bool. if true, save history every updating.</span>
+<span class="sd">         otherwise save only in the end.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">MLPSObserver</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;detail&#39;</span><span class="p">,</span> <span class="s1">&#39;summary&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># detail</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}</span>  <span class="c1"># summary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_loggers</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">set_loggers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&amp;</span> <span class="mb">0b01</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PrintLogger</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="o">&amp;</span> <span class="mb">0b10</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">JSONLogger</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_log&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                                  <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_cnt</span><span class="p">,</span> <span class="n">eval_cnt</span><span class="p">,</span> <span class="n">population_list</span><span class="p">):</span>
+        <span class="n">log_dict</span> <span class="o">=</span> <span class="n">generate_mlpsgp_log</span><span class="p">(</span><span class="n">gene_cnt</span><span class="p">,</span> <span class="n">eval_cnt</span><span class="p">,</span> <span class="n">population_list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log_dict</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span><span class="p">[</span><span class="n">t</span><span class="p">])(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">)</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log_dict</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log_dict</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+                 <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span><span class="p">[</span><span class="n">t</span><span class="p">])(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_cnt</span><span class="p">,</span> <span class="n">eval_cnt</span><span class="p">,</span> <span class="n">population_list</span><span class="p">):</span>
+        <span class="n">log_dict</span> <span class="o">=</span> <span class="n">generate_mlpsgp_log</span><span class="p">(</span><span class="n">gene_cnt</span><span class="p">,</span> <span class="n">eval_cnt</span><span class="p">,</span> <span class="n">population_list</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">history_tag</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log_dict</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span><span class="p">[</span><span class="n">t</span><span class="p">])(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">)</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log_dict</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">log</span><span class="o">=</span><span class="n">log_dict</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">history_dict</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+                 <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">loggers_mapper</span><span class="p">[</span><span class="n">t</span><span class="p">])(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loggers</span><span class="p">)]</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
