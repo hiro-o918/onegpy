@@ -43,3 +43,5 @@ class PopulationGP(object):
             gene += 1
 
         self.observer.end(population)
+
+        return population

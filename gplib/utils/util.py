@@ -2,6 +2,7 @@ def get_generator_builder(selection):
     """
     Get a generator builder.
     The generator generates list of solutions by means of `selection`.
+
     :param selection: inheritance of class AbstractSelection.
     :return: generator_builder
     """
@@ -15,6 +16,7 @@ def get_generator_builder(selection):
 def get_fitness_info(population):
     """
     Get the fitness information from population
+
     :param population: list of solutions. population to get information
     :return: dictionary of fitness information. fitness information
     """

@@ -19,14 +19,14 @@ sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'GPLib'
-copyright = '2018, Taku Hasegawa'
-author = 'Taku Hasegawa'
+project = 'ONEG'
+copyright = '2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka'
+author = 'Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka'
 
 # The short X.Y version
-version = ''
+version = '0.1'
 # The full version, including alpha/beta/rc tags
-release = '0.0'
+release = '0b'
 
 
 # -- General configuration ---------------------------------------------------
@@ -114,7 +114,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'GPLibdoc'
+htmlhelp_basename = 'ONEGdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'GPLib.tex', 'GPLib Documentation',
+    (master_doc, 'ONEG.tex', 'ONEG Documentation',
      'Taku Hasegawa', 'manual'),
 ]
 
@@ -151,7 +151,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'gplib', 'GPLib Documentation',
+    (master_doc, 'gplib', 'ONEG Documentation',
      [author], 1)
 ]
 
@@ -162,8 +162,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'GPLib', 'GPLib Documentation',
-     author, 'GPLib', 'One line description of project.',
+    (master_doc, 'ONEG', 'ONEG Documentation',
+     author, 'ONEG', 'One line description of project.',
      'Miscellaneous'),
 ]
 
