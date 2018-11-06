@@ -1,9 +1,0 @@
-tests.solutions.test\_solution
-==============================
-
-.. module:: tests.solutions.test_solution
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   TestSolutionFunctions

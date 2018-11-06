@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to GPLib’s documentation! &mdash; GPLib 0.0 documentation</title>
+  <title>OnegPy &mdash; OnegPy 0.1.0 documentation</title>
   
 
   
@@ -27,8 +27,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reference" href="reference/index.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -47,7 +46,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> GPLib
+            <a href="#" class="icon icon-home"> OnegPy
           
 
           
@@ -55,6 +54,10 @@
 
           
             
+            
+              <div class="version">
+                0.1
+              </div>
             
           
 
@@ -77,11 +80,23 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">OnegPy</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#install-onegpy-using-pip">install OnegPy using pip</a></li>
+<li><a class="reference internal" href="#install-onegpy-from-the-github">install OnegPy from the GitHub</a></li>
 </ul>
-
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
             
           
         </div>
@@ -94,7 +109,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">GPLib</a>
+          <a href="#">OnegPy</a>
         
       </nav>
 
@@ -125,7 +140,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Welcome to GPLib’s documentation!</li>
+      <li>OnegPy</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -144,22 +159,58 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-gplib-s-documentation">
-<h1>Welcome to GPLib’s documentation!<a class="headerlink" href="#welcome-to-gplib-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+  <div class="section" id="onegpy">
+<h1>OnegPy<a class="headerlink" href="#onegpy" title="Permalink to this headline">¶</a></h1>
+<p>OnegPy is a genetic programming (GP) framework, written in Python.
+It was developed with a focus on easy setting or customizing
+of GP algorithm.</p>
+<p>Supports both classical tree-based GPs and <a class="reference external" href="https://dl.acm.org/citation.cfm?id=3067695.3076048">Genetic programming with multi-layered population structure (MLPS-GP)</a>, as well as combinations of genetic operators
+which are adopted in these algorithms.</p>
+<p>OnegPy is compatible with: Python 3.6-.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install OnegPy, follow the below.</p>
+<div class="section" id="install-onegpy-using-pip">
+<h3>install OnegPy using pip<a class="headerlink" href="#install-onegpy-using-pip" title="Permalink to this headline">¶</a></h3>
+<p>[W.I.P]</p>
+</div>
+<div class="section" id="install-onegpy-from-the-github">
+<h3>install OnegPy from the GitHub<a class="headerlink" href="#install-onegpy-from-the-github" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/onegpy-team/onegpy
+</pre></div>
+</div>
+<p>Then,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd onegpy
+$ python setup.py install
+</pre></div>
+</div>
+<p><strong>NOTE:</strong></p>
+<p>If you are using of an environment of your system, you need to use <cite>sudo</cite> to install;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo python setup.py install
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/numpy/numpy/tree/master/doc/source/reference">numpy</a> is required.</li>
 </ul>
 </div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Some examples are located in <a class="reference external" href="https://github.com/onegpy-team/onegpy/examples">examples</a>.</p>
+<div class="toctree-wrapper compound">
 </div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
+</div>
+</div>
 </div>
 
 
@@ -168,19 +219,12 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Taku Hasegawa.
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
 
     </p>
   </div>
@@ -199,20 +243,14 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

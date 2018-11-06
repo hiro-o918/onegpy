@@ -1,9 +1,0 @@
-tests.test\_sequenctial
-=======================
-
-.. module:: tests.test_sequenctial
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   TestSequential

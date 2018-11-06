@@ -1,9 +1,0 @@
-base.gpbase
-===========
-
-.. module:: gplib.base.gpbase
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   PopulationGP

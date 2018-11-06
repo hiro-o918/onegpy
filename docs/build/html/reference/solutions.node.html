@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>solutions.node &mdash; GPLib 0.0 documentation</title>
+  <title>solutions.node &mdash; OnegPy 0.1.0 documentation</title>
   
 
   
@@ -27,9 +27,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="gplib.solutions.node.Function" href="generated/gplib.solutions.node.Function.html" />
-    <link rel="prev" title="solutions package" href="solutions.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -48,7 +46,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> GPLib
+            <a href="../index.html" class="icon icon-home"> OnegPy
           
 
           
@@ -56,6 +54,10 @@
 
           
             
+            
+              <div class="version">
+                0.1
+              </div>
             
           
 
@@ -78,51 +80,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="base.html">base package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operators.html">operators package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problems.html">problems package</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="solutions.html">solutions package</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">solutions.node</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.Function.html">gplib.solutions.node.Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.Node.html">gplib.solutions.node.Node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.calc_node_depth.html">gplib.solutions.node.calc_node_depth</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.children_checker.html">gplib.solutions.node.children_checker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.copy_node.html">gplib.solutions.node.copy_node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.copy_nodes_along_graph.html">gplib.solutions.node.copy_nodes_along_graph</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.func_id_checker.html">gplib.solutions.node.func_id_checker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_all_node.html">gplib.solutions.node.get_all_node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_all_nonterminal_nodes.html">gplib.solutions.node.get_all_nonterminal_nodes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_all_terminal_nodes.html">gplib.solutions.node.get_all_terminal_nodes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_all_terminal_points.html">gplib.solutions.node.get_all_terminal_points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_graph_to_target.html">gplib.solutions.node.get_graph_to_target</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_n_children.html">gplib.solutions.node.get_n_children</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.get_parent_node.html">gplib.solutions.node.get_parent_node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.n_children_checker.html">gplib.solutions.node.n_children_checker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.node_array_equal.html">gplib.solutions.node.node_array_equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.node_checker.html">gplib.solutions.node.node_checker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.node_equal.html">gplib.solutions.node.node_equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.nodes_checker.html">gplib.solutions.node.nodes_checker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.set_children.html">gplib.solutions.node.set_children</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.solutions.node.set_id.html">gplib.solutions.node.set_id</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">solutions.node</a></li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="solutions.solution.html">solutions.solution</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="viewer.html">viewer package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operator.html">operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problem.html">problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sequential.html">sequential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="terminal_condition.html">terminal_condition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="terminator.html">terminator</a></li>
-</ul>
-</li>
-</ul>
-
+</div>
             
           
         </div>
@@ -135,7 +97,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">GPLib</a>
+          <a href="../index.html">OnegPy</a>
         
       </nav>
 
@@ -166,10 +128,6 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">Reference</a> &raquo;</li>
-        
-          <li><a href="solutions.html">solutions package</a> &raquo;</li>
-        
       <li>solutions.node</li>
     
     
@@ -189,76 +147,76 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-gplib.solutions.node">
-<span id="solutions-node"></span><h1>solutions.node<a class="headerlink" href="#module-gplib.solutions.node" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-onegpy.solutions.node">
+<span id="solutions-node"></span><h1>solutions.node<a class="headerlink" href="#module-onegpy.solutions.node" title="Permalink to this headline">¶</a></h1>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.Function.html#gplib.solutions.node.Function" title="gplib.solutions.node.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Function</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.Function.html#onegpy.solutions.node.Function" title="onegpy.solutions.node.Function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Function</span></code></a></td>
 <td>Function object.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.Node.html#gplib.solutions.node.Node" title="gplib.solutions.node.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.Node.html#onegpy.solutions.node.Node" title="onegpy.solutions.node.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a></td>
 <td>Node object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.calc_node_depth.html#gplib.solutions.node.calc_node_depth" title="gplib.solutions.node.calc_node_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_node_depth</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.calc_node_depth.html#onegpy.solutions.node.calc_node_depth" title="onegpy.solutions.node.calc_node_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_node_depth</span></code></a></td>
+<td>Calculate the depth of nodes which is following under the target node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.children_checker.html#onegpy.solutions.node.children_checker" title="onegpy.solutions.node.children_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children_checker</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.children_checker.html#gplib.solutions.node.children_checker" title="gplib.solutions.node.children_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children_checker</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.copy_node.html#onegpy.solutions.node.copy_node" title="onegpy.solutions.node.copy_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_node</span></code></a></td>
+<td>Copy function :param node: node object, target node to copy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.copy_node.html#gplib.solutions.node.copy_node" title="gplib.solutions.node.copy_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_node</span></code></a></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.copy_nodes_along_graph.html#gplib.solutions.node.copy_nodes_along_graph" title="gplib.solutions.node.copy_nodes_along_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_nodes_along_graph</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.copy_nodes_along_graph.html#onegpy.solutions.node.copy_nodes_along_graph" title="onegpy.solutions.node.copy_nodes_along_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_nodes_along_graph</span></code></a></td>
 <td>Copy node object from <code class="docutils literal notranslate"><span class="pre">root</span></code> to the target node based on <a href="#id1"><span class="problematic" id="id2">``</span></a>graph’’ This method differs from deepcopy(root) in that it copies only the nodes along <a href="#id3"><span class="problematic" id="id4">``</span></a>graph’‘.:param graph: list of <a href="#id5"><span class="problematic" id="id6">``</span></a>(i, Node object)’’ where <a href="#id7"><span class="problematic" id="id8">``</span></a>i’’ is the index of the next node of graph and <a href="#id9"><span class="problematic" id="id10">``</span></a>Node object’’ is the parent node.This graph is obtained by using <a href="#id11"><span class="problematic" id="id12">``</span></a>get_parent_node’‘.:return: the index of target node node in the parent, copied the target node object and copied root object..</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.func_id_checker.html#gplib.solutions.node.func_id_checker" title="gplib.solutions.node.func_id_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_id_checker</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.func_id_checker.html#onegpy.solutions.node.func_id_checker" title="onegpy.solutions.node.func_id_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_id_checker</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.get_all_node.html#gplib.solutions.node.get_all_node" title="gplib.solutions.node.get_all_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_node</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_all_node.html#onegpy.solutions.node.get_all_node" title="onegpy.solutions.node.get_all_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_node</span></code></a></td>
 <td>function for getting all node in the solution</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.get_all_nonterminal_nodes.html#gplib.solutions.node.get_all_nonterminal_nodes" title="gplib.solutions.node.get_all_nonterminal_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_nonterminal_nodes</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_all_nonterminal_nodes.html#onegpy.solutions.node.get_all_nonterminal_nodes" title="onegpy.solutions.node.get_all_nonterminal_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_nonterminal_nodes</span></code></a></td>
 <td>function for getting all terminal node in the solution</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.get_all_terminal_nodes.html#gplib.solutions.node.get_all_terminal_nodes" title="gplib.solutions.node.get_all_terminal_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_terminal_nodes</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_all_terminal_nodes.html#onegpy.solutions.node.get_all_terminal_nodes" title="onegpy.solutions.node.get_all_terminal_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_terminal_nodes</span></code></a></td>
 <td>function for getting all terminal node in the solution</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.get_all_terminal_points.html#gplib.solutions.node.get_all_terminal_points" title="gplib.solutions.node.get_all_terminal_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_terminal_points</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_all_terminal_points.html#onegpy.solutions.node.get_all_terminal_points" title="onegpy.solutions.node.get_all_terminal_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_terminal_points</span></code></a></td>
 <td>function for getting all terminal points in the solution this function is for crossover in MLPS-GP</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.get_graph_to_target.html#gplib.solutions.node.get_graph_to_target" title="gplib.solutions.node.get_graph_to_target"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_graph_to_target</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_graph_to_target.html#onegpy.solutions.node.get_graph_to_target" title="onegpy.solutions.node.get_graph_to_target"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_graph_to_target</span></code></a></td>
 <td>function for searching a graph from root node to a target node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.get_n_children.html#gplib.solutions.node.get_n_children" title="gplib.solutions.node.get_n_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_children</span></code></a></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_n_children.html#onegpy.solutions.node.get_n_children" title="onegpy.solutions.node.get_n_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_children</span></code></a></td>
+<td>Get the number of children of function that id = func_id.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.get_parent_node.html#gplib.solutions.node.get_parent_node" title="gplib.solutions.node.get_parent_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parent_node</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.get_parent_node.html#onegpy.solutions.node.get_parent_node" title="onegpy.solutions.node.get_parent_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parent_node</span></code></a></td>
 <td>function for searching parent node of target node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.n_children_checker.html#gplib.solutions.node.n_children_checker" title="gplib.solutions.node.n_children_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_children_checker</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.n_children_checker.html#onegpy.solutions.node.n_children_checker" title="onegpy.solutions.node.n_children_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_children_checker</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.node_array_equal.html#gplib.solutions.node.node_array_equal" title="gplib.solutions.node.node_array_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_array_equal</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.node_array_equal.html#onegpy.solutions.node.node_array_equal" title="onegpy.solutions.node.node_array_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_array_equal</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.node_checker.html#gplib.solutions.node.node_checker" title="gplib.solutions.node.node_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_checker</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.node_checker.html#onegpy.solutions.node.node_checker" title="onegpy.solutions.node.node_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_checker</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.node_equal.html#gplib.solutions.node.node_equal" title="gplib.solutions.node.node_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_equal</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.node_equal.html#onegpy.solutions.node.node_equal" title="onegpy.solutions.node.node_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_equal</span></code></a></td>
 <td>Function for comparing two nodes.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.nodes_checker.html#gplib.solutions.node.nodes_checker" title="gplib.solutions.node.nodes_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_checker</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.nodes_checker.html#onegpy.solutions.node.nodes_checker" title="onegpy.solutions.node.nodes_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_checker</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.solutions.node.set_children.html#gplib.solutions.node.set_children" title="gplib.solutions.node.set_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_children</span></code></a></td>
-<td>TODO: implement a method to check follows: the number of children of node = len(children)</td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.solutions.node.set_children.html#onegpy.solutions.node.set_children" title="onegpy.solutions.node.set_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_children</span></code></a></td>
+<td>Setter for children to node :param node: node object.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.solutions.node.set_id.html#gplib.solutions.node.set_id" title="gplib.solutions.node.set_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_id</span></code></a></td>
-<td>function for setting id to node object.</td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.solutions.node.set_id.html#onegpy.solutions.node.set_id" title="onegpy.solutions.node.set_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_id</span></code></a></td>
+<td>Function for setting id to node object.</td>
 </tr>
 </tbody>
 </table>
@@ -270,21 +228,12 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="generated/gplib.solutions.node.Function.html" class="btn btn-neutral float-right" title="gplib.solutions.node.Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="solutions.html" class="btn btn-neutral" title="solutions package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Taku Hasegawa.
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
 
     </p>
   </div>
@@ -303,20 +252,14 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

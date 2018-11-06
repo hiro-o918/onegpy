@@ -1,9 +1,0 @@
-tests.test\_terminator
-======================
-
-.. module:: tests.test_terminator
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   TestGenerationTerminator

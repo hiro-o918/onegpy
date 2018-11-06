@@ -1,7 +1,7 @@
 operators.localsearch
 =====================
 
-.. module:: gplib.operators.localsearch
+.. module:: onegpy.operators.localsearch
 .. autosummary::
    :toctree: generated/
    :nosignatures:

@@ -1,7 +1,7 @@
 problem
 =======
 
-.. module:: gplib.problem
+.. module:: onegpy.problem
 .. autosummary::
    :toctree: generated/
    :nosignatures:

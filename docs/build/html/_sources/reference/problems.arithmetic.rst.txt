@@ -1,7 +1,7 @@
 problems.arithmetic
 ===================
 
-.. module:: gplib.problems.arithmetic
+.. module:: onegpy.problems.arithmetic
 .. autosummary::
    :toctree: generated/
    :nosignatures:

@@ -1,7 +1,7 @@
 operator
 ========
 
-.. module:: gplib.operator
+.. module:: onegpy.operator
 .. autosummary::
    :toctree: generated/
    :nosignatures:

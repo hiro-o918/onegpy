@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>operators.mutation &mdash; GPLib 0.0 documentation</title>
+  <title>operators.mutation &mdash; OnegPy 0.1.0 documentation</title>
   
 
   
@@ -27,9 +27,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="gplib.operators.mutation.AbstractMutation" href="generated/gplib.operators.mutation.AbstractMutation.html" />
-    <link rel="prev" title="gplib.operators.mlps_crossover.MLPS_Crossover" href="generated/gplib.operators.mlps_crossover.MLPS_Crossover.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -48,7 +46,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> GPLib
+            <a href="../index.html" class="icon icon-home"> OnegPy
           
 
           
@@ -56,6 +54,10 @@
 
           
             
+            
+              <div class="version">
+                0.1
+              </div>
             
           
 
@@ -78,39 +80,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="base.html">base package</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="operators.html">operators package</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="operators.crossover.html">operators.crossover</a></li>
-<li class="toctree-l3"><a class="reference internal" href="operators.initializer.html">operators.initializer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="operators.localsearch.html">operators.localsearch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="operators.mlps_crossover.html">operators.mlps_crossover</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">operators.mutation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.operators.mutation.AbstractMutation.html">gplib.operators.mutation.AbstractMutation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.operators.mutation.PointMutation.html">gplib.operators.mutation.PointMutation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.operators.mutation.PopulationPointMutation.html">gplib.operators.mutation.PopulationPointMutation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.operators.mutation.get_mutation_core.html">gplib.operators.mutation.get_mutation_core</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/gplib.operators.mutation.one_point.html">gplib.operators.mutation.one_point</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">operators.mutation</a></li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="operators.selection.html">operators.selection</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="problems.html">problems package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solutions.html">solutions package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="viewer.html">viewer package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operator.html">operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="problem.html">problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sequential.html">sequential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="terminal_condition.html">terminal_condition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="terminator.html">terminator</a></li>
-</ul>
-</li>
-</ul>
-
+</div>
             
           
         </div>
@@ -123,7 +97,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">GPLib</a>
+          <a href="../index.html">OnegPy</a>
         
       </nav>
 
@@ -154,10 +128,6 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">Reference</a> &raquo;</li>
-        
-          <li><a href="operators.html">operators package</a> &raquo;</li>
-        
       <li>operators.mutation</li>
     
     
@@ -177,27 +147,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-gplib.operators.mutation">
-<span id="operators-mutation"></span><h1>operators.mutation<a class="headerlink" href="#module-gplib.operators.mutation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-onegpy.operators.mutation">
+<span id="operators-mutation"></span><h1>operators.mutation<a class="headerlink" href="#module-onegpy.operators.mutation" title="Permalink to this headline">¶</a></h1>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.operators.mutation.AbstractMutation.html#gplib.operators.mutation.AbstractMutation" title="gplib.operators.mutation.AbstractMutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbstractMutation</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.operators.mutation.AbstractMutation.html#onegpy.operators.mutation.AbstractMutation" title="onegpy.operators.mutation.AbstractMutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AbstractMutation</span></code></a></td>
 <td>Abstract class for mutation.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.operators.mutation.PointMutation.html#gplib.operators.mutation.PointMutation" title="gplib.operators.mutation.PointMutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointMutation</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.operators.mutation.PointMutation.html#onegpy.operators.mutation.PointMutation" title="onegpy.operators.mutation.PointMutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointMutation</span></code></a></td>
 <td>Point mutation class.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.operators.mutation.PopulationPointMutation.html#gplib.operators.mutation.PopulationPointMutation" title="gplib.operators.mutation.PopulationPointMutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationPointMutation</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.operators.mutation.PopulationPointMutation.html#onegpy.operators.mutation.PopulationPointMutation" title="onegpy.operators.mutation.PopulationPointMutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationPointMutation</span></code></a></td>
 <td>Point mutation class for population.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/gplib.operators.mutation.get_mutation_core.html#gplib.operators.mutation.get_mutation_core" title="gplib.operators.mutation.get_mutation_core"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mutation_core</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/onegpy.operators.mutation.get_mutation_core.html#onegpy.operators.mutation.get_mutation_core" title="onegpy.operators.mutation.get_mutation_core"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mutation_core</span></code></a></td>
 <td>getter of core function of mutation.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/gplib.operators.mutation.one_point.html#gplib.operators.mutation.one_point" title="gplib.operators.mutation.one_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_point</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/onegpy.operators.mutation.one_point.html#onegpy.operators.mutation.one_point" title="onegpy.operators.mutation.one_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_point</span></code></a></td>
 <td>Core function of one_point mutation.</td>
 </tr>
 </tbody>
@@ -210,21 +180,12 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="generated/gplib.operators.mutation.AbstractMutation.html" class="btn btn-neutral float-right" title="gplib.operators.mutation.AbstractMutation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="generated/gplib.operators.mlps_crossover.MLPS_Crossover.html" class="btn btn-neutral" title="gplib.operators.mlps_crossover.MLPS_Crossover" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Taku Hasegawa.
+        &copy; Copyright 2018, Taku Hasegawa, Hironori Yamamoto, Yoshiyuki Tanaka
 
     </p>
   </div>
@@ -243,20 +204,14 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

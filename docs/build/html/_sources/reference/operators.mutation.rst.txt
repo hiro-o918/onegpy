@@ -1,7 +1,7 @@
 operators.mutation
 ==================
 
-.. module:: gplib.operators.mutation
+.. module:: onegpy.operators.mutation
 .. autosummary::
    :toctree: generated/
    :nosignatures:

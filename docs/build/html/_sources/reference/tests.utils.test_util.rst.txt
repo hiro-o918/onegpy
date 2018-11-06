@@ -1,9 +1,0 @@
-tests.utils.test\_util
-======================
-
-.. module:: tests.utils.test_util
-.. autosummary::
-   :toctree: generated/
-   :nosignatures:
-
-   TestUtil
