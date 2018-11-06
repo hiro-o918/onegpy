@@ -3,7 +3,7 @@ import unittest
 from onegpy.operators import PopulationRandomInitializer, TournamentSelection
 from onegpy.operators.crossover import PopulationOnePointCrossover
 from onegpy.sequential import Sequential
-from onegpy.base import gpbase
+from onegpy.base import sgp
 from onegpy.terminal_condition import TerminalCondition
 from onegpy.terminator import GenerationTerminator
 from onegpy.viewers import observer
@@ -20,9 +20,9 @@ class TestSequential(unittest.TestCase):
         self.terminal_condition = TerminalCondition([GenerationTerminator(10)])
 
     def test_gp(self):
-        gp = gpbase.PopulationGP(initializer=self.initializer, sequential=self.sequential,
-                                 n_generations=10, terminal_condition=self.terminal_condition,
-                                 observer=observer.DefaultObserver(verbose=3))
+        gp = sgp.PopulationGP(initializer=self.initializer, sequential=self.sequential,
+                              n_generations=10, terminal_condition=self.terminal_condition,
+                              observer=observer.DefaultObserver(verbose=3))
         gp.__call__()
 
 

@@ -1,2 +1,2 @@
-from onegpy.base.gpbase import PopulationGP
-from onegpy.base.mlps_base import MLPS_GP
+from onegpy.base.sgp import PopulationGP
+from onegpy.base.mlps import MLPS_GP
